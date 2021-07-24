@@ -1,4 +1,4 @@
-# 65816
-A homebrew computer based on the 65816 processor
+# 65C816
+A homebrew computer based on the 65C816 processor
 
-[Schematic](./hardware/65816.pdf)
+[Schematic](./hardware/65C816.pdf)

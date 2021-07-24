@@ -4,12 +4,12 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "65816 Homebrew Computer"
+Title "65C816 Homebrew Computer"
 Date "2021-07-20"
 Rev "A"
 Comp ""
 Comment1 ""
-Comment2 "https://github.com/adrienkohlbecker/65816"
+Comment2 "https://github.com/adrienkohlbecker/65C816"
 Comment3 "Licensed under CERN-OHL-W v2"
 Comment4 "Copyright © 2021 Adrien Kohlbecker"
 $EndDescr
