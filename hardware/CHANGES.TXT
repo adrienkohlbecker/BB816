@@ -1,3 +1,7 @@
+2021-07-31:
+    * Add data pins buffer
+    * Add pull-down resistors on data bus
+
 2021-07-20:
     * First version of the schematic
     * Bank address latch circuit
