@@ -1,3 +1,6 @@
+2021-08-08:
+    * Add Bus Enable to the logic for data bus buffer & bank address latch
+
 2021-07-31:
     * Add data pins buffer
     * Add pull-down resistors on data bus
