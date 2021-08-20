@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 74AC245
+D Octal BUS Transceivers, 3-State outputs
+K TTL BUS 3State
+F https://www.ti.com/lit/ds/symlink/sn54ac245-sp.pdf
+$ENDCMP
+#
+$CMP W65C816SxP
+D W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40
+K 6502 65816 CPU uP
+F http://www.westerndesigncenter.com/wdc/documentation/w65c816s.pdf
+$ENDCMP
+#
+#End Doc Library
