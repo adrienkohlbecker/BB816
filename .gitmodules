@@ -1,0 +1,3 @@
+[submodule "lib/mdbom"]
+	path = lib/mdbom
+	url = git@github.com:holmesrichards/mdbom.git
