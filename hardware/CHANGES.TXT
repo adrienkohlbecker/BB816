@@ -1,3 +1,9 @@
+2021-09-03:
+    * Add demultiplexing logic for RDY bi-directional pin to RDYIN input and WAITN output
+
+2021-08-20:
+    * Add pull-up/down resistor networks to address, data pins, BE and RWB
+
 2021-08-08:
     * Add Bus Enable to the logic for data bus buffer & bank address latch
 
