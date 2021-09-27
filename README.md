@@ -33,3 +33,17 @@ A homebrew computer based on the 65C816 processor
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
 | U* | 1 | 74AC04 | hex inverter |
+
+## Timing diagrams
+
+### DB/BA Latch
+
+[![DB/BA Latch](./hardware/timing/Timing%20Latch.png)](./hardware/timing/Timing%20Latch.png)
+
+### DB/BA Buffer
+
+[![DB/BA Buffer](./hardware/timing/Timing%20Buffer.png)](./hardware/timing/Timing%20Buffer.png)
+
+### Bus Enable
+
+[![Bus Enable](./hardware/timing/Timing%20BE.png)](./hardware/timing/Timing%20BE.png)
