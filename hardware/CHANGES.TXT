@@ -1,3 +1,8 @@
+2021-09-27:
+    * Add clock frequency multiplier
+    * Control timing of RDY_IN changes
+    * Add RDY_IN to databus demultiplexing circuit
+
 2021-09-03:
     * Add demultiplexing logic for RDY bi-directional pin to RDYIN input and WAITN output
 
