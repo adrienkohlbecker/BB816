@@ -149,4 +149,60 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 
 ### Bus Enable
 
-[![Bus Enable](./timing/Timing%20BE.png)](./timing/Timing%20BE.png)
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'BE', wave: '1....0(32)', phase: 0.20 },
+    { nodes: ['.....Ѳ(25)Ѵ'], phase: 0.90 },
+    { name: 'CPU ADDR & RWB', wave: '7....x(25)9(7)', data:['ON', 'OFF'], phase: 0.20 },
+    { nodes: ['.....Ά(8.5)Ν', '.....Α(1.5)Γ'], phase: 0.90 },
+    { name: 'AC573 OE', wave: '0.....(1.5)x(7)1(23.5)', data:['ON', 'OFF'], phase: 0.20 },
+    { nodes: ['......(8.5)Β(12)Ξ', '......(1.5)Ο(2)Ό'], phase: 0.90 },
+    { name: 'AC573 OUT', wave: '7.....(3.5)x(17)9(11.5)', data:['ON', 'OFF'], phase: 0.20 },
+    { nodes: ['.....A(17)D', '.....B(2.5)Π'], phase: 0.90 },
+    { name: 'ACT245 OE', wave: '0.....(2.5)x(14.5)1(15)', data:['ON', 'OFF'], phase: 0.20 },
+    { nodes: ['......(17)E(11)F', '......(2.5)G(1)H'], phase: 0.90 },
+    { name: 'ACT245 OUT', wave: '7.....(3.5)x(24.5)9(4)', data:['ON', 'OFF'], phase: 0.20 },
+    {},
+    {},
+    { name: 'BE', wave: '0....1(32)', phase: 0.20 },
+    { nodes: ['.....Ρ(25)L'], phase: 0.90 },
+    { name: 'CPU ADDR & RWB', wave: '9....x(25)7(7)', data:['OFF', 'ON'], phase: 0.20 },
+    { nodes: ['.....M(7)N', '.....K(1)C'], phase: 0.90 },
+    { name: 'AC573 OE', wave: '1.....(1)x(6)0(25)', data:['ON', 'OFF'], phase: 0.20 },
+    { nodes: ['......(7)J(10)O', '......(1)Σ(2)I'], phase: 0.90 },
+    { name: 'AC573 OUT', wave: '9.....(3)x(14)7(15)', data:['OFF', 'ON'], phase: 0.20 },
+    { nodes: ['.....Q(14.5)R', '.....Я(2)P'], phase: 0.90 },
+    { name: 'ACT245 OE', wave: '1.....(2)x(12.5)0(17.5)', data:['ON', 'OFF'], phase: 0.20 },
+    { nodes: ['......(14.5)T(12)U', '......(2)Τ(1.5)S'], phase: 0.90 },
+    { name: 'ACT245 OUT', wave: '9.....(3.5)x(23)7(5.5)', data:['OFF', 'ON'], phase: 0.20 },
+  ],
+  edge: [
+    'Ѳ+Ѵ 25ns', 'Α+Γ 1.5ns', 'Ά+Ν 8.5ns', 'Ο+Ό 2ns', 'Ξ+Β 12ns',
+    'B+Π 2.5ns', 'A+D 17ns', 'G+H 1ns','E+F 11ns',
+    'Ρ+L 25ns', 'K+C 1ns', 'M+N 7ns', 'Σ+I 2ns', 'J+O 10ns',
+    'Я+P 2ns', 'Q+R 14.5ns', 'Τ+S 1.5ns','T+U 12ns',
+  ],
+  config: {
+    skin: 'narrow_x4',
+    hscale: 2,
+    lines: {
+      offset: 5,
+      every: 50
+    },
+    background: 'white'
+  },
+  head: {
+    tick: -5,
+      every: 10,
+        text: ['tspan', { "font-size": '12px', dx: 20 }, 'timing of Bus Enable; assumes CLK=RDY=1']
+  }
+}
+```
+</p></details>
+
+<a href="./timing/Timing%20BE.png"><img src="./timing/Timing%20BE.png" width="330"/></a>
