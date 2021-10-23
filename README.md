@@ -36,6 +36,10 @@ A homebrew computer based on the 65C816 processor
 | U* | 1 | 74AC04 | hex inverter |
 | U* | 1 | 74AC08 | Quad And2 |
 
+### Replacement for obsolete chips
+
+- `DS1035-10`: can be replaced by `DS1135Z-10+` with a SOIC-8 to through hole adapter
+
 ## Timing diagrams
 
 ### DB/BA Latch
