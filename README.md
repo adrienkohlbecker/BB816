@@ -207,3 +207,47 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 </p></details>
 
 <a href="./timing/Timing%20BE.png"><img src="./timing/Timing%20BE.png" width="330"/></a>
+
+### RDY
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(50)1(50)0.', phase: 0.20 },
+    { nodes: ['...(47)Ξ(3)Ο(0.5)Ό'], phase: 0.45 },
+    { name: 'RDY_IN', wave: 'z..(47)6(3.5)z(51.5)', data: ['IN'], phase: 0.20 },
+    { nodes: ['...(50)B(10.5)Π', '...(50)E(2.5)F'], phase: 0.45 },
+    { name: 'RDY (registered)', wave: '4..(52.5)x(8)4(41.5)', data: ['RDY (reg)', 'RDY (reg)'], phase: 0.20 },
+    { nodes: ['...(60.5)Σ(30)I'], phase: 0.45 },
+    { name: 'RDY', wave: '3..(52.5)x(38)3(11.5)', data: ['RDY', 'RDY'], phase: 0.20 },
+    { nodes: ['..Ύ(10)Д(80)Ё(10)Ж'], phase: 0.45 },
+    { name: 'RDY (cpu in)', wave: '6..(10)z(80)6(12)', data: ['RDY', 'RDY'], phase: 0.20 },
+  ],
+  edge: [
+    'Ξ+Ο 3ns', 'Ο+Ό .5ns',
+    'B+Π 10.5ns', 'E+F 2.5ns',
+    'Σ+I 30ns',
+    'Ύ+Д 10ns', 'Ё+Ж 10ns',
+  ],
+  config: {
+    skin: 'narrower',
+    lines: {
+      offset: 2,
+      every: 50
+    },
+    background: 'white'
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 10Mhz clock; assumes BE=1']
+  }
+}
+```
+</p></details>
+
+[![RDY](./timing/Timing%20RDY.png)](./timing/Timing%20RDY.png)
