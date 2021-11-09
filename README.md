@@ -1,33 +1,51 @@
 # 65C816
+
 A homebrew computer based on the 65C816 processor
 
 ## Schematic
 
-[![Schematic](./hardware/65C816.png)](./hardware/65C816.png)
+### Top-level
+
+[![Top-level schematic](./hardware/65C816.png)](./hardware/65C816.png)
+
+### Clock module
+
+[![Clock module](./hardware/clock.png)](./hardware/clock.png)
 
 ## BOM
 
-**Component Count:** 31
+**Component Count:** 48
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
 | C1 | 1 | 220u | Polarized capacitor, small symbol |
 | C2, C3, C8 | 3 | 10u | Polarized capacitor, small symbol |
-| C4, C5, C6, C7, C9, C10, C11, C12 | 8 | 100n | Unpolarized capacitor, small symbol |
+| C4, C5, C6, C7, C9, C10, C11, C12, C16, C17, C18, C19 | 12 | 100n | Unpolarized capacitor, small symbol |
+| C13 | 1 | 1u | Unpolarized capacitor, small symbol |
+| C14 | 1 | 2.2u | Unpolarized capacitor, small symbol |
+| C15 | 1 | 10n | Unpolarized capacitor, small symbol |
 | D1 | 1 | POWER | Light emitting diode, small symbol |
 | D2 | 1 | 1N5817 | 20V 1A Schottky Barrier Rectifier Diode, DO-41 |
 | J1 | 1 | POWER | Generic connector, single row, 01x02 |
-| R1 | 1 | 220 | Resistor, small symbol |
-| R2 | 1 | 1k | Resistor, small symbol |
+| R1, R3 | 2 | 220 | Resistor, small symbol |
+| R2, R4 | 2 | 1k | Resistor, small symbol |
+| R5 | 1 | 2.2k | Resistor, small symbol |
+| R6 | 1 | 10k | Resistor, small symbol |
 | RN1, RN2, RN3, RN4, RN5, RN6 | 6 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RV1 | 1 | 500k | Potentiometer |
+| SW1 | 1 | Pulse | Push button switch, generic, two pins |
 | U1 | 1 | 74AC00 | quad 2-input NAND gate |
 | U2 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
 | U3 | 1 | 74ACT245 | Octal BUS Transceivers, 3-State outputs |
 | U4 | 1 | 74AC573 | 8-bit Latch 3-state outputs |
 | U5 | 1 | DS1035-10 | 3-in-1 High–Speed Silicon Delay Line |
 | U6 | 1 | 74AC74 | Dual D Flip-flop, Set & Reset |
+| U7 | 1 | LMC555xN | CMOS Timer, 555 compatible, PDIP-8 |
 | U8 | 1 | 74AC11 | Triple 3-input AND |
 | U9 | 1 | 74AC32 | Quad 2-input OR |
+| U10 | 1 | 74HC14 | Hex inverter schmitt trigger |
+| U11 | 1 | 74HC74 | Dual D Flip-flop, Set & Reset |
+| X1 | 1 | 28.322Mhz | Crystal Clock Oscillator, DIP8-style metal package |
 
 ### Used in previous videos
 

@@ -1,3 +1,7 @@
+2021-11-09:
+    * Move clock module to own hierarchical sheet
+    * Add 28Mhz oscillator, 555 timer circuit, and pulse button debouncing
+
 2021-10-21:
     * Switch to ACT buffer
     * Add DS1035-10 for delayed clock, used in latch enable and buffer output enable

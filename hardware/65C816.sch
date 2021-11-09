@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 1
+Sheet 1 2
 Title "65C816 Homebrew Computer"
 Date "2021-07-20"
 Rev "A"
@@ -255,21 +255,6 @@ F 3 "" H 2000 2050 50  0001 C CNN
 	1    2000 2050
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:VCC #PWR025
-U 1 1 6156E344
-P 3500 1600
-F 0 "#PWR025" H 3500 1450 50  0001 C CNN
-F 1 "VCC" H 3400 1700 50  0000 C CNN
-F 2 "" H 3500 1600 50  0001 C CNN
-F 3 "" H 3500 1600 50  0001 C CNN
-	1    3500 1600
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3650 1550 3650 1600
-Wire Wire Line
-	3650 1600 3500 1600
 Text GLabel 1050 3100 0    50   Input ~ 0
 RDY_IN
 Wire Wire Line
@@ -317,40 +302,6 @@ Wire Wire Line
 Connection ~ 2200 2350
 Wire Wire Line
 	2200 2350 2200 2250
-Wire Wire Line
-	3250 1250 3350 1250
-Text GLabel 3250 1250 0    50   Input ~ 0
-CLK*2
-$Comp
-L power:VCC #PWR026
-U 1 1 6156DE1E
-P 3650 950
-F 0 "#PWR026" H 3650 800 50  0001 C CNN
-F 1 "VCC" H 3665 1123 50  0000 C CNN
-F 2 "" H 3650 950 50  0001 C CNN
-F 3 "" H 3650 950 50  0001 C CNN
-	1    3650 950 
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4000 1350 4100 1350
-Connection ~ 4000 1350
-Wire Wire Line
-	3300 1150 3350 1150
-Wire Wire Line
-	3300 700  3300 1150
-Wire Wire Line
-	4000 700  3300 700 
-Wire Wire Line
-	4000 1350 4000 700 
-Wire Wire Line
-	3950 1350 4000 1350
-Wire Wire Line
-	4100 1150 3950 1150
-Text GLabel 4100 1350 2    50   Output ~ 0
-~CLK
-Text GLabel 4100 1150 2    50   Output ~ 0
-CLK
 Text GLabel 1250 3950 0    50   Input ~ 0
 ~CLK
 Wire Wire Line
@@ -366,99 +317,99 @@ Wire Wire Line
 Wire Wire Line
 	10500 1200 10050 1200
 Wire Wire Line
-	600  5450 1450 5450
+	600  5300 1450 5300
 $Comp
 L power:VCC #PWR0101
 U 1 1 618E8AA2
-P 600 5450
-F 0 "#PWR0101" H 600 5300 50  0001 C CNN
-F 1 "VCC" H 615 5623 50  0000 C CNN
-F 2 "" H 600 5450 50  0001 C CNN
-F 3 "" H 600 5450 50  0001 C CNN
-	1    600  5450
+P 600 5300
+F 0 "#PWR0101" H 600 5150 50  0001 C CNN
+F 1 "VCC" H 615 5473 50  0000 C CNN
+F 2 "" H 600 5300 50  0001 C CNN
+F 3 "" H 600 5300 50  0001 C CNN
+	1    600  5300
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	600  5800 600  5450
+	600  5650 600  5300
 Wire Wire Line
-	1450 5450 1450 5800
-Connection ~ 600  5800
-NoConn ~ 2050 5900
-NoConn ~ 2050 6450
-NoConn ~ 1200 7000
-NoConn ~ 1200 6450
-NoConn ~ 1200 5900
+	1450 5300 1450 5650
+Connection ~ 600  5650
+NoConn ~ 2050 5750
+NoConn ~ 2050 6300
+NoConn ~ 1200 6850
+NoConn ~ 1200 6300
+NoConn ~ 1200 5750
 Wire Wire Line
-	1450 6350 1450 6550
-Connection ~ 1450 6350
+	1450 6200 1450 6400
+Connection ~ 1450 6200
 Wire Wire Line
-	1450 6000 1450 6350
-Connection ~ 1450 6000
+	1450 5850 1450 6200
+Connection ~ 1450 5850
 Wire Wire Line
-	1450 5800 1450 6000
+	1450 5650 1450 5850
 Wire Wire Line
-	600  6550 600  6350
-Connection ~ 600  6550
+	600  6400 600  6200
+Connection ~ 600  6400
 Wire Wire Line
-	600  6350 600  6000
-Connection ~ 600  6350
+	600  6200 600  5850
+Connection ~ 600  6200
 Wire Wire Line
-	600  6000 600  5800
-Connection ~ 600  6000
+	600  5850 600  5650
+Connection ~ 600  5850
 Wire Wire Line
 	2900 3850 2950 3850
 Wire Wire Line
-	1450 6550 1450 7000
-Connection ~ 1450 6550
-Connection ~ 1450 7000
+	1450 6400 1450 6850
+Connection ~ 1450 6400
+Connection ~ 1450 6850
 Wire Wire Line
-	1450 7000 1450 7500
-NoConn ~ 2050 7000
-NoConn ~ 2050 7500
+	1450 6850 1450 7350
+NoConn ~ 2050 6850
+NoConn ~ 2050 7350
 Wire Wire Line
 	2000 3850 2300 3850
 $Comp
 L 74xx:74HC00 U1
 U 1 1 6184AB1C
-P 1750 5900
-F 0 "U1" H 1750 6225 50  0000 C CNN
-F 1 "74AC00" H 1750 6134 50  0000 C CNN
-F 2 "" H 1750 5900 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/sn74ac00.pdf" H 1750 5900 50  0001 C CNN
-	1    1750 5900
+P 1750 5750
+F 0 "U1" H 1750 6075 50  0000 C CNN
+F 1 "74AC00" H 1750 5984 50  0000 C CNN
+F 2 "" H 1750 5750 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/sn74ac00.pdf" H 1750 5750 50  0001 C CNN
+	1    1750 5750
 	1    0    0    -1  
 $EndComp
 $Comp
 L 74xx:74LS32 U9
 U 2 1 6186A7FA
-P 1750 6450
-F 0 "U9" H 1750 6775 50  0000 C CNN
-F 1 "74AC32" H 1750 6684 50  0000 C CNN
-F 2 "" H 1750 6450 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 1750 6450 50  0001 C CNN
-	2    1750 6450
+P 1750 6300
+F 0 "U9" H 1750 6625 50  0000 C CNN
+F 1 "74AC32" H 1750 6534 50  0000 C CNN
+F 2 "" H 1750 6300 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 1750 6300 50  0001 C CNN
+	2    1750 6300
 	1    0    0    -1  
 $EndComp
 $Comp
 L 74xx:74LS32 U9
 U 4 1 6186BC0D
-P 900 6450
-F 0 "U9" H 900 6775 50  0000 C CNN
-F 1 "74AC32" H 900 6684 50  0000 C CNN
-F 2 "" H 900 6450 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 900 6450 50  0001 C CNN
-	4    900  6450
+P 900 6300
+F 0 "U9" H 900 6625 50  0000 C CNN
+F 1 "74AC32" H 900 6534 50  0000 C CNN
+F 2 "" H 900 6300 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 900 6300 50  0001 C CNN
+	4    900  6300
 	1    0    0    -1  
 $EndComp
 $Comp
 L 74xx:74LS32 U9
 U 3 1 6186C713
-P 900 5900
-F 0 "U9" H 900 6225 50  0000 C CNN
-F 1 "74AC32" H 900 6134 50  0000 C CNN
-F 2 "" H 900 5900 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 900 5900 50  0001 C CNN
-	3    900  5900
+P 900 5750
+F 0 "U9" H 900 6075 50  0000 C CNN
+F 1 "74AC32" H 900 5984 50  0000 C CNN
+F 2 "" H 900 5750 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 900 5750 50  0001 C CNN
+	3    900  5750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -508,12 +459,12 @@ $EndComp
 $Comp
 L 74xx:74LS74 U6
 U 1 1 615325CC
-P 3650 1250
-F 0 "U6" H 3450 1500 50  0000 C CNN
-F 1 "74AC74" H 3850 1500 50  0000 C CNN
-F 2 "" H 3650 1250 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/sn54ac74-sp.pdf" H 3650 1250 50  0001 C CNN
-	1    3650 1250
+P 900 7450
+F 0 "U6" H 700 7700 50  0000 C CNN
+F 1 "74AC74" H 1100 7700 50  0000 C CNN
+F 2 "" H 900 7450 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/sn54ac74-sp.pdf" H 900 7450 50  0001 C CNN
+	1    900  7450
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -784,23 +735,23 @@ $EndComp
 $Comp
 L 65C816:DS1035-10 U5
 U 2 1 619C811E
-P 1750 7000
-F 0 "U5" H 1750 7317 50  0000 C CNN
-F 1 "DS1035-10" H 1750 7226 50  0000 C CNN
-F 2 "" H 1750 7000 50  0001 C CNN
-F 3 "https://datasheets.maximintegrated.com/en/ds/DS1035.pdf" H 1750 7000 50  0001 C CNN
-	2    1750 7000
+P 1750 6850
+F 0 "U5" H 1750 7167 50  0000 C CNN
+F 1 "DS1035-10" H 1750 7076 50  0000 C CNN
+F 2 "" H 1750 6850 50  0001 C CNN
+F 3 "https://datasheets.maximintegrated.com/en/ds/DS1035.pdf" H 1750 6850 50  0001 C CNN
+	2    1750 6850
 	1    0    0    -1  
 $EndComp
 $Comp
 L 65C816:DS1035-10 U5
 U 3 1 619C887E
-P 1750 7500
-F 0 "U5" H 1750 7817 50  0000 C CNN
-F 1 "DS1035-10" H 1750 7726 50  0000 C CNN
-F 2 "" H 1750 7500 50  0001 C CNN
-F 3 "https://datasheets.maximintegrated.com/en/ds/DS1035.pdf" H 1750 7500 50  0001 C CNN
-	3    1750 7500
+P 1750 7350
+F 0 "U5" H 1750 7667 50  0000 C CNN
+F 1 "DS1035-10" H 1750 7576 50  0000 C CNN
+F 2 "" H 1750 7350 50  0001 C CNN
+F 3 "https://datasheets.maximintegrated.com/en/ds/DS1035.pdf" H 1750 7350 50  0001 C CNN
+	3    1750 7350
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -839,10 +790,10 @@ F 3 "https://www.ti.com/lit/ds/symlink/sn74ac11.pdf" H 2600 3850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:VCC #PWR?
+L power:VCC #PWR0102
 U 1 1 61D0B1F3
 P 2250 3750
-F 0 "#PWR?" H 2250 3600 50  0001 C CNN
+F 0 "#PWR0102" H 2250 3600 50  0001 C CNN
 F 1 "VCC" H 2265 3923 50  0000 C CNN
 F 2 "" H 2250 3750 50  0001 C CNN
 F 3 "" H 2250 3750 50  0001 C CNN
@@ -852,7 +803,7 @@ $EndComp
 Wire Wire Line
 	2300 3750 2250 3750
 Wire Wire Line
-	600  6550 600  6900
+	600  6400 600  6750
 $Comp
 L 74xx:74LS11 U8
 U 4 1 61D1E56B
@@ -867,22 +818,22 @@ $EndComp
 $Comp
 L 74xx:74LS11 U8
 U 3 1 61D20A8E
-P 900 7000
-F 0 "U8" H 900 7325 50  0000 C CNN
-F 1 "74AC11" H 900 7234 50  0000 C CNN
-F 2 "" H 900 7000 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/sn74ac11.pdf" H 900 7000 50  0001 C CNN
-	3    900  7000
+P 900 6850
+F 0 "U8" H 900 7175 50  0000 C CNN
+F 1 "74AC11" H 900 7084 50  0000 C CNN
+F 2 "" H 900 6850 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/sn74ac11.pdf" H 900 6850 50  0001 C CNN
+	3    900  6850
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	600  6900 600  7000
-Connection ~ 600  6900
-Connection ~ 600  7000
+	600  6750 600  6850
+Connection ~ 600  6750
+Connection ~ 600  6850
 Wire Wire Line
-	600  7000 600  7100
-Connection ~ 600  5450
-Connection ~ 1450 5800
+	600  6850 600  6950
+Connection ~ 600  5300
+Connection ~ 1450 5650
 Connection ~ 2950 4500
 Wire Wire Line
 	2000 3100 2000 3850
@@ -933,10 +884,6 @@ Wire Notes Line
 	650  4750 650  1750
 Wire Notes Line
 	650  1750 4000 1750
-Wire Notes Line
-	4350 1650 4350 600 
-Wire Notes Line
-	2900 600  2900 1650
 Wire Notes Line
 	4100 1750 4100 2950
 Wire Notes Line
@@ -1791,10 +1738,40 @@ Wire Notes Line
 	750  600  2750 600 
 Wire Notes Line
 	2750 600  2750 1500
-Wire Notes Line
-	2900 600  4350 600 
-Wire Notes Line
-	2900 1650 4350 1650
+$Sheet
+S 3050 850  550  450 
+U 6188A63E
+F0 "Clock" 50
+F1 "clock.sch" 50
+F2 "CLK" O R 3600 1000 50 
+F3 "~CLK" O R 3600 1150 50 
+$EndSheet
+Wire Wire Line
+	600  7750 900  7750
+Connection ~ 600  6950
+Wire Wire Line
+	900  7150 600  7150
+Wire Wire Line
+	600  6950 600  7150
+Connection ~ 600  7150
+Wire Wire Line
+	600  7150 600  7350
+Wire Wire Line
+	600  7450 600  7750
+Wire Wire Line
+	600  7350 600  7450
+Connection ~ 600  7350
+Connection ~ 600  7450
+NoConn ~ 1200 7350
+NoConn ~ 1200 7550
+Text GLabel 3650 1150 2    50   Output ~ 0
+~CLK
+Text GLabel 3650 1000 2    50   Output ~ 0
+CLK
+Wire Wire Line
+	3650 1150 3600 1150
+Wire Wire Line
+	3600 1000 3650 1000
 Wire Bus Line
 	6950 2100 6950 3450
 Wire Bus Line
