@@ -1,3 +1,8 @@
+2021-11-16:
+    * Add clock multiplexer
+    * Add fast clock divider
+    * Change to 20Mhz clock oscillator
+
 2021-11-09:
     * Move clock module to own hierarchical sheet
     * Add 28Mhz oscillator, 555 timer circuit, and pulse button debouncing

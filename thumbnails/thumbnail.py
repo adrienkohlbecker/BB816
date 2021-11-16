@@ -15,7 +15,8 @@ episodes = [
     'RDY part #1',
     'RDY part #2',
     'Timing improvements',
-    'Clock module #1'
+    'Clock module #1',
+    'Clock module #2',
 ]
 
 path = './thumbnails/'
@@ -23,7 +24,7 @@ pathfmt = path + '{:d}.{}'
 
 for num, episode in enumerate(episodes, start=0):
 
-    if num < 8:
+    if num < 9:
         continue
 
     with Image.open(pathfmt.format(num, 'png')) as im:

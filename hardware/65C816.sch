@@ -392,13 +392,13 @@ F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 1750 6300 50  0001 C CNN
 $EndComp
 $Comp
 L 74xx:74LS32 U9
-U 4 1 6186BC0D
+U 1 1 6186BC0D
 P 900 6300
 F 0 "U9" H 900 6625 50  0000 C CNN
 F 1 "74AC32" H 900 6534 50  0000 C CNN
 F 2 "" H 900 6300 50  0001 C CNN
 F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 900 6300 50  0001 C CNN
-	4    900  6300
+	1    900  6300
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -425,13 +425,13 @@ F 3 "~" H 10500 1100 50  0001 C CNN
 $EndComp
 $Comp
 L 74xx:74HC00 U1
-U 3 1 617F2205
+U 4 1 617F2205
 P 2500 2350
 F 0 "U1" H 2500 2675 50  0000 C CNN
 F 1 "74AC00" H 2500 2584 50  0000 C CNN
 F 2 "" H 2500 2350 50  0001 C CNN
 F 3 "https://www.ti.com/lit/ds/symlink/sn74ac00.pdf" H 2500 2350 50  0001 C CNN
-	3    2500 2350
+	4    2500 2350
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -447,13 +447,13 @@ F 3 "https://www.ti.com/lit/ds/symlink/sn54ac74-sp.pdf" H 1450 3200 50  0001 C C
 $EndComp
 $Comp
 L 74xx:74LS32 U9
-U 1 1 6161DFB3
+U 4 1 6161DFB3
 P 3250 3950
 F 0 "U9" H 3250 4275 50  0000 C CNN
 F 1 "74AC32" H 3250 4184 50  0000 C CNN
 F 2 "" H 3250 3950 50  0001 C CNN
 F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 3250 3950 50  0001 C CNN
-	1    3250 3950
+	4    3250 3950
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -491,13 +491,13 @@ F 3 "http://www.vishay.com/docs/88525/1n5817.pdf" H 2000 2600 50  0001 C CNN
 $EndComp
 $Comp
 L 74xx:74HC00 U1
-U 4 1 610F744F
+U 3 1 610F744F
 P 3100 2450
 F 0 "U1" H 3100 2775 50  0000 C CNN
 F 1 "74AC00" H 3100 2684 50  0000 C CNN
 F 2 "" H 3100 2450 50  0001 C CNN
 F 3 "https://www.ti.com/lit/ds/symlink/sn74ac00.pdf" H 3100 2450 50  0001 C CNN
-	4    3100 2450
+	3    3100 2450
 	1    0    0    -1  
 $EndComp
 $Comp
