@@ -14,6 +14,17 @@ A homebrew computer based on the 65C816 processor
 
 ## BOM
 
+### Basics
+
+- BusBoard BB830 Breadboards
+- Hook-Up Wire: [Recommended option](https://www.jameco.com/z/JMS9313-01D-Jameco-Valuepro-22-AWG-6-Color-Solid-Tinned-Copper-Hook-Up-Wire-Assortment-100-Feet_2183752.html)
+- Male-to-Male Dupont Wires
+- [Dupont Female Connectors](https://www.aliexpress.com/item/4001362869482.html). Use them to replace single connectors and group your cables by 2, 8...
+- 10uF Polarized capacitors. Sprinkle one per power rail
+- 3mm LEDs with built-in resistors ([Yellow](https://www.digikey.com/product-detail/en/WP710A10YD5V/754-1729-ND/3084212), [Red](https://www.digikey.com/product-detail/en/WP710A10ID5V/754-1721-ND/3084187), [Green](https://www.digikey.com/product-detail/en/WP710A10SGD5V/754-1724-ND/3084201))
+
+### KiCad components
+
 **Component Count:** 63
 
 | Refs | Qty | Component | Description |
