@@ -1,6 +1,8 @@
 # 65C816
 
-A homebrew computer based on the 65C816 processor
+A homebrew computer based on the 65C816 processor. Watch the series on YouTube:
+
+[![Watch series on YouTube](./thumbnails/playlist.jpg)](https://www.youtube.com/watch?v=sdFXc0Rkpvc&list=PLdGm_pyUmoII9D16mzw-XsJjHKi3f1kqT)
 
 ## Schematic
 
