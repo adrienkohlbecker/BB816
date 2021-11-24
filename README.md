@@ -45,13 +45,13 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 71
+**Component Count:** 76
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
 | C1 | 1 | 220u | Polarized capacitor, small symbol |
 | C2, C3, C8 | 3 | 10u | Polarized capacitor, small symbol |
-| C4, C5, C6, C7, C9, C10, C11, C12, C16, C17, C18, C19, C22, C23, C24, C25, C26 | 17 | 100n | Unpolarized capacitor, small symbol |
+| C4, C5, C6, C7, C9, C10, C11, C12, C16, C17, C18, C19, C22, C23, C24, C25, C26, C27, C28 | 19 | 100n | Unpolarized capacitor, small symbol |
 | C13 | 1 | 1u | Polarized capacitor, small symbol |
 | C14, C20, C21 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C15 | 1 | 10n | Unpolarized capacitor, small symbol |
@@ -82,10 +82,11 @@ The goals of the YouTube series are to provide a good description of all the des
 | U9 | 1 | 74AC32 | Quad 2-input OR |
 | U10 | 1 | 74HC14 | Hex inverter schmitt trigger |
 | U11, U12 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
-| U13 | 1 | 74HC253 | Dual Multiplexer 4 to 1, 3-State Outputs |
+| U13, U20 | 2 | 74HC151 | Multiplexer 8 to 1 |
 | U14 | 1 | 74HC193 | Synchronous 4-bit Up/Down (2 clk) counter |
 | U15 | 1 | MAX705 | Low-Cost, μP Supervisory Circuit |
 | U16 | 1 | 74HC175 | 4-bit D Flip-Flop, reset |
+| U17, U18 | 2 | 74HC112 | dual JK Flip-Flop, Set & Reset |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos
