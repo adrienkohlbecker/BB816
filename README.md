@@ -4,6 +4,20 @@ A homebrew computer based on the 65C816 processor. Watch the series on YouTube:
 
 [![Watch series on YouTube](./thumbnails/playlist.jpg)](https://www.youtube.com/watch?v=sdFXc0Rkpvc&list=PLdGm_pyUmoII9D16mzw-XsJjHKi3f1kqT)
 
+## Goals
+
+The purpose of this project is to build a 65C816 development platform and learn about the CPU. Conceptually, it will be similar to WDC's [own development board](https://wdc65xx.com/Single-Board-Computers/w65c816sxb/).
+
+I'm not going for ludicrous speed and features for revision A, here are the goals:
+
+- Runs at 4Mhz
+- Prototyped on a breadboard, through-hole ICs only, no programmable logic
+- 32KB RAM, 32KB ROM, 512KB extended RAM
+- 65C22 and 65C21 for peripheral I/O
+- 65C51 for UART
+
+The goals of the YouTube series are to provide a good description of all the design decisions, including going in-depth on timing, to be a more advanced complement to something like Ben Eater's 6502 series, as well as show more love to this cool CPU in the homebrew community.
+
 ## Schematic
 
 ### Top-level
