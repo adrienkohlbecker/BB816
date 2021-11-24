@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 2
+Sheet 1 3
 Title "65C816 Homebrew Computer"
 Date "2021-07-20"
 Rev "A"
@@ -49,63 +49,27 @@ Connection ~ 1500 950
 Wire Wire Line
 	1300 1150 1300 1100
 $Comp
-L power:VCC #PWR08
-U 1 1 615D756A
-P 5700 1000
-F 0 "#PWR08" H 5700 850 50  0001 C CNN
-F 1 "VCC" H 5715 1173 50  0000 C CNN
-F 2 "" H 5700 1000 50  0001 C CNN
-F 3 "" H 5700 1000 50  0001 C CNN
-	1    5700 1000
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR09
-U 1 1 615D7C09
-P 5700 1200
-F 0 "#PWR09" H 5700 950 50  0001 C CNN
-F 1 "GND" H 5705 1027 50  0000 C CNN
-F 2 "" H 5700 1200 50  0001 C CNN
-F 3 "" H 5700 1200 50  0001 C CNN
-	1    5700 1200
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5900 1000 5700 1000
-Connection ~ 5700 1000
-Wire Wire Line
-	5700 1000 5500 1000
-Wire Wire Line
-	5500 1200 5700 1200
-Connection ~ 5700 1200
-Wire Wire Line
-	5700 1200 5900 1200
-Text Notes 5850 900  0    50   ~ 0
-Breadboard power rail decoupling\nNot in the final PCB
-$Comp
 L power:VCC #PWR012
 U 1 1 615DAD1B
-P 7350 1000
-F 0 "#PWR012" H 7350 850 50  0001 C CNN
-F 1 "VCC" H 7365 1173 50  0000 C CNN
-F 2 "" H 7350 1000 50  0001 C CNN
-F 3 "" H 7350 1000 50  0001 C CNN
-	1    7350 1000
+P 7000 1000
+F 0 "#PWR012" H 7000 850 50  0001 C CNN
+F 1 "VCC" H 7015 1173 50  0000 C CNN
+F 2 "" H 7000 1000 50  0001 C CNN
+F 3 "" H 7000 1000 50  0001 C CNN
+	1    7000 1000
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR013
 U 1 1 615DB156
-P 7350 1200
-F 0 "#PWR013" H 7350 950 50  0001 C CNN
-F 1 "GND" H 7355 1027 50  0000 C CNN
-F 2 "" H 7350 1200 50  0001 C CNN
-F 3 "" H 7350 1200 50  0001 C CNN
-	1    7350 1200
+P 7000 1200
+F 0 "#PWR013" H 7000 950 50  0001 C CNN
+F 1 "GND" H 7005 1027 50  0000 C CNN
+F 2 "" H 7000 1200 50  0001 C CNN
+F 3 "" H 7000 1200 50  0001 C CNN
+	1    7000 1200
 	1    0    0    -1  
 $EndComp
-Text Notes 7450 900  0    50   ~ 0
-Decoupling capacitor one per chip, place next to power pin
 $Comp
 L power:VCC #PWR05
 U 1 1 615DCFD2
@@ -130,7 +94,6 @@ F 3 "" H 2300 1250 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	8250 1000 7800 1000
-Connection ~ 7350 1000
 Connection ~ 7800 1000
 Wire Wire Line
 	7800 1000 7350 1000
@@ -186,12 +149,6 @@ Wire Wire Line
 	9150 1200 8700 1200
 Connection ~ 8700 1200
 Wire Wire Line
-	5900 1200 6250 1200
-Connection ~ 5900 1200
-Wire Wire Line
-	6250 1000 5900 1000
-Connection ~ 5900 1000
-Wire Wire Line
 	6150 7550 5350 7550
 Connection ~ 5350 7550
 Wire Wire Line
@@ -213,25 +170,13 @@ Wire Wire Line
 	9600 1000 10050 1000
 Wire Wire Line
 	10050 1200 9600 1200
-Text GLabel 3600 3200 2    50   Output ~ 0
-L_~LE
 Connection ~ 2300 4400
 Wire Wire Line
 	2300 4400 2300 4600
 Wire Wire Line
-	2300 4400 2200 4400
-Text GLabel 2200 4400 0    50   Input ~ 0
-BE
-Wire Wire Line
 	2900 4500 2950 4500
-Text GLabel 3400 2450 2    50   Output ~ 0
-~WAIT
-Text GLabel 1850 2350 0    50   BiDi ~ 0
-RDY
 Wire Wire Line
 	2800 2800 2800 2550
-Wire Wire Line
-	1850 2350 2000 2350
 Wire Wire Line
 	2000 2450 2000 2350
 Connection ~ 2000 2350
@@ -255,21 +200,13 @@ F 3 "" H 2000 2050 50  0001 C CNN
 	1    2000 2050
 	1    0    0    -1  
 $EndComp
-Text GLabel 1050 3100 0    50   Input ~ 0
-RDY_IN
 Wire Wire Line
 	2950 4500 2950 4050
-Wire Wire Line
-	1150 3100 1050 3100
 Wire Wire Line
 	1750 3100 2000 3100
 Wire Wire Line
 	2000 2800 2000 3100
 Connection ~ 2000 3100
-Text GLabel 1050 3200 0    50   Input ~ 0
-CLK
-Wire Wire Line
-	1150 3200 1050 3200
 $Comp
 L power:VCC #PWR028
 U 1 1 617D4E7D
@@ -302,10 +239,6 @@ Wire Wire Line
 Connection ~ 2200 2350
 Wire Wire Line
 	2200 2350 2200 2250
-Text GLabel 1250 3950 0    50   Input ~ 0
-~CLK
-Wire Wire Line
-	1250 3950 1350 3950
 Wire Wire Line
 	2950 6550 3850 6550
 Connection ~ 3850 6550
@@ -556,17 +489,6 @@ F 3 "https://www.ti.com/lit/ds/symlink/sn54ac74-sp.pdf" H 3850 7050 50  0001 C C
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:CP_Small C8
-U 1 1 61409EFC
-P 6250 1100
-F 0 "C8" H 6368 1146 50  0000 L CNN
-F 1 "10u" H 6368 1055 50  0000 L CNN
-F 2 "" H 6288 950 50  0001 C CNN
-F 3 "~" H 6250 1100 50  0001 C CNN
-	1    6250 1100
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:C_Small C9
 U 1 1 613F4C20
 P 9150 1100
@@ -655,28 +577,6 @@ F 3 "~" H 7350 1100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:CP_Small C3
-U 1 1 615D71A6
-P 5900 1100
-F 0 "C3" H 6018 1146 50  0000 L CNN
-F 1 "10u" H 6018 1055 50  0000 L CNN
-F 2 "" H 5938 950 50  0001 C CNN
-F 3 "~" H 5900 1100 50  0001 C CNN
-	1    5900 1100
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:CP_Small C2
-U 1 1 615D6B6C
-P 5500 1100
-F 0 "C2" H 5618 1146 50  0000 L CNN
-F 1 "10u" H 5618 1055 50  0000 L CNN
-F 2 "" H 5538 950 50  0001 C CNN
-F 3 "~" H 5500 1100 50  0001 C CNN
-	1    5500 1100
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:CP_Small C1
 U 1 1 615D406F
 P 1500 1050
@@ -699,17 +599,7 @@ F 3 "~" H 900 1100 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	2950 4500 3600 4500
-Text GLabel 3600 4500 2    50   Output ~ 0
-L_~OE
-Wire Wire Line
-	3600 3950 3550 3950
-Text GLabel 3600 3950 2    50   Output ~ 0
-B_~OE
-Wire Wire Line
 	1950 3950 2150 3950
-Text GLabel 2250 3200 0    50   Input ~ 0
-~CLK
 $Comp
 L 65C816:DS1035-10 U5
 U 4 1 618979E4
@@ -754,8 +644,6 @@ F 3 "https://datasheets.maximintegrated.com/en/ds/DS1035.pdf" H 1750 7350 50  00
 	3    1750 7350
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2250 3200 2300 3200
 Connection ~ 2150 3950
 Wire Wire Line
 	2150 3950 2300 3950
@@ -776,8 +664,6 @@ Wire Wire Line
 	2150 3300 2150 3950
 Wire Wire Line
 	2300 3100 2000 3100
-Wire Wire Line
-	2900 3200 3600 3200
 $Comp
 L 74xx:74LS11 U8
 U 2 1 61CE6878
@@ -848,23 +734,11 @@ F 3 "https://nl.mouser.com/datasheet/2/54/4600x-776645.pdf" H 4400 2400 50  0001
 	1    4400 2400
 	0    -1   1    0   
 $EndComp
-Text GLabel 4650 2000 2    50   Input ~ 0
-R~W
-Wire Wire Line
-	4650 2000 4600 2000
-Text GLabel 4650 2100 2    50   Input ~ 0
-BE
-Wire Wire Line
-	4650 2100 4600 2100
 NoConn ~ 4600 2300
 NoConn ~ 4600 2400
 NoConn ~ 4600 2500
 NoConn ~ 4600 2600
 NoConn ~ 4600 2700
-Text GLabel 4650 2200 2    50   Input ~ 0
-RDY_IN
-Wire Wire Line
-	4650 2200 4600 2200
 $Comp
 L power:VCC #PWR07
 U 1 1 612B0E71
@@ -988,8 +862,6 @@ F 3 "https://nl.mouser.com/datasheet/2/54/4600x-776645.pdf" H 10050 4850 50  000
 	1    10050 4850
 	0    1    1    0   
 $EndComp
-Text GLabel 5500 4350 0    50   BiDi ~ 0
-RDY
 Wire Wire Line
 	10250 4450 10300 4450
 $Comp
@@ -1254,18 +1126,6 @@ F 3 "" H 7700 2850 50  0001 C CNN
 	1    7700 2850
 	1    0    0    -1  
 $EndComp
-Text GLabel 5500 4050 0    50   Output ~ 0
-R~W
-Text GLabel 5500 3150 0    50   Input ~ 0
-CLK
-Text GLabel 5500 4450 0    50   Input ~ 0
-BE
-Text GLabel 8350 5450 0    50   Input ~ 0
-L_~OE
-Text GLabel 8350 3350 0    50   Input ~ 0
-B_~OE
-Text GLabel 8350 5350 0    50   Input ~ 0
-L_~LE
 Entry Wire Line
 	9600 2950 9700 3050
 Entry Wire Line
@@ -1422,10 +1282,6 @@ Text Label 6700 5050 0    50   ~ 0
 A13
 Text Label 6700 4950 0    50   ~ 0
 A12
-Text GLabel 8350 3250 0    50   Input ~ 0
-R~W
-Text GLabel 10500 2100 2    50   BiDi ~ 0
-D0..7
 Wire Bus Line
 	9600 2100 10500 2100
 Text Label 9350 2850 0    50   ~ 0
@@ -1546,8 +1402,6 @@ Wire Wire Line
 	8050 4550 8350 4550
 Wire Wire Line
 	8350 4450 8050 4450
-Text GLabel 10400 6100 2    50   Output ~ 0
-A0..A23
 Text Label 6700 4650 0    50   ~ 0
 A9
 Text Label 6700 4550 0    50   ~ 0
@@ -1764,18 +1618,146 @@ Connection ~ 600  7350
 Connection ~ 600  7450
 NoConn ~ 1200 7350
 NoConn ~ 1200 7550
-Text GLabel 3650 1150 2    50   Output ~ 0
-~CLK
-Text GLabel 3650 1000 2    50   Output ~ 0
+$Sheet
+S 4150 850  650  450 
+U 61B33617
+F0 "Reset" 50
+F1 "reset.sch" 50
+F2 "~RST" O R 4800 1000 50 
+F3 "CLK" I L 4150 1000 50 
+F4 "~PWRUP" O R 4800 1200 50 
+F5 "RST" O R 4800 1100 50 
+$EndSheet
+Text Label 3800 1000 2    50   ~ 0
 CLK
+Text Label 3800 1150 2    50   ~ 0
+~CLK
 Wire Wire Line
-	3650 1150 3600 1150
+	3600 1150 3800 1150
 Wire Wire Line
-	3600 1000 3650 1000
-Wire Bus Line
-	6950 2100 6950 3450
+	3600 1000 3800 1000
+Text Label 3950 1000 0    50   ~ 0
+CLK
+Text Label 5000 1000 2    50   ~ 0
+~RST
+Wire Wire Line
+	4800 1000 5000 1000
+Wire Wire Line
+	3950 1000 4150 1000
+Text Label 1750 2350 0    50   ~ 0
+RDY
+Text Label 800  3100 0    50   ~ 0
+RDY_IN
+Text Label 800  3200 0    50   ~ 0
+CLK
+Text Label 1150 3950 0    50   ~ 0
+~CLK
+Text Label 3750 3200 2    50   ~ 0
+L_~LE
+Text Label 3600 2450 2    50   ~ 0
+~WAIT
+Text Label 3750 3950 2    50   ~ 0
+B_~OE
+Text Label 2100 4400 0    50   ~ 0
+BE
+Text Label 2100 3200 0    50   ~ 0
+~CLK
+Text Label 3750 4500 2    50   ~ 0
+L_~OE
+Wire Wire Line
+	800  3200 1150 3200
+Wire Wire Line
+	800  3100 1150 3100
+Wire Wire Line
+	1750 2350 2000 2350
+Wire Wire Line
+	3600 2450 3400 2450
+Wire Wire Line
+	2900 3200 3750 3200
+Wire Wire Line
+	3550 3950 3750 3950
+Wire Wire Line
+	2950 4500 3750 4500
+Wire Wire Line
+	2100 4400 2300 4400
+Wire Wire Line
+	2100 3200 2300 3200
+Wire Wire Line
+	1150 3950 1350 3950
+Text Label 4900 2000 2    50   ~ 0
+R~W
+Text Label 4900 2100 2    50   ~ 0
+BE
+Text Label 4900 2200 2    50   ~ 0
+RDY_IN
+Wire Wire Line
+	4600 2000 4900 2000
+Wire Wire Line
+	4600 2100 4900 2100
+Wire Wire Line
+	4600 2200 4900 2200
+Text Label 5350 2850 0    50   ~ 0
+~RST
+Text Label 5350 3150 0    50   ~ 0
+CLK
+Text Label 5350 4050 0    50   ~ 0
+R~W
+Text Label 5350 4350 0    50   ~ 0
+RDY
+Text Label 5350 4450 0    50   ~ 0
+BE
+Wire Wire Line
+	5500 2850 5350 2850
+Wire Wire Line
+	5350 3150 5500 3150
+Wire Wire Line
+	5350 4050 5500 4050
+Wire Wire Line
+	5350 4350 5500 4350
+Wire Wire Line
+	5350 4450 5500 4450
+Text Label 8150 3250 0    50   ~ 0
+R~W
+Text Label 8150 3350 0    50   ~ 0
+B_~OE
+Wire Wire Line
+	8350 3250 8150 3250
+Wire Wire Line
+	8150 3350 8350 3350
+Text Label 8150 5350 0    50   ~ 0
+L_~LE
+Text Label 8150 5450 0    50   ~ 0
+L_~OE
+Wire Wire Line
+	8150 5450 8350 5450
+Wire Wire Line
+	8350 5350 8150 5350
+Text Label 10500 2100 2    50   ~ 0
+D0..7
+Text Label 10400 6100 2    50   ~ 0
+A0..A23
+$Comp
+L Device:CP_Small C2
+U 1 1 615D6B6C
+P 7000 1100
+F 0 "C2" H 7118 1146 50  0000 L CNN
+F 1 "10u" H 7118 1055 50  0000 L CNN
+F 2 "" H 7038 950 50  0001 C CNN
+F 3 "~" H 7000 1100 50  0001 C CNN
+	1    7000 1100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 1200 7350 1200
+Connection ~ 7000 1200
+Wire Wire Line
+	7350 1000 7000 1000
+Connection ~ 7350 1000
+Connection ~ 7000 1000
 Wire Bus Line
 	9600 2100 9600 2950
+Wire Bus Line
+	6950 2100 6950 3450
 Wire Bus Line
 	9600 4550 9600 6100
 Wire Bus Line

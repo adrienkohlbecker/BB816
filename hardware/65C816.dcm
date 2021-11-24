@@ -60,6 +60,11 @@ K Delay
 F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
 $ENDCMP
 #
+$CMP MAX705
+D Low-Cost, μP Supervisory Circuit
+F https://datasheets.maximintegrated.com/en/ds/MAX705-MAX813L.pdf
+$ENDCMP
+#
 $CMP W65C816SxP
 D W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40
 K 6502 65816 CPU uP
