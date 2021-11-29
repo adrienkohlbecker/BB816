@@ -5,8 +5,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 3
 Title "65C816 Homebrew Computer"
-Date "2021-11-25"
-Rev "A.10"
+Date "2021-11-29"
+Rev "A.11"
 Comp ""
 Comment1 ""
 Comment2 "https://github.com/adrienkohlbecker/65C816"
@@ -1527,12 +1527,13 @@ Wire Notes Line
 Wire Notes Line
 	2750 600  2750 1500
 $Sheet
-S 3050 850  550  450 
+S 3250 900  650  450 
 U 6188A63E
 F0 "Clock" 50
 F1 "clock.sch" 50
-F2 "CLK" O R 3600 1000 50 
-F3 "~CLK" O R 3600 1150 50 
+F2 "CLK" O R 3900 1050 50 
+F3 "~CLK" O R 3900 1200 50 
+F4 "~PWRUP" I L 3250 1050 50 
 $EndSheet
 Wire Wire Line
 	600  7750 900  7750
@@ -1553,31 +1554,31 @@ Connection ~ 600  7450
 NoConn ~ 1200 7350
 NoConn ~ 1200 7550
 $Sheet
-S 4150 850  650  450 
+S 4450 900  650  450 
 U 61B33617
 F0 "Reset" 50
 F1 "reset.sch" 50
-F2 "~RST" O R 4800 1000 50 
-F3 "CLK" I L 4150 1000 50 
-F4 "~PWRUP" O R 4800 1200 50 
-F5 "RST" O R 4800 1100 50 
+F2 "~RST" O R 5100 1050 50 
+F3 "CLK" I L 4450 1050 50 
+F4 "~PWRUP" O R 5100 1250 50 
+F5 "RST" O R 5100 1150 50 
 $EndSheet
-Text Label 3800 1000 2    50   ~ 0
+Text Label 4100 1050 2    50   ~ 0
 CLK
-Text Label 3800 1150 2    50   ~ 0
+Text Label 4100 1200 2    50   ~ 0
 ~CLK
 Wire Wire Line
-	3600 1150 3800 1150
+	3900 1200 4100 1200
 Wire Wire Line
-	3600 1000 3800 1000
-Text Label 3950 1000 0    50   ~ 0
+	3900 1050 4100 1050
+Text Label 4250 1050 0    50   ~ 0
 CLK
-Text Label 5000 1000 2    50   ~ 0
+Text Label 5450 1050 2    50   ~ 0
 ~RST
 Wire Wire Line
-	4800 1000 5000 1000
+	5100 1050 5450 1050
 Wire Wire Line
-	3950 1000 4150 1000
+	4250 1050 4450 1050
 Text Label 1750 2350 0    50   ~ 0
 RDY
 Text Label 800  3100 0    50   ~ 0
@@ -1688,16 +1689,6 @@ Wire Wire Line
 	7350 1000 7000 1000
 Connection ~ 7350 1000
 Connection ~ 7000 1000
-Wire Bus Line
-	9600 2100 9600 2950
-Wire Bus Line
-	6950 2100 6950 3450
-Wire Bus Line
-	9600 4550 9600 6100
-Wire Bus Line
-	7950 2100 7950 5050
-Wire Bus Line
-	6950 3850 6950 6100
 $Comp
 L 74xx:74LS32 U6
 U 3 1 6186C713
@@ -1764,4 +1755,22 @@ F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 5350 7050 50  0001 C CNN
 	5    5350 7050
 	1    0    0    -1  
 $EndComp
+Text Label 5450 1250 2    50   ~ 0
+~PWRUP
+Wire Wire Line
+	5450 1250 5100 1250
+Text Label 2900 1050 0    50   ~ 0
+~PWRUP
+Wire Wire Line
+	2900 1050 3250 1050
+Wire Bus Line
+	9600 2100 9600 2950
+Wire Bus Line
+	6950 2100 6950 3450
+Wire Bus Line
+	9600 4550 9600 6100
+Wire Bus Line
+	7950 2100 7950 5050
+Wire Bus Line
+	6950 3850 6950 6100
 $EndSCHEMATC

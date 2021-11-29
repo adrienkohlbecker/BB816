@@ -42,37 +42,37 @@ The goals of the YouTube series are to provide a good description of all the des
 - [Dupont Female Connectors](https://www.aliexpress.com/item/4001362869482.html). Use them to replace single connectors and group your cables by 2, 8...
 - 10uF Polarized capacitors. Sprinkle one per power rail
 - 3mm LEDs with built-in resistors ([Yellow](https://www.digikey.com/product-detail/en/WP710A10YD5V/754-1729-ND/3084212), [Red](https://www.digikey.com/product-detail/en/WP710A10ID5V/754-1721-ND/3084187), [Green](https://www.digikey.com/product-detail/en/WP710A10SGD5V/754-1724-ND/3084201))
+- LED Bars with 8 LEDs, various colors ([Red version](https://www.aliexpress.com/item/32315190808.html)), with [9-pin bussed 1k resistors](https://nl.mouser.com/ProductDetail/Bourns/4609M-101-102LF)
 
 ### KiCad components
 
-**Component Count:** 76
-
-**Component Count:** 76
+**Component Count:** 80
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
 | C1 | 1 | 220u | Polarized capacitor, small symbol |
 | C2, C16, C25 | 3 | 10u | Polarized capacitor, small symbol |
-| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28 | 19 | 100n | Unpolarized capacitor, small symbol |
+| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30 | 21 | 100n | Unpolarized capacitor, small symbol |
 | C11, C12, C13 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C14 | 1 | 1u | Polarized capacitor, small symbol |
 | C15 | 1 | 10n | Unpolarized capacitor, small symbol |
 | D1 | 1 | 1N5817 | 20V 1A Schottky Barrier Rectifier Diode, DO-41 |
 | D2 | 1 | POWER | Light emitting diode, small symbol |
 | D3 | 1 | Reset | Light emitting diode, small symbol |
-| J1 | 1 | POWER | Generic connector, single row, 01x02 |
+| J1 | 1 | POWER | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | R1, R10, R11 | 3 | 1k | Resistor, small symbol |
 | R2, R9 | 2 | 220 | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
 | R4, R6, R8 | 3 | 10k | Resistor, small symbol |
 | RN1, RN2, RN3, RN4, RN5, RN6 | 6 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
-| RN7 | 1 | 10k | 4 resistor network, star topology, bussed resistors, small symbol |
+| RN7, RN8 | 2 | 10k | 4 resistor network, star topology, bussed resistors, small symbol |
 | RV1 | 1 | 500k | Potentiometer |
 | SW1 | 1 | Pulse | Push button switch, generic, two pins |
 | SW2 | 1 | Mode | Push button switch, generic, two pins |
 | SW3 | 1 | Speed | Push button switch, generic, two pins |
 | SW4 | 1 | SW_DIP_x04 | 4x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
 | SW5 | 1 | Reset | Push button switch, generic, two pins |
+| SW6 | 1 | SW_DIP_SPDT_x02 | 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol |
 | U1 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
 | U2 | 1 | 74AC11 | Triple 3-input AND |
 | U3 | 1 | 74AC74 | Dual D Flip-flop, Set & Reset |

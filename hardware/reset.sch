@@ -5,8 +5,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 3 3
 Title "Reset Module"
-Date "2021-11-25"
-Rev "A.10"
+Date "2021-11-29"
+Rev "A.11"
 Comp ""
 Comment1 ""
 Comment2 "https://github.com/adrienkohlbecker/65C816"
