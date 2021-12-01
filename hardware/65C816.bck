@@ -12,6 +12,65 @@ K Delay
 F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
 $ENDCMP
 #
+$CMP DS1035-10
+D 3-in-1 High–Speed Silicon Delay Line
+K Delay
+F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
+$ENDCMP
+#
+$CMP DS1035-12
+D 3-in-1 High–Speed Silicon Delay Line
+K Delay
+F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
+$ENDCMP
+#
+$CMP DS1035-15
+D 3-in-1 High–Speed Silicon Delay Line
+K Delay
+F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
+$ENDCMP
+#
+$CMP DS1035-20
+D 3-in-1 High–Speed Silicon Delay Line
+K Delay
+F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
+$ENDCMP
+#
+$CMP DS1035-25
+D 3-in-1 High–Speed Silicon Delay Line
+K Delay
+F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
+$ENDCMP
+#
+$CMP DS1035-30
+D 3-in-1 High–Speed Silicon Delay Line
+K Delay
+F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
+$ENDCMP
+#
+$CMP DS1035-6
+D 3-in-1 High–Speed Silicon Delay Line
+K Delay
+F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
+$ENDCMP
+#
+$CMP DS1035-8
+D 3-in-1 High–Speed Silicon Delay Line
+K Delay
+F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
+$ENDCMP
+#
+$CMP MAX705
+D Low-Cost, μP Supervisory Circuit
+F https://datasheets.maximintegrated.com/en/ds/MAX705-MAX813L.pdf
+$ENDCMP
+#
+$CMP SW_DIP_SPDT_x02
+D 4x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol
+K dip switch
+F ~
+$ENDCMP
+#
 $CMP W65C816SxP
 D W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40
 K 6502 65816 CPU uP
