@@ -1646,19 +1646,6 @@ F 3 "~" H 1900 7800 50  0001 C CNN
 	1    1900 7800
 	1    0    0    -1  
 $EndComp
-$Comp
-L 74xx:74LS74 U11
-U 1 1 618D3CF2
-P 8700 4950
-F 0 "U11" H 8500 5200 50  0000 C CNN
-F 1 "74HC74" H 8900 5200 50  0000 C CNN
-F 2 "" H 8700 4950 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/sn74hc74.pdf" H 8700 4950 50  0001 C CNN
-	1    8700 4950
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8700 5300 8700 5250
 Wire Wire Line
 	9000 5050 9100 5050
 Wire Wire Line
@@ -1678,8 +1665,6 @@ PULSE_~RUN
 Wire Wire Line
 	10150 4850 10700 4850
 Wire Wire Line
-	9850 5300 9850 5250
-Wire Wire Line
 	9300 4950 9550 4950
 Text Label 9300 4950 0    50   ~ 0
 RUN
@@ -1688,35 +1673,6 @@ Wire Wire Line
 Connection ~ 9100 5050
 Wire Wire Line
 	9000 4850 9550 4850
-Text Label 7700 4600 0    50   ~ 0
-PULSE_ON_RST
-Wire Wire Line
-	8700 4600 8700 4650
-Wire Wire Line
-	8700 4600 9850 4600
-Wire Wire Line
-	9850 4600 9850 4650
-Connection ~ 8700 4600
-Text Label 7700 5300 0    50   ~ 0
-RUN_ON_RST
-Connection ~ 8700 5300
-$Comp
-L 74xx:74LS112 U10
-U 1 1 61C9D37C
-P 9850 4950
-F 0 "U10" H 9600 5200 50  0000 C CNN
-F 1 "74HC112" H 10100 5200 50  0000 C CNN
-F 2 "" H 9850 4950 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/sn54hc112.pdf" H 9850 4950 50  0001 C CNN
-	1    9850 4950
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8700 5300 9850 5300
-Wire Wire Line
-	7700 4600 8700 4600
-Wire Wire Line
-	7700 5300 8700 5300
 Wire Notes Line
 	11000 500  11000 6350
 $Comp
@@ -1789,4 +1745,48 @@ F 3 "https://www.ti.com/lit/ds/symlink/sn54hc112.pdf" H 9450 7250 50  0001 C CNN
 	3    9450 7250
 	1    0    0    -1  
 $EndComp
+$Comp
+L 74xx:74LS112 U10
+U 1 1 61C9D37C
+P 9850 4950
+F 0 "U10" H 9600 5200 50  0000 C CNN
+F 1 "74HC112" H 10100 5200 50  0000 C CNN
+F 2 "" H 9850 4950 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/sn54hc112.pdf" H 9850 4950 50  0001 C CNN
+	1    9850 4950
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS74 U11
+U 1 1 618D3CF2
+P 8700 4950
+F 0 "U11" H 8500 5200 50  0000 C CNN
+F 1 "74HC74" H 8900 5200 50  0000 C CNN
+F 2 "" H 8700 4950 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/sn74hc74.pdf" H 8700 4950 50  0001 C CNN
+	1    8700 4950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8700 5300 8700 5250
+Wire Wire Line
+	8700 5300 9850 5300
+Connection ~ 8700 5300
+Wire Wire Line
+	7700 5300 8700 5300
+Wire Wire Line
+	9850 5300 9850 5250
+Text Label 7700 5300 0    50   ~ 0
+RUN_ON_RST
+Wire Wire Line
+	9850 4600 9850 4650
+Wire Wire Line
+	8700 4600 9850 4600
+Wire Wire Line
+	8700 4600 8700 4650
+Connection ~ 8700 4600
+Wire Wire Line
+	7700 4600 8700 4600
+Text Label 7700 4600 0    50   ~ 0
+PULSE_ON_RST
 $EndSCHEMATC
