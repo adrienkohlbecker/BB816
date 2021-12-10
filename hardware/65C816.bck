@@ -60,13 +60,18 @@ K Delay
 F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
 $ENDCMP
 #
+$CMP LED-Array-8
+D BAR GRAPH 8 segment
+K display LED array
+$ENDCMP
+#
 $CMP MAX705
 D Low-Cost, μP Supervisory Circuit
 F https://datasheets.maximintegrated.com/en/ds/MAX705-MAX813L.pdf
 $ENDCMP
 #
 $CMP SW_DIP_SPDT_x02
-D 4x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol
+D 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol
 K dip switch
 F ~
 $ENDCMP

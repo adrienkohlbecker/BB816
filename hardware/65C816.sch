@@ -3,10 +3,10 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 3
+Sheet 1 5
 Title "65C816 Homebrew Computer"
-Date "2021-11-29"
-Rev "A.11"
+Date "2021-12-10"
+Rev "A.12"
 Comp ""
 Comment1 ""
 Comment2 "https://github.com/adrienkohlbecker/65C816"
@@ -493,7 +493,7 @@ L Device:R_Small R2
 U 1 1 615DC6A0
 P 2300 950
 F 0 "R2" H 2200 900 50  0000 R CNN
-F 1 "220" H 2200 1000 50  0000 R CNN
+F 1 "1k" H 2200 1000 50  0000 R CNN
 F 2 "" V 2230 950 50  0001 C CNN
 F 3 "~" H 2300 950 50  0001 C CNN
 	1    2300 950 
@@ -696,13 +696,13 @@ F 3 "" H 4200 2000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Notes Line
-	4000 1750 4000 4750
+	4000 1700 4000 4750
 Wire Notes Line
 	4000 4750 650  4750
 Wire Notes Line
-	650  4750 650  1750
+	650  4750 650  1700
 Wire Notes Line
-	650  1750 4000 1750
+	650  1700 4000 1700
 Wire Notes Line
 	4100 1750 4100 2950
 Wire Notes Line
@@ -798,33 +798,22 @@ F 3 "https://nl.mouser.com/datasheet/2/54/4600x-776645.pdf" H 10050 4850 50  000
 $EndComp
 Wire Wire Line
 	10250 4450 10300 4450
-$Comp
-L power:GND #PWR025
-U 1 1 613FD3EA
-P 10300 4450
-F 0 "#PWR025" H 10300 4200 50  0001 C CNN
-F 1 "GND" H 10305 4277 50  0000 C CNN
-F 2 "" H 10300 4450 50  0001 C CNN
-F 3 "" H 10300 4450 50  0001 C CNN
-	1    10300 4450
-	1    0    0    -1  
-$EndComp
 Text Label 9700 4950 0    50   ~ 0
-BA5
+A21
 Text Label 9700 5150 0    50   ~ 0
-BA7
+A23
 Text Label 9700 5050 0    50   ~ 0
-BA6
+A22
 Text Label 9700 4850 0    50   ~ 0
-BA4
+A20
 Text Label 9700 4750 0    50   ~ 0
-BA3
+A19
 Text Label 9700 4650 0    50   ~ 0
-BA2
+A18
 Text Label 9700 4550 0    50   ~ 0
-BA1
+A17
 Text Label 9700 4450 0    50   ~ 0
-BA0
+A16
 Wire Wire Line
 	9700 5150 9850 5150
 Wire Wire Line
@@ -881,28 +870,6 @@ Wire Wire Line
 	7700 4550 7650 4550
 Wire Wire Line
 	7700 3750 7650 3750
-$Comp
-L power:GND #PWR019
-U 1 1 6136B158
-P 7700 4550
-F 0 "#PWR019" H 7700 4300 50  0001 C CNN
-F 1 "GND" H 7705 4377 50  0000 C CNN
-F 2 "" H 7700 4550 50  0001 C CNN
-F 3 "" H 7700 4550 50  0001 C CNN
-	1    7700 4550
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR018
-U 1 1 61362D9F
-P 7700 3750
-F 0 "#PWR018" H 7700 3500 50  0001 C CNN
-F 1 "GND" H 7705 3577 50  0000 C CNN
-F 2 "" H 7700 3750 50  0001 C CNN
-F 3 "" H 7700 3750 50  0001 C CNN
-	1    7700 3750
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	7250 3750 7050 3750
 Wire Wire Line
@@ -1049,17 +1016,6 @@ Text Label 7050 2850 0    50   ~ 0
 DBA0
 Wire Wire Line
 	7650 2850 7700 2850
-$Comp
-L power:GND #PWR017
-U 1 1 612F2303
-P 7700 2850
-F 0 "#PWR017" H 7700 2600 50  0001 C CNN
-F 1 "GND" H 7705 2677 50  0000 C CNN
-F 2 "" H 7700 2850 50  0001 C CNN
-F 3 "" H 7700 2850 50  0001 C CNN
-	1    7700 2850
-	1    0    0    -1  
-$EndComp
 Entry Wire Line
 	9600 2950 9700 3050
 Entry Wire Line
@@ -1357,21 +1313,21 @@ A1
 Text Label 6700 3750 0    50   ~ 0
 A0
 Text Label 9350 4950 0    50   ~ 0
-BA5
+A21
 Text Label 9350 5150 0    50   ~ 0
-BA7
+A23
 Text Label 9350 5050 0    50   ~ 0
-BA6
+A22
 Text Label 9350 4850 0    50   ~ 0
-BA4
+A20
 Text Label 9350 4750 0    50   ~ 0
-BA3
+A19
 Text Label 9350 4650 0    50   ~ 0
-BA2
+A18
 Text Label 9350 4550 0    50   ~ 0
-BA1
+A17
 Text Label 9350 4450 0    50   ~ 0
-BA0
+A16
 Wire Wire Line
 	9350 5150 9500 5150
 Wire Wire Line
@@ -1573,10 +1529,10 @@ Wire Wire Line
 	3900 1050 4100 1050
 Text Label 4250 1050 0    50   ~ 0
 CLK
-Text Label 5450 1050 2    50   ~ 0
+Text Label 5600 1050 2    50   ~ 0
 ~RST
 Wire Wire Line
-	5100 1050 5450 1050
+	5100 1050 5600 1050
 Wire Wire Line
 	4250 1050 4450 1050
 Text Label 1750 2350 0    50   ~ 0
@@ -1589,8 +1545,8 @@ Text Label 1150 3950 0    50   ~ 0
 ~CLK
 Text Label 3750 3200 2    50   ~ 0
 L_~LE
-Text Label 3600 2450 2    50   ~ 0
-~WAIT
+Text Label 3750 2450 2    50   ~ 0
+~WAI
 Text Label 3750 3950 2    50   ~ 0
 B_~OE
 Text Label 2100 4400 0    50   ~ 0
@@ -1605,8 +1561,6 @@ Wire Wire Line
 	800  3100 1150 3100
 Wire Wire Line
 	1750 2350 2000 2350
-Wire Wire Line
-	3600 2450 3400 2450
 Wire Wire Line
 	2900 3200 3750 3200
 Wire Wire Line
@@ -1668,9 +1622,9 @@ Wire Wire Line
 Wire Wire Line
 	8350 5350 8150 5350
 Text Label 10500 2100 2    50   ~ 0
-D0..7
+D[0..7]
 Text Label 10400 6100 2    50   ~ 0
-A0..A23
+A[0..23]
 $Comp
 L Device:CP_Small C2
 U 1 1 615D6B6C
@@ -1755,14 +1709,145 @@ F 3 "https://www.ti.com/lit/ds/symlink/sn54ac32.pdf" H 5350 7050 50  0001 C CNN
 	5    5350 7050
 	1    0    0    -1  
 $EndComp
-Text Label 5450 1250 2    50   ~ 0
+Text Label 5600 1250 2    50   ~ 0
 ~PWRUP
 Wire Wire Line
-	5450 1250 5100 1250
+	5600 1250 5100 1250
 Text Label 2900 1050 0    50   ~ 0
 ~PWRUP
 Wire Wire Line
 	2900 1050 3250 1050
+NoConn ~ 5500 5250
+NoConn ~ 5500 5150
+NoConn ~ 5500 4950
+NoConn ~ 5500 4850
+NoConn ~ 5250 1150
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 61C5AC05
+P 1300 950
+F 0 "#FLG0101" H 1300 1025 50  0001 C CNN
+F 1 "PWR_FLAG" H 1300 1123 50  0000 C CNN
+F 2 "" H 1300 950 50  0001 C CNN
+F 3 "~" H 1300 950 50  0001 C CNN
+	1    1300 950 
+	1    0    0    -1  
+$EndComp
+Connection ~ 1300 950 
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 61C5B1E2
+P 1300 1150
+F 0 "#FLG0102" H 1300 1225 50  0001 C CNN
+F 1 "PWR_FLAG" H 1300 1323 50  0000 C CNN
+F 2 "" H 1300 1150 50  0001 C CNN
+F 3 "~" H 1300 1150 50  0001 C CNN
+	1    1300 1150
+	-1   0    0    1   
+$EndComp
+Connection ~ 1300 1150
+Wire Wire Line
+	5100 1150 5250 1150
+$Sheet
+S 2950 5050 600  1250
+U 61C859BC
+F0 "Debug" 50
+F1 "debug.sch" 50
+F2 "R~W" I L 2950 5200 50 
+F3 "VDA" I L 2950 5300 50 
+F4 "VPA" I L 2950 5400 50 
+F5 "~IRQ" I L 2950 5700 50 
+F6 "RDY" I L 2950 5500 50 
+F7 "BE" I L 2950 5600 50 
+F8 "~NMI" I L 2950 5800 50 
+F9 "~WAI" I L 2950 5900 50 
+F10 "a[0..23]" I L 2950 6050 50 
+F11 "d[0..7]" I L 2950 6150 50 
+$EndSheet
+Wire Wire Line
+	2750 5200 2950 5200
+Wire Wire Line
+	2950 5300 2750 5300
+Wire Wire Line
+	2750 5400 2950 5400
+Wire Wire Line
+	2950 5700 2750 5700
+Wire Wire Line
+	2750 5500 2950 5500
+Wire Wire Line
+	2750 5600 2950 5600
+Wire Wire Line
+	2750 5800 2950 5800
+Text Label 2750 5500 0    50   ~ 0
+RDY
+Text Label 2750 5600 0    50   ~ 0
+BE
+Text Label 2750 5800 0    50   ~ 0
+~NMI
+Text Label 2750 5900 0    50   ~ 0
+~WAI
+Text Label 2750 5700 0    50   ~ 0
+~IRQ
+Text Label 2750 5400 0    50   ~ 0
+VPA
+Text Label 2750 5300 0    50   ~ 0
+VDA
+Text Label 2750 5200 0    50   ~ 0
+R~W
+Wire Wire Line
+	2750 5900 2950 5900
+Text Label 2600 6150 0    50   ~ 0
+D[0..7]
+Text Label 2600 6050 0    50   ~ 0
+A[0..23]
+Wire Wire Line
+	3400 2450 3750 2450
+Text Label 5350 4550 0    50   ~ 0
+VPA
+Wire Wire Line
+	5350 4550 5500 4550
+Text Label 5350 4650 0    50   ~ 0
+VDA
+Wire Wire Line
+	5350 4650 5500 4650
+Text Label 5200 3750 0    50   ~ 0
+~NMI
+Text Label 5200 3650 0    50   ~ 0
+~IRQ
+Wire Wire Line
+	5200 3750 5400 3750
+Wire Wire Line
+	5200 3650 5400 3650
+$Comp
+L power:VCC #PWR0101
+U 1 1 6225E717
+P 5400 3500
+F 0 "#PWR0101" H 5400 3350 50  0001 C CNN
+F 1 "VCC" H 5415 3673 50  0000 C CNN
+F 2 "" H 5400 3500 50  0001 C CNN
+F 3 "" H 5400 3500 50  0001 C CNN
+	1    5400 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5400 3500 5400 3550
+Connection ~ 5400 3750
+Wire Wire Line
+	5400 3750 5500 3750
+Wire Wire Line
+	5400 3550 5500 3550
+Connection ~ 5400 3550
+Wire Wire Line
+	5400 3550 5400 3650
+Connection ~ 5400 3650
+Wire Wire Line
+	5400 3650 5500 3650
+Wire Wire Line
+	5400 3650 5400 3750
+Wire Bus Line
+	2950 6150 2600 6150
+Wire Bus Line
+	2600 6050 2950 6050
 Wire Bus Line
 	9600 2100 9600 2950
 Wire Bus Line
@@ -1773,4 +1858,54 @@ Wire Bus Line
 	7950 2100 7950 5050
 Wire Bus Line
 	6950 3850 6950 6100
+$Comp
+L power:GND #PWR017
+U 1 1 612F2303
+P 7700 2850
+F 0 "#PWR017" H 7700 2600 50  0001 C CNN
+F 1 "GND" H 7705 2677 50  0000 C CNN
+F 2 "" H 7700 2850 50  0001 C CNN
+F 3 "" H 7700 2850 50  0001 C CNN
+	1    7700 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR018
+U 1 1 61D625DC
+P 7700 3750
+F 0 "#PWR018" H 7700 3600 50  0001 C CNN
+F 1 "VCC" H 7715 3923 50  0000 C CNN
+F 2 "" H 7700 3750 50  0001 C CNN
+F 3 "" H 7700 3750 50  0001 C CNN
+	1    7700 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR019
+U 1 1 61D62AFC
+P 7700 4550
+F 0 "#PWR019" H 7700 4400 50  0001 C CNN
+F 1 "VCC" H 7715 4723 50  0000 C CNN
+F 2 "" H 7700 4550 50  0001 C CNN
+F 3 "" H 7700 4550 50  0001 C CNN
+	1    7700 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR025
+U 1 1 61D63001
+P 10300 4450
+F 0 "#PWR025" H 10300 4300 50  0001 C CNN
+F 1 "VCC" H 10315 4623 50  0000 C CNN
+F 2 "" H 10300 4450 50  0001 C CNN
+F 3 "" H 10300 4450 50  0001 C CNN
+	1    10300 4450
+	1    0    0    -1  
+$EndComp
+$Sheet
+S 3900 5050 500  300 
+U 61EB86F2
+F0 "Tester" 50
+F1 "tester.sch" 50
+$EndSheet
 $EndSCHEMATC

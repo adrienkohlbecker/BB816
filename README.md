@@ -32,6 +32,14 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![Reset module](./hardware/reset.png)](./hardware/reset.png)
 
+### Debug module
+
+[![Debug module](./hardware/debug.png)](./hardware/debug.png)
+
+### Tester module
+
+[![Tester module](./hardware/tester.png)](./hardware/tester.png)
+
 ## BOM
 
 ### Basics
@@ -42,30 +50,38 @@ The goals of the YouTube series are to provide a good description of all the des
 - [Dupont Female Connectors](https://www.aliexpress.com/item/4001362869482.html). Use them to replace single connectors and group your cables by 2, 8...
 - 10uF Polarized capacitors. Sprinkle one per power rail
 - 3mm LEDs with built-in resistors ([Yellow](https://www.digikey.com/product-detail/en/WP710A10YD5V/754-1729-ND/3084212), [Red](https://www.digikey.com/product-detail/en/WP710A10ID5V/754-1721-ND/3084187), [Green](https://www.digikey.com/product-detail/en/WP710A10SGD5V/754-1724-ND/3084201))
-- LED Bars with 8 LEDs, various colors ([Red version](https://www.aliexpress.com/item/32315190808.html)), with [9-pin bussed 1k resistors](https://nl.mouser.com/ProductDetail/Bourns/4609M-101-102LF)
+- LED Bars with 8 LEDs, various colors ([Red version](https://www.aliexpress.com/item/32315190808.html)), with [9-pin bussed 1k resistors](https://nl.mouser.com/ProductDetail/Bourns/4609M-101-102LF). I use 1k, 1.5k or 3.3k resistors depending on the color.
 
 ### KiCad components
 
-**Component Count:** 80
+**Component Count:** 117
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
+| BAR1 | 1 | Blue | BAR GRAPH 8 segment |
+| BAR2, BAR3, BAR4 | 3 | Yellow | BAR GRAPH 8 segment |
+| BAR5 | 1 | Green | BAR GRAPH 8 segment |
+| BAR6 | 1 | Red | BAR GRAPH 8 segment |
 | C1 | 1 | 220u | Polarized capacitor, small symbol |
-| C2, C16, C25 | 3 | 10u | Polarized capacitor, small symbol |
-| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30 | 21 | 100n | Unpolarized capacitor, small symbol |
+| C2, C16, C25, C31 | 4 | 10u | Polarized capacitor, small symbol |
+| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37 | 27 | 100n | Unpolarized capacitor, small symbol |
 | C11, C12, C13 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C14 | 1 | 1u | Polarized capacitor, small symbol |
 | C15 | 1 | 10n | Unpolarized capacitor, small symbol |
 | D1 | 1 | 1N5817 | 20V 1A Schottky Barrier Rectifier Diode, DO-41 |
 | D2 | 1 | POWER | Light emitting diode, small symbol |
 | D3 | 1 | Reset | Light emitting diode, small symbol |
+| D4 | 1 | PWRUP | Light emitting diode, small symbol |
+| D5 | 1 | Clock | Light emitting diode, small symbol |
 | J1 | 1 | POWER | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| R1, R10, R11 | 3 | 1k | Resistor, small symbol |
-| R2, R9 | 2 | 220 | Resistor, small symbol |
+| R1, R2, R10, R11, R12, R13 | 6 | 1k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
-| R4, R6, R8 | 3 | 10k | Resistor, small symbol |
-| RN1, RN2, RN3, RN4, RN5, RN6 | 6 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
-| RN7, RN8 | 2 | 10k | 4 resistor network, star topology, bussed resistors, small symbol |
+| R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21 | 11 | 10k | Resistor, small symbol |
+| R9 | 1 | 220 | Resistor, small symbol |
+| RN1, RN2, RN3, RN4, RN5, RN6, RN7 | 7 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RN8, RN9 | 2 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RN10, RN11, RN12 | 3 | 1k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RN13 | 1 | 3.3k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RV1 | 1 | 500k | Potentiometer |
 | SW1 | 1 | Pulse | Push button switch, generic, two pins |
 | SW2 | 1 | Mode | Push button switch, generic, two pins |
@@ -73,6 +89,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | SW4 | 1 | SW_DIP_x04 | 4x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
 | SW5 | 1 | Reset | Push button switch, generic, two pins |
 | SW6 | 1 | SW_DIP_SPDT_x02 | 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol |
+| SW7 | 1 | SW_DIP_x08 | 8x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
 | U1 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
 | U2 | 1 | 74AC11 | Triple 3-input AND |
 | U3 | 1 | 74AC74 | Dual D Flip-flop, Set & Reset |
@@ -89,13 +106,14 @@ The goals of the YouTube series are to provide a good description of all the des
 | U16, U17 | 2 | 74HC151 | Multiplexer 8 to 1 |
 | U18 | 1 | MAX705 | Low-Cost, μP Supervisory Circuit |
 | U19 | 1 | 74HC175 | 4-bit D Flip-Flop, reset |
+| U20 | 1 | 74HC04 | Hex Inverter |
+| U21, U22, U23, U24, U25 | 5 | 74HC245 | Octal BUS Transceivers, 3-State outputs |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
-| U* | 1 | 74AC04 | hex inverter |
 | U* | 1 | 74AC08 | Quad And2 |
 
 ### Replacement for obsolete chips

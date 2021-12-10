@@ -1,3 +1,8 @@
+2021-12-10:
+    * Add debug display
+    * Add tester board
+    * Sync with breadboard state
+
 2021-11-29:
     * Add clean clock switching with JK Flip Flops
     * Add DIP switch to set clock setting on boot

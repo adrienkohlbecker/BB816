@@ -19,6 +19,7 @@ episodes = [
     'Clock module #2',
     'Power-up Reset',
     'Clock module #3',
+    'First run\nBus display',
 ]
 
 path = './thumbnails/'
@@ -26,7 +27,7 @@ pathfmt = path + '{:d}.{}'
 
 for num, episode in enumerate(episodes, start=0):
 
-    if num < 11:
+    if num < 12:
         continue
 
     with Image.open(pathfmt.format(num, 'png')) as im:

@@ -60,6 +60,11 @@ K Delay
 F https://datasheets.maximintegrated.com/en/ds/DS1035.pdf
 $ENDCMP
 #
+$CMP LED-Array-8
+D BAR GRAPH 8 segment
+K display LED array
+$ENDCMP
+#
 $CMP MAX705
 D Low-Cost, μP Supervisory Circuit
 F https://datasheets.maximintegrated.com/en/ds/MAX705-MAX813L.pdf
