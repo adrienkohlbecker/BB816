@@ -22,7 +22,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### Top-level
 
-[![Top-level schematic](./hardware/65C816.png)](./hardware/65C816.png)
+[![Top-level schematic](./hardware/main.png)](./hardware/main.png)
 
 ### Clock module
 
@@ -54,7 +54,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 117
+**Component Count:** 119
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -73,8 +73,9 @@ The goals of the YouTube series are to provide a good description of all the des
 | D3 | 1 | Reset | Light emitting diode, small symbol |
 | D4 | 1 | PWRUP | Light emitting diode, small symbol |
 | D5 | 1 | Clock | Light emitting diode, small symbol |
+| D6 | 1 | EMU | Light emitting diode, small symbol |
 | J1 | 1 | POWER | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| R1, R2, R10, R11, R12, R13 | 6 | 1k | Resistor, small symbol |
+| R1, R2, R10, R11, R12, R13, R22 | 6 | 1k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
 | R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21 | 11 | 10k | Resistor, small symbol |
 | R9 | 1 | 220 | Resistor, small symbol |
@@ -119,6 +120,20 @@ The goals of the YouTube series are to provide a good description of all the des
 ### Replacement for obsolete chips
 
 - `DS1035-10`: can be replaced by `DS1135Z-10+` with a SOIC-8 to through hole adapter
+
+## Memory map
+
+### Diagram
+
+[![Memory Map](./doc/memory_map.png)](./doc/memory_map.png)
+
+### Decoding
+
+[![Decoding](./doc/address_decoding.png)](./doc/address_decoding.png)
+
+### Decoding circuit
+
+[![Decoding circuit](./simulation/address.png)](./simulation/address.png)
 
 ## Timing diagrams
 

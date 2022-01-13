@@ -6,8 +6,8 @@
 
   (title_block
     (title "Reset Module")
-    (date "2021-12-10")
-    (rev "A.12")
+    (date "2022-01-09")
+    (rev "A.13")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2021 Adrien Kohlbecker")
