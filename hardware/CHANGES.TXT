@@ -1,3 +1,6 @@
+2022-01-13:
+    * Add Emulation mode LED
+
 2021-12-10:
     * Add debug display
     * Add tester board
