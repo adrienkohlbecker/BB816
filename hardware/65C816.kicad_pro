@@ -318,7 +318,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
       "unannotated": "error",
@@ -429,6 +429,18 @@
     [
       "00000000-0000-0000-0000-000061eb86f2",
       "Tester"
+    ],
+    [
+      "95d65710-49c8-4cb8-9de3-935bd85d56b1",
+      "Glue Logic"
+    ],
+    [
+      "51a25d9b-b48c-46f9-8897-a7e56a5418ca",
+      "Memory"
+    ],
+    [
+      "f3e13532-3999-4d1f-800f-4b9a7b3c3e9d",
+      "Address decoding"
     ]
   ],
   "text_variables": {}
