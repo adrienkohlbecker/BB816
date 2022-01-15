@@ -1,3 +1,10 @@
+default:
+	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch main.a )
+	cat software/report.txt
+
+eeprom:
+	(cd software; minipro -p AT28C256 -w main.bin)
+
 schematics:
 	pdfseparate -f 1 -l 1 hardware/65C816.pdf hardware/main.pdf
 	convert -density 200 hardware/main.pdf hardware/main.png
