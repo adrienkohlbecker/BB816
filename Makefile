@@ -16,12 +16,11 @@ schematics:
 	convert -density 200 hardware/reset.pdf hardware/reset.png
 	pdfseparate -f 5 -l 5 hardware/65C816.pdf hardware/tester.pdf
 	convert -density 200 hardware/tester.pdf hardware/tester.png
-	pdfseparate -f 4 -l 4 hardware/65C816.pdf hardware/memory.pdf
+	pdfseparate -f 6 -l 6 hardware/65C816.pdf hardware/memory.pdf
 	convert -density 200 hardware/memory.pdf hardware/memory.png
-	pdfseparate -f 5 -l 5 hardware/65C816.pdf hardware/address_decoding.pdf
+	pdfseparate -f 7 -l 7 hardware/65C816.pdf hardware/address_decoding.pdf
 	convert -density 200 hardware/address_decoding.pdf hardware/address_decoding.png
 	rm hardware/{65C816,main,clock,debug,reset,tester,memory,address_decoding}.pdf
-	imageoptim hardware/{main,clock,debug,reset,tester,memory,address_decoding}.png
 
 .PHONY: thumbnails
 thumbnails:
