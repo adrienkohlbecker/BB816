@@ -688,7 +688,7 @@
   (symbol (lib_id "74xx:74LS10") (at 102.87 161.29 0) (unit 4)
     (in_bom yes) (on_board yes)
     (uuid 0108fbbd-bb2f-4247-9e7c-8ed949a2604f)
-    (property "Reference" "U28" (id 0) (at 99.06 152.4 0))
+    (property "Reference" "U27" (id 0) (at 99.06 152.4 0))
     (property "Value" "74HC10" (id 1) (at 107.95 152.4 0))
     (property "Footprint" "" (id 2) (at 102.87 161.29 0)
       (effects (font (size 1.27 1.27)) hide)

@@ -4,7 +4,7 @@
 
 *=$8000
 main:
-  sec
+  clc
 loop:
   xce
 
@@ -15,5 +15,6 @@ loop:
 
   jmp loop
 
-; Fill remaining memory with NOPs
-!align $ffff,0
+*=$fffc
+  !word main
+  !word $eaea

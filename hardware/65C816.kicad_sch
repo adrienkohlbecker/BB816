@@ -3275,7 +3275,7 @@
       (reference "U27") (unit 3) (value "74HC10") (footprint "")
     )
     (path "/f3e13532-3999-4d1f-800f-4b9a7b3c3e9d/0108fbbd-bb2f-4247-9e7c-8ed949a2604f"
-      (reference "U28") (unit 4) (value "74HC10") (footprint "")
+      (reference "U27") (unit 4) (value "74HC10") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-00006194c461"
       (reference "X1") (unit 1) (value "20MHz") (footprint "Oscillator:Oscillator_DIP-14")

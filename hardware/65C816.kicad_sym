@@ -729,7 +729,10 @@
     (property "Datasheet" "http://www.ti.com/lit/ds/symlink/lmc555.pdf" (id 3) (at 22.86 -10.16 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "ki_fp_filters" "DIP*W7.62mm*" (id 4) (at 0 0 0)
+    (property "ki_description" "CMOS Timer, 555 compatible, PDIP-8" (id 4) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "ki_fp_filters" "DIP*W7.62mm*" (id 5) (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (symbol "LMC555xN_0_0"

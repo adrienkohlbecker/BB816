@@ -55,7 +55,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 119
+**Component Count:** 128
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -64,8 +64,8 @@ The goals of the YouTube series are to provide a good description of all the des
 | BAR5 | 1 | Green | BAR GRAPH 8 segment |
 | BAR6 | 1 | Red | BAR GRAPH 8 segment |
 | C1 | 1 | 220u | Polarized capacitor, small symbol |
-| C2, C16, C25, C31 | 4 | 10u | Polarized capacitor, small symbol |
-| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37 | 27 | 100n | Unpolarized capacitor, small symbol |
+| C2, C16, C25, C31, C38, C40, C42 | 7 | 10u | Polarized capacitor, small symbol |
+| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37, C39, C41 | 29 | 100n | Unpolarized capacitor, small symbol |
 | C11, C12, C13 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C14 | 1 | 1u | Polarized capacitor, small symbol |
 | C15 | 1 | 10n | Unpolarized capacitor, small symbol |
@@ -76,9 +76,10 @@ The goals of the YouTube series are to provide a good description of all the des
 | D5 | 1 | Clock | Light emitting diode, small symbol |
 | D6 | 1 | EMU | Light emitting diode, small symbol |
 | J1 | 1 | POWER | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| R1, R2, R10, R11, R12, R13, R22 | 6 | 1k | Resistor, small symbol |
+| J2 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| R1, R2, R10, R11, R12, R13, R22 | 7 | 1k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
-| R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21 | 11 | 10k | Resistor, small symbol |
+| R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21, R23 | 12 | 10k | Resistor, small symbol |
 | R9 | 1 | 220 | Resistor, small symbol |
 | RN1, RN2, RN3, RN4, RN5, RN6, RN7 | 7 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN8, RN9 | 2 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
@@ -96,8 +97,8 @@ The goals of the YouTube series are to provide a good description of all the des
 | U2 | 1 | 74AC11 | Triple 3-input AND |
 | U3 | 1 | 74AC74 | Dual D Flip-flop, Set & Reset |
 | U4 | 1 | DS1035-10 | 3-in-1 High–Speed Silicon Delay Line |
-| U5 | 1 | 74AC00 | quad 2-input NAND gate |
-| U6 | 1 | 74AC32 | Quad 2-input OR |
+| U5 | 1 | 74AHC00 | quad 2-input NAND gate |
+| U6 | 1 | 74AHC32 | Quad 2-input OR |
 | U7 | 1 | 74ACT245 | Octal BUS Transceivers, 3-State outputs |
 | U8 | 1 | 74AC573 | 8-bit Latch 3-state outputs |
 | U9 | 1 | 74HC14 | Hex inverter schmitt trigger |
@@ -109,7 +110,9 @@ The goals of the YouTube series are to provide a good description of all the des
 | U18 | 1 | MAX705 | Low-Cost, μP Supervisory Circuit |
 | U19 | 1 | 74HC175 | 4-bit D Flip-Flop, reset |
 | U20 | 1 | 74HC04 | Hex Inverter |
-| U21, U22, U23, U24, U25 | 5 | 74HC245 | Octal BUS Transceivers, 3-State outputs |
+| U21, U22, U23, U24, U25 | 5 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
+| U26 | 1 | 28C256 | Paged Parallel EEPROM 256Kb (32K x 8), DIP-28/SOIC-28 |
+| U27 | 1 | 74HC10 | Triple 3-input NAND |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos
