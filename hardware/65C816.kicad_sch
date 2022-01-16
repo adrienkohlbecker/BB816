@@ -2944,6 +2944,9 @@
     (path "/00000000-0000-0000-0000-0000615d1014"
       (reference "J1") (unit 1) (value "POWER") (footprint "")
     )
+    (path "/00000000-0000-0000-0000-000061eb86f2/0e006e01-b151-4d6e-9611-84a495b7aa73"
+      (reference "J2") (unit 1) (value "Tester") (footprint "")
+    )
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/f83e3a8c-8fad-4ea2-95eb-917e07ea4109"
       (reference "R1") (unit 1) (value "1k") (footprint "")
     )
