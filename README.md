@@ -22,31 +22,35 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### Top-level
 
-[![Top-level schematic](./hardware/main.png)](./hardware/main.png)
+[![Top-level schematic](./schematics/main.png)](./schematics/main.png)
 
 ### Clock module
 
-[![Clock module](./hardware/clock.png)](./hardware/clock.png)
+[![Clock module](./schematics/clock.png)](./schematics/clock.png)
 
 ### Reset module
 
-[![Reset module](./hardware/reset.png)](./hardware/reset.png)
+[![Reset module](./schematics/reset.png)](./schematics/reset.png)
+
+### Glue Logic module
+
+[![Glue Logic module](./schematics/glue.png)](./schematics/glue.png)
 
 ### Address Decoding module
 
-[![Address Decoding module](./hardware/address_decoding.png)](./hardware/address_decoding.png)
+[![Address Decoding module](./schematics/address_decoding.png)](./schematics/address_decoding.png)
 
 ### Memory module
 
-[![Memory module](./hardware/memory.png)](./hardware/memory.png)
+[![Memory module](./schematics/memory.png)](./schematics/memory.png)
 
 ### Debug module
 
-[![Debug module](./hardware/debug.png)](./hardware/debug.png)
+[![Debug module](./schematics/debug.png)](./schematics/debug.png)
 
 ### Tester module
 
-[![Tester module](./hardware/tester.png)](./hardware/tester.png)
+[![Tester module](./schematics/tester.png)](./schematics/tester.png)
 
 ## BOM
 
