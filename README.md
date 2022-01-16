@@ -32,6 +32,14 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![Reset module](./hardware/reset.png)](./hardware/reset.png)
 
+### Address Decoding module
+
+[![Address Decoding module](./hardware/address_decoding.png)](./hardware/address_decoding.png)
+
+### Memory module
+
+[![Memory module](./hardware/memory.png)](./hardware/memory.png)
+
 ### Debug module
 
 [![Debug module](./hardware/debug.png)](./hardware/debug.png)
