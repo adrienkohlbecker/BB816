@@ -3113,19 +3113,19 @@
       (reference "U4") (unit 4) (value "DS1035-10") (footprint "")
     )
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/94b521cf-1e4f-40dd-8fb7-f673412bca0f"
-      (reference "U5") (unit 1) (value "74HC00") (footprint "")
+      (reference "U5") (unit 1) (value "74AHC00") (footprint "")
     )
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/d57f4acd-54ad-4ae7-8f1b-a3f6e1c85868"
-      (reference "U5") (unit 2) (value "74HC00") (footprint "")
+      (reference "U5") (unit 2) (value "74AHC00") (footprint "")
     )
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/38290d28-64c1-476b-b4d7-6ec242bc01f8"
-      (reference "U5") (unit 3) (value "74HC00") (footprint "")
+      (reference "U5") (unit 3) (value "74AHC00") (footprint "")
     )
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/fc8fd912-0c36-4ddf-acb7-5ff07178137e"
-      (reference "U5") (unit 4) (value "74HC00") (footprint "")
+      (reference "U5") (unit 4) (value "74AHC00") (footprint "")
     )
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/c5d9686e-eae2-4dae-896d-3c1759eb0149"
-      (reference "U5") (unit 5) (value "74HC00") (footprint "")
+      (reference "U5") (unit 5) (value "74AHC00") (footprint "")
     )
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/266f5bfe-73a4-4365-9d08-c077bb33d25b"
       (reference "U6") (unit 1) (value "74AHC32") (footprint "")
