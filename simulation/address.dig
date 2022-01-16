@@ -599,7 +599,7 @@
         </entry>
         <entry>
           <string>Description</string>
-          <string>11; 44.5</string>
+          <string>10.5; 44.5</string>
         </entry>
       </elementAttributes>
       <pos x="260" y="340"/>
@@ -647,7 +647,7 @@ AC138 select: 2.8; 10</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11; 44.5</string>
+          <string>10.5; 44.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -665,7 +665,7 @@ AC138 select: 2.8; 10</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11; 67.5</string>
+          <string>10.5; 67.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -683,7 +683,7 @@ AC138 select: 2.8; 10</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11; 67.5</string>
+          <string>10.5; 67.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -701,7 +701,7 @@ AC138 select: 2.8; 10</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>12; 75.5</string>
+          <string>11.5; 75.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -719,14 +719,14 @@ AC138 select: 2.8; 10</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11; 68.5</string>
+          <string>10.5; 68.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
           <boolean>false</boolean>
         </entry>
       </elementAttributes>
-      <pos x="894" y="465"/>
+      <pos x="880" y="465"/>
     </visualElement>
     <visualElement>
       <elementName>Text</elementName>
@@ -737,7 +737,7 @@ AC138 select: 2.8; 10</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11; 68.5</string>
+          <string>10.5; 68.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -755,14 +755,14 @@ AC138 select: 2.8; 10</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11; 68.5</string>
+          <string>10.5; 68.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
           <boolean>false</boolean>
         </entry>
       </elementAttributes>
-      <pos x="894" y="725"/>
+      <pos x="882" y="725"/>
     </visualElement>
     <visualElement>
       <elementName>Text</elementName>
@@ -791,7 +791,7 @@ AC138 select: 2.8; 10</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>12; 76.5</string>
+          <string>11; 76.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
