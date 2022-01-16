@@ -51,6 +51,7 @@ The goals of the YouTube series are to provide a good description of all the des
 - 10uF Polarized capacitors. Sprinkle one per power rail
 - 3mm LEDs with built-in resistors ([Yellow](https://www.digikey.com/product-detail/en/WP710A10YD5V/754-1729-ND/3084212), [Red](https://www.digikey.com/product-detail/en/WP710A10ID5V/754-1721-ND/3084187), [Green](https://www.digikey.com/product-detail/en/WP710A10SGD5V/754-1724-ND/3084201))
 - LED Bars with 8 LEDs, various colors ([Red version](https://www.aliexpress.com/item/32315190808.html)), with [9-pin bussed 1k resistors](https://nl.mouser.com/ProductDetail/Bourns/4609M-101-102LF). I use 1k, 1.5k or 3.3k resistors depending on the color.
+- ZIF socket for ROM: [Aries Electronics 28-526-10](https://mouser.com/ProductDetail/Aries-Electronics/28-526-10?qs=WZRMhwwaLl9nHDqf31PyaQ%3D%3D) + [28pin Wire-Wrap socket](https://mouser.com/ProductDetail/Mill-Max/123-43-628-41-001000?qs=IGgAdOvCTsSqORqiKCtp8w%3D%3D)
 
 ### KiCad components
 
@@ -393,3 +394,51 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 </p></details>
 
 [![RDY](./timing/Timing%20RDY.png)](./timing/Timing%20RDY.png)
+
+### ROM
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
+    { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
+    { nodes: ['..Ѳ(54)Ѵ', '..Α(10)Γ'], phase: 0.9 },
+    { name: 'ROM_OE', wave: '0..(10)x(44)0(198)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(76.5)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'ROM_CS', wave: '0..(11)x(65.5)0(175.5)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['...(30)Ο(150)Ό', '...(54)Ν(70)Ά'], phase: 0.9 },
+    { nodes: ['...(76.5)Β(150)Ξ', '..G(10)H(50)P(116.5)L(50)K'], phase: 0.9 },
+    { name: 'ROM DATA', wave: '5..(10)x(50)z(116.5)x(50)5(25.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 9ns', 'Ζ+Η 19ns',
+    'B+Π 76.5ns', 'E+F 11ns',
+    'Ѳ+Ѵ 54ns', 'Α+Γ 10ns',
+    'Ν+Ά 70ns (tOE)', 'Β+Ξ 150ns (tCE)', 'Ο+Ό 150ns (tAcc)', 'G+H 10ns', 'H+P 50ns', 'L+K unknown',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![ROM](./timing/Timing%20ROM.png)](./timing/Timing%20ROM.png)
