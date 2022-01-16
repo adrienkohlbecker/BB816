@@ -244,6 +244,53 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 
 [![DB/BA Buffer](./timing/Timing%20Buffer.png)](./timing/Timing%20Buffer.png)
 
+### Address decoding
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(100)1.', phase: 0.20 },
+    { nodes: ['..Ѳ(30)Ѵ', '..Α(10)Γ'], phase: 0.45 },
+    { name: 'A[0..15]', wave: '3..(10)x(20)3(70)..', data: ['', 'Address'], phase: 0.20 },
+    { nodes: ['..Β(44.5)Ξ', '..Ν(10.5)Ά'], phase: 0.45 },
+    { name: 'A[16..23]', wave: '7..(10.5)x(34)7(57.5)', data: ['', 'Bank Address'], phase: 0.20 },
+    { nodes: ['..Ο(75.5)Ό', '..A(11.5)D'], phase: 0.45 },
+    { name: 'EXTRAM_CS', wave: '8..(11.5)x(64)8(26.5)', data: ['', 'Extended RAM'], phase: 0.20 },
+    { nodes: ['..B(76.5)Π', '..E(11)F'], phase: 0.45 },
+    { name: 'ROM_CS', wave: '8..(11)x(65.5)8(25.5)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..G(78.5)H', '..Ρ(12.5)L'], phase: 0.45 },
+    { name: 'IO_CS', wave: '8..(12.5)x(66)8(23.5)', data: ['', 'I/O'], phase: 0.20 },
+    { nodes: ['..K(76.5)C', '..M(11)N'], phase: 0.45 },
+    { name: 'RAM_CS', wave: '8..(11)x(65.5)8(25.5)', data: ['', 'RAM'], phase: 0.20 },
+  ],
+  edge: [
+    'Ѳ+Ѵ 30ns', 'Α+Γ 10ns', 'Ν+Ά 10.5ns', 'Β+Ξ 44.5ns', 'Ο+Ό 75.5ns',
+    'A+D 11.5ns', 'B+Π 76.5ns', 'E+F 11ns', 'G+H 78.5ns',
+    'Ρ+L 12.6ns', 'K+C 76.5ns', 'M+N 11ns',
+  ],
+  config: {
+    skin: 'narrower',
+    lines: {
+      offset: 2,
+      every: 100
+    },
+    background: 'white'
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 5Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![Address](./timing/Timing%20Address.png)](./timing/Timing%20Address.png)
+
 ### Bus Enable
 
 <details><summary>View source</summary><p>
