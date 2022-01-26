@@ -425,19 +425,21 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
     { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
     { nodes: ['..Ѳ(54)Ѵ', '..Α(10)Γ'], phase: 0.9 },
-    { name: 'ROM_OE', wave: '0..(10)x(44)0(198)', data: ['', 'ROM'], phase: 0.20 },
+    { name: 'RD', wave: '0..(10)x(44)0(198)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['..B(76.5)Π', '..E(11)F'], phase: 0.9 },
     { name: 'ROM_CS', wave: '0..(11)x(65.5)0(175.5)', data: ['', 'ROM'], phase: 0.20 },
-    { nodes: ['...(30)Ο(150)Ό', '...(54)Ν(70)Ά'], phase: 0.9 },
-    { nodes: ['...(76.5)Β(150)Ξ', '..G(10)H(50)P(116.5)L(50)K'], phase: 0.9 },
-    { name: 'ROM DATA', wave: '5..(10)x(50)z(116.5)x(50)5(25.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
+    { nodes: ['', '...(30)Ο(150)Ό'], phase: 0.9 },
+    { nodes: ['...(54)Ν(70)Ά', '...(76.5)Β(150)Ξ'], phase: 0.9 },
+    { name: 'ROM DATA (1/2)', wave: 'z..(11)x(165.5)x(50)5(25.5)', data: ['OUTPUT VALID'], phase: 0.20 },
+    { nodes: ['..G(10)H(50)P'], phase: 0.9 },
+    { name: 'ROM DATA (1/2)', wave: '5..(10)x(50)z(192)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
     'Φ+Έ 9ns', 'Ζ+Η 19ns',
     'B+Π 76.5ns', 'E+F 11ns',
     'Ѳ+Ѵ 54ns', 'Α+Γ 10ns',
-    'Ν+Ά 70ns (tOE)', 'Β+Ξ 150ns (tCE)', 'Ο+Ό 150ns (tAcc)', 'G+H 10ns', 'H+P 50ns', 'L+K unknown',
+    'Ν+Ά 70ns (tOE)', 'Β+Ξ 150ns (tCE)', 'Ο+Ό 150ns (tAcc)', 'G+H 10ns', 'H+P 50ns',
   ],
   config: {
     skin: 'narrowerer',
@@ -457,3 +459,111 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 </p></details>
 
 [![ROM](./timing/Timing%20ROM.png)](./timing/Timing%20ROM.png)
+
+### RAM
+
+#### Read Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
+    { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
+    { nodes: ['..Ѳ(54)Ѵ', '..Α(10)Γ'], phase: 0.9 },
+    { name: 'RD', wave: '0..(10)x(44)0(198)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(76.5)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'RAM_CS', wave: '0..(11)x(65.5)0(175.5)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['', '...(30)Ο(55)Ό'], phase: 0.9 },
+    { nodes: ['...(11)M(10)Σ(55.5)Β(55)Ξ', '...(10)Ё(5)Ж(39)Ν(30)Ά'], phase: 0.9 },
+    { name: 'RAM DATA (1/2)', wave: 'z..(15)x(116.5)5(120.5)', data: ['OUTPUT VALID'], phase: 0.20 },
+    { nodes: ['...(11)L(20)K', '..G(10)H(20)P'], phase: 0.9 },
+    { name: 'RAM DATA (2/2)', wave: '5..(10)x(20)z(222)', data: [''], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 9ns', 'Ζ+Η 19ns',
+    'B+Π 76.5ns', 'E+F 11ns',
+    'Ѳ+Ѵ 54ns', 'Α+Γ 10ns',
+    'Ν+Ά 30ns (tOE)',
+    'Β+Ξ 55ns (tACE)',
+    'Ο+Ό 55ns (tAA)',
+    'G+H 10ns',
+    'H+P 20ns (tOHZ)', 'L+K 20ns (tCHZ)',
+    'M+Σ 10ns (tCLZ)', 'Ё+Ж 5ns (tOLZ)'
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![RAM Read](./timing/Timing%20RAM%20Read.png)](./timing/Timing%20RAM%20Read.png)
+
+#### Write Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(39.5)Η'], phase: 0.9 },
+    { name: 'WRITE BUFFER', wave: '6..(10.5)x(154)6(85.5)..', data: ['', 'Writing Data'], phase: 0.20 },
+    { nodes: ['..B(76.5)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'RAM_CS', wave: '0..(11)x(65.5)0(175.5)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['...(30)Ο(50)Ό', '...(76.5)Β(50)Ξ'], phase: 0.9 },
+    { nodes: ['...(8.5)P(0)Q(117.5)I(0)J(7.5)M(45)N',], phase: 0.9 },
+    { nodes: ['..Ѳ(8.5)Ѵ', '..Α(1)Γ'], phase: 0.9 },
+    { name: 'WR', wave: '0..(1)x(7.5)1(117.5)x(7.5)0(118.5)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['...(8.5)G(0)H(217.5)L(25)K'], phase: 0.9 },
+    { name: 'RAM DATA', wave: '5..(8.5)z(217.5)5(26)', data: ['', 'DATA VALID'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 10.5ns', 'Ζ+Η 39.5ns',
+    'B+Π 76.5ns', 'E+F 11ns',
+    'Ѳ+Ѵ 8.5ns', 'Α+Γ 1ns',
+    'Β+Ξ 50ns (tCW)', 'Ο+Ό 50ns (tAW)',
+    'G+H 0ns (tDH)','L+K 25ns (tDW)',
+    'I+J 0ns (tAS)', 'M+N 45ns (tWP)', 'P+Q 0ns (tWR)'
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![RAM Write](./timing/Timing%20RAM%20Write.png)](./timing/Timing%20RAM%20Write.png)
