@@ -3586,7 +3586,7 @@
     (uuid ff290f35-6333-4fa3-9eff-71a7352cf7d1)
   )
 
-  (text "pull-down on buffer is useful if the clock gets paused, since the data bus is only driven for half the cycle\npull-up/down on address bus and cpu data bus is useful only if you plan to tie BE low with nothing else driving the bus"
+  (text "pull-down on buffer data bus is useful if you stop the clock, since the data bus is only driven for half the cycle\npull-up/down on address bus and cpu data bus is useful only if you plan to tie BE low with nothing else driving the bus"
     (at 161.29 151.13 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid b41e3f83-17b9-486d-8d4a-c4025e640c3b)

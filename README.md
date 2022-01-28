@@ -67,7 +67,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 128
+**Component Count:** 129
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -77,7 +77,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | BAR6 | 1 | Red | BAR GRAPH 8 segment |
 | C1 | 1 | 220u | Polarized capacitor, small symbol |
 | C2, C16, C25, C31, C38, C40, C42 | 7 | 10u | Polarized capacitor, small symbol |
-| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37, C39, C41 | 29 | 100n | Unpolarized capacitor, small symbol |
+| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37, C39, C41, C43 | 30 | 100n | Unpolarized capacitor, small symbol |
 | C11, C12, C13 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C14 | 1 | 1u | Polarized capacitor, small symbol |
 | C15 | 1 | 10n | Unpolarized capacitor, small symbol |
@@ -91,7 +91,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | J2 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | R1, R2, R10, R11, R12, R13, R22 | 7 | 1k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
-| R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21, R23 | 12 | 10k | Resistor, small symbol |
+| R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21 | 11 | 10k | Resistor, small symbol |
 | R9 | 1 | 220 | Resistor, small symbol |
 | RN1, RN2, RN3, RN4, RN5, RN6, RN7 | 7 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN8, RN9 | 2 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
@@ -123,8 +123,9 @@ The goals of the YouTube series are to provide a good description of all the des
 | U19 | 1 | 74HC175 | 4-bit D Flip-Flop, reset |
 | U20 | 1 | 74HC04 | Hex Inverter |
 | U21, U22, U23, U24, U25 | 5 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
-| U26 | 1 | 28C256 | Paged Parallel EEPROM 256Kb (32K x 8), DIP-28/SOIC-28 |
+| U26 | 1 | AT28C256-15PC | Paged Parallel EEPROM 256Kb (32K x 8), DIP-28/SOIC-28 |
 | U27 | 1 | 74HC10 | Triple 3-input NAND |
+| U28 | 1 | LY62256PL-55LL | 32Kx8 bit Low Power CMOS Static RAM, 55/70ns, DIP-28 |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos
@@ -424,22 +425,23 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
     { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
     { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
-    { nodes: ['..Ѳ(54)Ѵ', '..Α(10)Γ'], phase: 0.9 },
-    { name: 'RD', wave: '0..(10)x(44)0(198)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..Ѳ(38.5)Ѵ', '..Α(11)Γ'], phase: 0.9 },
+    { name: 'RD', wave: '0..(11)x(27.5)0(213.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['..B(76.5)Π', '..E(11)F'], phase: 0.9 },
     { name: 'ROM_CS', wave: '0..(11)x(65.5)0(175.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['', '...(30)Ο(150)Ό'], phase: 0.9 },
-    { nodes: ['...(54)Ν(70)Ά', '...(76.5)Β(150)Ξ'], phase: 0.9 },
+    { nodes: ['...(38.5)Ν(70)Ά', '...(76.5)Β(150)Ξ'], phase: 0.9 },
     { name: 'ROM DATA (1/2)', wave: 'z..(11)x(165.5)x(50)5(25.5)', data: ['OUTPUT VALID'], phase: 0.20 },
-    { nodes: ['..G(10)H(50)P'], phase: 0.9 },
-    { name: 'ROM DATA (1/2)', wave: '5..(10)x(50)z(192)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
+    { nodes: ['...(10)Q(0)S', '..G(10)R(28.5)H(50)P'], phase: 0.9 },
+    { name: 'ROM DATA (1/2)', wave: '5..(10)x(78.5)z(163.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
     'Φ+Έ 9ns', 'Ζ+Η 19ns',
     'B+Π 76.5ns', 'E+F 11ns',
-    'Ѳ+Ѵ 54ns', 'Α+Γ 10ns',
-    'Ν+Ά 70ns (tOE)', 'Β+Ξ 150ns (tCE)', 'Ο+Ό 150ns (tAcc)', 'G+H 10ns', 'H+P 50ns',
+    'Ѳ+Ѵ 38.5ns', 'Α+Γ 11ns',
+    'Ν+Ά 70ns (tOE)', 'Β+Ξ 150ns (tCE)', 'Ο+Ό 150ns (tAcc)', 'G+R 10ns', 'H+P 50ns (tDF)',
+    'Q+S 0ns (tOH)'
   ],
   config: {
     skin: 'narrowerer',
@@ -476,27 +478,28 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
     { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
     { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
-    { nodes: ['..Ѳ(54)Ѵ', '..Α(10)Γ'], phase: 0.9 },
-    { name: 'RD', wave: '0..(10)x(44)0(198)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..Ѳ(38.5)Ѵ', '..Α(11)Γ'], phase: 0.9 },
+    { name: 'RD', wave: '0..(11)x(27.5)0(213.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['..B(76.5)Π', '..E(11)F'], phase: 0.9 },
     { name: 'RAM_CS', wave: '0..(11)x(65.5)0(175.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['', '...(30)Ο(55)Ό'], phase: 0.9 },
-    { nodes: ['...(11)M(10)Σ(55.5)Β(55)Ξ', '...(10)Ё(5)Ж(39)Ν(30)Ά'], phase: 0.9 },
-    { name: 'RAM DATA (1/2)', wave: 'z..(15)x(116.5)5(120.5)', data: ['OUTPUT VALID'], phase: 0.20 },
-    { nodes: ['...(11)L(20)K', '..G(10)H(20)P'], phase: 0.9 },
-    { name: 'RAM DATA (2/2)', wave: '5..(10)x(20)z(222)', data: [''], phase: 0.20 },
+    { nodes: ['...(11)M(10)Σ(55.5)Β(55)Ξ', '...(11)Ё(5)Ж(22.4)Ν(30)Ά'], phase: 0.9 },
+    { name: 'RAM DATA (1/2)', wave: 'z..(16)x(115.5)5(120.5)', data: ['OUTPUT VALID'], phase: 0.20 },
+    { nodes: ['...(10)S(10)T(18.5)R(20)P(18)L(20)K', '..G(11)H'], phase: 0.9 },
+    { name: 'RAM DATA (2/2)', wave: '5..(11)x(47.5)z(193.5)', data: [''], phase: 0.20 },
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
     'Φ+Έ 9ns', 'Ζ+Η 19ns',
     'B+Π 76.5ns', 'E+F 11ns',
-    'Ѳ+Ѵ 54ns', 'Α+Γ 10ns',
+    'Ѳ+Ѵ 38.5ns', 'Α+Γ 11ns',
     'Ν+Ά 30ns (tOE)',
     'Β+Ξ 55ns (tACE)',
     'Ο+Ό 55ns (tAA)',
-    'G+H 10ns',
-    'H+P 20ns (tOHZ)', 'L+K 20ns (tCHZ)',
-    'M+Σ 10ns (tCLZ)', 'Ё+Ж 5ns (tOLZ)'
+    'G+H 11ns',
+    'R+P 20ns (tOHZ)', 'L+K 20ns (tCHZ)',
+    'M+Σ 10ns (tCLZ)', 'Ё+Ж 5ns (tOLZ)',
+    'S+T 10ns (tOH)'
   ],
   config: {
     skin: 'narrowerer',
@@ -533,8 +536,8 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'WRITE BUFFER', wave: '6..(10.5)x(154)6(85.5)..', data: ['', 'Writing Data'], phase: 0.20 },
     { nodes: ['..B(76.5)Π', '..E(11)F'], phase: 0.9 },
     { name: 'RAM_CS', wave: '0..(11)x(65.5)0(175.5)', data: ['', 'ROM'], phase: 0.20 },
-    { nodes: ['...(30)Ο(50)Ό', '...(76.5)Β(50)Ξ'], phase: 0.9 },
-    { nodes: ['...(8.5)P(0)Q(117.5)I(0)J(7.5)M(45)N',], phase: 0.9 },
+    { nodes: ['...(30)U(55)V', '...(30)Ο(50)Ό'], phase: 0.9 },
+    { nodes: ['...(76.5)Β(50)Ξ', '...(8.5)P(0)Q(117.5)I(0)J(7.5)M(45)N',], phase: 0.9 },
     { nodes: ['..Ѳ(8.5)Ѵ', '..Α(1)Γ'], phase: 0.9 },
     { name: 'WR', wave: '0..(1)x(7.5)1(117.5)x(7.5)0(118.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['...(8.5)G(0)H(217.5)L(25)K'], phase: 0.9 },
@@ -547,7 +550,8 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     'Ѳ+Ѵ 8.5ns', 'Α+Γ 1ns',
     'Β+Ξ 50ns (tCW)', 'Ο+Ό 50ns (tAW)',
     'G+H 0ns (tDH)','L+K 25ns (tDW)',
-    'I+J 0ns (tAS)', 'M+N 45ns (tWP)', 'P+Q 0ns (tWR)'
+    'I+J 0ns (tAS)', 'M+N 45ns (tWP)', 'P+Q 0ns (tWR)',
+    'U+V 55ns (tWC)'
   ],
   config: {
     skin: 'narrowerer',

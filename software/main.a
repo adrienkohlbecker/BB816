@@ -4,16 +4,35 @@
 
 *=$8000
 main:
+  ; put CPU in native mode
   clc
-loop:
   xce
 
-  nop
-  nop
-  nop
-  nop
+  ; set registers to 16 bits (Set bits m and x to 0 in CPU status register)
+  rep #%00110000
+  !rl
+  !al
 
-  jmp loop
+  ldx #$7fff
+  dex ; align to 16 bits
+
+loop:
+   ; store 16 bits of data at X and X+1 and verify we read the same thing
+  txa
+  sta $0,X
+  cmp $0,X
+  bne fail
+
+  ; decrement address
+  dex
+  dex
+
+  ; continue until X=0
+  bne loop
+  stp
+
+fail:
+  wai
 
 *=$fffc
   !word main
