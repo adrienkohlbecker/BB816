@@ -148,10 +148,6 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![Decoding](./doc/address_decoding.png)](./doc/address_decoding.png)
 
-### Decoding circuit
-
-[![Decoding circuit](./simulation/address.png)](./simulation/address.png)
-
 ## Timing diagrams
 
 ### DB/BA Latch
