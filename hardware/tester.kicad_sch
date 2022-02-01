@@ -6,8 +6,8 @@
 
   (title_block
     (title "Tester Module")
-    (date "2022-01-23")
-    (rev "A.15")
+    (date "2022-01-30")
+    (rev "A.16")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2021 Adrien Kohlbecker")
