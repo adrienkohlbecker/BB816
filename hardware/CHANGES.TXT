@@ -1,3 +1,13 @@
+2022-01-28:
+    * Add RAM
+    * Basic WR pulse generation
+
+2022-01-20:
+    * Add ROM
+    * Update debug buffers from 245 to 541
+    * Add pull-up on interrupt pins
+    * Add temporary address decoding
+
 2022-01-13:
     * Add Emulation mode LED
 
