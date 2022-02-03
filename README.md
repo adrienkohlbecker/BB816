@@ -67,34 +67,35 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 129
+**Component Count:** 142
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
-| BAR1 | 1 | Blue | BAR GRAPH 8 segment |
+| BAR1 | 1 | LED-Array-10-BGYR | BAR GRAPH 10 segment |
 | BAR2, BAR3, BAR4 | 3 | Yellow | BAR GRAPH 8 segment |
 | BAR5 | 1 | Green | BAR GRAPH 8 segment |
 | BAR6 | 1 | Red | BAR GRAPH 8 segment |
 | C1 | 1 | 220u | Polarized capacitor, small symbol |
 | C2, C16, C25, C31, C38, C40, C42 | 7 | 10u | Polarized capacitor, small symbol |
-| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37, C39, C41, C43 | 30 | 100n | Unpolarized capacitor, small symbol |
+| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37, C39, C41, C43, C44, C45, C46, C47 | 34 | 100n | Unpolarized capacitor, small symbol |
 | C11, C12, C13 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C14 | 1 | 1u | Polarized capacitor, small symbol |
 | C15 | 1 | 10n | Unpolarized capacitor, small symbol |
 | D1 | 1 | 1N5817 | 20V 1A Schottky Barrier Rectifier Diode, DO-41 |
 | D2 | 1 | POWER | Light emitting diode, small symbol |
-| D3 | 1 | Reset | Light emitting diode, small symbol |
 | D4 | 1 | PWRUP | Light emitting diode, small symbol |
 | D5 | 1 | Clock | Light emitting diode, small symbol |
-| D6 | 1 | EMU | Light emitting diode, small symbol |
 | J1 | 1 | POWER | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | J2 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| R1, R2, R10, R11, R12, R13, R22 | 7 | 1k | Resistor, small symbol |
+| R1, R2, R10, R12, R13, R27, R28, R29 | 8 | 1k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
 | R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21 | 11 | 10k | Resistor, small symbol |
 | R9 | 1 | 220 | Resistor, small symbol |
+| R22 | 1 | 1.5k | Resistor, small symbol |
+| R23, R24, R25, R26 | 4 | 4.7k | Resistor, small symbol |
+| R30, R31 | 2 | 2k | Resistor, small symbol |
 | RN1, RN2, RN3, RN4, RN5, RN6, RN7 | 7 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
-| RN8, RN9 | 2 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RN8 | 1 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN10, RN11, RN12 | 3 | 1k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN13 | 1 | 3.3k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RV1 | 1 | 500k | Potentiometer |
@@ -107,12 +108,12 @@ The goals of the YouTube series are to provide a good description of all the des
 | SW7 | 1 | SW_DIP_x08 | 8x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
 | U1 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
 | U2 | 1 | 74AC11 | Triple 3-input AND |
-| U3 | 1 | 74AC74 | Dual D Flip-flop, Set & Reset |
+| U3 | 1 | 74AHC74 | Dual D Flip-flop, Set & Reset |
 | U4 | 1 | DS1035-10 | 3-in-1 High–Speed Silicon Delay Line |
 | U5 | 1 | 74AHC00 | quad 2-input NAND gate |
-| U6 | 1 | 74AHC32 | Quad 2-input OR |
+| U6, U31 | 2 | 74AHC32 | Quad 2-input OR |
 | U7 | 1 | 74ACT245 | Octal BUS Transceivers, 3-State outputs |
-| U8 | 1 | 74AC573 | 8-bit Latch 3-state outputs |
+| U8 | 1 | 74AC563 | 8-bit Latch 3-state outputs inverting |
 | U9 | 1 | 74HC14 | Hex inverter schmitt trigger |
 | U10, U13 | 2 | 74HC112 | dual JK Flip-Flop, Set & Reset |
 | U11, U14 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
@@ -122,10 +123,13 @@ The goals of the YouTube series are to provide a good description of all the des
 | U18 | 1 | MAX705 | Low-Cost, μP Supervisory Circuit |
 | U19 | 1 | 74HC175 | 4-bit D Flip-Flop, reset |
 | U20 | 1 | 74HC04 | Hex Inverter |
-| U21, U22, U23, U24, U25 | 5 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
+| U21, U22 | 2 | 74HC540 | 8-bit Buffer/Line driver Inverter, 3-state outputs |
+| U23, U24, U25 | 3 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
 | U26 | 1 | AT28C256-15PC | Paged Parallel EEPROM 256Kb (32K x 8), DIP-28/SOIC-28 |
-| U27 | 1 | 74HC10 | Triple 3-input NAND |
+| U27, U29 | 2 | 74HC30 | 8-input NAND |
 | U28 | 1 | LY62256PL-55LL | 32Kx8 bit Low Power CMOS Static RAM, 55/70ns, DIP-28 |
+| U30 | 1 | 74AHC00 | quad 2-input NAND gate |
+| U32 | 1 | 74AHC138 | Decoder 3 to 8 active low outputs |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos
