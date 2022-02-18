@@ -3,7 +3,8 @@ default:
 	cat software/report.txt
 
 eeprom:
-	(cd software; minipro -p AT28C256 -w main.bin)
+	minipro --presence_check
+	(cd software; minipro --device AT28C256 --pin_check --write main.bin)
 
 .PHONY: schematics
 schematics:
@@ -23,6 +24,8 @@ schematics:
 	convert -density 200 schematics/debug.pdf schematics/debug.png
 	pdfseparate -f 8 -l 8 hardware/65C816.pdf schematics/tester.pdf
 	convert -density 200 schematics/tester.pdf schematics/tester.png
+	pdfseparate -f 9 -l 9 hardware/65C816.pdf schematics/monitor.pdf
+	convert -density 200 schematics/monitor.pdf schematics/monitor.png
 	rm hardware/65C816.pdf schematics/*.pdf
 
 .PHONY: thumbnails

@@ -13,6 +13,7 @@ main:
   !rl
   !al
 
+restart:
   ; load into X the address of the end of RAM
   ldx #$7f7f
   dex ; align to 16 bits
@@ -30,7 +31,7 @@ loop:
 
   ; continue until X=0
   bne loop
-  stp
+  jmp restart
 
 fail:
   wai

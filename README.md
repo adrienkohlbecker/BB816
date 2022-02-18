@@ -48,6 +48,10 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![Debug module](./schematics/debug.png)](./schematics/debug.png)
 
+### Monitor module
+
+[![Monitor module](./schematics/monitor.png)](./schematics/monitor.png)
+
 ### Tester module
 
 [![Tester module](./schematics/tester.png)](./schematics/tester.png)
@@ -67,7 +71,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 142
+**Component Count:** 146
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -81,16 +85,17 @@ The goals of the YouTube series are to provide a good description of all the des
 | C11, C12, C13 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C14 | 1 | 1u | Polarized capacitor, small symbol |
 | C15 | 1 | 10n | Unpolarized capacitor, small symbol |
+| C48 | 1 | 22u | Polarized capacitor, small symbol |
 | D1 | 1 | 1N5817 | 20V 1A Schottky Barrier Rectifier Diode, DO-41 |
 | D2 | 1 | POWER | Light emitting diode, small symbol |
-| D4 | 1 | PWRUP | Light emitting diode, small symbol |
 | D5 | 1 | Clock | Light emitting diode, small symbol |
 | J1 | 1 | POWER | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | J2 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| R1, R2, R10, R12, R13, R27, R28, R29 | 8 | 1k | Resistor, small symbol |
+| R1, R2, R10, R13, R27, R28, R29 | 7 | 1k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
-| R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21 | 11 | 10k | Resistor, small symbol |
+| R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21, R33 | 12 | 10k | Resistor, small symbol |
 | R9 | 1 | 220 | Resistor, small symbol |
+| R11, R32 | 2 | 100 | Resistor, small symbol |
 | R22 | 1 | 1.5k | Resistor, small symbol |
 | R23, R24, R25, R26 | 4 | 4.7k | Resistor, small symbol |
 | R30, R31 | 2 | 2k | Resistor, small symbol |
@@ -106,6 +111,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | SW5 | 1 | Reset | Push button switch, generic, two pins |
 | SW6 | 1 | SW_DIP_SPDT_x02 | 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol |
 | SW7 | 1 | SW_DIP_x08 | 8x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
+| SW8 | 1 | SW_DIP_SPDT_x01 | 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol |
 | U1 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
 | U2 | 1 | 74AC11 | Triple 3-input AND |
 | U3 | 1 | 74AHC74 | Dual D Flip-flop, Set & Reset |
@@ -119,7 +125,8 @@ The goals of the YouTube series are to provide a good description of all the des
 | U11, U14 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
 | U12 | 1 | LMC555xN | CMOS Timer, 555 compatible, PDIP-8 |
 | U15 | 1 | 74HC193 | Synchronous 4-bit Up/Down (2 clk) counter |
-| U16, U17 | 2 | 74HC151 | Multiplexer 8 to 1 |
+| U16 | 1 | 74AC151 | Multiplexer 8 to 1 |
+| U17 | 1 | 74HC151 | Multiplexer 8 to 1 |
 | U18 | 1 | MAX705 | Low-Cost, μP Supervisory Circuit |
 | U19 | 1 | 74HC175 | 4-bit D Flip-Flop, reset |
 | U20 | 1 | 74HC04 | Hex Inverter |
@@ -130,6 +137,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | U28 | 1 | LY62256PL-55LL | 32Kx8 bit Low Power CMOS Static RAM, 55/70ns, DIP-28 |
 | U30 | 1 | 74AHC00 | quad 2-input NAND gate |
 | U32 | 1 | 74AHC138 | Decoder 3 to 8 active low outputs |
+| U33 | 1 | Teensy++2.0 |  |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos
