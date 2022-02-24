@@ -2,6 +2,8 @@ const char ADDR[] = {25, 24, 23, 22, 21, 20, 19, 18, 38, 39, 40, 41, 42, 43, 44,
 const char DATA[] = {10, 11, 12, 13, 14, 15, 16, 17};
 #define CLOCK 0
 #define READ_WRITE 1
+#define SYNC 27
+#define VA 26
 
 void setup() {
   for (int n = 0; n < 16; n += 1) {
@@ -12,6 +14,8 @@ void setup() {
   }
   pinMode(CLOCK, OUTPUT);
   pinMode(READ_WRITE, INPUT);
+  pinMode(SYNC, INPUT);
+  pinMode(VA, INPUT);
 
   //attachInterrupt(digitalPinToInterrupt(CLOCK), onClock, RISING);
   
@@ -21,7 +25,7 @@ void setup() {
 bool stopped = false;
 
 void onClock() {
-  char output[17];
+  char output[19];
 
   unsigned int bank = 0;
   for (int n = 0; n < 8; n += 1) {
@@ -48,7 +52,11 @@ void onClock() {
     data = (data << 1) + bit;
   }
 
-  sprintf(output, "   %02x %04x  %c %02x", bank, address, digitalRead(READ_WRITE) ? 'r' : 'W', data);
+  if (digitalRead(VA)) {
+    sprintf(output, "   %02x %04x  %c %02x %c", bank, address, digitalRead(READ_WRITE) ? 'r' : 'W', data, digitalRead(SYNC) ? '*' : ' ');
+  } else {
+    sprintf(output, "   -- ----  - --");
+  }
   Serial.println(output);  
 }
 

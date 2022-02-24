@@ -1,3 +1,11 @@
+2022-02-25:
+    * VDA, VPA signals generate VA and SYNC
+    * Start RD, WR rework
+
+2022-02-04:
+    * Add Teensy bus monitor
+    * Rework power distribution
+
 2022-01-28:
     * Add RAM
     * Basic WR pulse generation
