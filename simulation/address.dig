@@ -405,7 +405,7 @@
         </entry>
         <entry>
           <string>Description</string>
-          <string>10.5; 44.5</string>
+          <string>11.5; 44.5</string>
         </entry>
       </elementAttributes>
       <pos x="120" y="340"/>
@@ -452,7 +452,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 70</string>
+          <string>12.5; 70</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -470,7 +470,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>10.5; 67.5</string>
+          <string>11.5; 67.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -488,7 +488,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>10.5; 67.5</string>
+          <string>11.5; 67.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -506,7 +506,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>10.5; 67.5</string>
+          <string>11.5; 67.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -542,7 +542,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 76</string>
+          <string>12; 76</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -614,7 +614,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 76</string>
+          <string>12; 76</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -646,7 +646,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>Worst case 78.5ns for I/O chip select
+          <string>Worst case 79ns for I/O chip select
 Needs to happen 
 10ns before rising edge of clock for 65C22
 30ns before rising edge of clock for 65C51
@@ -655,8 +655,9 @@ Needs to happen
 =&gt; frequency &lt;= 4.58MHz
 
 for the ROM
-=&gt; period of clock &gt;= 76+19+150 = 245ns
-=&gt; frequency &lt;= 4.08Mhz</string>
+=&gt; half-period of clock &gt;= 36+19+70 = 125ns
+      &amp; clock &gt;= 76+150+19 = 245
+=&gt; frequency &lt;= 4Mhz</string>
         </entry>
       </elementAttributes>
       <pos x="1300" y="340"/>
@@ -930,7 +931,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 53</string>
+          <string>12.5; 53</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -948,7 +949,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 53</string>
+          <string>12.5; 53</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -966,7 +967,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>10.5; 44.5</string>
+          <string>11.5; 44.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -984,7 +985,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 61.5</string>
+          <string>13.5; 61.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>

@@ -4,6 +4,6 @@
 
 [![Address decoding](./address.png)](./address.png)
 
-## RD/WR pulses
+## Glue logic
 
-[![RD RW pulses](./pulse.png)](./pulse.png)
+[![Glue logic](./glue.png)](./glue.png)
