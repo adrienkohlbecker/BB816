@@ -681,7 +681,7 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid e699f4b7-d3e9-4f5f-be53-0bf7d8976a06)
   )
-  (bus (pts (xy 80.01 133.35) (xy 119.38 133.35))
+  (bus (pts (xy 86.36 133.35) (xy 119.38 133.35))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid e99321c3-76d8-4332-bd42-3f74ea5819a8)
   )
@@ -723,6 +723,12 @@
   (wire (pts (xy 121.92 106.68) (xy 128.27 106.68))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid fefcb863-087e-48ed-b79c-9ce5804b87fc)
+  )
+
+  (text "Note: Do not connect the +5V pin comming from USB power,\nas the project is already powered by your power supply.\nIt could break either your USB port or bench power supply."
+    (at 191.77 62.23 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid b53f95ce-717c-4887-b253-af6ccbafdbd7)
   )
 
   (label "R~{W}" (at 121.92 71.12 0)
@@ -885,7 +891,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid e5ed0d3a-0da6-46bc-88cb-6b2b387f01f8)
   )
-  (label "D[0..7]" (at 80.01 133.35 0)
+  (label "D[0..7]" (at 86.36 133.35 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid ec5aceeb-151e-434e-a8a7-ea0eada5a6cc)
   )
