@@ -66,12 +66,12 @@ The goals of the YouTube series are to provide a good description of all the des
 - [Dupont Female Connectors](https://www.aliexpress.com/item/4001362869482.html). Use them to replace single connectors and group your cables by 2, 8...
 - 10uF Polarized capacitors. Sprinkle one per power rail
 - 3mm LEDs with built-in resistors ([Yellow](https://www.digikey.com/product-detail/en/WP710A10YD5V/754-1729-ND/3084212), [Red](https://www.digikey.com/product-detail/en/WP710A10ID5V/754-1721-ND/3084187), [Green](https://www.digikey.com/product-detail/en/WP710A10SGD5V/754-1724-ND/3084201))
-- LED Bars with 8 LEDs, various colors ([Red version](https://www.aliexpress.com/item/32315190808.html)), with [9-pin bussed 1k resistors](https://nl.mouser.com/ProductDetail/Bourns/4609M-101-102LF). I use 1k, 1.5k or 3.3k resistors depending on the color.
+- LED Bars with 8 LEDs, various colors ([Red version](https://www.aliexpress.com/item/32315190808.html)), with [9-pin bussed 1k resistors](https://nl.mouser.com/ProductDetail/Bourns/4609M-101-102LF?qs=nFt9sTYf7TDihA0IqmqOVw%3D%3D). I use 1k, 1.5k or 3.3k resistors depending on the color.
 - ZIF socket for ROM: [Aries Electronics 28-526-10](https://mouser.com/ProductDetail/Aries-Electronics/28-526-10?qs=WZRMhwwaLl9nHDqf31PyaQ%3D%3D) + [28pin Wire-Wrap socket](https://mouser.com/ProductDetail/Mill-Max/123-43-628-41-001000?qs=IGgAdOvCTsSqORqiKCtp8w%3D%3D)
 
 ### KiCad components
 
-**Component Count:** 150
+**Component Count:** 158
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -93,13 +93,13 @@ The goals of the YouTube series are to provide a good description of all the des
 | J2 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | R1, R2, R10, R13, R27, R28, R29 | 7 | 1k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
-| R4, R6, R8, R14, R15, R16, R17, R18, R19, R20, R21, R33 | 12 | 10k | Resistor, small symbol |
+| R4, R6, R8, R12, R14, R15, R16, R17, R18, R19, R20, R21, R33, R34, R35, R36, R37, R38, R39, R40, R41 | 21 | 10k | Resistor, small symbol |
 | R9 | 1 | 220 | Resistor, small symbol |
 | R11, R32 | 2 | 100 | Resistor, small symbol |
 | R22 | 1 | 1.5k | Resistor, small symbol |
 | R23, R24, R25, R26 | 4 | 4.7k | Resistor, small symbol |
 | R30, R31 | 2 | 2k | Resistor, small symbol |
-| RN1, RN2, RN3, RN4, RN5, RN6, RN7 | 7 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RN2, RN3, RN4, RN5, RN6, RN7 | 6 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN8 | 1 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN10, RN11, RN12 | 3 | 1k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN13 | 1 | 3.3k | 8 resistor network, star topology, bussed resistors, small symbol |
@@ -113,7 +113,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | SW7 | 1 | SW_DIP_x08 | 8x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
 | SW8 | 1 | SW_DIP_SPDT_x01 | 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol |
 | U1 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
-| U2 | 1 | 74AC11 | Triple 3-input AND |
+| U2 | 1 | 74AHC125 | Quad buffer 3-State outputs |
 | U3 | 1 | 74AHC74 | Dual D Flip-flop, Set & Reset |
 | U4 | 1 | DS1035-10 | 3-in-1 High–Speed Silicon Delay Line |
 | U5 | 1 | 74AHC00 | quad 2-input NAND gate |
@@ -139,7 +139,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | U32 | 1 | 74AHC138 | Decoder 3 to 8 active low outputs |
 | U33 | 1 | Teensy++2.0 |  |
 | U34 | 1 | 74AC10 | Triple 3-input NAND |
-| U35 | 1 | 74AHC367 | Hex Bus Driver 3-state outputs |
+| U36 | 1 | 74AHC02 | quad 2-input NOR gate |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos
@@ -171,20 +171,9 @@ The goals of the YouTube series are to provide a good description of all the des
 
 Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 
-
 ```js
 {
   signal: [
-    { name: 'CLK_IN', wave: '1.0(50)1(50)0.', phase: 0.20 },
-    { nodes: ['..C(10)D(40)Q(10)U', '...(7.5)I(2.5)J(2.5)A(45)N(2.5)O(2.5)Z'], phase: 0.45 },
-    { name: 'CLK-', wave: '1..(7.5)x(5)0(45)x(5)1..(37.5)', phase: 0.20 },
-    { nodes: ['...(10)Б(10)Г(40)Ύ(10)Д', '...(15)Φ(5)Έ(5)Ζ(40)Η(5)B(5)Π'], phase: 0.45 },
-    { name: 'CLK', wave: '1..(15)x(10)0(40)x(10)1..(25)', phase: 0.20 },
-    { nodes: ['...(20)E(10)F(40)Ѳ(10)Ѵ', '...(22.5)Α(7.5)Γ(7.5)V(35)W(7.5)X(7.5)Y'], phase: 0.45 },
-    { name: 'CLK+', wave: '1..(22.5)x(15)0(35)x(15)1..(12.5)', phase: 0.20 },
-    {},
-    {},
-    {},
     { name: 'CLK_IN', wave: '0..(25)x(10)1(40)x(10)0(17)', phase: 0.20 },
     { nodes: ['...(25)Ο(5)Ό(5)G(40)H(5)R(5)P', '...(30)Ν(10)Ά(40)Β(10)Ξ'], phase: 0.45 },
     { name: 'CLK-', wave: '0..(37.5)x(5)1(45)x(5)0..(7.5)', phase: 0.20 },
@@ -192,14 +181,15 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'CLK', wave: '1.0(50)1(50)0.', phase: 0.20 },
     { nodes: ['..Θ(10)Λ(40)Њ(10)Ќ', '...(7.5)Љ(2.5)Є(2.5)Υ(45)Ю(2.5)Ψ(2.5)Ω'], phase: 0.45 },
     { name: 'CLK+', wave: '1..(7.5)x(5)0(45)x(5)1..(37.5)', phase: 0.20 },
+    {},
+    { nodes: ['..Ε(8.5)Ι(41.5)Κ(8.5)Μ', '..Ρ(1)Τ(49)Χ(1)А'], phase: 0.45 },
+    { name: '~CLK', wave: '0..(1)x(7.5)1(42.5)x(7.5)0..(41.5)', phase: 0.20 },
   ],
   edge: [
-    'C+D 10ns', 'Q+U 10ns', 'I+J 2.5ns', 'J+A 2.5ns', 'N+O 2.5ns', 'O+Z 2.5ns',
-    'Б+Г 10ns', 'Ύ+Д 10ns', 'Φ+Έ 5ns', 'Έ+Ζ 5ns', 'Η+B 5ns', 'B+Π 5ns',
-    'E+F 10ns', 'Ѳ+Ѵ 10ns', 'Α+Γ 7.5ns', 'Γ+V 7.5ns', 'W+X 7.5ns', 'X+Y 7.5ns',
     'Ν+Ά 10ns', 'Β+Ξ 10ns', 'Ο+Ό 5ns', 'Ό+G 5ns', 'H+R 5ns', 'R+P 5ns',
     'L+K 10ns', 'M+Σ 10ns', 'Ё+Ж 2.5ns', 'Ж+S 2.5ns', 'T+Ћ 2.5ns', 'Ћ+Δ 2.5ns',
     'Θ+Λ 10ns', 'Њ+Ќ 10ns', 'Љ+Є 2.5ns', 'Є+Υ 2.5ns', 'Ю+Ψ 2.5ns', 'Ψ+Ω 2.5ns',
+    'Ε+Ι 8.5ns', 'Κ+Μ 8.5ns', 'Ρ+Τ 1ns', 'Χ+А 1ns'
   ],
   config: {
     skin: 'narrower',
@@ -422,7 +412,7 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 ```
 </p></details>
 
-<a href="./timing/Timing%20BE.png"><img src="./timing/Timing%20BE.png" width="330"/></a>
+[![BE](./timing/Timing%20BE.png)](./timing/Timing%20BE.png)
 
 ### RDY
 
@@ -484,19 +474,19 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
     { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
     { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
-    { nodes: ['...(12.5)Ѳ(25)Ѵ(100)V(23.5)W', '...(7.5)Α(3)Γ(122)T(3)U'], phase: 0.9 },
-    { name: 'RD', wave: '0..(10.5)x(27)1(98)x(25.5)0(91)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['...(12.5)Ѳ(33.5)Ѵ(79)V(23.5)W', '...(7.5)Α(4)Γ(113.5)T(3)U'], phase: 0.9 },
+    { name: 'RD', wave: '0..(11.5)x(34.5)1(82)x(20.5)0(103.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['..B(76)Π', '..E(12)F'], phase: 0.9 },
     { name: 'ROM_CS', wave: '0..(12)x(64)0(176)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['', '...(30)Ο(150)Ό'], phase: 0.9 },
-    { nodes: ['...(10)Q(0)S(66)Β(150)Ξ', '..G(10)R(27.5)H(50)P(73.5)Ν(70)Ά'], phase: 0.9 },
-    { name: 'ROM DATA', wave: '5..(10)x(77.5)z(48)x(95.5)5(21)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
+    { nodes: ['...(10)Q(0)S(66)Β(150)Ξ', '..G(10)R(36)H(50)P(52.5)Ν(70)Ά'], phase: 0.9 },
+    { name: 'ROM DATA', wave: '5..(10)x(86)z(32)x(98)5(26)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
     'Φ+Έ 9ns', 'Ζ+Η 19ns',
     'B+Π 76ns', 'E+F 12ns',
-    'Ѳ+Ѵ 25ns', 'Α+Γ 3ns', 'T+U 3ns', 'V+W 23.5ns',
+    'Ѳ+Ѵ 33.5ns', 'Α+Γ 4ns', 'T+U 3ns', 'V+W 23.5ns',
     'Ν+Ά 70ns (tOE)', 'Β+Ξ 150ns (tCE)', 'Ο+Ό 150ns (tAcc)', 'G+R 10ns', 'H+P 50ns (tDF)',
     'Q+S 0ns (tOH)',
     'C+D 10ns', 'I+J 2.5ns', 'J+K 2.5ns', 'L+M 10ns', 'N+O 2.5ns', 'O+Z 2.5ns',
@@ -538,20 +528,20 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
     { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
     { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
-    { nodes: ['...(12.5)Ѳ(25)Ѵ(100)V(23.5)W', '...(7.5)Α(3)Γ(122)X(3)Y'], phase: 0.9 },
-    { name: 'RD', wave: '0..(10.5)x(27)1(98)x(25.5)0(91)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['...(12.5)Ѳ(33.5)Ѵ(79)V(23.5)W', '...(7.5)Α(4)Γ(113.5)X(3)Y'], phase: 0.9 },
+    { name: 'RD', wave: '0..(11.5)x(34.5)1(82)x(20.5)0(103.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['..B(76)Π', '..E(12)F'], phase: 0.9 },
     { name: 'RAM_CS', wave: '0..(12)x(64)0(176)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['', '...(12)M(10)Σ(8)Ο(55)Ό'], phase: 0.9 },
-    { nodes: ['...(10)S(10)T(17.5)R(20)P(18.5)Β(55)Ξ', '..G(10.5)H(65.5)L(20)K(39.5)Ё(5)Ж(20.5)Ν(30)Ά'], phase: 0.9 },
-    { name: 'RAM DATA', wave: '5..(10.5)x(47)z(83)x(50.5)5(61)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
+    { nodes: ['...(10)S(10)T(26)R(20)P(10)Β(55)Ξ', '..G(10.5)H(65.5)L(20)K(32)Ё(5)Ж(15.5)Ν(30)Ά'], phase: 0.9 },
+    { name: 'RAM DATA', wave: '5..(10.5)x(55.5)z(67)x(45.5)5(73.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
     { nodes: ['', ''], phase: 0.9 },
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
     'Φ+Έ 9ns', 'Ζ+Η 19ns',
     'B+Π 76ns', 'E+F 12ns',
-    'Ѳ+Ѵ 25ns', 'Α+Γ 3ns', 'V+W 23.5ns', 'X+Y 3ns',
+    'Ѳ+Ѵ 33.5ns', 'Α+Γ 4ns', 'V+W 23.5ns', 'X+Y 3ns',
     'Ν+Ά 30ns (tOE)',
     'Β+Ξ 55ns (tACE)',
     'Ο+Ό 55ns (tAA)',

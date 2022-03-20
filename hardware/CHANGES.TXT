@@ -1,3 +1,7 @@
+2022-03-20:
+    * New CLK phase
+    * Glue logic rework
+
 2022-02-25:
     * VDA, VPA signals generate VA and SYNC
     * Start RD, WR rework
