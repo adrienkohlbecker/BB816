@@ -13,6 +13,8 @@ main:
   !rl
   !al
 
+; ### Test bank0 RAM
+
 restart:
   ; load into X the address of the end of RAM
   ldx #$7f7f
@@ -21,8 +23,8 @@ restart:
 loop:
    ; store 16 bits of data at X and X+1 and verify we read the same thing
   txa
-  sta $0,X
-  cmp $0,X
+  sta $0000,X
+  cmp $0000,X
   bne fail
 
   ; decrement address
@@ -31,6 +33,44 @@ loop:
 
   ; continue until X=0
   bne loop
+
+; ### Test extended RAM
+
+  ldy #$8 ; store bank number 8 into Y
+
+loop_dbr:
+  ; set indexes to 8 bits
+  sep #%...1....
+	!rs
+
+  phy
+  plb ; pull value into Data Bank Register, effectively changing bank for all data accesses
+
+  ; set indexes to 16 bits
+  rep #%...#....
+	!rl
+
+  ldx #$ffff
+  dex ; align to 16 bits
+
+loop_ext:
+   ; store 16 bits of data at X and X+1 and verify we read the same thing
+  txa
+  sta $0000,X
+  cmp $0000,X
+  bne fail
+
+  ; decrement address
+  dex
+  dex
+
+  ; continue until X=0
+  bne loop_ext
+
+  ; increment Y
+  iny
+  cpy #$10
+  bne loop_dbr
   jmp restart
 
 fail:

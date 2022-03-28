@@ -533,8 +533,8 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { nodes: ['..B(76)Π', '..E(12)F'], phase: 0.9 },
     { name: 'RAM_CS', wave: '0..(12)x(64)0(176)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['', '...(12)M(10)Σ(8)Ο(55)Ό'], phase: 0.9 },
-    { nodes: ['...(10)S(10)T(26)R(20)P(10)Β(55)Ξ', '..G(10.5)H(65.5)L(20)K(32)Ё(5)Ж(15.5)Ν(30)Ά'], phase: 0.9 },
-    { name: 'RAM DATA', wave: '5..(10.5)x(55.5)z(67)x(45.5)5(73.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
+    { nodes: ['...(10)S(10)T(26)R(20)P(10)Β(55)Ξ', '..G(11.5)H(64.5)L(20)K(32)Ё(5)Ж(15.5)Ν(30)Ά'], phase: 0.9 },
+    { name: 'RAM DATA', wave: '5..(11.5)x(54.5)z(67)x(45.5)5(73.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
     { nodes: ['', ''], phase: 0.9 },
   ],
   edge: [
@@ -545,7 +545,7 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     'Ν+Ά 30ns (tOE)',
     'Β+Ξ 55ns (tACE)',
     'Ο+Ό 55ns (tAA)',
-    'G+H 10.5ns',
+    'G+H 11.5ns',
     'R+P 20ns (tOHZ)', 'L+K 20ns (tCHZ)',
     'M+Σ 10ns (tCLZ)', 'Ё+Ж 5ns (tOLZ)',
     'S+T 10ns (tOH)',
@@ -603,7 +603,7 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     'Β+Ξ 50ns (tCW)', 'Ο+Ό 50ns (tAW)',
     'G+H 0ns (tDH)','L+K 25ns (tDW)', 'Ч+Ш 25ns (tDW)',
     'I+J 0ns (tAS)', 'M+N 45ns (tWP)', 'P+Q 0ns (tWR)',
-    'U+V 55ns (tWC)', 'C+D 3ns', 'R+S 23.5ns', 'Ψ+Ω 25ns',
+    'U+V 55ns (tWC)', 'C+D 3ns', 'R+S 23.5ns', 'Ψ+Ω 25ns', 'Α+Γ 3ns', 'Ѳ+Ѵ 25ns',
     'Λ+T 20ns', 'W+X 5ns', 'X+A 5ns', 'Y+Ы 20ns', 'Δ+O 5ns', 'O+Z 5ns',
   ],
   config: {
@@ -624,3 +624,117 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 </p></details>
 
 [![RAM Write](./timing/Timing%20RAM%20Write.png)](./timing/Timing%20RAM%20Write.png)
+
+### Extended RAM
+
+#### Read Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    { nodes: ['..C(10)D(115)Q(10)U', '...(7.5)I(2.5)J(2.5)A(120)N(2.5)O(2.5)Z'], phase: 0.9 },
+    { name: 'CLK+', wave: '1..(7.5)x(5)0(120)x(5)1..(112.5)', phase: 0.20 },
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
+    { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
+    { nodes: ['...(12.5)Ѳ(33.5)Ѵ(79)V(23.5)W', '...(7.5)Α(4)Γ(113.5)X(3)Y'], phase: 0.9 },
+    { name: 'RD', wave: '0..(11.5)x(34.5)1(82)x(20.5)0(103.5)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(70)Π', '..E(12.5)F'], phase: 0.9 },
+    { name: 'RAM_CS', wave: '0..(12.5)x(57.5)0(176)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['', '...(12.5)M(10)Σ(7.5)Ο(55)Ό'], phase: 0.9 },
+    { nodes: ['...(10)S(10)T(26)R(20)P(4)Β(55)Ξ', '..G(11.5)H(58.5)L(20)K(38)Ё(5)Ж(15.5)Ν(30)Ά'], phase: 0.9 },
+    { name: 'EXTRAM DATA', wave: '5..(11.5)x(54.5)z(67)x(45.5)5(73.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
+    { nodes: ['', ''], phase: 0.9 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 9ns', 'Ζ+Η 19ns',
+    'B+Π 70ns', 'E+F 12.5ns',
+    'Ѳ+Ѵ 33.5ns', 'Α+Γ 4ns', 'V+W 23.5ns', 'X+Y 3ns',
+    'Ν+Ά 30ns (tOE)',
+    'Β+Ξ 55ns (tACE)',
+    'Ο+Ό 55ns (tAA)',
+    'G+H 11.5ns',
+    'R+P 20ns (tOHZ)', 'L+K 20ns (tCHZ)',
+    'M+Σ 10ns (tCLZ)', 'Ё+Ж 5ns (tOLZ)',
+    'S+T 10ns (tOH)',
+    'C+D 10ns', 'I+J 2.5ns', 'J+A 2.5ns', 'Q+U 10ns', 'N+O 2.5ns', 'O+Z 2.5ns',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![EXTRAM Read](./timing/Timing%20EXTRAM%20Read.png)](./timing/Timing%20EXTRAM%20Read.png)
+
+#### Write Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    { nodes: ['...(105)Λ(20)T(105)Y(20)Ы', '...(100)W(5)X(5)A(115)Δ(5)O(5)Z'], phase: 0.9 },
+    { name: 'CLK_IN', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(39.5)Η'], phase: 0.9 },
+    { name: 'WRITE BUFFER', wave: '6..(10.5)x(154)6(85.5)..', data: ['', 'Writing Data'], phase: 0.20 },
+    { nodes: ['..B(70)Π', '..E(12.5)F'], phase: 0.9 },
+    { name: 'RAM_CS', wave: '0..(12.5)x(57.5)0(182)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['...(30)U(55)V', '...(30)Ο(50)Ό'], phase: 0.9 },
+    { nodes: ['...(70)Β(50)Ξ', '...(10)P(0)Q(93)I(0)J(30.5)M(45)N',], phase: 0.9 },
+    { nodes: ['', 'Ѳ(12)Ѵ(90)Α(3)Γ(7)R(23.5)S(91.5)C(3)D(7)Ψ(17)Ω'], phase: 0.9 },
+    { name: 'WR', wave: 'x..(10)1(93)x(30.5)0(94.5)x(24)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['...(10)G(0)H(193)L(25)K'], phase: 0.9 },
+    { name: 'EXTRAM DATA', wave: '5..(10)z(193)5(49)', data: ['', 'DATA VALID'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 10.5ns', 'Ζ+Η 39.5ns',
+    'B+Π 70ns', 'E+F 12.5s',
+    'Β+Ξ 50ns (tCW)', 'Ο+Ό 50ns (tAW)',
+    'G+H 0ns (tDH)','L+K 25ns (tDW)', 'Ч+Ш 25ns (tDW)',
+    'I+J 0ns (tAS)', 'M+N 45ns (tWP)', 'P+Q 0ns (tWR)',
+    'U+V 55ns (tWC)', 'C+D 3ns', 'R+S 23.5ns', 'Ψ+Ω 25ns', 'Α+Γ 3ns', 'Ѳ+Ѵ 25ns',
+    'Λ+T 20ns', 'W+X 5ns', 'X+A 5ns', 'Y+Ы 20ns', 'Δ+O 5ns', 'O+Z 5ns',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![EXTRAM Write](./timing/Timing%20EXTRAM%20Write.png)](./timing/Timing%20EXTRAM%20Write.png)

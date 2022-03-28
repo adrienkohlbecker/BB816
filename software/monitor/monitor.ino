@@ -1,9 +1,9 @@
-const char ADDR[] = {25, 24, 23, 22, 21, 20, 19, 18, 38, 39, 40, 41, 42, 43, 44, 45, 2, 3, 4, 5, 6, 7, 8, 9};
-const char DATA[] = {10, 11, 12, 13, 14, 15, 16, 17};
-#define CLOCK 0
-#define READ_WRITE 1
-#define SYNC 27
-#define VA 26
+const char ADDR[] = {27, 26, 25, 24, 23, 22, 21, 20, 45, 44, 43, 42, 41, 40, 39, 38, 7, 6, 5, 4, 3, 2, 1, 0};
+const char DATA[] = {17, 16, 15, 14, 13, 12, 11, 10};
+#define CLOCK 18
+#define READ_WRITE 8
+#define SYNC 9
+#define VA 19
 
 void setup() {
   for (int n = 0; n < 16; n += 1) {
@@ -17,7 +17,8 @@ void setup() {
   pinMode(SYNC, INPUT);
   pinMode(VA, INPUT);
 
-  //attachInterrupt(digitalPinToInterrupt(CLOCK), onClock, RISING);
+  // clock is inverted on the breadboard
+  //attachInterrupt(digitalPinToInterrupt(CLOCK), onClock, FALLING);
   
   Serial.begin(57600);
 }
@@ -52,6 +53,10 @@ void onClock() {
     data = (data << 1) + bit;
   }
 
+  if (data == 0xCB && digitalRead(SYNC)) {
+    while(1);
+  }
+
   if (digitalRead(VA)) {
     sprintf(output, "   %02x %04x  %c %02x %c", bank, address, digitalRead(READ_WRITE) ? 'r' : 'W', data, digitalRead(SYNC) ? '*' : ' ');
   } else {
@@ -61,8 +66,9 @@ void onClock() {
 }
 
 void loop() {
-  digitalWrite(CLOCK, 0);
+  // clock is inverted on the breadboard
   digitalWrite(CLOCK, 1);
+  digitalWrite(CLOCK, 0);
 
   // wait 125ns for the ROM to output its data, each nop has a 62.5ns delay
   __asm__("nop\n\t");
