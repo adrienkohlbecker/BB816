@@ -71,7 +71,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 158
+**Component Count:** 160
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -81,7 +81,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | BAR6 | 1 | Red | BAR GRAPH 8 segment |
 | C1 | 1 | 220u | Polarized capacitor, small symbol |
 | C2, C16, C25, C31, C38, C40, C42 | 7 | 10u | Polarized capacitor, small symbol |
-| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37, C39, C41, C43, C44, C45, C46, C47, C49, C50 | 36 | 100n | Unpolarized capacitor, small symbol |
+| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37, C39, C41, C43, C44, C45, C46, C47, C49, C50, C51 | 37 | 100n | Unpolarized capacitor, small symbol |
 | C11, C12, C13 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C14 | 1 | 1u | Polarized capacitor, small symbol |
 | C15 | 1 | 10n | Unpolarized capacitor, small symbol |
@@ -139,6 +139,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | U32 | 1 | 74AHC138 | Decoder 3 to 8 active low outputs |
 | U33 | 1 | Teensy++2.0 |  |
 | U34 | 1 | 74AC10 | Triple 3-input NAND |
+| U35 | 1 | AS6C4008-55PCN | 512K x 8 Low Power CMOS RAM, DIP-32 |
 | U36 | 1 | 74AHC02 | quad 2-input NOR gate |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 

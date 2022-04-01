@@ -25,42 +25,37 @@ void setup() {
 
 bool stopped = false;
 
+void print_byte_in_binary(byte x) {
+  for (int i = 0; i < 8; i++) {
+    Serial.print(x & 1 ? "1" : "0");
+    x = x >> 1; 
+  }
+}
+
 void onClock() {
   char output[19];
 
-  unsigned int bank = 0;
-  for (int n = 0; n < 8; n += 1) {
-    int bit = digitalRead(ADDR[n]) ? 0 : 1;
-    Serial.print(bit);
-    bank = (bank << 1) + bit;
-  }
-  
+  byte bank = ~PINB;
+  byte address_h = PINF;
+  byte address_l = PIND;
+  byte data = PINC;
+  byte ctrl = PINE;
+
+  bool va   = ((ctrl >> 7) & 1) > 0;
+  bool sync = ((ctrl >> 1) & 1) > 0;
+  bool rw   = ((ctrl >> 0) & 1) > 0;
+
+  print_byte_in_binary(bank);
   Serial.print(" ");
-
-  unsigned int address = 0;
-  for (int n = 8; n < 24; n += 1) {
-    int bit = digitalRead(ADDR[n]) ? 1 : 0;
-    Serial.print(bit);
-    address = (address << 1) + bit;
-  }
-  
+  print_byte_in_binary(address_h);
+  print_byte_in_binary(address_l);
   Serial.print("   ");
-  
-  unsigned int data = 0;
-  for (int n = 0; n < 8; n += 1) {
-    int bit = digitalRead(DATA[n]) ? 1 : 0;
-    Serial.print(bit);
-    data = (data << 1) + bit;
-  }
+  print_byte_in_binary(data);
 
-  if (data == 0xCB && digitalRead(SYNC)) {
-    while(1);
-  }
-
-  if (digitalRead(VA)) {
-    sprintf(output, "   %02x %04x  %c %02x %c", bank, address, digitalRead(READ_WRITE) ? 'r' : 'W', data, digitalRead(SYNC) ? '*' : ' ');
+  if (va) {
+    sprintf(output, "%02x %02x%02x  %c %02x %c", bank, address_h, address_l, rw ? 'r' : 'W', data, sync ? '*' : ' ');
   } else {
-    sprintf(output, "   -- ----  - --");
+    sprintf(output, "-- ----  - --");
   }
   Serial.println(output);  
 }

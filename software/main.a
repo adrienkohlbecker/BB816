@@ -23,8 +23,8 @@ restart:
 loop:
    ; store 16 bits of data at X and X+1 and verify we read the same thing
   txa
-  sta $0000,X
-  cmp $0000,X
+  sta $0,X ; direct page indexed
+  cmp $0,X
   bne fail
 
   ; decrement address
@@ -56,7 +56,7 @@ loop_dbr:
 loop_ext:
    ; store 16 bits of data at X and X+1 and verify we read the same thing
   txa
-  sta $0000,X
+  sta $0000,X ; absolute indexed
   cmp $0000,X
   bne fail
 

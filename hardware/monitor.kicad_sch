@@ -6618,7 +6618,7 @@
     )
   )
 
-  (text "Note: Do not connect the +5V pin coming from USB power,\nas the project is already powered by your power supply.\nIt could break either your USB port or bench power supply."
+  (text "Note: Do not connect the +5V pin coming from USB power,\nas the project is already powered by your bench power supply.\nIt could break either your USB port or bench power supply."
     (at 187.96 50.8 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid b53f95ce-717c-4887-b253-af6ccbafdbd7)
