@@ -25,10 +25,10 @@ void setup() {
 
 bool stopped = false;
 
-void print_byte_in_binary(byte x) {
+void print_byte_in_binary(byte x, bool va) {
   for (int i = 0; i < 8; i++) {
-    Serial.print(x & 1 ? "1" : "0");
-    x = x >> 1; 
+    Serial.print(va ? (x & 10000000 ? "1" : "0") : "-");
+    x = x << 1; 
   }
 }
 
@@ -45,12 +45,13 @@ void onClock() {
   bool sync = ((ctrl >> 1) & 1) > 0;
   bool rw   = ((ctrl >> 0) & 1) > 0;
 
-  print_byte_in_binary(bank);
+  print_byte_in_binary(bank, va);
   Serial.print(" ");
-  print_byte_in_binary(address_h);
-  print_byte_in_binary(address_l);
+  print_byte_in_binary(address_h, va);
+  print_byte_in_binary(address_l, va);
+  Serial.print(" ");
+  print_byte_in_binary(data, va);
   Serial.print("   ");
-  print_byte_in_binary(data);
 
   if (va) {
     sprintf(output, "%02x %02x%02x  %c %02x %c", bank, address_h, address_l, rw ? 'r' : 'W', data, sync ? '*' : ' ');
