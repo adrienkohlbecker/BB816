@@ -5,8 +5,9 @@
   (paper "A4")
 
   (title_block
-    (date "2022-03-25")
-    (rev "A.20")
+    (title "Monitor Module")
+    (date "2022-04-15")
+    (rev "A.21")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2022 Adrien Kohlbecker")

@@ -44,6 +44,10 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![Memory module](./schematics/memory.png)](./schematics/memory.png)
 
+### GPIO module
+
+[![GPIO module](./schematics/gpio.png)](./schematics/gpio.png)
+
 ### Debug module
 
 [![Debug module](./schematics/debug.png)](./schematics/debug.png)
@@ -71,17 +75,17 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 160
+**Component Count:** 170
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
 | BAR1 | 1 | LED-Array-10-BGYR | BAR GRAPH 10 segment |
 | BAR2, BAR3, BAR4 | 3 | Yellow | BAR GRAPH 8 segment |
 | BAR5 | 1 | Green | BAR GRAPH 8 segment |
-| BAR6 | 1 | Red | BAR GRAPH 8 segment |
+| BAR6, BAR7, BAR8 | 3 | Red | BAR GRAPH 8 segment |
 | C1 | 1 | 220u | Polarized capacitor, small symbol |
 | C2, C16, C25, C31, C38, C40, C42 | 7 | 10u | Polarized capacitor, small symbol |
-| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37, C39, C41, C43, C44, C45, C46, C47, C49, C50, C51 | 37 | 100n | Unpolarized capacitor, small symbol |
+| C3, C4, C5, C6, C7, C8, C9, C10, C17, C18, C19, C20, C21, C22, C23, C24, C26, C27, C28, C29, C30, C32, C33, C34, C35, C36, C37, C39, C41, C43, C44, C45, C46, C47, C49, C50, C51, C52, C53, C54 | 40 | 100n | Unpolarized capacitor, small symbol |
 | C11, C12, C13 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C14 | 1 | 1u | Polarized capacitor, small symbol |
 | C15 | 1 | 10n | Unpolarized capacitor, small symbol |
@@ -99,8 +103,8 @@ The goals of the YouTube series are to provide a good description of all the des
 | R22 | 1 | 1.5k | Resistor, small symbol |
 | R23, R24, R25, R26 | 4 | 4.7k | Resistor, small symbol |
 | R30, R31 | 2 | 2k | Resistor, small symbol |
+| RN1, RN8, RN9 | 3 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN2, RN3, RN4, RN5, RN6, RN7 | 6 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
-| RN8 | 1 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN10, RN11, RN12 | 3 | 1k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN13 | 1 | 3.3k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RV1 | 1 | 500k | Potentiometer |
@@ -131,7 +135,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | U19 | 1 | 74HC175 | 4-bit D Flip-Flop, reset |
 | U20 | 1 | 74HC04 | Hex Inverter |
 | U21, U22 | 2 | 74HC540 | 8-bit Buffer/Line driver Inverter, 3-state outputs |
-| U23, U24, U25 | 3 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
+| U23, U24, U25, U38, U39 | 5 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
 | U26 | 1 | AT28C256-15PC | Paged Parallel EEPROM 256Kb (32K x 8), DIP-28/SOIC-28 |
 | U27, U29 | 2 | 74HC30 | 8-input NAND |
 | U28 | 1 | LY62256PL-55LL | 32Kx8 bit Low Power CMOS Static RAM, 55/70ns, DIP-28 |
@@ -141,6 +145,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | U34 | 1 | 74AC10 | Triple 3-input NAND |
 | U35 | 1 | AS6C4008-55PCN | 512K x 8 Low Power CMOS RAM, DIP-32 |
 | U36 | 1 | 74AHC02 | quad 2-input NOR gate |
+| U37 | 1 | W65C22SxP | W65C22S CMOS Versatile Interface Adapter (VIA), 20-pin I/O, 2 Timer/Counters, DIP-40 |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos
@@ -739,3 +744,115 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 </p></details>
 
 [![EXTRAM Write](./timing/Timing%20EXTRAM%20Write.png)](./timing/Timing%20EXTRAM%20Write.png)
+
+### 65C22 VIA
+
+#### Read Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    {},
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..W(47)X', '..Λ(12)T'], phase: 0.9 },
+    { name: 'VA', wave: '1..(12)x(35)1(205)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(79)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'IO0_CS', wave: '0..(11)x(68)0(173)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..U(10)V(105)Ο(10)Ό'], phase: 0.9 },
+    { name: 'VIA CONTROL VALID', wave: '5..(10)z(105)5(137)', data: ['', 'CONTROL'], phase: 0.20 },
+    {},
+    { nodes: ['...(115)Β(10)Ξ'], phase: 0.9 },
+    { name: 'PERIPH. DATA VALID', wave: 'z..(115)4(137)', data: ['PERIPHERAL DATA'], phase: 0.20 },
+    { nodes: ['..G(10)H(115)L(20)K'], phase: 0.9 },
+    { name: 'VIA DATA BUS', wave: '5..(10)x(135)5(107)', data: ['', 'DATA'], phase: 0.20 },
+    { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
+    { name: 'CPU READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 9ns', 'Ζ+Η 19ns',
+    'B+Π 79ns', 'E+F 11s',
+    'G+H 10ns (tHR)','L+K 20ns (tCDR)',
+    'U+V 10ns (tACR)', 'Ο+Ό 10ns (tCAR)',
+    'Λ+T 12ns', 'W+X 47ns',
+    'Β+Ξ 10ns (tPCR)',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![VIA Read](./timing/Timing%20VIA%20Read.png)](./timing/Timing%20VIA%20Read.png)
+
+#### Write Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    {},
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..W(47)X', '..Λ(12)T'], phase: 0.9 },
+    { name: 'VA', wave: '1..(12)x(35)1(205)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(79)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'IO0_CS', wave: '0..(11)x(68)0(173)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..U(10)V(105)Ο(10)Ό'], phase: 0.9 },
+    { name: 'VIA CONTROL VALID', wave: '5..(10)z(105)5(137)', data: ['', 'CONTROL'], phase: 0.20 },
+    {},
+    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(39.5)Η'], phase: 0.9 },
+    { name: 'CPU WRITE BUFFER', wave: '6..(10.5)x(154)6(85.5)..', data: ['', 'Writing Data'], phase: 0.20 },
+    { nodes: ['..G(10)H(230)L(10)K'], phase: 0.9 },
+    { name: 'VIA DATA BUS VALID', wave: '5..(10)z(230)5(12)', data: ['', 'DATA'], phase: 0.20 },
+    { nodes: ['..Β(30)Ξ'], phase: 0.9 },
+    { name: 'PERIPHERAL DATA', wave: 'x..(30)4(222)', data: ['PERIPHERAL DATA'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 10.5ns', 'Ζ+Η 39.5ns',
+    'B+Π 79ns', 'E+F 11s',
+    'G+H 10ns (tHW)','L+K 10ns (tDCW)',
+    'U+V 10ns (tACW)', 'Ο+Ό 10ns (tCAW)',
+    'Λ+T 12ns', 'W+X 47ns',
+    'Β+Ξ 30ns (tCPW)',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![VIA Write](./timing/Timing%20VIA%20Write.png)](./timing/Timing%20VIA%20Write.png)

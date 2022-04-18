@@ -445,6 +445,10 @@
     [
       "ad436a76-34c0-4a92-97a3-841d53d56384",
       "Monitor"
+    ],
+    [
+      "d540f930-f1b1-4dbe-a658-53337bc671f7",
+      "GPIO"
     ]
   ],
   "text_variables": {}
