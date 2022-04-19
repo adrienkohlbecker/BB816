@@ -1509,7 +1509,7 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 4ceddf4e-502f-4cbb-b295-6ac51115d626)
   )
-  (label "DBA[0..7]" (at 241.3 53.34 0)
+  (label "D[0..7]" (at 241.3 53.34 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 4ead879a-9866-4427-8576-2d6c54f0fa6b)
   )
