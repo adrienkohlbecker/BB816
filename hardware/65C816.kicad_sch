@@ -3297,19 +3297,19 @@
       (reference "R31") (unit 1) (value "10k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/6a0adcaa-2f0b-4f00-9771-45fb45bb78c1"
-      (reference "R32") (unit 1) (value "1.5k") (footprint "")
+      (reference "R32") (unit 1) (value "3.3k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/9d40f20d-8514-4339-8a83-2024d20ed151"
-      (reference "R33") (unit 1) (value "4.7k") (footprint "")
+      (reference "R33") (unit 1) (value "6.8k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/6f66cf3e-d18b-4a9c-9160-24c74dae70e5"
-      (reference "R34") (unit 1) (value "4.7k") (footprint "")
+      (reference "R34") (unit 1) (value "6.8k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/f61e68fd-2bb7-4fbc-8ba8-08a5977f3eba"
-      (reference "R35") (unit 1) (value "4.7k") (footprint "")
+      (reference "R35") (unit 1) (value "6.8k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/b2e507e2-1e20-4313-8f78-4c011318c2df"
-      (reference "R36") (unit 1) (value "4.7k") (footprint "")
+      (reference "R36") (unit 1) (value "6.8k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/7cd118b5-d727-4e27-b7b0-0e9db30a4251"
       (reference "R37") (unit 1) (value "1k") (footprint "")
@@ -3321,10 +3321,10 @@
       (reference "R39") (unit 1) (value "1k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/0375f49c-cd6a-42bb-b69e-9fab92780fa3"
-      (reference "R40") (unit 1) (value "2k") (footprint "")
+      (reference "R40") (unit 1) (value "1.5k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/2fd948d9-0928-428b-bafc-fe7fc538730b"
-      (reference "R41") (unit 1) (value "2k") (footprint "")
+      (reference "R41") (unit 1) (value "1.5k") (footprint "")
     )
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/dbb85baf-b36b-41b6-8004-64283c48568b"
       (reference "RN1") (unit 1) (value "10k") (footprint "Resistor_THT:R_Array_SIP9")
