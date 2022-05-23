@@ -28,6 +28,8 @@ schematics:
 	convert -density 200 schematics/monitor.pdf schematics/monitor.png
 	pdfseparate -f 10 -l 10 hardware/65C816.pdf schematics/gpio.pdf
 	convert -density 200 schematics/gpio.pdf schematics/gpio.png
+	pdfseparate -f 11 -l 11 hardware/65C816.pdf schematics/peripherals.pdf
+	convert -density 200 schematics/peripherals.pdf schematics/peripherals.png
 	rm hardware/65C816.pdf schematics/*.pdf
 
 .PHONY: thumbnails

@@ -42,52 +42,6 @@
 !address IO_0_VIA_IER         = $7F8E   ; Interrupe Enable Register
 !address IO_0_VIA_PORTA_NHDSK = $7F8F   ; Output/Intput Register Port A but with no handshake
 
-VIA_PCR_CA1_CONTROL = 0
-VIA_PCR_CA2_CONTROL = 1
-VIA_PCR_CB1_CONTROL = 4
-VIA_PCR_CB2_CONTROL = 5
-
-VIA_PCR_1_NEGATIVE_EDGE             = 0
-VIA_PCR_1_POSITIVE_EDGE             = 1
-VIA_PCR_2_NEGATIVE_EDGE             = 000
-VIA_PCR_2_INDEPENDENT_NEGATIVE_EDGE = 001
-VIA_PCR_2_POSITIVE_EDGE             = 010
-VIA_PCR_2_INDEPENDENT_POSITIVE_EDGE = 011
-VIA_PCR_2_HANDSHAKE_OUTPUT          = 100
-VIA_PCR_2_PULSE_OUTPUT              = 101
-VIA_PCR_2_LOW_OUTPUT                = 110
-VIA_PCR_2_HIGH_OUTPUT               = 110
-
-VIA_IR_CA2_ACTIVE_EDGE   = 1 << 0
-VIA_IR_CA1_ACTIVE_EDGE   = 1 << 1
-VIA_IR_COMPLETE_8_SHIFTS = 1 << 2
-VIA_IR_CB2_ACTIVE_EDGE   = 1 << 3
-VIA_IR_CB1_ACTIVE_EDGE   = 1 << 4
-VIA_IR_T2_TIMEOUT        = 1 << 5
-VIA_IR_T1_TIMEOUT        = 1 << 6
-VIA_IR_ANY_INTERRUPT     = 1 << 7
-
-VIA_PORT_A0_EXT0 = 1 << 0
-VIA_PORT_A1_EXT1 = 1 << 1
-VIA_PORT_A2_EXT2 = 1 << 2
-VIA_PORT_A3_EXT3 = 1 << 3
-VIA_PORT_A4_EXT4 = 1 << 4
-VIA_PORT_A5_EXT5 = 1 << 5
-VIA_PORT_A6_EXT6 = 1 << 6
-VIA_PORT_A7_EXT7 = 1 << 7
-
-VIA_PORT_B0_LCD_E  = 1 << 0
-VIA_PORT_B1_LCD_RW = 1 << 1
-VIA_PORT_B2_LCD_RS = 1 << 2
-VIA_PORT_B3        = 1 << 3
-VIA_PORT_B4        = 1 << 4
-VIA_PORT_B5        = 1 << 5
-VIA_PORT_B6        = 1 << 6
-VIA_PORT_B7        = 1 << 7
-
-VIA_DDRA_DEFAULT = $00 ; all inputs
-VIA_DDRB_DEFAULT = (VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
-
 *=$8000
 main:
   ; initialize stack pointer to 01FF
@@ -98,52 +52,89 @@ main:
   clc
   xce
 
-  ; set registers to 8 bits (Set bits m and x to 1 in CPU status register)
-  sep #%00110000
-  !rs
-  !as
+  ; set registers to 16 bits (Set bits m and x to 0 in CPU status register)
+  rep #%00110000
+  !rl
+  !al
 
-  ; initialize port A and port B
-  stz IO_0_VIA_PORTA
-  stz IO_0_VIA_PORTB
-  lda # VIA_DDRA_DEFAULT
-  sta IO_0_VIA_DDRA
-  lda # VIA_DDRB_DEFAULT
+  ; set port A and B to output
+  lda #$ffff
   sta IO_0_VIA_DDRB
 
-  ; initialize LCD
-  jsr lcd_init
+  ; set port A and B to 5555
+  lda #$5555
+  sta IO_0_VIA_PORTB
 
-  lda # "H"
-  jsr print_char
-  lda # "e"
-  jsr print_char
-  lda # "l"
-  jsr print_char
-  lda # "l"
-  jsr print_char
-  lda # "o"
-  jsr print_char
-  lda # ","
-  jsr print_char
-  lda # " "
-  jsr print_char
-  lda # "W"
-  jsr print_char
-  lda # "o"
-  jsr print_char
-  lda # "r"
-  jsr print_char
-  lda # "l"
-  jsr print_char
-  lda # "d"
-  jsr print_char
-  lda # "!"
-  jsr print_char
+; ### Test bank0 RAM
 
-  stp
+restart:
+  ; load into X the address of the end of RAM
+  ldx #$7f7f
+  dex ; align to 16 bits
 
-!source "lib/lcd.a"
+loop:
+   ; store 16 bits of data at X and X+1 and verify we read the same thing
+  txa
+  sta $0,X ; direct page indexed
+  cmp $0,X
+  bne fail
+
+  ; decrement address
+  dex
+  dex
+
+  ; continue until X=0
+  bne loop
+
+; ### Test extended RAM
+
+  ldy #$8 ; store bank number 8 into Y
+
+loop_dbr:
+  ; set indexes to 8 bits
+  sep #%00010000
+	!rs
+
+  phy
+  ldy #0
+  phy
+  plb
+
+  ror IO_0_VIA_PORTB
+
+  ply
+  phy
+  plb ; pull value into Data Bank Register, effectively changing bank for all data accesses
+
+  ; set indexes to 16 bits
+  rep #%00010000
+	!rl
+
+  ldx #$ffff
+  dex ; align to 16 bits
+
+loop_ext:
+   ; store 16 bits of data at X and X+1 and verify we read the same thing
+  txa
+  sta $0000,X ; absolute indexed
+  cmp $0000,X
+  bne fail
+
+  ; decrement address
+  dex
+  dex
+
+  ; continue until X=0
+  bne loop_ext
+
+  ; increment Y
+  iny
+  cpy #$10
+  bne loop_dbr
+  jmp restart
+
+fail:
+  wai
 
 *=$fffc
   !word main

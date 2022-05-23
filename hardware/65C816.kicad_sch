@@ -6,8 +6,8 @@
 
   (title_block
     (title "65C816 Homebrew Computer")
-    (date "2022-04-15")
-    (rev "A.21")
+    (date "2022-05-06")
+    (rev "A.22")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2022 Adrien Kohlbecker")
@@ -1017,6 +1017,10 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 659470a9-3c47-4d1f-a671-af353f33eb04)
   )
+  (bus (pts (xy 271.78 36.83) (xy 283.21 36.83))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 6a3a4945-0a93-4e23-b05a-426f950f7644)
+  )
 
   (wire (pts (xy 191.77 116.84) (xy 200.66 116.84))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -1262,6 +1266,11 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid c8c2a229-536d-417e-8e0f-aa42bb455139)
   )
+  (bus (pts (xy 252.73 68.58) (xy 241.3 68.58))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid c98750da-3dfa-4d6a-8954-8b82048ffa49)
+  )
+
   (wire (pts (xy 105.41 114.3) (xy 100.33 114.3))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid ccf9c040-53e2-410d-b180-a796a3f3f280)
@@ -1315,6 +1324,10 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid e160366f-abee-4600-a41f-c56213f34c4c)
   )
+  (bus (pts (xy 252.73 66.04) (xy 241.3 66.04))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid e1d9416a-413b-41c1-9f19-5a742e7fb42c)
+  )
   (bus (pts (xy 187.96 147.32) (xy 200.66 147.32))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid e3209fc8-4416-4d6f-9a82-8b34c13955ad)
@@ -1349,6 +1362,11 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid f39797ea-4099-4cf1-898e-73abfde79482)
   )
+  (bus (pts (xy 271.78 34.29) (xy 283.21 34.29))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid f3a959a5-1766-439d-93d9-4ddb3a1eaec3)
+  )
+
   (wire (pts (xy 220.98 69.85) (xy 223.52 69.85))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid f4b2676b-6f25-4840-a941-c3afcd0e0563)
@@ -1461,6 +1479,10 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 2cb64b67-97af-427d-b2f1-c396435abbd7)
   )
+  (label "{PORTA}" (at 241.3 66.04 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 2d503678-b0a9-49da-85f4-17f5113b6d6e)
+  )
   (label "A12" (at 100.33 124.46 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 2fa57c20-8404-4a83-9f99-5235f7354039)
@@ -1488,6 +1510,10 @@
   (label "A14" (at 100.33 129.54 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 3e7c019d-e894-4a04-8d40-ed3378ada6bb)
+  )
+  (label "{PORTB}" (at 283.21 36.83 180)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid 3e9b7513-5cd9-45a0-9392-aa89cc987a62)
   )
   (label "DBA1" (at 100.33 73.66 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -1548,6 +1574,10 @@
   (label "A8" (at 100.33 114.3 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 5c9d4f00-4cd0-4ee4-9cc5-87c9ef812b4d)
+  )
+  (label "{PORTB}" (at 241.3 68.58 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 5f8db3d8-5e26-4459-a689-96a238611d9c)
   )
   (label "CLK" (at 173.99 52.07 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -1668,6 +1698,10 @@
   (label "MONCLK" (at 233.68 137.16 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid aa130e60-0660-46ee-9f76-7913d3381720)
+  )
+  (label "{PORTA}" (at 283.21 34.29 180)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid ada75517-4599-4bdb-80f5-5f3081e94880)
   )
   (label "~{IRQ}" (at 64.77 91.44 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -2431,6 +2465,26 @@
     )
   )
 
+  (sheet (at 252.73 62.23) (size 19.05 19.05) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid 9ed7b6bb-7ed2-4702-841f-e7214dc31a3a)
+    (property "Sheet name" "Peripherals" (id 0) (at 252.73 61.5184 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "peripherals.kicad_sch" (id 1) (at 252.73 81.8646 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (pin "{PORTA}" input (at 252.73 66.04 180)
+      (effects (font (size 1.27 1.27)) (justify left))
+      (uuid fa886383-70ec-482c-9916-e0f636795440)
+    )
+    (pin "{PORTB}" input (at 252.73 68.58 180)
+      (effects (font (size 1.27 1.27)) (justify left))
+      (uuid eab9ca84-0ae2-442d-93b0-f1a05e70afc0)
+    )
+  )
+
   (sheet (at 200.66 133.35) (size 20.32 21.59) (fields_autoplaced)
     (stroke (width 0.1524) (type solid) (color 0 0 0 0))
     (fill (color 0 0 0 0.0000))
@@ -2509,6 +2563,14 @@
       (effects (font (size 1.27 1.27)) (justify left))
       (uuid 60919ad4-8f13-4199-87e8-1f05be74b350)
     )
+    (pin "{PORTA}" output (at 271.78 34.29 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+      (uuid cd10dc7a-eb8c-49fd-83c3-ac9caee7d764)
+    )
+    (pin "{PORTB}" output (at 271.78 36.83 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+      (uuid c63e7fe4-04f9-4a0b-bf7d-fdd0fe756691)
+    )
   )
 
   (sheet (at 200.66 49.53) (size 20.32 33.02) (fields_autoplaced)
@@ -2582,6 +2644,7 @@
     (path "/00000000-0000-0000-0000-000061eb86f2" (page "8"))
     (path "/ad436a76-34c0-4a92-97a3-841d53d56384" (page "9"))
     (path "/d540f930-f1b1-4dbe-a658-53337bc671f7" (page "10"))
+    (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a" (page "11"))
   )
 
   (symbol_instances
@@ -3002,6 +3065,24 @@
     (path "/d540f930-f1b1-4dbe-a658-53337bc671f7/7fca1846-4921-46bd-a62e-739ac3f296be"
       (reference "#PWR0137") (unit 1) (value "GND") (footprint "")
     )
+    (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/fa8592f1-e58e-47b1-a136-fdf66694e39e"
+      (reference "#PWR0138") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/b812a04f-f15d-493c-bc9e-d753041a9d51"
+      (reference "#PWR0139") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/fc71f5a8-1262-4967-95b8-b80e4caa500f"
+      (reference "#PWR0140") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/7e73d4d5-1427-4f74-a06a-74444b81f42d"
+      (reference "#PWR0141") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/89ff1752-d989-4c90-bc1d-2da58196c565"
+      (reference "#PWR0142") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/cc4091e5-fde6-42b8-8820-46ea102df2d7"
+      (reference "#PWR0143") (unit 1) (value "GND") (footprint "")
+    )
     (path "/00000000-0000-0000-0000-000061c859bc/a7e376c9-fb69-4975-b411-b7a56874b31b"
       (reference "BAR1") (unit 1) (value "LED-Array-10-BGYR") (footprint "")
     )
@@ -3197,6 +3278,9 @@
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/f818d74a-5ffc-4388-be9e-aa337070bc87"
       (reference "D3") (unit 1) (value "1N5817") (footprint "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal")
     )
+    (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/26a36c45-d460-4bae-835a-3016e3b778c6"
+      (reference "DS1") (unit 1) (value "HD44780") (footprint "Display:WC1602A")
+    )
     (path "/00000000-0000-0000-0000-0000615d1014"
       (reference "J1") (unit 1) (value "POWER") (footprint "")
     )
@@ -3367,6 +3451,9 @@
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061973512"
       (reference "RV1") (unit 1) (value "500k") (footprint "")
+    )
+    (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/00c27e7c-9cd0-41be-a04c-086ba8f8eabf"
+      (reference "RV2") (unit 1) (value "10k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061988e45"
       (reference "SW1") (unit 1) (value "Pulse") (footprint "")

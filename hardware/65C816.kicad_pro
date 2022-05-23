@@ -449,6 +449,10 @@
     [
       "d540f930-f1b1-4dbe-a658-53337bc671f7",
       "GPIO"
+    ],
+    [
+      "9ed7b6bb-7ed2-4702-841f-e7214dc31a3a",
+      "Peripherals"
     ]
   ],
   "text_variables": {}

@@ -48,6 +48,10 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![GPIO module](./schematics/gpio.png)](./schematics/gpio.png)
 
+### Peripherals module
+
+[![Peripherals module](./schematics/peripherals.png)](./schematics/peripherals.png)
+
 ### Debug module
 
 [![Debug module](./schematics/debug.png)](./schematics/debug.png)
@@ -75,7 +79,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 170
+**Component Count:** 172
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -93,6 +97,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | D1 | 1 | POWER | Light emitting diode, small symbol |
 | D2 | 1 | Clock | Light emitting diode, small symbol |
 | D3 | 1 | 1N5817 | 20V 1A Schottky Barrier Rectifier Diode, DO-41 |
+| DS1 | 1 | HD44780 | LCD 16x2 Alphanumeric , 8 bit parallel bus, 5V VDD |
 | J1 | 1 | POWER | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | J2 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | R1, R21, R23, R27, R37, R38, R39 | 7 | 1k | Resistor, small symbol |
@@ -108,6 +113,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | RN9 | 1 | 3.3k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN11, RN12, RN13 | 3 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RV1 | 1 | 500k | Potentiometer |
+| RV2 | 1 | 10k | Potentiometer |
 | SW1 | 1 | Pulse | Push button switch, generic, two pins |
 | SW2 | 1 | Mode | Push button switch, generic, two pins |
 | SW3 | 1 | Speed | Push button switch, generic, two pins |

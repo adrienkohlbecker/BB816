@@ -28,7 +28,8 @@ episodes = [
     'VDA, VPA, RD, WR',
     'New CLK phase\nWR timing',
     'Extended RAM',
-    'Versatile Interface\nAdapter'
+    'Versatile Interface\nAdapter',
+    'LCD screen\nCalling conventions'
 ]
 
 path = './thumbnails/'
@@ -36,7 +37,7 @@ pathfmt = path + '{:d}.{}'
 
 for num, episode in enumerate(episodes, start=0):
 
-    if num < 21:
+    if num < 22:
         continue
 
     with Image.open(pathfmt.format(num, 'png')) as im:
