@@ -6,8 +6,8 @@
 
   (title_block
     (title "65C816 Homebrew Computer")
-    (date "2022-05-06")
-    (rev "A.22")
+    (date "2022-05-23")
+    (rev "A.23")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2022 Adrien Kohlbecker")
@@ -1085,6 +1085,10 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 88070ea6-c4a1-4601-b2db-5b3ce3f0f39e)
   )
+  (wire (pts (xy 220.98 139.7) (xy 233.68 139.7))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 8918a609-8065-49da-81df-bcf204bf83c1)
+  )
   (wire (pts (xy 233.68 137.16) (xy 220.98 137.16))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 89f4310e-fe3b-408a-b848-4316728445b1)
@@ -1683,7 +1687,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a1a041b8-399c-4448-8387-cddbfdb7e16e)
   )
-  (label "MONCLK" (at 137.16 34.29 0)
+  (label "~{CLK_EN}" (at 137.16 34.29 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a779b881-d5ab-4f9b-b7aa-93b03a937799)
   )
@@ -1695,9 +1699,13 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a944fd4e-c59a-4ea7-a0a8-6be4330872de)
   )
-  (label "MONCLK" (at 233.68 137.16 180)
+  (label "~{CLK_EN}" (at 233.68 137.16 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid aa130e60-0660-46ee-9f76-7913d3381720)
+  )
+  (label "CLK_IN" (at 233.68 139.7 180)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid aa6006bb-bf43-4c1d-b8fe-057f15743429)
   )
   (label "{PORTA}" (at 283.21 34.29 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -2239,9 +2247,9 @@
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid bf30f0d4-a1f9-405b-aa9a-f36db41fdf88)
     )
-    (pin "MONCLK" input (at 146.05 34.29 180)
+    (pin "~{CLK_EN}" input (at 146.05 34.29 180)
       (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 45b8f1a2-4d57-4c5e-9375-f789d767e56f)
+      (uuid 88f57620-7b25-4222-9ad1-737ebc39d86c)
     )
   )
 
@@ -2507,10 +2515,6 @@
       (effects (font (size 1.27 1.27)) (justify left))
       (uuid 4578199c-bda8-4a59-976f-1635cb8ffe78)
     )
-    (pin "MONCLK" output (at 220.98 137.16 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 38aa3c94-d5eb-4d40-8101-afee844eb749)
-    )
     (pin "SYNC" input (at 200.66 139.7 180)
       (effects (font (size 1.27 1.27)) (justify left))
       (uuid 057b7861-d5b9-4030-ae2b-a5dcf04cca3c)
@@ -2518,6 +2522,14 @@
     (pin "VA" input (at 200.66 142.24 180)
       (effects (font (size 1.27 1.27)) (justify left))
       (uuid f879ef72-05ec-462c-8505-23f4a2044f56)
+    )
+    (pin "~{CLK_EN}" output (at 220.98 137.16 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+      (uuid de975abd-f378-4e82-9222-221de5888795)
+    )
+    (pin "CLK_IN" bidirectional (at 220.98 139.7 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+      (uuid ac677f01-af64-41d7-b6fa-28593b218a9f)
     )
   )
 
@@ -2789,8 +2801,8 @@
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061bd2519"
       (reference "#PWR045") (unit 1) (value "VCC") (footprint "")
     )
-    (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061b55d16"
-      (reference "#PWR046") (unit 1) (value "GND") (footprint "")
+    (path "/00000000-0000-0000-0000-00006188a63e/9046a009-49d0-4967-8780-b19596d2a1b8"
+      (reference "#PWR046") (unit 1) (value "VCC") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061dd67d5"
       (reference "#PWR047") (unit 1) (value "GND") (footprint "")
@@ -3083,6 +3095,18 @@
     (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/cc4091e5-fde6-42b8-8820-46ea102df2d7"
       (reference "#PWR0143") (unit 1) (value "GND") (footprint "")
     )
+    (path "/00000000-0000-0000-0000-00006188a63e/f10c80e2-e06f-4ff6-97b2-e81734468134"
+      (reference "#PWR0144") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-00006188a63e/9e40651a-3e1a-4d4e-91b1-8737c6133ef4"
+      (reference "#PWR0145") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-00006188a63e/9938f9b2-7d2d-4f02-8ba8-5fa739df5360"
+      (reference "#PWR0146") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-00006188a63e/f8d2dab6-7ac4-4960-82d1-7ca695ce2fe1"
+      (reference "#PWR0147") (unit 1) (value "GND") (footprint "")
+    )
     (path "/00000000-0000-0000-0000-000061c859bc/a7e376c9-fb69-4975-b411-b7a56874b31b"
       (reference "BAR1") (unit 1) (value "LED-Array-10-BGYR") (footprint "")
     )
@@ -3335,7 +3359,7 @@
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061d814e7"
       (reference "R16") (unit 1) (value "10k") (footprint "")
     )
-    (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061dc18a8"
+    (path "/00000000-0000-0000-0000-00006188a63e/13fdffb1-a6c7-4690-8695-8477c4aadf42"
       (reference "R17") (unit 1) (value "10k") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061dc18af"
@@ -3355,12 +3379,6 @@
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-00006197129c"
       (reference "R23") (unit 1) (value "1k") (footprint "")
-    )
-    (path "/00000000-0000-0000-0000-00006188a63e/26c30e6d-c469-4313-a981-55e1711112b8"
-      (reference "R24") (unit 1) (value "100") (footprint "")
-    )
-    (path "/00000000-0000-0000-0000-00006188a63e/b9ccdb07-26ea-4761-ad36-c6c26d163692"
-      (reference "R25") (unit 1) (value "100") (footprint "")
     )
     (path "/95d65710-49c8-4cb8-9de3-935bd85d56b1/01ddd3b1-919f-4050-9eb5-fe57903e202e"
       (reference "R26") (unit 1) (value "10k") (footprint "")
@@ -3467,11 +3485,8 @@
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061df5bc7"
       (reference "SW4") (unit 1) (value "SW_DIP_SPDT_x02") (footprint "")
     )
-    (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-00006190529c"
-      (reference "SW5") (unit 1) (value "SW_DIP_x04") (footprint "")
-    )
-    (path "/00000000-0000-0000-0000-00006188a63e/28f8a272-ad05-49f0-b9f0-48cb70ea1d36"
-      (reference "SW6") (unit 1) (value "SW_DIP_SPDT_x01") (footprint "")
+    (path "/00000000-0000-0000-0000-00006188a63e/4ffd8958-74b4-48f4-8dba-37c5d6b7a503"
+      (reference "SW5") (unit 1) (value "SW_DIP_x03") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061b33617/00000000-0000-0000-0000-000061969d97"
       (reference "SW7") (unit 1) (value "Reset") (footprint "")
@@ -3516,13 +3531,13 @@
       (reference "U4") (unit 1) (value "74HC193") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061bdff75"
-      (reference "U5") (unit 1) (value "74HC112") (footprint "")
+      (reference "U5") (unit 1) (value "74AC112") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061be0d5f"
-      (reference "U5") (unit 2) (value "74HC112") (footprint "")
+      (reference "U5") (unit 2) (value "74AC112") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061be1ff1"
-      (reference "U5") (unit 3) (value "74HC112") (footprint "")
+      (reference "U5") (unit 3) (value "74AC112") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-0000619b42fc"
       (reference "U6") (unit 1) (value "74HC74") (footprint "")
@@ -3534,22 +3549,22 @@
       (reference "U6") (unit 3) (value "74HC74") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061c9d37c"
-      (reference "U7") (unit 1) (value "74HC112") (footprint "")
+      (reference "U7") (unit 1) (value "74AC112") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061cf4e59"
-      (reference "U7") (unit 2) (value "74HC112") (footprint "")
+      (reference "U7") (unit 2) (value "74AC112") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061cf632e"
-      (reference "U7") (unit 3) (value "74HC112") (footprint "")
+      (reference "U7") (unit 3) (value "74AC112") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-00006196ecf1"
       (reference "U8") (unit 1) (value "LMC555xN") (footprint "Package_DIP:DIP-8_W7.62mm")
     )
-    (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061b2bf9d"
-      (reference "U9") (unit 1) (value "74AC151") (footprint "")
+    (path "/00000000-0000-0000-0000-00006188a63e/7b872fee-c441-4c2d-8a8a-8b6e94dc680b"
+      (reference "U9") (unit 1) (value "74HC283") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-000061dd67c2"
-      (reference "U10") (unit 1) (value "74HC151") (footprint "")
+      (reference "U10") (unit 1) (value "74AC151") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061b33617/00000000-0000-0000-0000-000061967767"
       (reference "U11") (unit 1) (value "MAX705") (footprint "")
@@ -3757,6 +3772,9 @@
     )
     (path "/d540f930-f1b1-4dbe-a658-53337bc671f7/2b0707dd-999e-4362-b0a5-325184b4313e"
       (reference "U39") (unit 1) (value "74HC541") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-00006188a63e/12b113e3-01f5-4d85-95a7-8902ccd8f69c"
+      (reference "U40") (unit 1) (value "74HC251") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00006188a63e/00000000-0000-0000-0000-00006194c461"
       (reference "X1") (unit 1) (value "20MHz") (footprint "Oscillator:Oscillator_DIP-14")
