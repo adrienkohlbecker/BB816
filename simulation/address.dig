@@ -655,9 +655,10 @@ Needs to happen
 =&gt; frequency &lt;= 4.58MHz
 
 for the ROM
-=&gt; half-period of clock &gt;= 36+19+70 = 125ns
-      &amp; clock &gt;= 76+150+19 = 245
-=&gt; frequency &lt;= 4Mhz</string>
+=&gt; half-period of clock &gt;= 23.5+19+70 = 112.5ns
+=&gt; clock &gt;= 225ns
+      &amp; clock &gt;= 76+150+19 = 245ns
+=&gt; frequency &lt;= 4.08Mhz</string>
         </entry>
       </elementAttributes>
       <pos x="1300" y="340"/>

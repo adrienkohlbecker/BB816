@@ -435,34 +435,36 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 ```js
 {
   signal: [
-    { name: 'CLK', wave: '1.0(50)1(50)0.', phase: 0.20 },
-    { nodes: ['...(45)Ξ(5)Ο(0.5)Ό'], phase: 0.45 },
-    { name: 'RDY_IN', wave: 'z..(45)6(5.5)z(51.5)', data: ['IN'], phase: 0.20 },
-    { nodes: ['...(50)B(10.5)Π', '...(50)E(1)F'], phase: 0.45 },
-    { name: 'RDY (registered)', wave: '4..(51)x(9.5)4(41.5)', data: ['RDY (reg)', 'RDY (reg)'], phase: 0.20 },
-    { nodes: ['...(60.5)Σ(30)I'], phase: 0.45 },
-    { name: 'RDY', wave: '3..(51)x(39.5)3(11.5)', data: ['RDY', 'RDY'], phase: 0.20 },
-    { nodes: ['..Ύ(10)Д(80)Ё(10)Ж'], phase: 0.45 },
-    { name: 'RDY (cpu in)', wave: '6..(10)z(80)6(12)', data: ['RDY', 'RDY'], phase: 0.20 },
+    { name: 'CLK_IN', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
+    { nodes: ['...(100)Ο(5)Ό(5)G(115)H(5)R(5)P', '...(105)Ν(10)Ά(115)Β(10)Ξ'], phase: 0.9 },
+    { name: 'CLK-', wave: '0..(112.5)x(5)1(120)x(5)0..(7.5)', phase: 0.20 },
+    { nodes: ['...(112.5)Ё(2.5)Ж(2.5)S(120)T(2.5)Ћ(2.5)Δ', '...(115)L(10)K(115)M(10)Σ'], phase: 0.9 },
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    { nodes: ['..Θ(10)Λ(115)Њ(10)Ќ', '...(7.5)Љ(2.5)Є(2.5)Υ(120)Ю(2.5)Ψ(2.5)Ω'], phase: 0.9 },
+    { name: 'CLK+', wave: '1..(7.5)x(5)0(120)x(5)1..(112.5)', phase: 0.20 },
+    {},
+    { nodes: ['..Ε(8.5)Ι(116.5)Κ(8.5)Μ', '..Ρ(1)Τ(124)Χ(1)А'], phase: 0.9 },
+    { name: '~CLK', wave: '0..(1)x(7.5)1(117.5)x(7.5)0..(115.5)x', phase: 0.20 },
   ],
   edge: [
-    'Ξ+Ο 5ns', 'Ο+Ό 0.5ns',
-    'B+Π 10.5ns', 'E+F 1ns',
-    'Σ+I 30ns (approx. measured)',
-    'Ύ+Д 10ns', 'Ё+Ж 10ns',
+    'Ν+Ά 10ns', 'Β+Ξ 10ns', 'Ο+Ό 5ns', 'Ό+G 5ns', 'H+R 5ns', 'R+P 5ns',
+    'L+K 10ns', 'M+Σ 10ns', 'Ё+Ж 2.5ns', 'Ж+S 2.5ns', 'T+Ћ 2.5ns', 'Ћ+Δ 2.5ns',
+    'Θ+Λ 10ns', 'Њ+Ќ 10ns', 'Љ+Є 2.5ns', 'Є+Υ 2.5ns', 'Ю+Ψ 2.5ns', 'Ψ+Ω 2.5ns',
+    'Ε+Ι 8.5ns', 'Κ+Μ 8.5ns', 'Ρ+Τ 1ns', 'Χ+А 1ns'
   ],
   config: {
-    skin: 'narrower',
+    skin: 'narrowerer',
     lines: {
       offset: 2,
-      every: 50
+      every: 125,
+      every_muted: 10,
     },
-    background: 'white'
+    background: 'white',
   },
   head: {
     tick: -2,
     every: 10,
-    text: ['tspan', { "font-size": '12px' }, 'based on 10Mhz clock; assumes BE=1']
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock']
   }
 }
 ```
