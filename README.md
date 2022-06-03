@@ -79,7 +79,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 172
+**Component Count:** 170
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -104,7 +104,6 @@ The goals of the YouTube series are to provide a good description of all the des
 | R2, R3, R4, R5, R6, R8, R10, R12, R13, R14, R15, R16, R17, R18, R19, R20, R26, R28, R29, R30, R31 | 21 | 10k | Resistor, small symbol |
 | R7, R9, R11 | 3 | 2.2k | Resistor, small symbol |
 | R22 | 1 | 220 | Resistor, small symbol |
-| R24, R25 | 2 | 100 | Resistor, small symbol |
 | R32 | 1 | 3.3k | Resistor, small symbol |
 | R33, R34, R35, R36 | 4 | 6.8k | Resistor, small symbol |
 | R40, R41 | 2 | 1.5k | Resistor, small symbol |
@@ -118,18 +117,17 @@ The goals of the YouTube series are to provide a good description of all the des
 | SW2 | 1 | Mode | Push button switch, generic, two pins |
 | SW3 | 1 | Speed | Push button switch, generic, two pins |
 | SW4 | 1 | SW_DIP_SPDT_x02 | 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol |
-| SW5 | 1 | SW_DIP_x04 | 4x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
-| SW6 | 1 | SW_DIP_SPDT_x01 | 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol |
+| SW5 | 1 | SW_DIP_x03 | 3x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
 | SW7 | 1 | Reset | Push button switch, generic, two pins |
 | SW8 | 1 | SW_DIP_x08 | 8x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
 | U1 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
 | U2 | 1 | 74HC14 | Hex inverter schmitt trigger |
 | U3, U6 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
 | U4 | 1 | 74HC193 | Synchronous 4-bit Up/Down (2 clk) counter |
-| U5, U7 | 2 | 74HC112 | dual JK Flip-Flop, Set & Reset |
+| U5, U7 | 2 | 74AC112 | dual JK Flip-Flop, Set & Reset |
 | U8 | 1 | LMC555xN | CMOS Timer, 555 compatible, PDIP-8 |
-| U9 | 1 | 74AC151 | Multiplexer 8 to 1 |
-| U10 | 1 | 74HC151 | Multiplexer 8 to 1 |
+| U9 | 1 | 74HC283 | 4-bit full Adder |
+| U10 | 1 | 74AC151 | Multiplexer 8 to 1 |
 | U11 | 1 | MAX705 | Low-Cost, μP Supervisory Circuit |
 | U12 | 1 | 74HC175 | 4-bit D Flip-Flop, reset |
 | U13 | 1 | 74AHC74 | Dual D Flip-flop, Set & Reset |
@@ -152,6 +150,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | U33, U34, U35, U38, U39 | 5 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
 | U36 | 1 | Teensy++2.0 |  |
 | U37 | 1 | W65C22SxP | W65C22S CMOS Versatile Interface Adapter (VIA), 20-pin I/O, 2 Timer/Counters, DIP-40 |
+| U40 | 1 | 74HC251 | Multiplexer 8 to 1, 3-state Outputs |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos

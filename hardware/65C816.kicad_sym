@@ -1852,7 +1852,7 @@
         (number "50" (effects (font (size 1.27 1.27))))
       )
       (pin bidirectional line (at 21.59 -36.83 180) (length 5.08)
-        (name "A6_35" (effects (font (size 1.27 1.27))))
+        (name "A7_35" (effects (font (size 1.27 1.27))))
         (number "51" (effects (font (size 1.27 1.27))))
       )
       (pin bidirectional line (at -17.78 21.59 0) (length 5.08)
