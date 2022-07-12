@@ -5,7 +5,7 @@
 ; Memory Map
 ;
 ; 0000 0000 0000 0000 0000 0000 - 0000 0000 1111 1111 1111 1111 | 000000 00FFFF | Bank 0 (see below)
-; 0000 1000 0000 0000 0000 0000 - 0000 1111 1111 1111 1111 1111 | 080000 15FFFF | General Purpose RAM
+; 1111 0000 0000 0000 0000 0000 - 1111 0111 1111 1111 1111 1111 | F00000 F7FFFF | Extended RAM
 ;
 ; Bank0:
 ;
@@ -88,7 +88,7 @@ loop:
 
 ; ### Test extended RAM
 
-  ldy #$8 ; store bank number 8 into Y
+  ldy #$F0 ; store bank number F0 into Y
 
 loop_dbr:
   ; set indexes to 8 bits
@@ -129,7 +129,7 @@ loop_ext:
 
   ; increment Y
   iny
-  cpy #$10
+  cpy #$F8
   bne loop_dbr
   jmp restart
 

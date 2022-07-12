@@ -408,7 +408,7 @@
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 44</string>
+          <string>10.5; 44</string>
         </entry>
       </elementAttributes>
       <pos x="220" y="340"/>
@@ -455,7 +455,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 69.5</string>
+          <string>11.5; 69.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -473,7 +473,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 69.5</string>
+          <string>11.5; 69.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -491,7 +491,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 69.5</string>
+          <string>11.5; 69.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -509,7 +509,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 69.5</string>
+          <string>11.5; 69.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -882,7 +882,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 52.5</string>
+          <string>11.5; 52.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -900,7 +900,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 52.5</string>
+          <string>11.5; 52.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -918,7 +918,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 44</string>
+          <string>10.5; 44</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -936,7 +936,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>13.5; 61</string>
+          <string>12.5; 61</string>
         </entry>
         <entry>
           <string>snapToGrid</string>

@@ -14,6 +14,58 @@
   )
 
   (lib_symbols
+    (symbol "power:VCC" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+      (property "Reference" "#PWR" (id 0) (at 0 -3.81 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Value" "VCC" (id 1) (at 0 3.81 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (id 2) (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "" (id 3) (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_keywords" "power-flag" (id 4) (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "Power symbol creates a global label with name \"VCC\"" (id 5) (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "VCC_0_1"
+        (polyline
+          (pts
+            (xy -0.762 1.27)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default) (color 0 0 0 0))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default) (color 0 0 0 0))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 2.54)
+            (xy 0.762 1.27)
+          )
+          (stroke (width 0) (type default) (color 0 0 0 0))
+          (fill (type none))
+        )
+      )
+      (symbol "VCC_1_1"
+        (pin power_in line (at 0 0 90) (length 0) hide
+          (name "VCC" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
   )
 
 
@@ -605,6 +657,24 @@
   (label "~{RST}" (at 229.87 40.64 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid f6174035-fd7c-4369-a196-d238a352721f)
+  )
+
+  (symbol (lib_id "power:VCC") (at 181.61 102.87 90) (unit 1)
+    (in_bom yes) (on_board yes) (fields_autoplaced)
+    (uuid 36f87b18-2ccc-47b1-8c83-cb4010940ee3)
+    (property "Reference" "#PWR0165" (id 0) (at 185.42 102.87 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "VCC" (id 1) (at 177.8 102.8699 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (id 2) (at 181.61 102.87 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (id 3) (at 181.61 102.87 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 4c9bac65-98da-4312-82c0-d7c09e49b2b0))
   )
 
   (sheet (at 127 38.1) (size 21.59 15.24) (fields_autoplaced)
@@ -1539,6 +1609,9 @@
     )
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/ac283e0f-56bc-4f02-8be9-0348725be0da/b2e43088-a053-4a91-b140-7e1baee82007"
       (reference "#PWR0164") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/36f87b18-2ccc-47b1-8c83-cb4010940ee3"
+      (reference "#PWR0165") (unit 1) (value "VCC") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/a7e376c9-fb69-4975-b411-b7a56874b31b"
       (reference "BAR1") (unit 1) (value "LED-Array-10-BGYR") (footprint "")

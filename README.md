@@ -24,13 +24,13 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![Top-level schematic](./schematics/main.png)](./schematics/main.png)
 
-### Clock module
+### CPU breakout
 
-[![Clock module](./schematics/clock.png)](./schematics/clock.png)
+[![CPU breakout](./schematics/breakout.png)](./schematics/breakout.png)
 
-### Reset module
+### Clock and Reset module
 
-[![Reset module](./schematics/reset.png)](./schematics/reset.png)
+[![Clock and Reset module](./schematics/clock_reset.png)](./schematics/clock_reset.png)
 
 ### Glue Logic module
 
@@ -44,13 +44,9 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![Memory module](./schematics/memory.png)](./schematics/memory.png)
 
-### GPIO module
+### Debug Clock module
 
-[![GPIO module](./schematics/gpio.png)](./schematics/gpio.png)
-
-### Peripherals module
-
-[![Peripherals module](./schematics/peripherals.png)](./schematics/peripherals.png)
+[![Debug Clock module](./schematics/debug_clock.png)](./schematics/debug_clock.png)
 
 ### Debug module
 
@@ -59,6 +55,14 @@ The goals of the YouTube series are to provide a good description of all the des
 ### Monitor module
 
 [![Monitor module](./schematics/monitor.png)](./schematics/monitor.png)
+
+### GPIO module
+
+[![GPIO module](./schematics/gpio.png)](./schematics/gpio.png)
+
+### Peripherals module
+
+[![Peripherals module](./schematics/peripherals.png)](./schematics/peripherals.png)
 
 ### Tester module
 
@@ -238,7 +242,7 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { nodes: ['..K(33)C(92)Σ(30)I', '..Ρ(10)L(23)C(92)M(10)N'], phase: 0.90 },
     { name: 'CPU D0-D7 (write)', wave: '6(12)x(23)7(102)x(20)6(97)', data: ['Wr Data', 'Bank Address', 'Write Data'], phase: 0.20 },
     { nodes: ['...(12.5)Я(17)P(95.5)Τ(8.5)S', '...(7.5)J(2)O..(113.5)Q(1)R'], phase: 0.90 },
-    { name: 'AHC573 LE', wave: '0..(9.5)x(20)1(96.5)x(7.5)0(118.5)', node: '..(123.5)É(3.5)È.(6.5)À(1.5)Ç', phase: 0.20, nphase: 0.90, nyoffset: -6 },
+    { name: '/READ_CLOCK', wave: '0..(9.5)x(20)1(96.5)x(7.5)0(118.5)', node: '..(123.5)É(3.5)È.(6.5)À(1.5)Ç', phase: 0.20, nphase: 0.90, nyoffset: -6 },
     { nodes: ['..(34)Υ(11)Z'], phase: 0.90 },
     { nodes: ['...(33)X(1)Y', '...(9.5)T(1)U(19)V(12)W'], phase: 0.90 },
     { name: 'BA0-BA7', wave: '7..(10.5)x(33.5)7(208)', data: ['BA', 'Bank Address'], phase: 0.20 },
@@ -292,8 +296,8 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'AHCT245 OUT', wave: '2..(11)x(36.5)2(202.5)..', data: ['DIR valid', 'DIR valid'], phase: 0.20 },
     { nodes: ['...(11)(2.5)І(16.5)Л(97)(11)(2.5)Ѣ(15)Ц', '...(7.5)Й(2)К(116.5)(7.5)П(2)Ф'], phase: 0.9 },
     { name: 'AHCT245 OE', wave: '0..(9.5)x(19.5)1(105.5)x(18)0(97.5)..', data: ['RWB', 'RWB'], phase: 0.20 },
-    { node: '...(9.5)Ч(1)Ш(18.5)Щ(17.5)Ъ(88)Ы(1.5)Ь(16.5)Э(17)Ю', phase: 0.9 },
-    { name: 'AHCT245 OUT', wave: '2..(10.5)x(36)2(96)x(27)2(80.5)..', data: ['ON', 'OFF', 'ON'], phase: 0.20 },
+    { node: '...(9.5)Ч(1)Ш(18.5)Щ(17.5)Ъ(88)Ы(1)Ь(17)Э(17)Ю', phase: 0.9 },
+    { name: 'AHCT245 OUT', wave: '2..(10.5)x(36)2(89)x(34)2(80.5)..', data: ['ON', 'OFF', 'ON'], phase: 0.20 },
     { nodes: ['..Ε(10)Δ', '..(10)Φ(1)Έ(219)Ζ(11)Η(10)Ή'], phase: 0.9 },
     { name: 'AHCT245 OUT (read)', wave: '2..(9)x(220)2(21)..', data: ['Rd Data', 'Read Data'], phase: 0.20 },
     { node: '..Θ(10)Ι(1)Ί(114)Κ(30)Λ(11)Μ', phase: 0.9 },
@@ -310,7 +314,7 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     'Б+Г 10ns', 'Ύ+Д 30ns',
     'Ё+Ж 1ns', 'З+И 17.5ns',
     'Й+К 2ns', 'І+Л 16.5ns', 'П+Ф 2ns', 'Ѣ+Ц 15ns',
-    'Ч+Ш 1ns', 'Щ+Ъ 17.5ns', 'Ы+Ь 1.5ns', 'Э+Ю 17ns',
+    'Ч+Ш 1ns', 'Щ+Ъ 17.5ns', 'Ы+Ь 1ns', 'Э+Ю 17ns',
     'Ε+Δ 10ns', 'Φ+Έ 1ns', 'Ζ+Η 11ns', 'Η+Ή 10ns',
     'Θ+Ι 10ns', 'Ι+Ί 1ns', 'Κ+Λ 30ns', 'Λ+Μ 11ns',
     'Z+R 9ns', 'P+J 21ns', 'T+Y 10.5ns', 'U+O 44.5ns'
@@ -346,21 +350,21 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'CLK', wave: '1.0(100)1.', phase: 0.20 },
     { nodes: ['..Ѳ(30)Ѵ', '..Α(10)Γ'], phase: 0.45 },
     { name: 'A[0..15]', wave: '3..(10)x(20)3(70)..', data: ['', 'Address'], phase: 0.20 },
-    { nodes: ['..Β(44.5)Ξ', '..Ν(11.5)Ά'], phase: 0.45 },
-    { name: 'A[16..23]', wave: '7..(11.5)x(33)7(57.5)', data: ['', 'Bank Address'], phase: 0.20 },
-    { nodes: ['..Ο(70)Ό', '..A(12.5)D'], phase: 0.45 },
-    { name: 'EXTRAM_CS', wave: '8..(12.5)x(57.5)8(32)', data: ['', 'Extended RAM'], phase: 0.20 },
-    { nodes: ['..B(76)Π', '..E(12)F'], phase: 0.45 },
-    { name: 'ROM_CS', wave: '8..(12)x(64)8(26)', data: ['', 'ROM'], phase: 0.20 },
-    { nodes: ['..G(79)H', '..Ρ(11)L'], phase: 0.45 },
-    { name: 'IO_CS', wave: '8..(11)x(68)8(23)', data: ['', 'I/O'], phase: 0.20 },
-    { nodes: ['..K(76)C', '..M(12)N'], phase: 0.45 },
-    { name: 'RAM_CS', wave: '8..(12)x(64)8(26)', data: ['', 'RAM'], phase: 0.20 },
+    { nodes: ['..Β(44)Ξ', '..Ν(10.5)Ά'], phase: 0.45 },
+    { name: 'A[16..23]', wave: '7..(10.5)x(33.5)7(58)', data: ['', 'Bank Address'], phase: 0.20 },
+    { nodes: ['..Ο(69.5)Ό', '..A(11.5)D'], phase: 0.45 },
+    { name: 'EXTRAM_CS', wave: '8..(11.5)x(58)8(32.5)', data: ['', 'Extended RAM'], phase: 0.20 },
+    { nodes: ['..B(78)Π', '..E(12)F'], phase: 0.45 },
+    { name: 'ROM_CS', wave: '8..(12)x(66)8(24)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..G(81)H', '..Ρ(11)L'], phase: 0.45 },
+    { name: 'IO_CS', wave: '8..(11)x(70)8(21)', data: ['', 'I/O'], phase: 0.20 },
+    { nodes: ['..K(78)C', '..M(12)N'], phase: 0.45 },
+    { name: 'RAM_CS', wave: '8..(12)x(66)8(24)', data: ['', 'RAM'], phase: 0.20 },
   ],
   edge: [
-    'Ѳ+Ѵ 30ns', 'Α+Γ 10ns', 'Ν+Ά 11.5ns', 'Β+Ξ 44.5ns', 'Ο+Ό 70ns',
-    'A+D 12.5ns', 'B+Π 76ns', 'E+F 12ns', 'G+H 79ns',
-    'Ρ+L 11ns', 'K+C 76ns', 'M+N 12ns',
+    'Ѳ+Ѵ 30ns', 'Α+Γ 10ns', 'Ν+Ά 10.5ns', 'Β+Ξ 44ns', 'Ο+Ό 69.5ns',
+    'A+D 11.5ns', 'B+Π 78ns', 'E+F 12ns', 'G+H 81ns',
+    'Ρ+L 11ns', 'K+C 78ns', 'M+N 12ns',
   ],
   config: {
     skin: 'narrower',
@@ -395,20 +399,20 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'CPU ADDR & RWB', wave: '7....x(25)9(15)x(25)7(15)x(2)', data:['ON', 'OFF', 'ON'], phase: 0.20 },
     { nodes: ['.....Ά(8.5)Ν(31.5)M(8.5)N', '.....Α(1)Γ(39)K(1)C'], phase: 0.45 },
     { name: '!BE', wave: '0.....(1)x(7.5)1(32.5)x(7.5)0(32.5)x(1)', phase: 0.20 },
-    { nodes: ['......(8.5)Β(12)Ξ(28)J(10)O', '......(1)Ο(1.5)Ό(38.5)Σ(2)I'], phase: 0.45 },
-    { name: 'AC563 OUT', wave: '7.....(2.5)x(18)9(22.5)x(15.5)7(23.5)', data:['ON', 'OFF', 'ON'], phase: 0.20 },
-    { nodes: ['.....A(8.5)D(31.5)Q(8.5)R', '.....B(1)Π(39)Я(1)P'], phase: 0.45 },
-    { name: 'ACT245 OE', wave: '0.....(1)x(7.5)1(32.5)x(7.5)0(32.5)x(1)', phase: 0.20 },
-    { nodes: ['......(8.5)E(11)F(29)T(12)U', '......(1)G(1)H(39)Τ(1.5)S'], phase: 0.45 },
-    { name: 'ACT245 OUT', wave: '7.....(2)x(17.5)9(23)x(18)7(21.5)', data:['ON', 'OFF', 'ON'], phase: 0.20 },
+    { nodes: ['......(8.5)Β(12)Ξ(28)J(12)O', '......(1)Ο(1)Ό(39)Σ(1)I'], phase: 0.45 },
+    { name: 'AHC573 OUT', wave: '7.....(2)x(18.5)9(21.5)x(18.5)7(21.5)', data:['ON', 'OFF', 'ON'], phase: 0.20 },
+    { nodes: ['.....A(8)D(32)Q(6.5)R', '.....B(1)Π(39)Я(1)P'], phase: 0.45 },
+    { name: 'AHCT245 OE', wave: '0.....(1)x(7)1(33)x(5.5)0(34.5)x(1)', phase: 0.20 },
+    { nodes: ['......(8.5)E(17.5)F(20.5)T(17)U', '......(1)G(1)H(39)Τ(1.5)S'], phase: 0.45 },
+    { name: 'AHCT245 OUT', wave: '7.....(2)x(24)9(16.5)x(21)7(18.5)', data:['ON', 'OFF', 'ON'], phase: 0.20 },
     { nodes: ['......(8.5)V(10)W(30)Б(8)Г', '......(1)X(1)Y(39)Ύ(1)Д'], phase: 0.45 },
     { name: 'RD & WR', wave: '7.....(2)x(16.5)9(23.5)x(14.5)7(25.5)', data:['ON', 'OFF', 'ON'], phase: 0.20 },
   ],
   edge: [
-    'Ѳ+Ѵ 25ns', 'Α+Γ 1ns', 'Ά+Ν 8.5ns', 'Ο+Ό 1.5ns', 'Ξ+Β 12ns',
-    'B+Π 1ns', 'A+D 8.5ns', 'G+H 1ns','E+F 11ns',
-    'Ρ+L 25ns', 'K+C 1ns', 'M+N 8.5ns', 'Σ+I 2ns', 'J+O 10ns',
-    'Я+P 1ns', 'Q+R 8.5ns', 'Τ+S 1.5ns','T+U 12ns',
+    'Ѳ+Ѵ 25ns', 'Α+Γ 1ns', 'Ά+Ν 8.5ns', 'Ο+Ό 1ns', 'Ξ+Β 12ns',
+    'B+Π 1ns', 'A+D 8ns', 'G+H 1ns','E+F 17.5ns',
+    'Ρ+L 25ns', 'K+C 1ns', 'M+N 8.5ns', 'Σ+I 1ns', 'J+O 12ns',
+    'Я+P 1ns', 'Q+R 6.5ns', 'Τ+S 1ns','T+U 17ns',
     'V+W 10ns', 'X+Y 1ns', 'Б+Г 8ns', 'Ύ+Д 1ns',
   ],
   config: {
@@ -439,36 +443,34 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 ```js
 {
   signal: [
-    { name: 'CLK_IN', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
-    { nodes: ['...(100)Ο(5)Ό(5)G(115)H(5)R(5)P', '...(105)Ν(10)Ά(115)Β(10)Ξ'], phase: 0.9 },
-    { name: 'CLK-', wave: '0..(112.5)x(5)1(120)x(5)0..(7.5)', phase: 0.20 },
-    { nodes: ['...(112.5)Ё(2.5)Ж(2.5)S(120)T(2.5)Ћ(2.5)Δ', '...(115)L(10)K(115)M(10)Σ'], phase: 0.9 },
-    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
-    { nodes: ['..Θ(10)Λ(115)Њ(10)Ќ', '...(7.5)Љ(2.5)Є(2.5)Υ(120)Ю(2.5)Ψ(2.5)Ω'], phase: 0.9 },
-    { name: 'CLK+', wave: '1..(7.5)x(5)0(120)x(5)1..(112.5)', phase: 0.20 },
-    {},
-    { nodes: ['..Ε(8.5)Ι(116.5)Κ(8.5)Μ', '..Ρ(1)Τ(124)Χ(1)А'], phase: 0.9 },
-    { name: '~CLK', wave: '0..(1)x(7.5)1(117.5)x(7.5)0..(115.5)x', phase: 0.20 },
+    { name: 'CLK', wave: '1.0(50)1(50)0.', phase: 0.20 },
+    { nodes: ['...(45)Ξ(5)Ο(0.5)Ό'], phase: 0.45 },
+    { name: 'RDY_IN', wave: 'z..(45)6(5.5)z(51.5)', data: ['IN'], phase: 0.20 },
+    { nodes: ['...(50)B(10.5)Π', '...(50)E(1)F'], phase: 0.45 },
+    { name: 'RDY (registered)', wave: '4..(51)x(9.5)4(41.5)', data: ['RDY (reg)', 'RDY (reg)'], phase: 0.20 },
+    { nodes: ['...(60.5)Σ(30)I'], phase: 0.45 },
+    { name: 'RDY', wave: '3..(51)x(39.5)3(11.5)', data: ['RDY', 'RDY'], phase: 0.20 },
+    { nodes: ['..Ύ(10)Д(80)Ё(10)Ж'], phase: 0.45 },
+    { name: 'RDY (cpu in)', wave: '6..(10)z(80)6(12)', data: ['RDY', 'RDY'], phase: 0.20 },
   ],
   edge: [
-    'Ν+Ά 10ns', 'Β+Ξ 10ns', 'Ο+Ό 5ns', 'Ό+G 5ns', 'H+R 5ns', 'R+P 5ns',
-    'L+K 10ns', 'M+Σ 10ns', 'Ё+Ж 2.5ns', 'Ж+S 2.5ns', 'T+Ћ 2.5ns', 'Ћ+Δ 2.5ns',
-    'Θ+Λ 10ns', 'Њ+Ќ 10ns', 'Љ+Є 2.5ns', 'Є+Υ 2.5ns', 'Ю+Ψ 2.5ns', 'Ψ+Ω 2.5ns',
-    'Ε+Ι 8.5ns', 'Κ+Μ 8.5ns', 'Ρ+Τ 1ns', 'Χ+А 1ns'
+    'Ξ+Ο 5ns', 'Ο+Ό 0.5ns',
+    'B+Π 10.5ns', 'E+F 1ns',
+    'Σ+I 30ns (approx. measured)',
+    'Ύ+Д 10ns', 'Ё+Ж 10ns',
   ],
   config: {
-    skin: 'narrowerer',
+    skin: 'narrower',
     lines: {
       offset: 2,
-      every: 125,
-      every_muted: 10,
+      every: 50
     },
-    background: 'white',
+    background: 'white'
   },
   head: {
     tick: -2,
     every: 10,
-    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock']
+    text: ['tspan', { "font-size": '12px' }, 'based on 10Mhz clock; assumes BE=1']
   }
 }
 ```
@@ -544,21 +546,21 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'CLK+', wave: '1..(7.5)x(5)0(120)x(5)1..(112.5)', phase: 0.20 },
     { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
-    { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
-    { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
+    { nodes: ['..Φ(9)Έ(220)Ζ(21)Η'], phase: 0.9 },
+    { name: 'READ BUFFER', wave: '6..(9)x(220)6(21)..', data: ['', 'Reading Data'], phase: 0.20 },
     { nodes: ['...(12.5)Ѳ(33.5)Ѵ(79)V(23.5)W', '...(7.5)Α(4)Γ(113.5)X(3)Y'], phase: 0.9 },
     { name: 'RD', wave: '0..(11.5)x(34.5)1(82)x(20.5)0(103.5)', data: ['', 'ROM'], phase: 0.20 },
-    { nodes: ['..B(76)Π', '..E(12)F'], phase: 0.9 },
-    { name: 'RAM_CS', wave: '0..(12)x(64)0(176)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(78)Π', '..E(12)F'], phase: 0.9 },
+    { name: 'RAM_CS', wave: '0..(12)x(66)0(174)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['', '...(12)M(10)Σ(8)Ο(55)Ό'], phase: 0.9 },
-    { nodes: ['...(10)S(10)T(26)R(20)P(10)Β(55)Ξ', '..G(11.5)H(64.5)L(20)K(32)Ё(5)Ж(15.5)Ν(30)Ά'], phase: 0.9 },
+    { nodes: ['...(10)S(10)T(26)R(20)P(12)Β(55)Ξ', '..G(11.5)H(66.5)L(20)K(30)Ё(5)Ж(15.5)Ν(30)Ά'], phase: 0.9 },
     { name: 'RAM DATA', wave: '5..(11.5)x(54.5)z(67)x(45.5)5(73.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
     { nodes: ['', ''], phase: 0.9 },
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
-    'Φ+Έ 9ns', 'Ζ+Η 19ns',
-    'B+Π 76ns', 'E+F 12ns',
+    'Φ+Έ 9ns', 'Ζ+Η 21ns',
+    'B+Π 78ns', 'E+F 12ns',
     'Ѳ+Ѵ 33.5ns', 'Α+Γ 4ns', 'V+W 23.5ns', 'X+Y 3ns',
     'Ν+Ά 30ns (tOE)',
     'Β+Ξ 55ns (tACE)',
@@ -602,12 +604,12 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'CLK_IN', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
     { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
-    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(39.5)Η'], phase: 0.9 },
-    { name: 'WRITE BUFFER', wave: '6..(10.5)x(154)6(85.5)..', data: ['', 'Writing Data'], phase: 0.20 },
-    { nodes: ['..B(76)Π', '..E(12)F'], phase: 0.9 },
-    { name: 'RAM_CS', wave: '0..(12)x(64)0(176)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(44.5)Η'], phase: 0.9 },
+    { name: 'WRITE BUFFER', wave: '6..(10.5)x(159)6(80.5)..', data: ['', 'Writing Data'], phase: 0.20 },
+    { nodes: ['..B(78)Π', '..E(12)F'], phase: 0.9 },
+    { name: 'RAM_CS', wave: '0..(12)x(66)0(174)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['...(30)U(55)V', '...(30)Ο(50)Ό'], phase: 0.9 },
-    { nodes: ['...(76)Β(50)Ξ', '...(10)P(0)Q(93)I(0)J(30.5)M(45)N',], phase: 0.9 },
+    { nodes: ['...(78)Β(50)Ξ', '...(10)P(0)Q(93)I(0)J(30.5)M(45)N',], phase: 0.9 },
     { nodes: ['', 'Ѳ(12)Ѵ(90)Α(3)Γ(7)R(23.5)S(91.5)C(3)D(7)Ψ(17)Ω'], phase: 0.9 },
     { name: 'WR', wave: 'x..(10)1(93)x(30.5)0(94.5)x(24)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['...(10)G(0)H(193)L(25)K'], phase: 0.9 },
@@ -615,8 +617,8 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
-    'Φ+Έ 10.5ns', 'Ζ+Η 39.5ns',
-    'B+Π 76ns', 'E+F 12ns',
+    'Φ+Έ 10.5ns', 'Ζ+Η 44.5ns',
+    'B+Π 78ns', 'E+F 12ns',
     'Ѳ+Ѵ 25ns', 'Α+Γ 3ns',
     'Β+Ξ 50ns (tCW)', 'Ο+Ό 50ns (tAW)',
     'G+H 0ns (tDH)','L+K 25ns (tDW)', 'Ч+Ш 25ns (tDW)',
@@ -659,21 +661,21 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'CLK+', wave: '1..(7.5)x(5)0(120)x(5)1..(112.5)', phase: 0.20 },
     { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
-    { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
-    { name: 'READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
+    { nodes: ['..Φ(9)Έ(220)Ζ(21)Η'], phase: 0.9 },
+    { name: 'READ BUFFER', wave: '6..(9)x(220)6(21)..', data: ['', 'Reading Data'], phase: 0.20 },
     { nodes: ['...(12.5)Ѳ(33.5)Ѵ(79)V(23.5)W', '...(7.5)Α(4)Γ(113.5)X(3)Y'], phase: 0.9 },
     { name: 'RD', wave: '0..(11.5)x(34.5)1(82)x(20.5)0(103.5)', data: ['', 'ROM'], phase: 0.20 },
-    { nodes: ['..B(70)Π', '..E(12.5)F'], phase: 0.9 },
-    { name: 'RAM_CS', wave: '0..(12.5)x(57.5)0(176)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(69.5)Π', '..E(11.5)F'], phase: 0.9 },
+    { name: 'RAM_CS', wave: '0..(11.5)x(58)0(182.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['', '...(12.5)M(10)Σ(7.5)Ο(55)Ό'], phase: 0.9 },
-    { nodes: ['...(10)S(10)T(26)R(20)P(4)Β(55)Ξ', '..G(11.5)H(58.5)L(20)K(38)Ё(5)Ж(15.5)Ν(30)Ά'], phase: 0.9 },
+    { nodes: ['...(10)S(10)T(26)R(20)P(3.5)Β(55)Ξ', '..G(11.5)H(58)L(20)K(38.5)Ё(5)Ж(15.5)Ν(30)Ά'], phase: 0.9 },
     { name: 'EXTRAM DATA', wave: '5..(11.5)x(54.5)z(67)x(45.5)5(73.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
     { nodes: ['', ''], phase: 0.9 },
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
-    'Φ+Έ 9ns', 'Ζ+Η 19ns',
-    'B+Π 70ns', 'E+F 12.5ns',
+    'Φ+Έ 9ns', 'Ζ+Η 21ns',
+    'B+Π 69.5ns', 'E+F 11.5ns',
     'Ѳ+Ѵ 33.5ns', 'Α+Γ 4ns', 'V+W 23.5ns', 'X+Y 3ns',
     'Ν+Ά 30ns (tOE)',
     'Β+Ξ 55ns (tACE)',
@@ -717,12 +719,12 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'CLK_IN', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
     { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
-    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(39.5)Η'], phase: 0.9 },
-    { name: 'WRITE BUFFER', wave: '6..(10.5)x(154)6(85.5)..', data: ['', 'Writing Data'], phase: 0.20 },
-    { nodes: ['..B(70)Π', '..E(12.5)F'], phase: 0.9 },
-    { name: 'RAM_CS', wave: '0..(12.5)x(57.5)0(182)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(44.5)Η'], phase: 0.9 },
+    { name: 'WRITE BUFFER', wave: '6..(10.5)x(159)6(80.5)..', data: ['', 'Writing Data'], phase: 0.20 },
+    { nodes: ['..B(69.5)Π', '..E(11.5)F'], phase: 0.9 },
+    { name: 'RAM_CS', wave: '0..(11.5)x(58)0(182.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['...(30)U(55)V', '...(30)Ο(50)Ό'], phase: 0.9 },
-    { nodes: ['...(70)Β(50)Ξ', '...(10)P(0)Q(93)I(0)J(30.5)M(45)N',], phase: 0.9 },
+    { nodes: ['...(69.5)Β(50)Ξ', '...(10)P(0)Q(93)I(0)J(30.5)M(45)N',], phase: 0.9 },
     { nodes: ['', 'Ѳ(12)Ѵ(90)Α(3)Γ(7)R(23.5)S(91.5)C(3)D(7)Ψ(17)Ω'], phase: 0.9 },
     { name: 'WR', wave: 'x..(10)1(93)x(30.5)0(94.5)x(24)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['...(10)G(0)H(193)L(25)K'], phase: 0.9 },
@@ -730,8 +732,8 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
-    'Φ+Έ 10.5ns', 'Ζ+Η 39.5ns',
-    'B+Π 70ns', 'E+F 12.5s',
+    'Φ+Έ 10.5ns', 'Ζ+Η 44.5ns',
+    'B+Π 69.5ns', 'E+F 11.5s',
     'Β+Ξ 50ns (tCW)', 'Ο+Ό 50ns (tAW)',
     'G+H 0ns (tDH)','L+K 25ns (tDW)', 'Ч+Ш 25ns (tDW)',
     'I+J 0ns (tAS)', 'M+N 45ns (tWP)', 'P+Q 0ns (tWR)',
@@ -774,8 +776,8 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
     { nodes: ['..W(47)X', '..Λ(12)T'], phase: 0.9 },
     { name: 'VA', wave: '1..(12)x(35)1(205)', data: ['', 'ROM'], phase: 0.20 },
-    { nodes: ['..B(79)Π', '..E(11)F'], phase: 0.9 },
-    { name: 'IO0_CS', wave: '0..(11)x(68)0(173)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(81)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'IO0_CS', wave: '0..(11)x(70)0(171)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['..U(10)V(105)Ο(10)Ό'], phase: 0.9 },
     { name: 'VIA CONTROL VALID', wave: '5..(10)z(105)5(137)', data: ['', 'CONTROL'], phase: 0.20 },
     {},
@@ -783,13 +785,13 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'PERIPH. DATA VALID', wave: 'z..(115)4(137)', data: ['PERIPHERAL DATA'], phase: 0.20 },
     { nodes: ['..G(10)H(115)L(20)K'], phase: 0.9 },
     { name: 'VIA DATA BUS', wave: '5..(10)x(135)5(107)', data: ['', 'DATA'], phase: 0.20 },
-    { nodes: ['..Φ(9)Έ(222)Ζ(19)Η'], phase: 0.9 },
-    { name: 'CPU READ BUFFER', wave: '6..(9)x(222)6(19)..', data: ['', 'Reading Data'], phase: 0.20 },
+    { nodes: ['..Φ(9)Έ(220)Ζ(21)Η'], phase: 0.9 },
+    { name: 'CPU READ BUFFER', wave: '6..(9)x(220)6(21)..', data: ['', 'Reading Data'], phase: 0.20 },
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
-    'Φ+Έ 9ns', 'Ζ+Η 19ns',
-    'B+Π 79ns', 'E+F 11s',
+    'Φ+Έ 9ns', 'Ζ+Η 21ns',
+    'B+Π 81ns', 'E+F 11s',
     'G+H 10ns (tHR)','L+K 20ns (tCDR)',
     'U+V 10ns (tACR)', 'Ο+Ό 10ns (tCAR)',
     'Λ+T 12ns', 'W+X 47ns',
@@ -829,13 +831,13 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
     { nodes: ['..W(47)X', '..Λ(12)T'], phase: 0.9 },
     { name: 'VA', wave: '1..(12)x(35)1(205)', data: ['', 'ROM'], phase: 0.20 },
-    { nodes: ['..B(79)Π', '..E(11)F'], phase: 0.9 },
-    { name: 'IO0_CS', wave: '0..(11)x(68)0(173)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(81)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'IO0_CS', wave: '0..(11)x(70)0(171)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['..U(10)V(105)Ο(10)Ό'], phase: 0.9 },
     { name: 'VIA CONTROL VALID', wave: '5..(10)z(105)5(137)', data: ['', 'CONTROL'], phase: 0.20 },
     {},
-    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(39.5)Η'], phase: 0.9 },
-    { name: 'CPU WRITE BUFFER', wave: '6..(10.5)x(154)6(85.5)..', data: ['', 'Writing Data'], phase: 0.20 },
+    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(44.5)Η'], phase: 0.9 },
+    { name: 'CPU WRITE BUFFER', wave: '6..(10.5)x(159)6(80.5)..', data: ['', 'Writing Data'], phase: 0.20 },
     { nodes: ['..G(10)H(230)L(10)K'], phase: 0.9 },
     { name: 'VIA DATA BUS VALID', wave: '5..(10)z(230)5(12)', data: ['', 'DATA'], phase: 0.20 },
     { nodes: ['..Β(30)Ξ'], phase: 0.9 },
@@ -843,8 +845,8 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
-    'Φ+Έ 10.5ns', 'Ζ+Η 39.5ns',
-    'B+Π 79ns', 'E+F 11s',
+    'Φ+Έ 10.5ns', 'Ζ+Η 44.5ns',
+    'B+Π 81ns', 'E+F 11s',
     'G+H 10ns (tHW)','L+K 10ns (tDCW)',
     'U+V 10ns (tACW)', 'Ο+Ό 10ns (tCAW)',
     'Λ+T 12ns', 'W+X 47ns',
