@@ -6,8 +6,8 @@
 
   (title_block
     (title "Tester Module")
-    (date "2022-05-23")
-    (rev "A.23")
+    (date "2022-07-04")
+    (rev "A.24")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2022 Adrien Kohlbecker")
@@ -1447,7 +1447,7 @@
     (property "Reference" "RN10" (id 0) (at 97.282 76.3016 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Value" "10k" (id 1) (at 97.282 78.613 0)
+    (property "Value" "3.3k" (id 1) (at 97.282 78.613 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Footprint" "Resistor_THT:R_Array_SIP9" (id 2) (at 73.025 77.47 90)

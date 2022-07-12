@@ -36,7 +36,7 @@ void print_byte_in_binary(byte x, bool va) {
 void onClock() {
   char output[19];
 
-  byte bank      = ~PINB;
+  byte bank      = PINB;
   byte address_h = PINF;
   byte address_l = PINA;
   byte data      = PINC;

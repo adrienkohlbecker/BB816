@@ -392,7 +392,7 @@
     "meta": {
       "version": 1
     },
-    "net_format_name": "",
+    "net_format_name": "KiCad",
     "ngspice": {
       "fix_include_paths": true,
       "fix_passive_vals": false,
@@ -415,15 +415,15 @@
       ""
     ],
     [
-      "00000000-0000-0000-0000-00006188a63e",
-      "Clock"
+      "e5d0483c-6550-44c4-8b9e-8a347a49d5da",
+      "CPU Breakout"
     ],
     [
-      "00000000-0000-0000-0000-000061b33617",
-      "Reset"
+      "ac283e0f-56bc-4f02-8be9-0348725be0da",
+      "Clock & Reset"
     ],
     [
-      "95d65710-49c8-4cb8-9de3-935bd85d56b1",
+      "53bee63e-299d-4029-8191-42375cde4417",
       "Glue Logic"
     ],
     [
@@ -435,12 +435,12 @@
       "Memory"
     ],
     [
-      "00000000-0000-0000-0000-000061c859bc",
-      "Debug"
+      "00000000-0000-0000-0000-00006188a63e",
+      "Debug Clock"
     ],
     [
-      "00000000-0000-0000-0000-000061eb86f2",
-      "Tester"
+      "00000000-0000-0000-0000-000061c859bc",
+      "Debug"
     ],
     [
       "ad436a76-34c0-4a92-97a3-841d53d56384",
@@ -453,6 +453,10 @@
     [
       "9ed7b6bb-7ed2-4702-841f-e7214dc31a3a",
       "Peripherals"
+    ],
+    [
+      "00000000-0000-0000-0000-000061eb86f2",
+      "Tester"
     ]
   ],
   "text_variables": {}

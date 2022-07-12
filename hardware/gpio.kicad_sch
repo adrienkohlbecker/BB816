@@ -6,8 +6,8 @@
 
   (title_block
     (title "GPIO module")
-    (date "2022-05-23")
-    (rev "A.23")
+    (date "2022-07-04")
+    (rev "A.24")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2022 Adrien Kohlbecker")
@@ -1059,6 +1059,7 @@
 
   (bus_alias "PORTA" (members "PA0" "PA1" "PA2" "PA3" "PA4" "PA5" "PA6" "PA7" "CA1" "CA2"))
   (bus_alias "PORTB" (members "PB0" "PB1" "PB2" "PB3" "PB4" "PB5" "PB6" "PB7" "CB1" "CB2"))
+
   (junction (at 175.26 54.61) (diameter 0) (color 0 0 0 0)
     (uuid 0e7ca446-a904-4b86-b19a-cc6c946b15df)
   )
@@ -2032,7 +2033,7 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 412f30e0-a2d9-4f52-b3a9-51a603ba25c1)
   )
-  (label "{ADDRESS}" (at 53.34 85.09 0)
+  (label "A[0..23]" (at 53.34 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 41fe944e-2193-402f-a4c7-ce0325d0c6a6)
   )
@@ -2124,7 +2125,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 8ee487ed-93db-47be-be6e-7f7c0ca54b9f)
   )
-  (label "{ADDRESS}" (at 39.37 39.37 180)
+  (label "A[0..23]" (at 39.37 39.37 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 94a4060e-58e9-4228-9ad4-a9ca2f5bfad4)
   )
@@ -2285,7 +2286,7 @@
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 7bd6c32c-f008-4822-b4f8-af4663e8ccb7)
   )
-  (hierarchical_label "{ADDRESS}" (shape input) (at 27.94 39.37 180)
+  (hierarchical_label "A[0..23]" (shape input) (at 27.94 39.37 180)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 98349584-90cc-4d0b-b144-82b0b191e0bb)
   )

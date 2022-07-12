@@ -15,7 +15,7 @@
           <string>A7</string>
         </entry>
       </elementAttributes>
-      <pos x="420" y="840"/>
+      <pos x="380" y="840"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -29,7 +29,7 @@
           <string>A8</string>
         </entry>
       </elementAttributes>
-      <pos x="420" y="800"/>
+      <pos x="380" y="800"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -43,7 +43,7 @@
           <string>A9</string>
         </entry>
       </elementAttributes>
-      <pos x="420" y="760"/>
+      <pos x="380" y="760"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -57,7 +57,7 @@
           <string>A10</string>
         </entry>
       </elementAttributes>
-      <pos x="420" y="720"/>
+      <pos x="380" y="720"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -71,7 +71,7 @@
           <string>A11</string>
         </entry>
       </elementAttributes>
-      <pos x="420" y="680"/>
+      <pos x="380" y="680"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -85,7 +85,7 @@
           <string>A12</string>
         </entry>
       </elementAttributes>
-      <pos x="420" y="640"/>
+      <pos x="380" y="640"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -99,7 +99,7 @@
           <string>A13</string>
         </entry>
       </elementAttributes>
-      <pos x="420" y="600"/>
+      <pos x="380" y="600"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -113,7 +113,7 @@
           <string>A14</string>
         </entry>
       </elementAttributes>
-      <pos x="420" y="560"/>
+      <pos x="380" y="560"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -127,7 +127,7 @@
           <string>A15</string>
         </entry>
       </elementAttributes>
-      <pos x="420" y="520"/>
+      <pos x="380" y="520"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -141,7 +141,7 @@
           <string>A16</string>
         </entry>
       </elementAttributes>
-      <pos x="280" y="480"/>
+      <pos x="380" y="480"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -155,7 +155,7 @@
           <string>A17</string>
         </entry>
       </elementAttributes>
-      <pos x="280" y="440"/>
+      <pos x="380" y="440"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -169,7 +169,7 @@
           <string>A18</string>
         </entry>
       </elementAttributes>
-      <pos x="280" y="400"/>
+      <pos x="380" y="400"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -183,7 +183,7 @@
           <string>A19</string>
         </entry>
       </elementAttributes>
-      <pos x="280" y="360"/>
+      <pos x="380" y="360"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -197,7 +197,7 @@
           <string>A20</string>
         </entry>
       </elementAttributes>
-      <pos x="280" y="320"/>
+      <pos x="380" y="320"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -211,7 +211,7 @@
           <string>A21</string>
         </entry>
       </elementAttributes>
-      <pos x="280" y="280"/>
+      <pos x="380" y="280"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -225,7 +225,7 @@
           <string>A22</string>
         </entry>
       </elementAttributes>
-      <pos x="280" y="240"/>
+      <pos x="380" y="240"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -239,7 +239,7 @@
           <string>A23</string>
         </entry>
       </elementAttributes>
-      <pos x="280" y="200"/>
+      <pos x="380" y="200"/>
     </visualElement>
     <visualElement>
       <elementName>Out</elementName>
@@ -304,11 +304,14 @@
           <string>Testdata</string>
           <testData>
             <dataString>A23 A22 A21 A20 A19 A18 A17 A16 A15 A14 A13 A12 A11 A10 A9 A8 A7   ~ROM ~RAM ~RAM_EXT ~IO
-1   X   X   X   X   X   X   X   X   X   X   X   X   X   X  X  X    1    1     1     1
+1   0   X   X   X   X   X   X   X   X   X   X   X   X   X  X  X    1    1     1     1
+1   1   0   X   X   X   X   X   X   X   X   X   X   X   X  X  X    1    1     1     1
+1   1   1   0   X   X   X   X   X   X   X   X   X   X   X  X  X    1    1     1     1
+1   1   1   1   0   X   X   X   X   X   X   X   X   X   X  X  X    1    1     0     1
+1   1   1   1   1   X   X   X   X   X   X   X   X   X   X  X  X    1    1     1     1
 0   1   X   X   X   X   X   X   X   X   X   X   X   X   X  X  X    1    1     1     1
 0   0   1   X   X   X   X   X   X   X   X   X   X   X   X  X  X    1    1     1     1
 0   0   0   1   X   X   X   X   X   X   X   X   X   X   X  X  X    1    1     1     1
-0   0   0   0   1   X   X   X   X   X   X   X   X   X   X  X  X    1    1     0     1
 0   0   0   0   0   1   X   X   X   X   X   X   X   X   X  X  X    1    1     1     1
 0   0   0   0   0   0   1   X   X   X   X   X   X   X   X  X  X    1    1     1     1
 0   0   0   0   0   0   0   1   X   X   X   X   X   X   X  X  X    1    1     1     1
@@ -405,10 +408,10 @@
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 44.5</string>
+          <string>11.5; 44</string>
         </entry>
       </elementAttributes>
-      <pos x="120" y="340"/>
+      <pos x="220" y="340"/>
     </visualElement>
     <visualElement>
       <elementName>Text</elementName>
@@ -422,7 +425,7 @@
           <string>10; 30</string>
         </entry>
       </elementAttributes>
-      <pos x="260" y="600"/>
+      <pos x="220" y="600"/>
     </visualElement>
     <visualElement>
       <elementName>Text</elementName>
@@ -452,7 +455,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 70</string>
+          <string>12.5; 69.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -470,7 +473,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 67.5</string>
+          <string>12.5; 69.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -488,7 +491,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 67.5</string>
+          <string>12.5; 69.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -506,7 +509,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 67.5</string>
+          <string>12.5; 69.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -542,7 +545,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>12; 76</string>
+          <string>12; 78</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -596,7 +599,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>11; 79</string>
+          <string>11; 81</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -614,7 +617,7 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>12; 76</string>
+          <string>12; 78</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -646,76 +649,22 @@ AHC138 select: 1; 11.5</string>
         </entry>
         <entry>
           <string>Description</string>
-          <string>Worst case 79ns for I/O chip select
+          <string>Worst case 81ns for I/O chip select
 Needs to happen 
 10ns before rising edge of clock for 65C22
 30ns before rising edge of clock for 65C51
-=&gt; half-period of clock &gt;= 79+30 = 109ns
-=&gt; period of clock &gt;= 218ns
-=&gt; frequency &lt;= 4.58MHz
+=&gt; half-period of clock &gt;= 81+30 = 111ns
+=&gt; period of clock &gt;= 222ns
+=&gt; frequency &lt;= 4.50MHz
 
 for the ROM
-=&gt; half-period of clock &gt;= 23.5+19+70 = 112.5ns
-=&gt; clock &gt;= 225ns
-      &amp; clock &gt;= 76+150+19 = 245ns
-=&gt; frequency &lt;= 4.08Mhz</string>
+=&gt; half-period of clock &gt;= 23.5+21+70 = 114.5ns
+=&gt; clock &gt;= 229ns
+      &amp; clock &gt;= 78+150+21 = 249ns
+=&gt; frequency &lt;= 4.01Mhz</string>
         </entry>
       </elementAttributes>
       <pos x="1300" y="340"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Not</elementName>
-      <elementAttributes/>
-      <pos x="300" y="200"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Not</elementName>
-      <elementAttributes/>
-      <pos x="300" y="240"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Not</elementName>
-      <elementAttributes/>
-      <pos x="300" y="280"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Not</elementName>
-      <elementAttributes/>
-      <pos x="300" y="320"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Not</elementName>
-      <elementAttributes/>
-      <pos x="300" y="360"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Not</elementName>
-      <elementAttributes/>
-      <pos x="300" y="400"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Not</elementName>
-      <elementAttributes/>
-      <pos x="300" y="480"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Not</elementName>
-      <elementAttributes/>
-      <pos x="300" y="440"/>
-    </visualElement>
-    <visualElement>
-      <elementName>NAnd</elementName>
-      <elementAttributes>
-        <entry>
-          <string>wideShape</string>
-          <boolean>true</boolean>
-        </entry>
-        <entry>
-          <string>Inputs</string>
-          <int>8</int>
-        </entry>
-      </elementAttributes>
-      <pos x="560" y="260"/>
     </visualElement>
     <visualElement>
       <elementName>Or</elementName>
@@ -918,10 +867,11 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>HC30</string>
+          <string>3*AHC32
+3*8.5=25.5</string>
         </entry>
       </elementAttributes>
-      <pos x="580" y="340"/>
+      <pos x="580" y="380"/>
     </visualElement>
     <visualElement>
       <elementName>Text</elementName>
@@ -932,7 +882,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 53</string>
+          <string>12.5; 52.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -950,7 +900,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>12.5; 53</string>
+          <string>12.5; 52.5</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -968,7 +918,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>11.5; 44.5</string>
+          <string>11.5; 44</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -986,7 +936,7 @@ for the ROM
         </entry>
         <entry>
           <string>Description</string>
-          <string>13.5; 61.5</string>
+          <string>13.5; 61</string>
         </entry>
         <entry>
           <string>snapToGrid</string>
@@ -1049,6 +999,20 @@ for the ROM
       </elementAttributes>
       <pos x="894" y="764"/>
     </visualElement>
+    <visualElement>
+      <elementName>Or</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+        <entry>
+          <string>Inputs</string>
+          <int>8</int>
+        </entry>
+      </elementAttributes>
+      <pos x="560" y="260"/>
+    </visualElement>
   </visualElements>
   <wires>
     <wire>
@@ -1056,7 +1020,7 @@ for the ROM
       <p2 x="1140" y="640"/>
     </wire>
     <wire>
-      <p1 x="420" y="640"/>
+      <p1 x="380" y="640"/>
       <p2 x="460" y="640"/>
     </wire>
     <wire>
@@ -1068,12 +1032,8 @@ for the ROM
       <p2 x="940" y="640"/>
     </wire>
     <wire>
-      <p1 x="340" y="320"/>
+      <p1 x="380" y="320"/>
       <p2 x="440" y="320"/>
-    </wire>
-    <wire>
-      <p1 x="280" y="320"/>
-      <p2 x="300" y="320"/>
     </wire>
     <wire>
       <p1 x="440" y="320"/>
@@ -1084,7 +1044,7 @@ for the ROM
       <p2 x="560" y="260"/>
     </wire>
     <wire>
-      <p1 x="420" y="520"/>
+      <p1 x="380" y="520"/>
       <p2 x="480" y="520"/>
     </wire>
     <wire>
@@ -1096,16 +1056,12 @@ for the ROM
       <p2 x="960" y="520"/>
     </wire>
     <wire>
-      <p1 x="420" y="840"/>
+      <p1 x="380" y="840"/>
       <p2 x="500" y="840"/>
     </wire>
     <wire>
-      <p1 x="340" y="200"/>
+      <p1 x="380" y="200"/>
       <p2 x="500" y="200"/>
-    </wire>
-    <wire>
-      <p1 x="280" y="200"/>
-      <p2 x="300" y="200"/>
     </wire>
     <wire>
       <p1 x="500" y="780"/>
@@ -1120,31 +1076,27 @@ for the ROM
       <p2 x="600" y="140"/>
     </wire>
     <wire>
-      <p1 x="440" y="80"/>
-      <p2 x="600" y="80"/>
-    </wire>
-    <wire>
       <p1 x="920" y="80"/>
       <p2 x="1000" y="80"/>
+    </wire>
+    <wire>
+      <p1 x="440" y="80"/>
+      <p2 x="600" y="80"/>
     </wire>
     <wire>
       <p1 x="480" y="400"/>
       <p2 x="560" y="400"/>
     </wire>
     <wire>
-      <p1 x="340" y="400"/>
+      <p1 x="380" y="400"/>
       <p2 x="460" y="400"/>
     </wire>
     <wire>
-      <p1 x="280" y="400"/>
-      <p2 x="300" y="400"/>
-    </wire>
-    <wire>
-      <p1 x="420" y="720"/>
+      <p1 x="380" y="720"/>
       <p2 x="520" y="720"/>
     </wire>
     <wire>
-      <p1 x="660" y="340"/>
+      <p1 x="640" y="340"/>
       <p2 x="760" y="340"/>
     </wire>
     <wire>
@@ -1156,11 +1108,11 @@ for the ROM
       <p2 x="940" y="660"/>
     </wire>
     <wire>
-      <p1 x="420" y="600"/>
+      <p1 x="380" y="600"/>
       <p2 x="480" y="600"/>
     </wire>
     <wire>
-      <p1 x="340" y="280"/>
+      <p1 x="380" y="280"/>
       <p2 x="460" y="280"/>
     </wire>
     <wire>
@@ -1168,15 +1120,11 @@ for the ROM
       <p2 x="560" y="280"/>
     </wire>
     <wire>
-      <p1 x="280" y="280"/>
-      <p2 x="300" y="280"/>
-    </wire>
-    <wire>
       <p1 x="520" y="540"/>
       <p2 x="540" y="540"/>
     </wire>
     <wire>
-      <p1 x="420" y="800"/>
+      <p1 x="380" y="800"/>
       <p2 x="480" y="800"/>
     </wire>
     <wire>
@@ -1188,12 +1136,8 @@ for the ROM
       <p2 x="960" y="480"/>
     </wire>
     <wire>
-      <p1 x="340" y="480"/>
+      <p1 x="380" y="480"/>
       <p2 x="500" y="480"/>
-    </wire>
-    <wire>
-      <p1 x="280" y="480"/>
-      <p2 x="300" y="480"/>
     </wire>
     <wire>
       <p1 x="700" y="160"/>
@@ -1224,16 +1168,12 @@ for the ROM
       <p2 x="1000" y="40"/>
     </wire>
     <wire>
-      <p1 x="420" y="680"/>
+      <p1 x="380" y="680"/>
       <p2 x="520" y="680"/>
     </wire>
     <wire>
-      <p1 x="340" y="360"/>
+      <p1 x="380" y="360"/>
       <p2 x="520" y="360"/>
-    </wire>
-    <wire>
-      <p1 x="280" y="360"/>
-      <p2 x="300" y="360"/>
     </wire>
     <wire>
       <p1 x="520" y="360"/>
@@ -1252,16 +1192,12 @@ for the ROM
       <p2 x="560" y="300"/>
     </wire>
     <wire>
-      <p1 x="420" y="560"/>
+      <p1 x="380" y="560"/>
       <p2 x="500" y="560"/>
     </wire>
     <wire>
-      <p1 x="340" y="240"/>
+      <p1 x="380" y="240"/>
       <p2 x="480" y="240"/>
-    </wire>
-    <wire>
-      <p1 x="280" y="240"/>
-      <p2 x="300" y="240"/>
     </wire>
     <wire>
       <p1 x="1040" y="500"/>
@@ -1284,7 +1220,7 @@ for the ROM
       <p2 x="520" y="760"/>
     </wire>
     <wire>
-      <p1 x="420" y="760"/>
+      <p1 x="380" y="760"/>
       <p2 x="460" y="760"/>
     </wire>
     <wire>
@@ -1296,12 +1232,8 @@ for the ROM
       <p2 x="780" y="760"/>
     </wire>
     <wire>
-      <p1 x="340" y="440"/>
+      <p1 x="380" y="440"/>
       <p2 x="480" y="440"/>
-    </wire>
-    <wire>
-      <p1 x="280" y="440"/>
-      <p2 x="300" y="440"/>
     </wire>
     <wire>
       <p1 x="1080" y="60"/>
