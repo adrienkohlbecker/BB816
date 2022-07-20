@@ -14,58 +14,6 @@
   )
 
   (lib_symbols
-    (symbol "power:VCC" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
-      (property "Reference" "#PWR" (id 0) (at 0 -3.81 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Value" "VCC" (id 1) (at 0 3.81 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Footprint" "" (id 2) (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Datasheet" "" (id 3) (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_keywords" "power-flag" (id 4) (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_description" "Power symbol creates a global label with name \"VCC\"" (id 5) (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "VCC_0_1"
-        (polyline
-          (pts
-            (xy -0.762 1.27)
-            (xy 0 2.54)
-          )
-          (stroke (width 0) (type default) (color 0 0 0 0))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 0 0)
-            (xy 0 2.54)
-          )
-          (stroke (width 0) (type default) (color 0 0 0 0))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 0 2.54)
-            (xy 0.762 1.27)
-          )
-          (stroke (width 0) (type default) (color 0 0 0 0))
-          (fill (type none))
-        )
-      )
-      (symbol "VCC_1_1"
-        (pin power_in line (at 0 0 90) (length 0) hide
-          (name "VCC" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27))))
-        )
-      )
-    )
   )
 
 
@@ -97,6 +45,10 @@
   (wire (pts (xy 201.93 60.96) (xy 204.47 60.96))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 05f41181-43de-40f3-9fe0-baa817a9238b)
+  )
+  (wire (pts (xy 172.72 102.87) (xy 181.61 102.87))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 06948bee-8e0a-41da-bf97-58ea1840e2e4)
   )
   (wire (pts (xy 46.99 67.31) (xy 33.02 67.31))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -422,6 +374,10 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 12872cce-fbec-41a4-894f-c98b6c0f0e4b)
   )
+  (label "E" (at 172.72 102.87 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 25bdec0a-4f14-4f09-a821-96067140ec2d)
+  )
   (label "~{ROM_CS}" (at 115.57 66.04 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 266381ca-534b-4d0b-82b3-48ed1c81639f)
@@ -502,7 +458,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 654f52ea-5383-43c0-8f1c-98465256f310)
   )
-  (label "CLK_IN" (at 33.02 46.99 0)
+  (label "CLK_SRC" (at 33.02 46.99 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 70af16ac-7a1c-45b4-be10-e6a3a35fa8de)
   )
@@ -522,7 +478,7 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 7bbdd083-1248-497b-95a1-105585f43352)
   )
-  (label "CLK_IN" (at 162.56 45.72 180)
+  (label "CLK_SRC" (at 162.56 45.72 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 7ca1634c-39cb-4d7e-9162-3f0c918bec0f)
   )
@@ -586,7 +542,7 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid aa130e60-0660-46ee-9f76-7913d3381720)
   )
-  (label "CLK_IN" (at 273.05 102.87 180)
+  (label "CLK_SRC" (at 273.05 102.87 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid aa6006bb-bf43-4c1d-b8fe-057f15743429)
   )
@@ -657,24 +613,6 @@
   (label "~{RST}" (at 229.87 40.64 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid f6174035-fd7c-4369-a196-d238a352721f)
-  )
-
-  (symbol (lib_id "power:VCC") (at 181.61 102.87 90) (unit 1)
-    (in_bom yes) (on_board yes) (fields_autoplaced)
-    (uuid 36f87b18-2ccc-47b1-8c83-cb4010940ee3)
-    (property "Reference" "#PWR0165" (id 0) (at 185.42 102.87 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "VCC" (id 1) (at 177.8 102.8699 90)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "" (id 2) (at 181.61 102.87 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (id 3) (at 181.61 102.87 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 4c9bac65-98da-4312-82c0-d7c09e49b2b0))
   )
 
   (sheet (at 127 38.1) (size 21.59 15.24) (fields_autoplaced)
@@ -871,7 +809,7 @@
       (effects (font (size 1.27 1.27)) (justify left))
       (uuid f879ef72-05ec-462c-8505-23f4a2044f56)
     )
-    (pin "CLK_IN" bidirectional (at 256.54 102.87 0)
+    (pin "CLK_SRC" bidirectional (at 256.54 102.87 0)
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid ac677f01-af64-41d7-b6fa-28593b218a9f)
     )
@@ -1019,7 +957,7 @@
       (effects (font (size 1.27 1.27)) (justify left))
       (uuid ed51b6d4-bfe9-4bfa-828d-a90600c8d82f)
     )
-    (pin "CLK_IN" bidirectional (at 46.99 46.99 180)
+    (pin "CLK_SRC" bidirectional (at 46.99 46.99 180)
       (effects (font (size 1.27 1.27)) (justify left))
       (uuid 4058a5ef-0e83-49c8-ba6d-dcfe882f78bc)
     )
@@ -1115,10 +1053,7 @@
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/602ab548-b0d1-4171-a142-59881f3194d1"
       (reference "#FLG02") (unit 1) (value "PWR_FLAG") (footprint "")
     )
-    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/a5f491c8-cefa-4711-b3cf-794f723d3875"
-      (reference "#FLG0101") (unit 1) (value "PWR_FLAG") (footprint "")
-    )
-    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/518e5e07-2cf6-402c-a775-d1d24dd787ac"
+    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/62ebe6b3-dd4c-4c55-8d8a-21b9853b1e20"
       (reference "#PWR01") (unit 1) (value "VCC") (footprint "")
     )
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/d8d6bfb9-a3a9-4514-a720-00a5b5445d30"
@@ -1565,8 +1500,8 @@
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/ac283e0f-56bc-4f02-8be9-0348725be0da/fa0d9726-84f5-46b5-84b1-67cbb37036b5"
       (reference "#PWR0149") (unit 1) (value "GND") (footprint "")
     )
-    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/c19cf0f9-51a5-4b41-9abb-cbc7f35d86e6"
-      (reference "#PWR0150") (unit 1) (value "+5V") (footprint "")
+    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/24076432-06f0-41ae-9974-1a0c8570ee38"
+      (reference "#PWR0150") (unit 1) (value "VCC") (footprint "")
     )
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/ac283e0f-56bc-4f02-8be9-0348725be0da/71f7c452-3171-4926-b8bf-53972928edbe"
       (reference "#PWR0151") (unit 1) (value "VCC") (footprint "")
@@ -1583,11 +1518,8 @@
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/e7c77e66-db94-4be5-a0d5-414db16641ce"
       (reference "#PWR0155") (unit 1) (value "GND") (footprint "")
     )
-    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/c6c85d1d-a22c-4e86-8ce2-daf52ef5ef35"
-      (reference "#PWR0156") (unit 1) (value "+5V") (footprint "")
-    )
-    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/b6844e6a-a82e-4046-aa12-ade336000618"
-      (reference "#PWR0157") (unit 1) (value "+5V") (footprint "")
+    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/2e46f42f-271c-4f1b-945a-fdd447ae38b7"
+      (reference "#PWR0156") (unit 1) (value "VCC") (footprint "")
     )
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/4b8b470a-01e6-4542-b92a-d84e6f5eca5a"
       (reference "#PWR0158") (unit 1) (value "GND") (footprint "")
@@ -1610,8 +1542,8 @@
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/ac283e0f-56bc-4f02-8be9-0348725be0da/b2e43088-a053-4a91-b140-7e1baee82007"
       (reference "#PWR0164") (unit 1) (value "VCC") (footprint "")
     )
-    (path "/36f87b18-2ccc-47b1-8c83-cb4010940ee3"
-      (reference "#PWR0165") (unit 1) (value "VCC") (footprint "")
+    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/ac283e0f-56bc-4f02-8be9-0348725be0da/1dfb63c7-0e87-4219-93d1-84841b66bb3e"
+      (reference "#PWR0165") (unit 1) (value "GND") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061c859bc/a7e376c9-fb69-4975-b411-b7a56874b31b"
       (reference "BAR1") (unit 1) (value "LED-Array-10-BGYR") (footprint "")
@@ -1811,20 +1743,20 @@
     (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a/26a36c45-d460-4bae-835a-3016e3b778c6"
       (reference "DS1") (unit 1) (value "HD44780") (footprint "Display:WC1602A")
     )
-    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/dbce72ae-5929-4fd8-9d9f-d702fc31f3a5"
-      (reference "F1") (unit 1) (value "Fuse") (footprint "")
-    )
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/3dad0243-5776-40ec-a406-c461334b4acf"
       (reference "J1") (unit 1) (value "Jack-DC") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061eb86f2/0e006e01-b151-4d6e-9611-84a495b7aa73"
       (reference "J2") (unit 1) (value "Tester") (footprint "")
     )
+    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/ac283e0f-56bc-4f02-8be9-0348725be0da/45cc211d-8a75-4d24-a61e-55f7bfca8b8c"
+      (reference "J3") (unit 1) (value "Conn_01x02") (footprint "")
+    )
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/53bee63e-299d-4029-8191-42375cde4417/3f8ec66d-a42d-4dd5-87bd-ba197deaf9fd"
       (reference "J4") (unit 1) (value "Conn_01x10") (footprint "")
     )
-    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/c2b7db24-ef06-4919-8c04-f22d4ca61f8b"
-      (reference "J5") (unit 1) (value "Conn_01x13") (footprint "")
+    (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/751a9dd4-4e8e-43b2-87d2-ec9010be4550"
+      (reference "J5") (unit 1) (value "Conn_01x12") (footprint "")
     )
     (path "/e5d0483c-6550-44c4-8b9e-8a347a49d5da/3f06e0d1-d27c-4d18-90e3-1016a0097024"
       (reference "J6") (unit 1) (value "Conn_01x40") (footprint "")

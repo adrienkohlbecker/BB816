@@ -1059,7 +1059,6 @@
 
   (bus_alias "PORTA" (members "PA0" "PA1" "PA2" "PA3" "PA4" "PA5" "PA6" "PA7" "CA1" "CA2"))
   (bus_alias "PORTB" (members "PB0" "PB1" "PB2" "PB3" "PB4" "PB5" "PB6" "PB7" "CB1" "CB2"))
-
   (junction (at 175.26 54.61) (diameter 0) (color 0 0 0 0)
     (uuid 0e7ca446-a904-4b86-b19a-cc6c946b15df)
   )
