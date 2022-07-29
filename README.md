@@ -478,6 +478,56 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 
 [![RDY](./timing/Timing%20RDY.png)](./timing/Timing%20RDY.png)
 
+### MX
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    { nodes: ['..', '..Б(5)Г(110)Ύ(10)Д(5)X(110)Λ(10)T'], phase: 0.9 },
+    { name: 'MX', wave: '3..(5)x(110)3(15)x(110)3(10)..', data: ['M', 'X', 'M'], phase: 0.20 },
+    { nodes: ['...(120)B(5)Π(0.5)F'], phase: 0.9 },
+    { name: 'D FF IN', wave: 'z..(120)4(5.5)z(124.5)..', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['...(125)U(10.5)V', '...(125)Ο(1)Ό'], phase: 0.9 },
+    { name: 'X', wave: '5..(126)x(9.5)5(114.5)..', data: ['X', 'X'], phase: 0.20 },
+    { nodes: ['...(5)Φ(1)Έ(109)Ζ(6.5)Η(8.5)G(1)H(109)L(6.5)K'], phase: 0.9 },
+    { name: '/MX', wave: '3..(6)x(115.5)3(9.5)x(115.5)3(3.5)..', data: ['/M', '/X', '/M'], phase: 0.20 },
+    { nodes: ['..Β(0)Ξ(246.5)W(3.5)E'], phase: 0.9 },
+    { name: 'J-K FF IN', wave: '4.z(246.5)4(3.5)z.', data: ['', ''], phase: 0.20 },
+    { nodes: ['..Ѳ(11)Ѵ', '..Α(2.5)Γ'], phase: 0.9 },
+    { name: 'M', wave: '5..(2.5)x(8.5)5(239)..', data: ['M', 'M'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 5ns', 'Ύ+Д 10ns', 'Д+X 5ns', 'Λ+T 10ns',
+    'U+V 10.5ns', 'Ο+Ό 1ns',
+    'B+Π 5ns', 'Π+F 0.5ns',
+    'Φ+Έ 1ns', 'Ζ+Η 6.5ns @ 15pF', 'G+H 1ns','L+K 6.5ns @ 15pF',
+    'Β+Ξ 0ns', 'W+E 3.5ns',
+    'Ѳ+Ѵ 11.1ns', 'Α+Γ 2.7ns',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4MHz clock']
+  }
+}
+```
+</p></details>
+
+[![MX](./timing/Timing%20MX.png)](./timing/Timing%20MX.png)
+
 ### ROM
 
 <details><summary>View source</summary><p>

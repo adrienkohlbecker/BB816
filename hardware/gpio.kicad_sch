@@ -6,8 +6,8 @@
 
   (title_block
     (title "GPIO module")
-    (date "2022-07-04")
-    (rev "A.24")
+    (date "2022-07-28")
+    (rev "A.25")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2022 Adrien Kohlbecker")

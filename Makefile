@@ -2,6 +2,10 @@ default:
 	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch main.a )
 	cat software/report.txt
 
+memtest:
+	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch examples/memtest.a )
+	cat software/report.txt
+
 eeprom:
 	minipro --presence_check
 	(cd software; minipro --device AT28C256 --pin_check --write main.bin)
