@@ -415,18 +415,6 @@
       ""
     ],
     [
-      "e5d0483c-6550-44c4-8b9e-8a347a49d5da",
-      "CPU Breakout"
-    ],
-    [
-      "ac283e0f-56bc-4f02-8be9-0348725be0da",
-      "Clock & Reset"
-    ],
-    [
-      "53bee63e-299d-4029-8191-42375cde4417",
-      "Glue Logic"
-    ],
-    [
       "f3e13532-3999-4d1f-800f-4b9a7b3c3e9d",
       "Address decoding"
     ],
