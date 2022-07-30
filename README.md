@@ -81,11 +81,7 @@ The goals of the YouTube series are to provide a good description of all the des
 - LED Bars with 8 LEDs, various colors ([Red version](https://www.aliexpress.com/item/32315190808.html)), with [9-pin bussed 1k resistors](https://nl.mouser.com/ProductDetail/Bourns/4609M-101-102LF?qs=nFt9sTYf7TDihA0IqmqOVw%3D%3D). I use 1k, 1.5k or 3.3k resistors depending on the color.
 - ZIF socket for ROM: [Aries Electronics 28-526-10](https://mouser.com/ProductDetail/Aries-Electronics/28-526-10?qs=WZRMhwwaLl9nHDqf31PyaQ%3D%3D) + [28pin Wire-Wrap socket](https://mouser.com/ProductDetail/Mill-Max/123-43-628-41-001000?qs=IGgAdOvCTsSqORqiKCtp8w%3D%3D)
 
-### KiCad components
-
-#### CPU Breakout board
-
-**Component Count:** 67
+### CPU Breakout board
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -121,9 +117,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | U16 | 1 | 74AHC573 | 8-bit Latch 3-state outputs |
 | X1 | 1 | 8MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
-#### Rest of the computer
-
-**Component Count:** 121
+### Rest of the computer
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
