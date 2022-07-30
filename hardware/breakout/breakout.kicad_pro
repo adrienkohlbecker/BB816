@@ -415,12 +415,12 @@
       ""
     ],
     [
-      "7dafc4fb-e021-435a-a6bd-152f4b331382",
-      "Glue Logic"
-    ],
-    [
       "2f090fc6-251b-4bb5-a751-d9ec5f3aaa1f",
       "Clock & Reset"
+    ],
+    [
+      "7dafc4fb-e021-435a-a6bd-152f4b331382",
+      "Glue Logic"
     ]
   ],
   "text_variables": {}
