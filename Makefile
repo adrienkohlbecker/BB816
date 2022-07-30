@@ -12,31 +12,33 @@ eeprom:
 
 .PHONY: schematics
 schematics:
+	pdfseparate -f 1 -l 1 hardware/breakout/breakout.pdf schematics/breakout.pdf
+	convert -alpha remove -density 200 schematics/breakout.pdf schematics/breakout.png
+	pdfseparate -f 2 -l 2 hardware/breakout/breakout.pdf schematics/clock_reset.pdf
+	convert -alpha remove -density 200 schematics/clock_reset.pdf schematics/clock_reset.png
+	pdfseparate -f 3 -l 3 hardware/breakout/breakout.pdf schematics/glue.pdf
+	convert -alpha remove -density 200 schematics/glue.pdf schematics/glue.png
+
 	pdfseparate -f 1 -l 1 hardware/65C816.pdf schematics/main.pdf
-	convert -density 200 schematics/main.pdf schematics/main.png
-	pdfseparate -f 2 -l 2 hardware/65C816.pdf schematics/breakout.pdf
-	convert -density 200 schematics/breakout.pdf schematics/breakout.png
-	pdfseparate -f 3 -l 3 hardware/65C816.pdf schematics/clock_reset.pdf
-	convert -density 200 schematics/clock_reset.pdf schematics/clock_reset.png
-	pdfseparate -f 4 -l 4 hardware/65C816.pdf schematics/glue.pdf
-	convert -density 200 schematics/glue.pdf schematics/glue.png
-	pdfseparate -f 5 -l 5 hardware/65C816.pdf schematics/address_decoding.pdf
-	convert -density 200 schematics/address_decoding.pdf schematics/address_decoding.png
-	pdfseparate -f 6 -l 6 hardware/65C816.pdf schematics/memory.pdf
-	convert -density 200 schematics/memory.pdf schematics/memory.png
-	pdfseparate -f 7 -l 7 hardware/65C816.pdf schematics/debug_clock.pdf
-	convert -density 200 schematics/debug_clock.pdf schematics/debug_clock.png
-	pdfseparate -f 8 -l 8 hardware/65C816.pdf schematics/debug.pdf
-	convert -density 200 schematics/debug.pdf schematics/debug.png
-	pdfseparate -f 9 -l 9 hardware/65C816.pdf schematics/monitor.pdf
-	convert -density 200 schematics/monitor.pdf schematics/monitor.png
-	pdfseparate -f 10 -l 10 hardware/65C816.pdf schematics/gpio.pdf
-	convert -density 200 schematics/gpio.pdf schematics/gpio.png
-	pdfseparate -f 11 -l 11 hardware/65C816.pdf schematics/peripherals.pdf
-	convert -density 200 schematics/peripherals.pdf schematics/peripherals.png
-	pdfseparate -f 12 -l 12 hardware/65C816.pdf schematics/tester.pdf
-	convert -density 200 schematics/tester.pdf schematics/tester.png
-	rm hardware/65C816.pdf schematics/*.pdf
+	convert -alpha remove -density 200 schematics/main.pdf schematics/main.png
+	pdfseparate -f 2 -l 2 hardware/65C816.pdf schematics/address_decoding.pdf
+	convert -alpha remove -density 200 schematics/address_decoding.pdf schematics/address_decoding.png
+	pdfseparate -f 3 -l 3 hardware/65C816.pdf schematics/memory.pdf
+	convert -alpha remove -density 200 schematics/memory.pdf schematics/memory.png
+	pdfseparate -f 4 -l 4 hardware/65C816.pdf schematics/debug_clock.pdf
+	convert -alpha remove -density 200 schematics/debug_clock.pdf schematics/debug_clock.png
+	pdfseparate -f 5 -l 5 hardware/65C816.pdf schematics/debug.pdf
+	convert -alpha remove -density 200 schematics/debug.pdf schematics/debug.png
+	pdfseparate -f 6 -l 6 hardware/65C816.pdf schematics/monitor.pdf
+	convert -alpha remove -density 200 schematics/monitor.pdf schematics/monitor.png
+	pdfseparate -f 7 -l 7 hardware/65C816.pdf schematics/gpio.pdf
+	convert -alpha remove -density 200 schematics/gpio.pdf schematics/gpio.png
+	pdfseparate -f 8 -l 8 hardware/65C816.pdf schematics/peripherals.pdf
+	convert -alpha remove -density 200 schematics/peripherals.pdf schematics/peripherals.png
+	pdfseparate -f 9 -l 9 hardware/65C816.pdf schematics/tester.pdf
+	convert -alpha remove -density 200 schematics/tester.pdf schematics/tester.png
+
+	rm schematics/*.pdf
 
 .PHONY: thumbnails
 thumbnails:

@@ -12,6 +12,9 @@
     (property "Datasheet" "https://github.com/adrienkohlbecker/65C816/tree/main/hardware/breakout" (id 3) (at -12.7 46.99 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "ki_description" "See https://github.com/adrienkohlbecker/65C816/tree/main/hardware/breakout" (id 4) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (symbol "65C816-Breakout_0_1"
       (rectangle (start -13.97 45.72) (end 13.97 -43.18)
         (stroke (width 0) (type default) (color 0 0 0 0))

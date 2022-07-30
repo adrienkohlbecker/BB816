@@ -83,7 +83,46 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### KiCad components
 
-**Component Count:** 170
+#### CPU Breakout board
+
+**Component Count:** 67
+
+| Refs | Qty | Component | Description |
+| ----- | --- | ---- | ----------- |
+| C1, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14, C15, C16, C17, C18, C19 | 17 | 100n | Unpolarized capacitor, small symbol |
+| C2 | 1 | 220u | Polarized capacitor, small symbol |
+| C3 | 1 | 10u | Polarized capacitor, small symbol |
+| D1 | 1 | POWER | Light emitting diode, small symbol |
+| D2 | 1 | 1N5817 | 20V 1A Schottky Barrier Rectifier Diode, DO-41 |
+| J1 | 1 | Jack-DC | DC Barrel Jack |
+| J2 | 1 | Conn_01x13 | Generic connector, single row, 01x13, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| J3 | 1 | Conn_01x40 | Generic connector, single row, 01x40, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| J4, J5 | 2 | Conn_01x10 | Generic connector, single row, 01x10, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| J6 | 1 | Conn_01x02 | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| R1, R2, R3, R5, R7, R17 | 6 | 3.3k | Resistor, small symbol |
+| R4, R9, R10, R11, R13 | 5 | 100k | Resistor, small symbol |
+| R6, R8 | 2 | 1k | Resistor, small symbol |
+| R12, R14, R15, R16 | 4 | 0R | Resistor, small symbol |
+| RN1, RN2, RN3, RN4, RN5 | 5 | 100k | 8 resistor network, star topology, bussed resistors, small symbol |
+| SW1 | 1 | Reset | Push button switch, generic, two pins |
+| U1 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
+| U2 | 1 | 74AHC02 | quad 2-input NOR gate |
+| U3, U5, U10 | 3 | 74AHC32 | Quad 2-input OR |
+| U4 | 1 | 74AHC74 | Dual D Flip-flop, Set & Reset |
+| U6 | 1 | 74AC10 | Triple 3-input NAND |
+| U7 | 1 | 74AHC125 | Quad buffer 3-State outputs |
+| U8 | 1 | 74AHC00 | quad 2-input NAND gate |
+| U9 | 1 | 74AC112 | dual JK Flip-Flop, Set & Reset |
+| U11 | 1 | DS1035-10 | 3-in-1 High–Speed Silicon Delay Line |
+| U12 | 1 | 74AHCT245 | Octal BUS Transceivers, 3-State outputs |
+| U13 | 1 | 74AHC573 | 8-bit Latch 3-state outputs |
+| U14, U15 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
+| U16 | 1 | DS1813-5 |  |
+| X1 | 1 | 8MHz | Crystal Clock Oscillator, DIP14-style metal package |
+
+#### Rest of the computer
+
+**Component Count:** 121
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -91,30 +130,25 @@ The goals of the YouTube series are to provide a good description of all the des
 | BAR2, BAR3, BAR4 | 3 | Yellow | BAR GRAPH 8 segment |
 | BAR5 | 1 | Green | BAR GRAPH 8 segment |
 | BAR6, BAR7, BAR8 | 3 | Red | BAR GRAPH 8 segment |
-| C1 | 1 | 220u | Polarized capacitor, small symbol |
-| C2, C4, C21, C25, C35, C41, C45 | 7 | 10u | Polarized capacitor, small symbol |
-| C3, C6, C10, C11, C12, C13, C14, C15, C16, C17, C18, C22, C23, C24, C26, C27, C28, C29, C30, C31, C32, C33, C34, C36, C37, C38, C39, C40, C42, C43, C44, C46, C47, C48, C49, C50, C51, C52, C53, C54 | 40 | 100n | Unpolarized capacitor, small symbol |
-| C5 | 1 | 22u | Polarized capacitor, small symbol |
-| C7, C8, C9 | 3 | 2.2u | Polarized capacitor, small symbol |
-| C19 | 1 | 1u | Polarized capacitor, small symbol |
-| C20 | 1 | 10n | Unpolarized capacitor, small symbol |
-| D1 | 1 | POWER | Light emitting diode, small symbol |
-| D2 | 1 | Clock | Light emitting diode, small symbol |
-| D3 | 1 | 1N5817 | 20V 1A Schottky Barrier Rectifier Diode, DO-41 |
+| C1, C6, C10, C27 | 4 | 10u | Polarized capacitor, small symbol |
+| C2, C3, C4, C5, C7, C8, C9, C12, C16, C17, C18, C19, C20, C21, C22, C23, C24, C28, C29, C30, C31, C32, C33, C34, C35, C36 | 26 | 100n | Unpolarized capacitor, small symbol |
+| C11 | 1 | 22u | Polarized capacitor, small symbol |
+| C13, C14, C15 | 3 | 2.2u | Polarized capacitor, small symbol |
+| C25 | 1 | 1u | Polarized capacitor, small symbol |
+| C26 | 1 | 10n | Unpolarized capacitor, small symbol |
+| D1 | 1 | Clock | Light emitting diode, small symbol |
 | DS1 | 1 | HD44780 | LCD 16x2 Alphanumeric , 8 bit parallel bus, 5V VDD |
-| J1 | 1 | POWER | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| J2 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| R1, R21, R23, R27, R37, R38, R39 | 7 | 1k | Resistor, small symbol |
-| R2, R3, R4, R5, R6, R8, R10, R12, R13, R14, R15, R16, R17, R18, R19, R20, R26, R28, R29, R30, R31 | 21 | 10k | Resistor, small symbol |
-| R7, R9, R11 | 3 | 2.2k | Resistor, small symbol |
-| R22 | 1 | 220 | Resistor, small symbol |
-| R32 | 1 | 3.3k | Resistor, small symbol |
-| R33, R34, R35, R36 | 4 | 6.8k | Resistor, small symbol |
-| R40, R41 | 2 | 1.5k | Resistor, small symbol |
-| RN1, RN2, RN3, RN4, RN5, RN10 | 6 | 10k | 8 resistor network, star topology, bussed resistors, small symbol |
-| RN6, RN7, RN8 | 3 | 1k | 8 resistor network, star topology, bussed resistors, small symbol |
-| RN9 | 1 | 3.3k | 8 resistor network, star topology, bussed resistors, small symbol |
-| RN11, RN12, RN13 | 3 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
+| J1 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| R1, R9, R10, R11, R12, R13, R14, R15, R19, R20 | 10 | 3.3k | Resistor, small symbol |
+| R2, R4, R6, R8 | 4 | 10k | Resistor, small symbol |
+| R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
+| R16, R18, R25, R26, R27 | 5 | 1k | Resistor, small symbol |
+| R17 | 1 | 220 | Resistor, small symbol |
+| R21, R22, R23, R24 | 4 | 6.8k | Resistor, small symbol |
+| R28, R29 | 2 | 1.5k | Resistor, small symbol |
+| RN1, RN2, RN3 | 3 | 1k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RN4, RN7 | 2 | 3.3k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RN5, RN6, RN8 | 3 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RV1 | 1 | 500k | Potentiometer |
 | RV2 | 1 | 10k | Potentiometer |
 | SW1 | 1 | Pulse | Push button switch, generic, two pins |
@@ -122,42 +156,33 @@ The goals of the YouTube series are to provide a good description of all the des
 | SW3 | 1 | Speed | Push button switch, generic, two pins |
 | SW4 | 1 | SW_DIP_SPDT_x02 | 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol |
 | SW5 | 1 | SW_DIP_x03 | 3x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
-| SW7 | 1 | Reset | Push button switch, generic, two pins |
-| SW8 | 1 | SW_DIP_x08 | 8x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
-| U1 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
-| U2 | 1 | 74HC14 | Hex inverter schmitt trigger |
-| U3, U6 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
-| U4 | 1 | 74HC193 | Synchronous 4-bit Up/Down (2 clk) counter |
-| U5, U7 | 2 | 74AC112 | dual JK Flip-Flop, Set & Reset |
-| U8 | 1 | LMC555xN | CMOS Timer, 555 compatible, PDIP-8 |
-| U9 | 1 | 74HC283 | 4-bit full Adder |
-| U10 | 1 | 74AC151 | Multiplexer 8 to 1 |
-| U11 | 1 | MAX705 | Low-Cost, μP Supervisory Circuit |
-| U12 | 1 | 74HC175 | 4-bit D Flip-Flop, reset |
-| U13 | 1 | 74AHC74 | Dual D Flip-flop, Set & Reset |
-| U14 | 1 | 74AHC125 | Quad buffer 3-State outputs |
-| U15 | 1 | DS1035-10 | 3-in-1 High–Speed Silicon Delay Line |
-| U16 | 1 | 74AHC00 | quad 2-input NAND gate |
-| U17 | 1 | 74AHC02 | quad 2-input NOR gate |
-| U18, U25 | 2 | 74AHC32 | Quad 2-input OR |
-| U19 | 1 | 74AC10 | Triple 3-input NAND |
-| U20 | 1 | 74ACT245 | Octal BUS Transceivers, 3-State outputs |
-| U21 | 1 | 74AC563 | 8-bit Latch 3-state outputs inverting |
-| U22, U23 | 2 | 74HC30 | 8-input NAND |
-| U24 | 1 | 74AHC00 | quad 2-input NAND gate |
-| U26 | 1 | 74AHC138 | Decoder 3 to 8 active low outputs |
-| U27 | 1 | AT28C256-15PC | Paged Parallel EEPROM 256Kb (32K x 8), DIP-28/SOIC-28 |
-| U28 | 1 | LY62256PL-55LL | 32Kx8 bit Low Power CMOS Static RAM, 55/70ns, DIP-28 |
-| U29 | 1 | AS6C4008-55PCN | 512K x 8 Low Power CMOS RAM, DIP-32 |
-| U30 | 1 | 74HC04 | Hex Inverter |
-| U31, U32 | 2 | 74HC540 | 8-bit Buffer/Line driver Inverter, 3-state outputs |
-| U33, U34, U35, U38, U39 | 5 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
-| U36 | 1 | Teensy++2.0 |  |
-| U37 | 1 | W65C22SxP | W65C22S CMOS Versatile Interface Adapter (VIA), 20-pin I/O, 2 Timer/Counters, DIP-40 |
-| U40 | 1 | 74HC251 | Multiplexer 8 to 1, 3-state Outputs |
+| SW6 | 1 | SW_DIP_x08 | 8x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
+| U1 | 1 | 65C816-Breakout | See https://github.com/adrienkohlbecker/65C816/tree/main/hardware/breakout |
+| U2 | 1 | 74HC30 | 8-input NAND |
+| U3 | 1 | 74AHC00 | quad 2-input NAND gate |
+| U4 | 1 | 74AHC32 | Quad 2-input OR |
+| U5 | 1 | 74AHC138 | Decoder 3 to 8 active low outputs |
+| U6 | 1 | AT28C256-15PC | Paged Parallel EEPROM 256Kb (32K x 8), DIP-28/SOIC-28 |
+| U7 | 1 | LY62256PL-55LL | 32Kx8 bit Low Power CMOS Static RAM, 55/70ns, DIP-28 |
+| U8 | 1 | AS6C4008-55PCN | 512K x 8 Low Power CMOS RAM, DIP-32 |
+| U9 | 1 | 74HC14 | Hex inverter schmitt trigger |
+| U10, U14 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
+| U11 | 1 | 74HC283 | 4-bit full Adder |
+| U12, U15 | 2 | 74AC112 | dual JK Flip-Flop, Set & Reset |
+| U13 | 1 | 74HC193 | Synchronous 4-bit Up/Down (2 clk) counter |
+| U16 | 1 | LMC555xN | CMOS Timer, 555 compatible, PDIP-8 |
+| U17 | 1 | 74HC251 | Multiplexer 8 to 1, 3-state Outputs |
+| U18 | 1 | 74AC151 | Multiplexer 8 to 1 |
+| U19 | 1 | 74HC04 | Hex Inverter |
+| U20 | 1 | 74HC540 | 8-bit Buffer/Line driver Inverter, 3-state outputs |
+| U21, U22, U23, U24, U27, U28 | 6 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
+| U25 | 1 | Teensy++2.0 |  |
+| U26 | 1 | W65C22SxP | W65C22S CMOS Versatile Interface Adapter (VIA), 20-pin I/O, 2 Timer/Counters, DIP-40 |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
 
 ### Used in previous videos
+
+TODO: This hasn't been updated in a while
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
