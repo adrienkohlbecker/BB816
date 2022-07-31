@@ -209,7 +209,7 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 ```js
 {
   signal: [
-    { name: 'CLK_IN', wave: '0..(25)x(10)1(40)x(10)0(17)', phase: 0.20 },
+    { name: 'CLK_SRC', wave: '0..(25)x(10)1(40)x(10)0(17)', phase: 0.20 },
     { nodes: ['...(25)Ο(5)Ό(5)G(40)H(5)R(5)P', '...(30)Ν(10)Ά(40)Β(10)Ξ'], phase: 0.45 },
     { name: 'CLK-', wave: '0..(37.5)x(5)1(45)x(5)0..(7.5)', phase: 0.20 },
     { nodes: ['...(37.5)Ё(2.5)Ж(2.5)S(45)T(2.5)Ћ(2.5)Δ', '...(40)L(10)K(40)M(10)Σ'], phase: 0.45 },
@@ -671,7 +671,7 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
   signal: [
     { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
     { nodes: ['...(105)Λ(20)T(105)Y(20)Ы', '...(100)W(5)X(5)A(115)Δ(5)O(5)Z'], phase: 0.9 },
-    { name: 'CLK_IN', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
+    { name: 'CLK_SRC', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
     { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
     { nodes: ['..Φ(10.5)Έ(114.5)Ζ(44.5)Η'], phase: 0.9 },
@@ -786,7 +786,7 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
   signal: [
     { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
     { nodes: ['...(105)Λ(20)T(105)Y(20)Ы', '...(100)W(5)X(5)A(115)Δ(5)O(5)Z'], phase: 0.9 },
-    { name: 'CLK_IN', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
+    { name: 'CLK_SRC', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
     { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
     { nodes: ['..Φ(10.5)Έ(114.5)Ζ(44.5)Η'], phase: 0.9 },
