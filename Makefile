@@ -1,11 +1,8 @@
 default:
-	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch main.a )
-	( cd software; python checksum.py main.bin )
-	( cd software; python bin2hex.py main.bin main.hex )
+	( cd software; ./build.sh main.a )
 
 memtest:
-	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch examples/memtest.a )
-	( cd software; python bin2hex.py main.bin main.hex  )
+	( cd software; ./build.sh examples/memtest.a )
 
 minipro:
 	minipro --presence_check

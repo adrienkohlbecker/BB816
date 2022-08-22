@@ -1,4 +1,3 @@
-!to "main.bin", plain
 !cpu 65816
 !initmem $ea
 
