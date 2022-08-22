@@ -243,6 +243,7 @@ kernel_init:
   ; shouldn't be reached
   stp
 
+!source "lib/bin2hex.asm"
 !source "lib/via.asm"
 !source "lib/lcd.asm"
 !source "lib/acia.asm"
