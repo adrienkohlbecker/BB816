@@ -37,6 +37,9 @@
 !address IO_7 = $7FF0
 
 *=START_OF_ROM
+
+!source "lib/macros.a"
+
 main:
   ; initialize stack pointer to 01FF
   ldx #$ff
@@ -74,22 +77,11 @@ main:
 
   beq checksum_ok
 
-  ; alternate E on with E off to signify ROM checksum error
-  ; 200ms period : 800 000 clock cycles. DEX, BNE both take 2 cycles. So we want 200k loops
-  ; that's around 3 times 2^16 iterations
-  ; because Emulation is being toggled, we are forced to use 8 bits registers
+  ; alternate E on with E off to signify ROM checksum error (200ms period)
   sec ; carry is set, emulation is off before this loop, so we can just repeat XCE to get toggling
----- lda # 3
---- ldy # $ff
--- ldx # $ff
-- dex
-  bne -
-  dey
-  bne --
-  dec
-  bne ---
+- +delay_large_ms 200
   xce
-  jmp ----
+  jmp -
 
 checksum_ok:
   ; initialize devices
