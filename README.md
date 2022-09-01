@@ -28,14 +28,6 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![CPU breakout](./schematics/breakout.png)](./schematics/breakout.png)
 
-### Clock and Reset module
-
-[![Clock and Reset module](./schematics/clock_reset.png)](./schematics/clock_reset.png)
-
-### Glue Logic module
-
-[![Glue Logic module](./schematics/glue.png)](./schematics/glue.png)
-
 ### Address Decoding module
 
 [![Address Decoding module](./schematics/address_decoding.png)](./schematics/address_decoding.png)

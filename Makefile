@@ -14,10 +14,6 @@ eeprom:
 schematics:
 	pdfseparate -f 1 -l 1 hardware/breakout/breakout.pdf schematics/breakout.pdf
 	convert -alpha remove -density 200 schematics/breakout.pdf schematics/breakout.png
-	pdfseparate -f 2 -l 2 hardware/breakout/breakout.pdf schematics/clock_reset.pdf
-	convert -alpha remove -density 200 schematics/clock_reset.pdf schematics/clock_reset.png
-	pdfseparate -f 3 -l 3 hardware/breakout/breakout.pdf schematics/glue.pdf
-	convert -alpha remove -density 200 schematics/glue.pdf schematics/glue.png
 
 	pdfseparate -f 1 -l 1 hardware/65C816.pdf schematics/main.pdf
 	convert -alpha remove -density 200 schematics/main.pdf schematics/main.png
