@@ -75,39 +75,40 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### CPU Breakout board
 
+**Component Count:** 81
+
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
-| C1, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14, C15, C16, C17, C18, C19 | 17 | 100n | Unpolarized capacitor, small symbol |
-| C2 | 1 | 220u | Polarized capacitor, small symbol |
+| C1 | 1 | 220u | Polarized capacitor, small symbol |
+| C2, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14, C15, C16, C17, C18, C19 | 17 | 100n | Unpolarized capacitor, small symbol |
 | C3 | 1 | 10u | Polarized capacitor, small symbol |
 | D1 | 1 | POWER | Light emitting diode, small symbol |
 | D2 | 1 | 1N5817 | 20V 1A Schottky Barrier Rectifier Diode, DO-41 |
-| J1 | 1 | Jack-DC | DC Barrel Jack |
-| J2 | 1 | Conn_01x13 | Generic connector, single row, 01x13, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| J3 | 1 | Conn_01x40 | Generic connector, single row, 01x40, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| J4 | 1 | Conn_01x10 | Generic connector, single row, 01x10, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| J5 | 1 | Conn_01x02 | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| J6 | 1 | Conn_01x11 | Generic connector, single row, 01x11, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| R1, R2, R3, R5, R7, R8 | 6 | 3.3k | Resistor, small symbol |
-| R4, R10, R11, R12, R14 | 5 | 100k | Resistor, small symbol |
-| R6, R9 | 2 | 1k | Resistor, small symbol |
-| R13, R15, R16, R17 | 4 | 0R | Resistor, small symbol |
-| RN1, RN2, RN3, RN4, RN5 | 5 | 100k | 8 resistor network, star topology, bussed resistors, small symbol |
-| SW1 | 1 | Reset | Push button switch, generic, two pins |
-| U1 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
-| U2, U3 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
-| U4 | 1 | DS1813-5 |  |
-| U5 | 1 | 74AHC125 | Quad buffer 3-State outputs |
-| U6 | 1 | 74AHC02 | quad 2-input NOR gate |
-| U7, U9, U13 | 3 | 74AHC32 | Quad 2-input OR |
-| U8 | 1 | 74AHC74 | Dual D Flip-flop, Set & Reset |
-| U10 | 1 | 74AC10 | Triple 3-input NAND |
-| U11 | 1 | 74AHC00 | quad 2-input NAND gate |
-| U12 | 1 | 74AC112 | dual JK Flip-Flop, Set & Reset |
-| U14 | 1 | DS1035-10 | 3-in-1 High–Speed Silicon Delay Line |
-| U15 | 1 | 74AHCT245 | Octal BUS Transceivers, 3-State outputs |
-| U16 | 1 | 74AHC573 | 8-bit Latch 3-state outputs |
-| X1 | 1 | 8MHz | Crystal Clock Oscillator, DIP14-style metal package |
+| J1 | 1 | Barrel_Jack_Switch | DC Barrel Jack with an internal switch |
+| J2 | 1 | Conn_02x40_Odd_Even | Generic connector, double row, 02x40, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/) |
+| J3 | 1 | Conn_02x18_Odd_Even | Generic connector, double row, 02x18, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/) |
+| R1, R2, R3, R5, R11, R17 | 6 | 3.3k | Resistor, small symbol |
+| R4, R12, R13, R14, R15 | 5 | 100k | Resistor, small symbol |
+| R6, R16 | 2 | 1k | Resistor, small symbol |
+| R7, R8, R9, R10 | 4 | 0R | Resistor, small symbol |
+| RN1 | 1 | 100k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RN2, RN3, RN4 | 3 | 100k | 8 resistor network, star topology, bussed resistors, small symbol |
+| RN5 | 1 | 100k | 8 resistor network, star topology, bussed resistors, small symbol |
+| SW1 | 1 | RESET | Push button switch, generic, two pins |
+| U1 | 1 | 74AHC74 | Dual D Flip-flop, Set & Reset |
+| U2 | 1 | 74AHC00 | quad 2-input NAND gate |
+| U3 | 1 | 74AC112 | dual JK Flip-Flop, Set & Reset |
+| U4 | 1 | W65C816SxP | W65C816S 8/16-bit CMOS General Purpose Microprocessor, DIP-40 |
+| U5, U6, U12 | 3 | 74AHC32 | Quad 2-input OR |
+| U7 | 1 | 74AHC125 | Quad buffer 3-State outputs |
+| U8 | 1 | DS1813-5 |  |
+| U9, U14 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
+| U10 | 1 | 74AHCT245 | Octal BUS Transceivers, 3-State outputs |
+| U11 | 1 | 74AHC573 | 8-bit Latch 3-state outputs |
+| U13 | 1 | 74AHC02 | quad 2-input NOR gate |
+| U15 | 1 | 74AC10 | Triple 3-input NAND |
+| U16 | 1 | DS1035-10 | 3-in-1 High–Speed Silicon Delay Line |
+| X1 | 1 | 8MHz | Crystal Clock Oscillator, DIP8-style metal package |
 
 ### Rest of the computer
 
