@@ -74,7 +74,7 @@ void trace() {
   Serial.print(" ");
   print_byte_in_binary(data, va);
   Serial.print("   ");
-  
+
   char output[19];
   if (va) {
     sprintf(output, "%02x %02x%02x  %c %02x %c", bank, address_h, address_l, rw ? 'r' : 'W', data, sync ? '*' : ' ');
@@ -86,10 +86,99 @@ void trace() {
   digitalWrite(CLOCK_IN, 0);
 }
 
+// blockingSerialRead blocks until data is available on the Serial port
+byte blockingSerialRead() {
+  while (Serial.available() == 0) { }
+  return Serial.read();
+}
+
+// hexDigitToNumber converts a ASCII digit in 0..9, A..F to the corresponding number
+byte hexDigitToNumber(byte hexDigit) {
+  return (hexDigit >= 'A') ? hexDigit - 'A' + 10 : hexDigit - '0';
+}
+
+// readHexAsByte does two blocking reads from the Serial port, 
+//   and interprets the result as the hexadecimal representation of a byte
+byte readHexAsByte() {
+  byte hn = hexDigitToNumber(blockingSerialRead());
+  byte ln = hexDigitToNumber(blockingSerialRead());
+
+  return hn << 4 | ln;
+}
+
+// printByteAsHex prints to Serial the hexadecimal representation of a byte, with leading zero
+void printByteAsHex(byte b) {
+  if (b < 16) {
+    Serial.print('0');
+  }
+  Serial.print(b, HEX);
+}
+
+void handleProgramming() {
+  while (true) { 
+    // read intel hex header
+    byte count = readHexAsByte();
+    byte addr_h = readHexAsByte();
+    byte addr_l = readHexAsByte();
+    byte type = readHexAsByte();
+    byte receiveCksum = count + addr_h  + addr_l + type;
+  
+    switch (type) {
+      case 0x00: {
+        // allocate buffer so we can grab the data, verify the checksum, and only then process it
+        byte buffer[256];
+        
+        // Data record
+        for (int i=0; i<count; i+=1) {
+          buffer[i] = readHexAsByte();
+          receiveCksum += buffer[i];
+        }
+      
+        // checksum is after the data bytes
+        byte checksum = readHexAsByte();
+        if (byte(receiveCksum + checksum) != 0) {
+          Serial.println("Invalid checksum on data record");
+          break;
+        }
+
+        // TODO:  do something with the data
+        for (int i=0; i<count; i+=1) {
+          printByteAsHex(buffer[i]);
+        }
+        Serial.println("");
+        
+        break;
+      }
+      case 0x01: {
+        // End of file, stop programming
+        // empty checksum byte from buffer
+        readHexAsByte();
+        return;
+      }
+      default: {
+        // unsupported record type
+        Serial.print("Unsupported record type received: ");
+        Serial.println(type, HEX);
+        break;
+      }
+    }
+  
+    // consume everything before the start of a new packet (CR, LF, spaces...)
+    byte start = 0;
+    while (start != ':') {
+      start = blockingSerialRead();
+    }
+  }
+}
+
 void loop() {
   if (Serial.available() > 0) {
     byte incomingByte = Serial.read();
     switch (incomingByte) {
+      case ':':
+        // start of an Intel HEX file, begin programming EEPROM
+        handleProgramming();
+        break;
       case 't':
         // enter trace mode
         startTracing();
@@ -98,6 +187,12 @@ void loop() {
         // stop trace mode
         stopTracing();
         break;
+      case ' ':
+      case '\t':
+      case '\r':
+      case '\n':
+        // do nothing for spaces
+        break; 
       default:
         // unsupported character
         Serial.print("Unsupported character received: ");
