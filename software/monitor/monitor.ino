@@ -43,9 +43,9 @@ void setup() {
   Serial.begin(57600);
 }
 
-void print_byte_in_binary(byte x, bool va) {
+void printByteAsBinary(byte x) {
   for (int i = 0; i < 8; i++) {
-    Serial.print(va ? (x & 10000000 ? "1" : "0") : "-");
+    Serial.print(x & 10000000 ? "1" : "0");
     x = x << 1;
   }
 }
@@ -89,21 +89,21 @@ void trace() {
   bool sync = ((ctrl >> 1) & 1) > 0;
   bool rw   = ((ctrl >> 0) & 1) > 0;
 
-  print_byte_in_binary(bank, va);
-  Serial.print(" ");
-  print_byte_in_binary(address_h, va);
-  print_byte_in_binary(address_l, va);
-  Serial.print(" ");
-  print_byte_in_binary(data, va);
-  Serial.print("   ");
-
-  char output[19];
   if (va) {
+    printByteAsBinary(bank);
+    Serial.print(" ");
+    printByteAsBinary(address_h);
+    printByteAsBinary(address_l);
+    Serial.print(" ");
+    printByteAsBinary(data);
+    Serial.print("   ");
+    
+    char output[16];
     sprintf(output, "%02x %02x%02x  %c %02x %c", bank, address_h, address_l, rw ? 'r' : 'W', data, sync ? '*' : ' ');
+    Serial.println(output); 
   } else {
-    sprintf(output, "-- ----  - --");
+    Serial.println("-------- ---------------- --------   -- ----  - --");
   }
-  Serial.println(output); 
   
   digitalWrite(CLOCK_SRC, 0);
 }
