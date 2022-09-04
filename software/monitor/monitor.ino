@@ -268,8 +268,29 @@ byte readByteAtAddress(word addr) {
   return readData;
 }
 
+void enableWriteProtection() {
+  programByteAtAddress(0x5555 + 0x8000, 0xAA);
+  programByteAtAddress(0x2AAA + 0x8000, 0x55);
+  programByteAtAddress(0x5555 + 0x8000, 0xA0);
+
+  delay(10); // ensure the write cycle ends (tWC)
+}
+
+void disableWriteProtection() {
+  programByteAtAddress(0x5555 + 0x8000, 0xAA);
+  programByteAtAddress(0x2AAA + 0x8000, 0x55);
+  programByteAtAddress(0x5555 + 0x8000, 0x80);
+  programByteAtAddress(0x5555 + 0x8000, 0xAA);
+  programByteAtAddress(0x2AAA + 0x8000, 0x55);
+  programByteAtAddress(0x5555 + 0x8000, 0x20);
+
+  delay(10); // ensure the write cycle ends (tWC)
+}
+
 void handleProgramming() {
   startProgramming();
+  disableWriteProtection();
+  
   while (true) { 
     // read intel hex header
     byte count = readHexAsByte();
@@ -343,8 +364,11 @@ void handleProgramming() {
       }
       case 0x01: {
         // End of file, stop programming
+   
         // empty checksum byte from buffer
         readHexAsByte();
+        
+        enableWriteProtection();
         endProgramming();
         return;
       }

@@ -10,7 +10,7 @@ memtest:
 
 minipro:
 	minipro --presence_check
-	( cd software; minipro --device AT28C256 --pin_check --no_write_protect --write  main.bin )
+	( cd software; minipro --device AT28C256 --pin_check --write  main.bin )
 
 eeprom:
 	( cd software; ./eeprom.sh )
