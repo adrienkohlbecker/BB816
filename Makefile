@@ -1,14 +1,20 @@
 default:
 	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch main.a )
+	( cd software; python bin2hex.py main.bin main.hex )
 	cat software/report.txt
 
 memtest:
 	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch examples/memtest.a )
+	( cd software; python bin2hex.py main.bin main.hex  )
 	cat software/report.txt
 
-eeprom:
+minipro:
 	minipro --presence_check
-	(cd software; minipro --device AT28C256 --pin_check --write main.bin)
+	( cd software; minipro --device AT28C256 --pin_check --no_write_protect --write  main.bin )
+
+TEENSY=$(shell find /dev -maxdepth 1 -name "cu.usbmodem*" -print -quit)
+eeprom:
+	cat software/main.hex > $(TEENSY)
 
 .PHONY: schematics
 schematics:
