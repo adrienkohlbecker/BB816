@@ -19,9 +19,7 @@ void setup() {
   pinMode(VA, INPUT);
 
   digitalWrite(CLOCK_EN, 0);
-  pinMode(CLOCK_EN, OUTPUT);
-
-  //attachInterrupt(digitalPinToInterrupt(CLOCK), onClock, RISING);
+  pinMode(CLOCK_EN, OUTPUT);;
   
   Serial.begin(57600);
 }
@@ -29,12 +27,35 @@ void setup() {
 void print_byte_in_binary(byte x, bool va) {
   for (int i = 0; i < 8; i++) {
     Serial.print(va ? (x & 10000000 ? "1" : "0") : "-");
-    x = x << 1; 
+    x = x << 1;
   }
 }
 
-void onClock() {
-  char output[19];
+bool tracingEnabled = false;
+
+void startTracing() {
+  tracingEnabled = true;
+  
+  digitalWrite(CLOCK_EN, 1); // enable teensy clock
+  __asm__("nop\n\t");        // Wait 62.5ns for main clock to be tri-stated
+  digitalWrite(CLOCK_IN, 0); // make sure it starts with 0
+  pinMode(CLOCK_IN, OUTPUT);
+}
+
+void stopTracing() {
+  tracingEnabled = false;
+  
+  pinMode(CLOCK_IN, INPUT);  // tri-state the Teensy clock pin
+  __asm__("nop\n\t");        // Wait 62.5ns for pin to be tri-stated
+  digitalWrite(CLOCK_EN, 0); // enable main clock
+}
+
+void trace() {
+  digitalWrite(CLOCK_IN, 1);
+
+  // wait 125ns for the ROM to output its data, each nop has a 62.5ns delay
+  __asm__("nop\n\t");
+  __asm__("nop\n\t");
 
   byte bank      = PINB;
   byte address_h = PINF;
@@ -53,36 +74,48 @@ void onClock() {
   Serial.print(" ");
   print_byte_in_binary(data, va);
   Serial.print("   ");
-
+  
+  char output[19];
   if (va) {
     sprintf(output, "%02x %02x%02x  %c %02x %c", bank, address_h, address_l, rw ? 'r' : 'W', data, sync ? '*' : ' ');
   } else {
     sprintf(output, "-- ----  - --");
   }
-  Serial.println(output);  
+  Serial.println(output); 
+  
+  digitalWrite(CLOCK_IN, 0);
 }
 
 void loop() {
-  // Serial will be true if Serial Monitor is opened on the computer
-  // this only works on Teensy, Arduino boards always return true (except the Due?).
-  if (Serial) { 
-    digitalWrite(CLOCK_EN, 1); // enable teensy clock
-    __asm__("nop\n\t");        // Wait 62.5ns for main clock to be tri-stated
-    pinMode(CLOCK_IN, OUTPUT);
- 
-    digitalWrite(CLOCK_IN, 0);
-    digitalWrite(CLOCK_IN, 1);
-    
-    // wait 125ns for the ROM to output its data, each nop has a 62.5ns delay
-    __asm__("nop\n\t");
-    __asm__("nop\n\t");
-
-    onClock();
-  } else {
-    digitalWrite(CLOCK_IN, 0); // make sure it restarts with 0
-    pinMode(CLOCK_IN, INPUT);  // tri-state the Teensy clock pin
-    __asm__("nop\n\t");        // Wait 62.5ns for pin to be tri-stated
-    digitalWrite(CLOCK_EN, 0); // enable main clock
+  if (Serial.available() > 0) {
+    byte incomingByte = Serial.read();
+    switch (incomingByte) {
+      case 't':
+        // enter trace mode
+        startTracing();
+        break;
+      case 'q':
+        // stop trace mode
+        stopTracing();
+        break;
+      default:
+        // unsupported character
+        Serial.print("Unsupported character received: ");
+        Serial.println(incomingByte, HEX);
+        break;
+    }
   }
-
+    
+  // Serial will be true if Serial Monitor is opened on the computer
+  // This only works on Teensy and Arduino boards with native USB (Leonardo, Micro...), and indicates whether or not the USB CDC serial connection is open
+  // On boards with separate USB interface, this always return true (eg. Uno, Nano, Mini, Mega)
+  if (Serial) {
+    if (tracingEnabled) {
+      trace();
+    }
+  } else {
+    if (tracingEnabled) {
+      stopTracing();
+    }
+  }
 }
