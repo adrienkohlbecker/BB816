@@ -214,13 +214,14 @@ void programByteAtAddress(word addr, byte data) {
   __asm__("nop\n\t");
 }
 
-void dataPolling(word addr, byte data) {
-  // init to something different
-  byte readData = data + 1; 
-  
+void checkToggleBit(word addr) {
+  byte newData = readByteAtAddress(addr) & 0b01000000;
+  byte previousData = !newData;
+
   // Wait for data to be valid
-  while(data != readData) {
-    readData = readByteAtAddress(addr);
+  while(newData != previousData) {
+    previousData = newData;
+    newData = readByteAtAddress(addr) & 0b01000000;
 
     // TODO: figure out why this is needed
     delayMicroseconds(200);
@@ -318,7 +319,7 @@ void handleProgramming() {
         startReadFromROM();
         
         // poll for end of write operation, use last byte written
-        dataPolling(addr+count-1, buffer[count-1]);
+        checkToggleBit(addr+count-1);
 
         // verify that all bytes have been written correctly
         for (int i=0; i<count; i+=1) {
@@ -330,6 +331,7 @@ void handleProgramming() {
             printByteAsHex(buffer[i]);
             Serial.print(" read=");
             printByteAsHex(readData);
+            Serial.println("");
             break;
           }
         }
