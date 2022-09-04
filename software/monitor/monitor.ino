@@ -140,7 +140,71 @@ void printWordAsHex(word w) {
   printByteAsHex(lowByte(w));
 }
 
+void startProgramming() {
+  digitalWrite(MR, 0); 
+  pinMode(MR, OUTPUT);
+  digitalWrite(BE, 0);
+  pinMode(BE, OUTPUT);
+  
+  // wait 62.5ns for the CPU and glue logic buffers to be disabled
+  __asm__("nop\n\t");
+  // set address and data bus as outputs
+  PORT_BANK = 0b00000000;
+  PORT_ADDR_H = 0b00000000;
+  PORT_ADDR_L = 0b00000000;
+  PORT_DATA = 0b00000000;
+  DDR_BANK = 0b11111111;
+  DDR_ADDR_H = 0b11111111;
+  DDR_ADDR_L = 0b11111111;
+  DDR_DATA = 0b11111111;
+
+  // Set ROM_WE to output
+  digitalWrite(ROM_WE, 1);
+  pinMode(ROM_WE, OUTPUT);
+}
+
+void endProgramming() {
+  // Set ROM_WE to input
+  digitalWrite(ROM_WE, 1);
+  pinMode(ROM_WE, INPUT);
+  
+  // set address and data bus as inputs
+  DDR_BANK = 0b00000000;
+  DDR_ADDR_H = 0b00000000;
+  DDR_ADDR_L = 0b00000000;
+  DDR_DATA = 0b00000000;
+  // wait 62.5ns for the Teensy buffers to be disabled
+  __asm__("nop\n\t");
+  
+  digitalWrite(BE, 1);
+  pinMode(BE, INPUT);
+  // wait 62.5ns for the CPU and glue logic buffers to be enabled
+  __asm__("nop\n\t");
+  digitalWrite(MR, 1); 
+  pinMode(MR, INPUT);
+}
+
+void programByteAtAddress(word addr, byte data) {
+  // Set address pins
+  PORT_BANK = 0;
+  PORT_ADDR_H = highByte(addr);
+  PORT_ADDR_L = lowByte(addr);
+  // Start WE pulse
+  digitalWrite(ROM_WE, 0);
+  // Set data pins
+  PORT_DATA = data;
+  // wait 125ns to satisfy tDS and tWP
+  __asm__("nop\n\t");
+  __asm__("nop\n\t");
+  // Stop WE pulse
+  digitalWrite(ROM_WE, 1);
+  // wait 125ns to satisfy tWPH
+  __asm__("nop\n\t");
+  __asm__("nop\n\t");
+}
+
 void handleProgramming() {
+  startProgramming();
   while (true) { 
     // read intel hex header
     byte count = readHexAsByte();
@@ -171,11 +235,12 @@ void handleProgramming() {
           break;
         }
 
-        // TODO:  do something with the data
+        // base address offset
+        word addr = word(addr_h, addr_l);
+        // each successive byte is programmed at an incrementing address
         for (int i=0; i<count; i+=1) {
-          printByteAsHex(buffer[i]);
+          programByteAtAddress(addr+i, buffer[i]);
         }
-        Serial.println("");
         
         break;
       }
@@ -183,6 +248,7 @@ void handleProgramming() {
         // End of file, stop programming
         // empty checksum byte from buffer
         readHexAsByte();
+        endProgramming();
         return;
       }
       default: {
