@@ -4,16 +4,16 @@
     (thickness 1.6)
   )
 
+  (paper "A4")
   (title_block
     (title "65C816 Homebrew Computer")
-    (date "2022-07-28")
-    (rev "A.25")
+    (date "2022-09-03")
+    (rev "A.28")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2022 Adrien Kohlbecker")
   )
 
-  (paper "A4")
   (layers
     (0 "F.Cu" signal)
     (31 "B.Cu" signal)

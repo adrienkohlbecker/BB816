@@ -9113,6 +9113,11 @@
     (effects (font (size 2.54 2.54)) (justify left bottom))
     (uuid 4f0f991c-d2da-4914-bf12-3e23bddf3b60)
   )
+  (text "Do not solder the ground side \nwhen using the PCB on a breadboard"
+    (at 361.95 190.5 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 528057b6-e8d7-4268-bee9-adebebbea2bd)
+  )
   (text "POWER" (at 19.05 146.05 0)
     (effects (font (size 2.54 2.54)) (justify left bottom))
     (uuid 66efe96b-03c2-40ed-a07f-27ba5dd9dc98)
