@@ -198,8 +198,7 @@ void programByteAtAddress(word addr, byte data) {
   __asm__("nop\n\t");
   // Stop WE pulse
   digitalWrite(ROM_WE, 1);
-  // wait 125ns to satisfy tWPH
-  __asm__("nop\n\t");
+  // wait 62.5ns to satisfy tWPH
   __asm__("nop\n\t");
 }
 
