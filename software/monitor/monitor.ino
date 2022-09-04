@@ -215,47 +215,56 @@ void programByteAtAddress(word addr, byte data) {
 }
 
 void dataPolling(word addr, byte data) {
-  byte readData = data + 1; // init to something different
+  // init to something different
+  byte readData = data + 1; 
+  
+  // Wait for data to be valid
+  while(data != readData) {
+    readData = readByteAtAddress(addr);
 
-  // Set address pins
-  PORT_BANK = 0;
-  PORT_ADDR_H = highByte(addr);
-  PORT_ADDR_L = lowByte(addr);
+    // TODO: figure out why this is needed
+    delayMicroseconds(200);
+  }
+}
 
+void startReadFromROM() {
   // Set data to input
   DDR_DATA = 0b00000000;
   
   // Set RD to output
   digitalWrite(RD, 1);
   pinMode(RD, OUTPUT);
+}
 
-  byte attempt = 0;
-
-  // Wait for data to be valid
-  while(data != readData) {
-    // Start RD pulse
-    digitalWrite(RD, 0);
-    // wait 187.5ns to satisfy data access time
-    __asm__("nop\n\t");
-    __asm__("nop\n\t");
-    __asm__("nop\n\t");
-    // Read data
-    readData = PIN_DATA;
-    // Stop RD pulse
-    digitalWrite(RD, 1);
-    // wait 62.5ns to satisfy tDF
-    __asm__("nop\n\t");
-
-    // TODO: figure out why this is needed
-    delayMicroseconds(200);
-  }
-  
+void endReadFromROM() {
   // Set RD to input
   digitalWrite(RD, 1); 
   pinMode(RD, INPUT);
   
   // Set data to output
   DDR_DATA = 0b11111111;
+}
+
+byte readByteAtAddress(word addr) {
+  // Set address pins
+  PORT_BANK = 0;
+  PORT_ADDR_H = highByte(addr);
+  PORT_ADDR_L = lowByte(addr);
+
+  // Start RD pulse
+  digitalWrite(RD, 0);
+  // wait 187.5ns to satisfy data access time + address decoding time
+  __asm__("nop\n\t");
+  __asm__("nop\n\t");
+  __asm__("nop\n\t");
+  // Read data
+  byte readData = PIN_DATA;
+  // Stop RD pulse
+  digitalWrite(RD, 1);
+  // wait 62.5ns to satisfy tDF
+  __asm__("nop\n\t");
+
+  return readData;
 }
 
 void handleProgramming() {
@@ -304,11 +313,31 @@ void handleProgramming() {
         for (int i=0; i<count; i+=1) {
           programByteAtAddress(addr+i, buffer[i]);
         }
+
+        // setup ROM for reading
+        startReadFromROM();
         
         // poll for end of write operation, use last byte written
         dataPolling(addr+count-1, buffer[count-1]);
+
+        // verify that all bytes have been written correctly
+        for (int i=0; i<count; i+=1) {
+          byte readData = readByteAtAddress(addr+i);
+          if (buffer[i] != readData) {
+            Serial.print("failed verification at address=");
+            printWordAsHex(addr+i);
+            Serial.print(" expected=");
+            printByteAsHex(buffer[i]);
+            Serial.print(" read=");
+            printByteAsHex(readData);
+            break;
+          }
+        }
+
+        // Finish reading from ROM
+        endReadFromROM();
         
-        break;
+        break;  
       }
       case 0x01: {
         // End of file, stop programming
