@@ -134,6 +134,12 @@ void printByteAsHex(byte b) {
   Serial.print(b, HEX);
 }
 
+// printWordAsHex prints to Serial the hexadecimal representation of a byte, with leading zero
+void printWordAsHex(word w) {
+  printByteAsHex(highByte(w));
+  printByteAsHex(lowByte(w));
+}
+
 void handleProgramming() {
   while (true) { 
     // read intel hex header
@@ -157,7 +163,11 @@ void handleProgramming() {
         // checksum is after the data bytes
         byte checksum = readHexAsByte();
         if (byte(receiveCksum + checksum) != 0) {
-          Serial.println("Invalid checksum on data record");
+          Serial.print("Invalid checksum on data record, got ");
+          printByteAsHex(checksum);
+          Serial.print(" computed ");
+          printByteAsHex(-receiveCksum);
+          Serial.println("");
           break;
         }
 
