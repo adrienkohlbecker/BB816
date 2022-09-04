@@ -22,6 +22,7 @@
 #define MR 5
 #define BE 4
 #define ROM_WE 7
+#define RD 3
 
 void setup() {
   DDR_BANK = 0b00000000;
@@ -37,6 +38,7 @@ void setup() {
   pinMode(MR, INPUT);
   pinMode(BE, INPUT);
   pinMode(ROM_WE, INPUT);
+  pinMode(RD, INPUT);
 
   Serial.begin(57600);
 }
@@ -202,6 +204,50 @@ void programByteAtAddress(word addr, byte data) {
   __asm__("nop\n\t");
 }
 
+void dataPolling(word addr, byte data) {
+  byte readData = data + 1; // init to something different
+
+  // Set address pins
+  PORT_BANK = 0;
+  PORT_ADDR_H = highByte(addr);
+  PORT_ADDR_L = lowByte(addr);
+
+  // Set data to input
+  DDR_DATA = 0b00000000;
+  
+  // Set RD to output
+  digitalWrite(RD, 1);
+  pinMode(RD, OUTPUT);
+
+  byte attempt = 0;
+
+  // Wait for data to be valid
+  while(data != readData) {
+    // Start RD pulse
+    digitalWrite(RD, 0);
+    // wait 187.5ns to satisfy data access time
+    __asm__("nop\n\t");
+    __asm__("nop\n\t");
+    __asm__("nop\n\t");
+    // Read data
+    readData = PIN_DATA;
+    // Stop RD pulse
+    digitalWrite(RD, 1);
+    // wait 62.5ns to satisfy tDF
+    __asm__("nop\n\t");
+
+    // TODO: figure out why this is needed
+    delayMicroseconds(200);
+  }
+  
+  // Set RD to input
+  digitalWrite(RD, 1); 
+  pinMode(RD, INPUT);
+  
+  // Set data to output
+  DDR_DATA = 0b11111111;
+}
+
 void handleProgramming() {
   startProgramming();
   while (true) { 
@@ -215,7 +261,14 @@ void handleProgramming() {
     switch (type) {
       case 0x00: {
         // allocate buffer so we can grab the data, verify the checksum, and only then process it
-        byte buffer[256];
+        byte buffer[64];
+
+        // page write mode only supports 64 bytes in a single operation
+        if (count > 64) {
+          Serial.print("invalid packet with more than 64 bytes, size=");
+          Serial.println(count, DEC);
+          break;
+        }
         
         // Data record
         for (int i=0; i<count; i+=1) {
@@ -236,10 +289,14 @@ void handleProgramming() {
 
         // base address offset
         word addr = word(addr_h, addr_l);
+
         // each successive byte is programmed at an incrementing address
         for (int i=0; i<count; i+=1) {
           programByteAtAddress(addr+i, buffer[i]);
         }
+        
+        // poll for end of write operation, use last byte written
+        dataPolling(addr+count-1, buffer[count-1]);
         
         break;
       }
