@@ -85,9 +85,9 @@ void trace() {
   byte data      = PIN_DATA;
   byte ctrl      = PIN_CTRL;
 
-  bool va   = ((ctrl >> 7) & 1) > 0;
-  bool sync = ((ctrl >> 1) & 1) > 0;
-  bool rw   = ((ctrl >> 0) & 1) > 0;
+  bool va   = (ctrl & (1 << 7)) > 0;
+  bool sync = (ctrl & (1 << 1)) > 0;
+  bool rw   = (ctrl & (1 << 0)) > 0;
 
   if (va) {
     printByteAsBinary(bank);
