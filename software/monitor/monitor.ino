@@ -191,6 +191,8 @@ void programByteAtAddress(word addr, byte data) {
   PORT_BANK = 0;
   PORT_ADDR_H = highByte(addr);
   PORT_ADDR_L = lowByte(addr);
+  // wait 62.5ns for address decoding to happen
+  __asm__("nop\n\t");
   // Start WE pulse
   digitalWrite(ROM_WE, 0);
   // Set data pins
