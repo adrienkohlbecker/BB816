@@ -112,6 +112,8 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### Rest of the computer
 
+**Component Count:** 122
+
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
 | BAR1 | 1 | LED-Array-10-BGYR | BAR GRAPH 10 segment |
@@ -125,6 +127,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | C25 | 1 | 1u | Polarized capacitor, small symbol |
 | C26 | 1 | 10n | Unpolarized capacitor, small symbol |
 | D1 | 1 | Clock | Light emitting diode, small symbol |
+| D2 | 1 | 1N5819 | 40V 1A Schottky Barrier Rectifier Diode, DO-41 |
 | DS1 | 1 | HD44780 | LCD 16x2 Alphanumeric , 8 bit parallel bus, 5V VDD |
 | J1 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | R1, R9, R10, R11, R12, R13, R14, R15, R19, R20 | 10 | 3.3k | Resistor, small symbol |
