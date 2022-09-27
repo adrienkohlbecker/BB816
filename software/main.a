@@ -141,9 +141,12 @@ main:
   lda # "!"
   jsr print_char
 
+  jsr acia_init
+
   stp
 
 !source "lib/lcd.a"
+!source "lib/acia.a"
 
 *=$fffc
   !word main
