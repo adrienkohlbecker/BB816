@@ -12,9 +12,8 @@ minipro:
 	minipro --presence_check
 	( cd software; minipro --device AT28C256 --pin_check --no_write_protect --write  main.bin )
 
-TEENSY=$(shell find /dev -maxdepth 1 -name "cu.usbmodem*" -print -quit)
 eeprom:
-	cat software/main.hex > $(TEENSY)
+	( cd software; ./eeprom.sh )
 
 .PHONY: schematics
 schematics:
