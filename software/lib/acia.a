@@ -76,3 +76,34 @@ acia_init:
   sta IO_1_ACIA_COMMAND_REGISTER
 
   rts
+
+; acia_putchar: Sends a byte over serial. Blocking loop until transmit is available.
+;
+; arguments: A = byte to send
+acia_putchar:
+  ; move byte to X register
+  tax
+
+  ; wait until we can transmit
+  lda # ACIA_STATUS_TRANSMITTER_DATA_REGISTER_EMPTY
+- bit IO_1_ACIA_STATUS_REGISTER
+  beq -
+
+  ; transmit byta and return
+  stx IO_1_ACIA_DATA_REGISTER
+  rts
+
+
+; acia_getchar: Receives a byte over serial. Blocking loop until something is received.
+;
+; No arguments
+; Returns byte in A
+acia_getchar:
+  ; wait until a byte is available
+  lda # ACIA_STATUS_RECEIVER_DATA_REGISTER_FULL
+- bit IO_1_ACIA_STATUS_REGISTER
+  beq -
+
+  ; get received byte and return
+  lda IO_1_ACIA_DATA_REGISTER
+  rts

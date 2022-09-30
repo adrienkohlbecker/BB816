@@ -55,31 +55,38 @@ main:
   jsr acia_init
 
   lda # "H"
-  jsr print_char
+  jsr acia_putchar
   lda # "e"
-  jsr print_char
+  jsr acia_putchar
   lda # "l"
-  jsr print_char
+  jsr acia_putchar
   lda # "l"
-  jsr print_char
+  jsr acia_putchar
   lda # "o"
-  jsr print_char
+  jsr acia_putchar
   lda # ","
-  jsr print_char
+  jsr acia_putchar
   lda # " "
-  jsr print_char
+  jsr acia_putchar
   lda # "W"
-  jsr print_char
+  jsr acia_putchar
   lda # "o"
-  jsr print_char
+  jsr acia_putchar
   lda # "r"
-  jsr print_char
+  jsr acia_putchar
   lda # "l"
-  jsr print_char
+  jsr acia_putchar
   lda # "d"
-  jsr print_char
+  jsr acia_putchar
   lda # "!"
+  jsr acia_putchar
+
+- jsr acia_getchar
+  pha
   jsr print_char
+  pla
+  jsr acia_putchar
+  jmp -
 
   stp
 
