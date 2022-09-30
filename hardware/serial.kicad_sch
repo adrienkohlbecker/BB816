@@ -4,6 +4,15 @@
 
   (paper "A4")
 
+  (title_block
+    (title "Serial Module")
+    (date "2022-09-26")
+    (rev "A.30")
+    (comment 2 "https://github.com/adrienkohlbecker/65C816")
+    (comment 3 "Licensed under CERN-OHL-W v2")
+    (comment 4 "Copyright © 2022 Adrien Kohlbecker")
+  )
+
   (lib_symbols
     (symbol "65xx:W65C51NxP" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
       (property "Reference" "U" (id 0) (at -10.16 33.02 0)
