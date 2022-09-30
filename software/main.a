@@ -25,68 +25,14 @@
 ; 0111 1111 1110 0000 - 0111 1111 1110 1111 | 7FE0 - 7FEF | I/O #6
 ; 0111 1111 1111 0000 - 0111 1111 1111 1111 | 7FF0 - 7FFF | I/O #7
 
-!address IO_0_VIA_PORTB       = $7F80   ; Output/Intput Register Port B
-!address IO_0_VIA_PORTA       = $7F81   ; Output/Intput Register Port A
-!address IO_0_VIA_DDRB        = $7F82   ; Data Direction Register Port B
-!address IO_0_VIA_DDRA        = $7F83   ; Data Direction Register Port A
-!address IO_0_VIA_T1CL        = $7F84   ; T1 Low Order Latches / Counter
-!address IO_0_VIA_T1CH        = $7F85   ; T1 High Order Counter
-!address IO_0_VIA_T1LL        = $7F86   ; T1 Low Order Latches
-!address IO_0_VIA_T1LH        = $7F87   ; T1 High Order Latches
-!address IO_0_VIA_T2CL        = $7F88   ; T2 Low Order Latches / Counter
-!address IO_0_VIA_T2CH        = $7F89   ; T2 High Order Counter
-!address IO_0_VIA_SR          = $7F8A   ; Shift Register
-!address IO_0_VIA_ACR         = $7F8B   ; Auxiliary Control Register
-!address IO_0_VIA_PCR         = $7F8C   ; Peripheral Control Register
-!address IO_0_VIA_IFR         = $7F8D   ; Interrupt Flag Register
-!address IO_0_VIA_IER         = $7F8E   ; Interrupe Enable Register
-!address IO_0_VIA_PORTA_NHDSK = $7F8F   ; Output/Intput Register Port A but with no handshake
-
-VIA_PCR_CA1_CONTROL = 0
-VIA_PCR_CA2_CONTROL = 1
-VIA_PCR_CB1_CONTROL = 4
-VIA_PCR_CB2_CONTROL = 5
-
-VIA_PCR_1_NEGATIVE_EDGE             = 0
-VIA_PCR_1_POSITIVE_EDGE             = 1
-VIA_PCR_2_NEGATIVE_EDGE             = 000
-VIA_PCR_2_INDEPENDENT_NEGATIVE_EDGE = 001
-VIA_PCR_2_POSITIVE_EDGE             = 010
-VIA_PCR_2_INDEPENDENT_POSITIVE_EDGE = 011
-VIA_PCR_2_HANDSHAKE_OUTPUT          = 100
-VIA_PCR_2_PULSE_OUTPUT              = 101
-VIA_PCR_2_LOW_OUTPUT                = 110
-VIA_PCR_2_HIGH_OUTPUT               = 110
-
-VIA_IR_CA2_ACTIVE_EDGE   = 1 << 0
-VIA_IR_CA1_ACTIVE_EDGE   = 1 << 1
-VIA_IR_COMPLETE_8_SHIFTS = 1 << 2
-VIA_IR_CB2_ACTIVE_EDGE   = 1 << 3
-VIA_IR_CB1_ACTIVE_EDGE   = 1 << 4
-VIA_IR_T2_TIMEOUT        = 1 << 5
-VIA_IR_T1_TIMEOUT        = 1 << 6
-VIA_IR_ANY_INTERRUPT     = 1 << 7
-
-VIA_PORT_A0_EXT0 = 1 << 0
-VIA_PORT_A1_EXT1 = 1 << 1
-VIA_PORT_A2_EXT2 = 1 << 2
-VIA_PORT_A3_EXT3 = 1 << 3
-VIA_PORT_A4_EXT4 = 1 << 4
-VIA_PORT_A5_EXT5 = 1 << 5
-VIA_PORT_A6_EXT6 = 1 << 6
-VIA_PORT_A7_EXT7 = 1 << 7
-
-VIA_PORT_B0_LCD_E  = 1 << 0
-VIA_PORT_B1_LCD_RW = 1 << 1
-VIA_PORT_B2_LCD_RS = 1 << 2
-VIA_PORT_B3        = 1 << 3
-VIA_PORT_B4        = 1 << 4
-VIA_PORT_B5        = 1 << 5
-VIA_PORT_B6        = 1 << 6
-VIA_PORT_B7        = 1 << 7
-
-VIA_DDRA_DEFAULT = $00 ; all inputs
-VIA_DDRB_DEFAULT = (VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
+!address IO_0 = $7F80
+!address IO_1 = $7F90
+!address IO_2 = $7FA0
+!address IO_3 = $7FB0
+!address IO_4 = $7FC0
+!address IO_5 = $7FD0
+!address IO_6 = $7FE0
+!address IO_7 = $7FF0
 
 *=$8000
 main:
@@ -103,16 +49,10 @@ main:
   !rs
   !as
 
-  ; initialize port A and port B
-  stz IO_0_VIA_PORTA
-  stz IO_0_VIA_PORTB
-  lda # VIA_DDRA_DEFAULT
-  sta IO_0_VIA_DDRA
-  lda # VIA_DDRB_DEFAULT
-  sta IO_0_VIA_DDRB
-
-  ; initialize LCD
+  ; initialize devices
+  jsr via_init
   jsr lcd_init
+  jsr acia_init
 
   lda # "H"
   jsr print_char
@@ -140,8 +80,6 @@ main:
   jsr print_char
   lda # "!"
   jsr print_char
-
-  jsr acia_init
 
   stp
 
