@@ -942,3 +942,109 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 </p></details>
 
 [![VIA Write](./timing/Timing%20VIA%20Write.png)](./timing/Timing%20VIA%20Write.png)
+
+### 65C51 ACIA
+
+#### Read Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    {},
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..W(47)X', '..Λ(12)T'], phase: 0.9 },
+    { name: 'VA', wave: '1..(12)x(35)1(205)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(81)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'ACIA_CS', wave: '0..(11)x(70)0(171)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..U(0)V(95)Ο(30)Ό'], phase: 0.9 },
+    { name: 'ACIA CONTROL VALID', wave: '5..(0)z(95)5(157)', data: ['', 'CONTROL'], phase: 0.20 },
+    {},
+    { nodes: ['..G(10)H(115)L(50)K'], phase: 0.9 },
+    { name: 'ACIA DATA BUS', wave: '5..(10)x(165)5(77)', data: ['', 'DATA'], phase: 0.20 },
+    { nodes: ['..Φ(9)Έ(220)Ζ(21)Η'], phase: 0.9 },
+    { name: 'CPU READ BUFFER', wave: '6..(9)x(220)6(21)..', data: ['', 'Reading Data'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 9ns', 'Ζ+Η 21ns',
+    'B+Π 81ns', 'E+F 11s',
+    'G+H 10ns (tHR)','L+K 50ns (tCDR)',
+    'U+V 0ns (tCAH, tCWH)', 'Ο+Ό 30ns (tAC, tWC)',
+    'Λ+T 12ns', 'W+X 47ns',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![ACIA Read](./timing/Timing%20ACIA%20Read.png)](./timing/Timing%20ACIA%20Read.png)
+
+#### Write Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    {},
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..W(47)X', '..Λ(12)T'], phase: 0.9 },
+    { name: 'VA', wave: '1..(12)x(35)1(205)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(81)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'ACIA_CS', wave: '0..(11)x(70)0(171)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..U(0)V(95)Ο(30)Ό'], phase: 0.9 },
+    { name: 'ACIA CONTROL VALID', wave: '5..(0)z(95)5(157)', data: ['', 'CONTROL'], phase: 0.20 },
+    {},
+    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(44.5)Η'], phase: 0.9 },
+    { name: 'CPU WRITE BUFFER', wave: '6..(10.5)x(159)6(80.5)..', data: ['', 'Writing Data'], phase: 0.20 },
+    { nodes: ['..G(5)H(210)L(35)K'], phase: 0.9 },
+    { name: 'ACIA DATA BUS VALID', wave: '5..(5)z(210)5(37)', data: ['', 'DATA'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 10.5ns', 'Ζ+Η 44.5ns',
+    'B+Π 81ns', 'E+F 11s',
+    'G+H 5ns (tHW)','L+K 35ns (tDCW)',
+    'U+V 0ns (tCAH, tCWH)', 'Ο+Ό 30ns (tWC, tAC)',
+    'Λ+T 12ns', 'W+X 47ns',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![ACIA Write](./timing/Timing%20ACIA%20Write.png)](./timing/Timing%20ACIA%20Write.png)
