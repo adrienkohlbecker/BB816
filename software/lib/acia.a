@@ -85,14 +85,31 @@ acia_putchar:
   tax
 
   ; wait until we can transmit
-  lda # ACIA_STATUS_TRANSMITTER_DATA_REGISTER_EMPTY
-- bit IO_1_ACIA_STATUS_REGISTER
-  beq -
+  ; Note: With W65C51N, this will not work due to hardware bug!
+  ; The transmitter data register empty bit is always set
+  ;   lda # ACIA_STATUS_TRANSMITTER_DATA_REGISTER_EMPTY
+  ; - bit IO_1_ACIA_STATUS_REGISTER
+  ;   beq -
 
-  ; transmit byta and return
+  ; transmit byte
   stx IO_1_ACIA_DATA_REGISTER
-  rts
 
+  ; wait for the byte to be transmitted
+  ; With a 8N1 configuration, 10 bits need to go out per byte
+  ; At 300 baud, that's 1/30s per byte
+  ; Our CPU is running at 4MHz => 133 333 cycles of waiting
+  ; cycles = 2 + Y*(6+X*4)
+  ; assuming X=255
+  ; Y = (cycles - 2) / (6+X*4)
+  ; Y = 130
+  ldy # 130
+-- ldx # 255
+- dex
+  bne -
+  dey
+  bne --
+
+  rts
 
 ; acia_getchar: Receives a byte over serial. Blocking loop until something is received.
 ;
