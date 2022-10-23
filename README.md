@@ -56,6 +56,10 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![Peripherals module](./schematics/peripherals.png)](./schematics/peripherals.png)
 
+### Serial module
+
+[![Serial module](./schematics/serial.png)](./schematics/serial.png)
+
 ### Tester module
 
 [![Tester module](./schematics/tester.png)](./schematics/tester.png)
@@ -112,7 +116,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### Rest of the computer
 
-**Component Count:** 122
+**Component Count:** 144
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -121,19 +125,27 @@ The goals of the YouTube series are to provide a good description of all the des
 | BAR5 | 1 | Green | BAR GRAPH 8 segment |
 | BAR6, BAR7, BAR8 | 3 | Red | BAR GRAPH 8 segment |
 | C1, C6, C10, C27 | 4 | 10u | Polarized capacitor, small symbol |
-| C2, C3, C4, C5, C7, C8, C9, C12, C16, C17, C18, C19, C20, C21, C22, C23, C24, C28, C29, C30, C31, C32, C33, C34, C35, C36 | 26 | 100n | Unpolarized capacitor, small symbol |
+| C2, C3, C4, C5, C7, C8, C9, C12, C16, C17, C18, C19, C20, C21, C22, C23, C24, C28, C29, C30, C31, C32, C33, C34, C35, C36, C37, C38, C39 | 29 | 100n | Unpolarized capacitor, small symbol |
 | C11 | 1 | 22u | Polarized capacitor, small symbol |
 | C13, C14, C15 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C25 | 1 | 1u | Polarized capacitor, small symbol |
 | C26 | 1 | 10n | Unpolarized capacitor, small symbol |
+| C40 | 1 | 470n | Unpolarized capacitor, small symbol |
 | D1 | 1 | Clock | Light emitting diode, small symbol |
-| D2 | 1 | 1N5819 | 40V 1A Schottky Barrier Rectifier Diode, DO-41 |
+| D2, D7 | 2 | 1N5819 | 40V 1A Schottky Barrier Rectifier Diode, DO-41 |
+| D3 | 1 | Rx | Light emitting diode, small symbol |
+| D4 | 1 | Tx | Light emitting diode, small symbol |
+| D5 | 1 | USBCFG | Light emitting diode, small symbol |
+| D6 | 1 | I2C | Light emitting diode, small symbol |
 | DS1 | 1 | HD44780 | LCD 16x2 Alphanumeric , 8 bit parallel bus, 5V VDD |
 | J1 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| R1, R9, R10, R11, R12, R13, R14, R15, R19, R20 | 10 | 3.3k | Resistor, small symbol |
+| J2 | 1 | USB_B | USB Type B connector |
+| J3 | 1 | Conn_01x04 | Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| J4 | 1 | USB Reset | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| R1, R9, R10, R11, R12, R13, R14, R15, R19, R20, R34, R35, R36 | 13 | 3.3k | Resistor, small symbol |
 | R2, R4, R6, R8 | 4 | 10k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
-| R16, R18, R25, R26, R27 | 5 | 1k | Resistor, small symbol |
+| R16, R18, R25, R26, R27, R30, R31, R32, R33 | 9 | 1k | Resistor, small symbol |
 | R17 | 1 | 220 | Resistor, small symbol |
 | R21, R22, R23, R24 | 4 | 6.8k | Resistor, small symbol |
 | R28, R29 | 2 | 1.5k | Resistor, small symbol |
@@ -169,7 +181,10 @@ The goals of the YouTube series are to provide a good description of all the des
 | U21, U22, U23, U24, U27, U28 | 6 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
 | U25 | 1 | Teensy++2.0 |  |
 | U26 | 1 | W65C22SxP | W65C22S CMOS Versatile Interface Adapter (VIA), 20-pin I/O, 2 Timer/Counters, DIP-40 |
+| U29 | 1 | W65C51NxP | W65C51N CMOS Asynchronous Communication Interface Adapter (ACIA), Serial UART, DIP-28 |
+| U30 | 1 | MCP2221AxP | USB to I2C/UART Protocol Converter with GPIO, DIP-14 |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
+| X2 | 1 | 1.8432MHz | Crystal Clock Oscillator, DIP8-style metal package |
 
 ### Used in previous videos
 
@@ -727,19 +742,22 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'CLK+', wave: '1..(7.5)x(5)0(120)x(5)1..(112.5)', phase: 0.20 },
     { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..Ψ(44)Ω', '..Ч(10.5)Ш'], phase: 0.9 },
+    { name: 'A16..18', wave: '7..(10.5)x(33.5)7(206)..', data: ['', 'BANK ADDRESS'], phase: 0.20 },
     { nodes: ['..Φ(9)Έ(220)Ζ(21)Η'], phase: 0.9 },
     { name: 'READ BUFFER', wave: '6..(9)x(220)6(21)..', data: ['', 'Reading Data'], phase: 0.20 },
     { nodes: ['...(12.5)Ѳ(33.5)Ѵ(79)V(23.5)W', '...(7.5)Α(4)Γ(113.5)X(3)Y'], phase: 0.9 },
     { name: 'RD', wave: '0..(11.5)x(34.5)1(82)x(20.5)0(103.5)', data: ['', 'ROM'], phase: 0.20 },
     { nodes: ['..B(69.5)Π', '..E(11.5)F'], phase: 0.9 },
     { name: 'RAM_CS', wave: '0..(11.5)x(58)0(182.5)', data: ['', 'ROM'], phase: 0.20 },
-    { nodes: ['', '...(12.5)M(10)Σ(7.5)Ο(55)Ό'], phase: 0.9 },
+    { nodes: ['', '...(12.5)M(10)Σ(21.5)Ο(55)Ό'], phase: 0.9 },
     { nodes: ['...(10)S(10)T(26)R(20)P(3.5)Β(55)Ξ', '..G(11.5)H(58)L(20)K(38.5)Ё(5)Ж(15.5)Ν(30)Ά'], phase: 0.9 },
     { name: 'EXTRAM DATA', wave: '5..(11.5)x(54.5)z(67)x(45.5)5(73.5)', data: ['', 'OUTPUT VALID'], phase: 0.20 },
     { nodes: ['', ''], phase: 0.9 },
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Ч+Ш 10.5ns', 'Ψ+Ω 44ns',
     'Φ+Έ 9ns', 'Ζ+Η 21ns',
     'B+Π 69.5ns', 'E+F 11.5ns',
     'Ѳ+Ѵ 33.5ns', 'Α+Γ 4ns', 'V+W 23.5ns', 'X+Y 3ns',
@@ -785,11 +803,13 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     { name: 'CLK_SRC', wave: '0..(100)x(10)1(115)x(10)0(17)', phase: 0.20 },
     { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
     { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..Ⴄ(44)Ⴆ', '..Ⴀ(10.5)Ⴃ'], phase: 0.9 },
+    { name: 'A16..18', wave: '7..(10.5)x(33.5)7(206)..', data: ['', 'BANK ADDRESS'], phase: 0.20 },
     { nodes: ['..Φ(10.5)Έ(114.5)Ζ(44.5)Η'], phase: 0.9 },
     { name: 'WRITE BUFFER', wave: '6..(10.5)x(159)6(80.5)..', data: ['', 'Writing Data'], phase: 0.20 },
     { nodes: ['..B(69.5)Π', '..E(11.5)F'], phase: 0.9 },
     { name: 'RAM_CS', wave: '0..(11.5)x(58)0(182.5)', data: ['', 'ROM'], phase: 0.20 },
-    { nodes: ['...(30)U(55)V', '...(30)Ο(50)Ό'], phase: 0.9 },
+    { nodes: ['...(44)U(55)V', '...(44)Ο(50)Ό'], phase: 0.9 },
     { nodes: ['...(69.5)Β(50)Ξ', '...(10)P(0)Q(93)I(0)J(30.5)M(45)N',], phase: 0.9 },
     { nodes: ['', 'Ѳ(12)Ѵ(90)Α(3)Γ(7)R(23.5)S(91.5)C(3)D(7)Ψ(17)Ω'], phase: 0.9 },
     { name: 'WR', wave: 'x..(10)1(93)x(30.5)0(94.5)x(24)', data: ['', 'ROM'], phase: 0.20 },
@@ -798,6 +818,7 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
   ],
   edge: [
     'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Ⴀ+Ⴃ 10.5ns', 'Ⴄ+Ⴆ 44ns',
     'Φ+Έ 10.5ns', 'Ζ+Η 44.5ns',
     'B+Π 69.5ns', 'E+F 11.5s',
     'Β+Ξ 50ns (tCW)', 'Ο+Ό 50ns (tAW)',
@@ -936,3 +957,109 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 </p></details>
 
 [![VIA Write](./timing/Timing%20VIA%20Write.png)](./timing/Timing%20VIA%20Write.png)
+
+### 65C51 ACIA
+
+#### Read Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    {},
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..W(47)X', '..Λ(12)T'], phase: 0.9 },
+    { name: 'VA', wave: '1..(12)x(35)1(205)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(81)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'ACIA_CS', wave: '0..(11)x(70)0(171)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..U(0)V(95)Ο(30)Ό'], phase: 0.9 },
+    { name: 'ACIA CONTROL VALID', wave: '5..(0)z(95)5(157)', data: ['', 'CONTROL'], phase: 0.20 },
+    {},
+    { nodes: ['..G(10)H(115)L(50)K'], phase: 0.9 },
+    { name: 'ACIA DATA BUS', wave: '5..(10)x(165)5(77)', data: ['', 'DATA'], phase: 0.20 },
+    { nodes: ['..Φ(9)Έ(220)Ζ(21)Η'], phase: 0.9 },
+    { name: 'CPU READ BUFFER', wave: '6..(9)x(220)6(21)..', data: ['', 'Reading Data'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 9ns', 'Ζ+Η 21ns',
+    'B+Π 81ns', 'E+F 11s',
+    'G+H 10ns (tHR)','L+K 50ns (tCDR)',
+    'U+V 0ns (tCAH, tCWH)', 'Ο+Ό 30ns (tAC, tWC)',
+    'Λ+T 12ns', 'W+X 47ns',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![ACIA Read](./timing/Timing%20ACIA%20Read.png)](./timing/Timing%20ACIA%20Read.png)
+
+#### Write Cycle
+
+<details><summary>View source</summary><p>
+
+Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
+
+```js
+{
+  signal: [
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    {},
+    { nodes: ['..Ύ(30)Д', '..Б(10)Г'], phase: 0.9 },
+    { name: 'A0..15, RWB', wave: '3..(10)x(20)3(220)..', data: ['', 'ADDRESS, RWB'], phase: 0.20 },
+    { nodes: ['..W(47)X', '..Λ(12)T'], phase: 0.9 },
+    { name: 'VA', wave: '1..(12)x(35)1(205)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..B(81)Π', '..E(11)F'], phase: 0.9 },
+    { name: 'ACIA_CS', wave: '0..(11)x(70)0(171)', data: ['', 'ROM'], phase: 0.20 },
+    { nodes: ['..U(0)V(95)Ο(30)Ό'], phase: 0.9 },
+    { name: 'ACIA CONTROL VALID', wave: '5..(0)z(95)5(157)', data: ['', 'CONTROL'], phase: 0.20 },
+    {},
+    { nodes: ['..Φ(10.5)Έ(114.5)Ζ(44.5)Η'], phase: 0.9 },
+    { name: 'CPU WRITE BUFFER', wave: '6..(10.5)x(159)6(80.5)..', data: ['', 'Writing Data'], phase: 0.20 },
+    { nodes: ['..G(5)H(210)L(35)K'], phase: 0.9 },
+    { name: 'ACIA DATA BUS VALID', wave: '5..(5)z(210)5(37)', data: ['', 'DATA'], phase: 0.20 },
+  ],
+  edge: [
+    'Б+Г 10ns', 'Ύ+Д 30ns',
+    'Φ+Έ 10.5ns', 'Ζ+Η 44.5ns',
+    'B+Π 81ns', 'E+F 11s',
+    'G+H 5ns (tHW)','L+K 35ns (tDCW)',
+    'U+V 0ns (tCAH, tCWH)', 'Ο+Ό 30ns (tWC, tAC)',
+    'Λ+T 12ns', 'W+X 47ns',
+  ],
+  config: {
+    skin: 'narrowerer',
+    lines: {
+      offset: 2,
+      every: 125
+    },
+    background: 'white',
+  },
+  head: {
+    tick: -2,
+    every: 10,
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock; assumes BE=RDY=1']
+  }
+}
+```
+</p></details>
+
+[![ACIA Write](./timing/Timing%20ACIA%20Write.png)](./timing/Timing%20ACIA%20Write.png)

@@ -6,8 +6,8 @@
 
   (title_block
     (title "Monitor Module")
-    (date "2022-09-03")
-    (rev "A.28")
+    (date "2022-09-26")
+    (rev "A.30")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2022 Adrien Kohlbecker")
