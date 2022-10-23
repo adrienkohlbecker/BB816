@@ -1745,7 +1745,7 @@
     (property "Reference" "J3" (id 0) (at 248.92 90.1699 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "Conn_01x04" (id 1) (at 248.92 92.7099 0)
+    (property "Value" "USB_I2C" (id 1) (at 248.92 92.7099 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal" (id 2) (at 246.38 90.17 0)

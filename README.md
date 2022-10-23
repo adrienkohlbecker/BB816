@@ -140,7 +140,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | DS1 | 1 | HD44780 | LCD 16x2 Alphanumeric , 8 bit parallel bus, 5V VDD |
 | J1 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | J2 | 1 | USB_B | USB Type B connector |
-| J3 | 1 | Conn_01x04 | Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| J3 | 1 | USB_I2C | Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | J4 | 1 | USB Reset | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | R1, R9, R10, R11, R12, R13, R14, R15, R19, R20, R34, R35, R36 | 13 | 3.3k | Resistor, small symbol |
 | R2, R4, R6, R8 | 4 | 10k | Resistor, small symbol |

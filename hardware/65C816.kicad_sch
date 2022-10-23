@@ -2093,8 +2093,8 @@
     (path "/ad436a76-34c0-4a92-97a3-841d53d56384" (page "6"))
     (path "/d540f930-f1b1-4dbe-a658-53337bc671f7" (page "7"))
     (path "/9ed7b6bb-7ed2-4702-841f-e7214dc31a3a" (page "8"))
-    (path "/00000000-0000-0000-0000-000061eb86f2" (page "9"))
-    (path "/7f06f836-6bc5-4cdc-ae12-13e936c7ce55" (page "10"))
+    (path "/7f06f836-6bc5-4cdc-ae12-13e936c7ce55" (page "9"))
+    (path "/00000000-0000-0000-0000-000061eb86f2" (page "10"))
   )
 
   (symbol_instances
@@ -2672,7 +2672,7 @@
       (reference "J2") (unit 1) (value "USB_B") (footprint "")
     )
     (path "/7f06f836-6bc5-4cdc-ae12-13e936c7ce55/8c952b3e-0c4b-4b81-a615-961c9f7da609"
-      (reference "J3") (unit 1) (value "Conn_01x04") (footprint "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal")
+      (reference "J3") (unit 1) (value "USB_I2C") (footprint "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal")
     )
     (path "/7f06f836-6bc5-4cdc-ae12-13e936c7ce55/5527472b-c5e0-41a4-b0c4-6bca9660ce26"
       (reference "J4") (unit 1) (value "USB Reset") (footprint "")
