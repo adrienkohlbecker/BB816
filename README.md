@@ -56,6 +56,10 @@ The goals of the YouTube series are to provide a good description of all the des
 
 [![Peripherals module](./schematics/peripherals.png)](./schematics/peripherals.png)
 
+### Serial module
+
+[![Serial module](./schematics/serial.png)](./schematics/serial.png)
+
 ### Tester module
 
 [![Tester module](./schematics/tester.png)](./schematics/tester.png)
@@ -112,7 +116,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### Rest of the computer
 
-**Component Count:** 122
+**Component Count:** 144
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -121,19 +125,27 @@ The goals of the YouTube series are to provide a good description of all the des
 | BAR5 | 1 | Green | BAR GRAPH 8 segment |
 | BAR6, BAR7, BAR8 | 3 | Red | BAR GRAPH 8 segment |
 | C1, C6, C10, C27 | 4 | 10u | Polarized capacitor, small symbol |
-| C2, C3, C4, C5, C7, C8, C9, C12, C16, C17, C18, C19, C20, C21, C22, C23, C24, C28, C29, C30, C31, C32, C33, C34, C35, C36 | 26 | 100n | Unpolarized capacitor, small symbol |
+| C2, C3, C4, C5, C7, C8, C9, C12, C16, C17, C18, C19, C20, C21, C22, C23, C24, C28, C29, C30, C31, C32, C33, C34, C35, C36, C37, C38, C39 | 29 | 100n | Unpolarized capacitor, small symbol |
 | C11 | 1 | 22u | Polarized capacitor, small symbol |
 | C13, C14, C15 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C25 | 1 | 1u | Polarized capacitor, small symbol |
 | C26 | 1 | 10n | Unpolarized capacitor, small symbol |
+| C40 | 1 | 470n | Unpolarized capacitor, small symbol |
 | D1 | 1 | Clock | Light emitting diode, small symbol |
-| D2 | 1 | 1N5819 | 40V 1A Schottky Barrier Rectifier Diode, DO-41 |
+| D2, D7 | 2 | 1N5819 | 40V 1A Schottky Barrier Rectifier Diode, DO-41 |
+| D3 | 1 | Rx | Light emitting diode, small symbol |
+| D4 | 1 | Tx | Light emitting diode, small symbol |
+| D5 | 1 | USBCFG | Light emitting diode, small symbol |
+| D6 | 1 | I2C | Light emitting diode, small symbol |
 | DS1 | 1 | HD44780 | LCD 16x2 Alphanumeric , 8 bit parallel bus, 5V VDD |
 | J1 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| R1, R9, R10, R11, R12, R13, R14, R15, R19, R20 | 10 | 3.3k | Resistor, small symbol |
+| J2 | 1 | USB_B | USB Type B connector |
+| J3 | 1 | Conn_01x04 | Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| J4 | 1 | USB Reset | Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| R1, R9, R10, R11, R12, R13, R14, R15, R19, R20, R34, R35, R36 | 13 | 3.3k | Resistor, small symbol |
 | R2, R4, R6, R8 | 4 | 10k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
-| R16, R18, R25, R26, R27 | 5 | 1k | Resistor, small symbol |
+| R16, R18, R25, R26, R27, R30, R31, R32, R33 | 9 | 1k | Resistor, small symbol |
 | R17 | 1 | 220 | Resistor, small symbol |
 | R21, R22, R23, R24 | 4 | 6.8k | Resistor, small symbol |
 | R28, R29 | 2 | 1.5k | Resistor, small symbol |
@@ -169,7 +181,10 @@ The goals of the YouTube series are to provide a good description of all the des
 | U21, U22, U23, U24, U27, U28 | 6 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
 | U25 | 1 | Teensy++2.0 |  |
 | U26 | 1 | W65C22SxP | W65C22S CMOS Versatile Interface Adapter (VIA), 20-pin I/O, 2 Timer/Counters, DIP-40 |
+| U29 | 1 | W65C51NxP | W65C51N CMOS Asynchronous Communication Interface Adapter (ACIA), Serial UART, DIP-28 |
+| U30 | 1 | MCP2221AxP | USB to I2C/UART Protocol Converter with GPIO, DIP-14 |
 | X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
+| X2 | 1 | 1.8432MHz | Crystal Clock Oscillator, DIP8-style metal package |
 
 ### Used in previous videos
 

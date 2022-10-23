@@ -39,6 +39,8 @@ schematics:
 	convert -alpha remove -density 200 schematics/peripherals.pdf schematics/peripherals.png
 	pdfseparate -f 9 -l 9 hardware/65C816.pdf schematics/tester.pdf
 	convert -alpha remove -density 200 schematics/tester.pdf schematics/tester.png
+	pdfseparate -f 10 -l 10 hardware/65C816.pdf schematics/serial.pdf
+	convert -alpha remove -density 200 schematics/serial.pdf schematics/serial.png
 
 	rm schematics/*.pdf
 
