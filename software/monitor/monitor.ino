@@ -142,6 +142,14 @@ void printWordAsHex(word w) {
   printByteAsHex(lowByte(w));
 }
 
+void resetComputer() {
+  digitalWrite(MR, 0); 
+  pinMode(MR, OUTPUT);
+  __asm__("nop\n\t");
+  digitalWrite(MR, 1); 
+  pinMode(MR, INPUT);
+}
+
 void startProgramming() {
   digitalWrite(MR, 0); 
   pinMode(MR, OUTPUT);
@@ -332,6 +340,10 @@ void loop() {
       case ':':
         // start of an Intel HEX file, begin programming EEPROM
         handleProgramming();
+        break;
+      case 'r':
+        // reset the computer
+        resetComputer();
         break;
       case 't':
         // enter trace mode
