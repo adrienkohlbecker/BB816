@@ -355,15 +355,13 @@ void loop() {
     }
   }
     
-  // Serial will be true if Serial Monitor is opened on the computer
-  // This only works on Teensy and Arduino boards with native USB (Leonardo, Micro...), and indicates whether or not the USB CDC serial connection is open
-  // On boards with separate USB interface, this always return true (eg. Uno, Nano, Mini, Mega)
-  if (Serial) {
-    if (tracingEnabled) {
+  if (tracingEnabled) {
+    // Serial will be true if Serial Monitor is opened on the computer
+    // This only works on Teensy and Arduino boards with native USB (Leonardo, Micro...), and indicates whether or not the USB CDC serial connection is open
+    // On boards with separate USB interface, this always return true (eg. Uno, Nano, Mini, Mega)
+    if (Serial) {
       trace();
-    }
-  } else {
-    if (tracingEnabled) {
+    } else {
       stopTracing();
     }
   }

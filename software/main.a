@@ -80,6 +80,10 @@ main:
   jsr acia_putchar
   lda # "!"
   jsr acia_putchar
+  lda # "\r"
+  jsr acia_putchar
+  lda # "\n"
+  jsr acia_putchar
 
 - jsr acia_getchar
   pha
