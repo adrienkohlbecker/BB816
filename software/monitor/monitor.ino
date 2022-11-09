@@ -54,7 +54,7 @@ bool tracingEnabled = false;
 
 void startTracing() {
   tracingEnabled = true;
-  
+
   digitalWrite(CLOCK_EN, 1); // enable teensy clock
   pinMode(CLOCK_EN, OUTPUT);
   __asm__("nop\n\t");        // Wait 62.5ns for main clock to be tri-stated
@@ -64,8 +64,8 @@ void startTracing() {
 
 void stopTracing() {
   tracingEnabled = false;
-  
-  digitalWrite(CLOCK_SRC, 0); 
+
+  digitalWrite(CLOCK_SRC, 0);
   pinMode(CLOCK_SRC, INPUT);  // tri-state the Teensy clock pin
   __asm__("nop\n\t");        // Wait 62.5ns for pin to be tri-stated
   digitalWrite(CLOCK_EN, 0); // enable main clock
@@ -97,14 +97,14 @@ void trace() {
     Serial.print(" ");
     printByteAsBinary(data);
     Serial.print("   ");
-    
+
     char output[16];
     sprintf(output, "%02x %02x%02x  %c %02x %c", bank, address_h, address_l, rw ? 'r' : 'W', data, sync ? '*' : ' ');
-    Serial.println(output); 
+    Serial.println(output);
   } else {
     Serial.println("-------- ---------------- --------   -- ----  - --");
   }
-  
+
   digitalWrite(CLOCK_SRC, 0);
 }
 
@@ -119,7 +119,7 @@ byte hexDigitToNumber(byte hexDigit) {
   return (hexDigit >= 'A') ? hexDigit - 'A' + 10 : hexDigit - '0';
 }
 
-// readHexAsByte does two blocking reads from the Serial port, 
+// readHexAsByte does two blocking reads from the Serial port,
 //   and interprets the result as the hexadecimal representation of a byte
 byte readHexAsByte() {
   byte hn = hexDigitToNumber(blockingSerialRead());
@@ -143,19 +143,19 @@ void printWordAsHex(word w) {
 }
 
 void resetComputer() {
-  digitalWrite(MR, 0); 
+  digitalWrite(MR, 0);
   pinMode(MR, OUTPUT);
   __asm__("nop\n\t");
-  digitalWrite(MR, 1); 
+  digitalWrite(MR, 1);
   pinMode(MR, INPUT);
 }
 
 void startProgramming() {
-  digitalWrite(MR, 0); 
+  digitalWrite(MR, 0);
   pinMode(MR, OUTPUT);
   digitalWrite(BE, 0);
   pinMode(BE, OUTPUT);
-  
+
   // wait 62.5ns for the CPU and glue logic buffers to be disabled
   __asm__("nop\n\t");
   // set address and data bus as outputs
@@ -177,7 +177,7 @@ void endProgramming() {
   // Set ROM_WE to input
   digitalWrite(ROM_WE, 1);
   pinMode(ROM_WE, INPUT);
-  
+
   // set address and data bus as inputs
   DDR_BANK = 0b00000000;
   DDR_ADDR_H = 0b00000000;
@@ -185,12 +185,12 @@ void endProgramming() {
   DDR_DATA = 0b00000000;
   // wait 62.5ns for the Teensy buffers to be disabled
   __asm__("nop\n\t");
-  
+
   digitalWrite(BE, 1);
   pinMode(BE, INPUT);
   // wait 62.5ns for the CPU and glue logic buffers to be enabled
   __asm__("nop\n\t");
-  digitalWrite(MR, 1); 
+  digitalWrite(MR, 1);
   pinMode(MR, INPUT);
 }
 
@@ -231,7 +231,7 @@ void checkToggleBit(word addr) {
 void startReadFromROM() {
   // Set data to input
   DDR_DATA = 0b00000000;
-  
+
   // Set RD to output
   digitalWrite(RD, 1);
   pinMode(RD, OUTPUT);
@@ -239,9 +239,9 @@ void startReadFromROM() {
 
 void endReadFromROM() {
   // Set RD to input
-  digitalWrite(RD, 1); 
+  digitalWrite(RD, 1);
   pinMode(RD, INPUT);
-  
+
   // Set data to output
   DDR_DATA = 0b11111111;
 }
@@ -290,15 +290,15 @@ void disableWriteProtection() {
 void handleProgramming() {
   startProgramming();
   disableWriteProtection();
-  
-  while (true) { 
+
+  while (true) {
     // read intel hex header
     byte count = readHexAsByte();
     byte addr_h = readHexAsByte();
     byte addr_l = readHexAsByte();
     byte type = readHexAsByte();
     byte receiveCksum = count + addr_h  + addr_l + type;
-  
+
     switch (type) {
       case 0x00: {
         // allocate buffer so we can grab the data, verify the checksum, and only then process it
@@ -310,13 +310,13 @@ void handleProgramming() {
           Serial.println(count, DEC);
           break;
         }
-        
+
         // Data record
         for (int i=0; i<count; i+=1) {
           buffer[i] = readHexAsByte();
           receiveCksum += buffer[i];
         }
-      
+
         // checksum is after the data bytes
         byte checksum = readHexAsByte();
         if (byte(receiveCksum + checksum) != 0) {
@@ -338,8 +338,8 @@ void handleProgramming() {
 
         // setup ROM for reading
         startReadFromROM();
-        
-        // poll for end of write operation, use last byte written
+
+        // poll for end of write operation
         checkToggleBit(addr+count-1);
 
         // verify that all bytes have been written correctly
@@ -359,15 +359,15 @@ void handleProgramming() {
 
         // Finish reading from ROM
         endReadFromROM();
-        
-        break;  
+
+        break;
       }
       case 0x01: {
         // End of file, stop programming
-   
+
         // empty checksum byte from buffer
         readHexAsByte();
-        
+
         enableWriteProtection();
         endProgramming();
         return;
@@ -379,7 +379,7 @@ void handleProgramming() {
         break;
       }
     }
-  
+
     // consume everything before the start of a new packet (CR, LF, spaces...)
     byte start = 0;
     while (start != ':') {
@@ -413,7 +413,7 @@ void loop() {
       case '\r':
       case '\n':
         // do nothing for spaces
-        break; 
+        break;
       default:
         // unsupported character
         Serial.print("Unsupported character received: ");
@@ -421,7 +421,7 @@ void loop() {
         break;
     }
   }
-    
+
   if (tracingEnabled) {
     // Serial will be true if Serial Monitor is opened on the computer
     // This only works on Teensy and Arduino boards with native USB (Leonardo, Micro...), and indicates whether or not the USB CDC serial connection is open
