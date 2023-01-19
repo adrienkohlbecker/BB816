@@ -13,7 +13,7 @@ minipro:
 	( cd software; minipro --device AT28C256 --pin_check --write main.bin )
 
 eeprom:
-	( cd software; ./eeprom.sh )
+	( cd software; python program.py main.hex )
 
 .PHONY: schematics
 schematics:

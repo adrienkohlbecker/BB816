@@ -288,8 +288,11 @@ void disableWriteProtection() {
 }
 
 void handleProgramming() {
+  Serial.println("Programming...");
   startProgramming();
   disableWriteProtection();
+
+  bool hasEncounteredError = false;
 
   while (true) {
     // read intel hex header
@@ -306,6 +309,7 @@ void handleProgramming() {
 
         // page write mode only supports 64 bytes in a single operation
         if (count > 64) {
+          hasEncounteredError = true;
           Serial.print("invalid packet with more than 64 bytes, size=");
           Serial.println(count, DEC);
           break;
@@ -320,6 +324,7 @@ void handleProgramming() {
         // checksum is after the data bytes
         byte checksum = readHexAsByte();
         if (byte(receiveCksum + checksum) != 0) {
+          hasEncounteredError = true;
           Serial.print("Invalid checksum on data record, got ");
           printByteAsHex(checksum);
           Serial.print(" computed ");
@@ -346,6 +351,7 @@ void handleProgramming() {
         for (int i=0; i<count; i+=1) {
           byte readData = readByteAtAddress(addr+i);
           if (buffer[i] != readData) {
+            hasEncounteredError = true;
             Serial.print("failed verification at address=");
             printWordAsHex(addr+i);
             Serial.print(" expected=");
@@ -368,12 +374,19 @@ void handleProgramming() {
         // empty checksum byte from buffer
         readHexAsByte();
 
+        if (hasEncounteredError) {
+          Serial.println("Errors during programming!");
+        } else {
+          Serial.println("Done!");
+        }
+
         enableWriteProtection();
         endProgramming();
         return;
       }
       default: {
         // unsupported record type
+        hasEncounteredError = true;
         Serial.print("Unsupported record type received: ");
         Serial.println(type, HEX);
         break;
