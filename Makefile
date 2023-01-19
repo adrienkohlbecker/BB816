@@ -1,12 +1,10 @@
 default:
 	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch main.a )
 	( cd software; python bin2hex.py main.bin main.hex )
-	cat software/report.txt
 
 memtest:
 	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch examples/memtest.a )
 	( cd software; python bin2hex.py main.bin main.hex  )
-	cat software/report.txt
 
 minipro:
 	minipro --presence_check
