@@ -474,15 +474,15 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
 ```js
 {
   signal: [
-    { name: 'CLK', wave: '1.0(50)1(50)0.', phase: 0.20 },
-    { nodes: ['...(45)Ξ(5)Ο(0.5)Ό'], phase: 0.45 },
-    { name: 'RDY_IN', wave: 'z..(45)6(5.5)z(51.5)', data: ['IN'], phase: 0.20 },
-    { nodes: ['...(50)B(10.5)Π', '...(50)E(1)F'], phase: 0.45 },
-    { name: 'RDY (registered)', wave: '4..(51)x(9.5)4(41.5)', data: ['RDY (reg)', 'RDY (reg)'], phase: 0.20 },
-    { nodes: ['...(60.5)Σ(30)I'], phase: 0.45 },
-    { name: 'RDY', wave: '3..(51)x(39.5)3(11.5)', data: ['RDY', 'RDY'], phase: 0.20 },
-    { nodes: ['..Ύ(10)Д(80)Ё(10)Ж'], phase: 0.45 },
-    { name: 'RDY (cpu in)', wave: '6..(10)z(80)6(12)', data: ['RDY', 'RDY'], phase: 0.20 },
+    { name: 'CLK', wave: '1.0(125)1(125)0.', phase: 0.20 },
+    { nodes: ['...(120)Ξ(5)Ο(0.5)Ό'], phase: 0.9 },
+    { name: 'RDY_IN', wave: 'z..(120)6(5.5)z(126.5)', data: ['IN'], phase: 0.20 },
+    { nodes: ['...(125)B(10.5)Π', '...(125)E(1)F'], phase: 0.9 },
+    { name: 'RDY (registered)', wave: '4..(126)x(9.5)4(116.5)', data: ['RDY (reg)', 'RDY (reg)'], phase: 0.20 },
+    { nodes: ['...(135.5)Σ(30)I'], phase: 0.9 },
+    { name: 'RDY', wave: '3..(126)x(39.5)3(86.5)', data: ['RDY', 'RDY'], phase: 0.20 },
+    { nodes: ['..Ύ(10)Д(230)Ё(10)Ж'], phase: 0.9 },
+    { name: 'RDY (cpu in)', wave: '6..(10)z(230)6(12)', data: ['RDY', 'RDY'], phase: 0.20 },
   ],
   edge: [
     'Ξ+Ο 5ns', 'Ο+Ό 0.5ns',
@@ -491,17 +491,17 @@ Uses [custom fork](https://github.com/adrienkohlbecker/wavedrom)
     'Ύ+Д 10ns', 'Ё+Ж 10ns',
   ],
   config: {
-    skin: 'narrower',
+    skin: 'narrowerer',
     lines: {
       offset: 2,
-      every: 50
+      every: 125
     },
     background: 'white'
   },
   head: {
     tick: -2,
     every: 10,
-    text: ['tspan', { "font-size": '12px' }, 'based on 10Mhz clock; assumes BE=1']
+    text: ['tspan', { "font-size": '12px' }, 'based on 4Mhz clock']
   }
 }
 ```
