@@ -1,6 +1,7 @@
 import struct
+import sys
 
-path = "software/main.bin"
+path = sys.argv[1]
 addr = 0x7fde
 
 def checksum(file):
@@ -15,10 +16,10 @@ with open(path, mode='r+b') as file:
     print("checksum OK")
     exit(0)
 
-  sumbyte = 65536 - cksum
+  sumword = 65536 - cksum
 
-  print("checksum is 0x{0:0>4x}, setting sum byte to 0x{1:0>4x} at 0x{2:0>4x} in {3}".format(cksum, sumbyte, addr, path))
+  print("checksum is 0x{0:0>4x}, setting sum word to 0x{1:0>4x} at 0x{2:0>4x} in {3}".format(cksum, sumword, addr, path))
 
   file.seek(addr, 0)
-  file.write(struct.pack('<H', sumbyte))
+  file.write(struct.pack('<H', sumword))
   file.close()
