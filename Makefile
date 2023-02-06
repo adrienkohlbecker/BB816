@@ -1,5 +1,6 @@
 default:
 	( cd software; acme --color --report report.txt --strict-segments -v -Wtype-mismatch main.a )
+	python software/checksum.py
 	( cd software; python bin2hex.py main.bin main.hex )
 
 memtest:

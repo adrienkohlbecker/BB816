@@ -26,6 +26,8 @@
 ; 0111 1111 1110 0000 - 0111 1111 1110 1111 | 7FE0 - 7FEF | I/O #6
 ; 0111 1111 1111 0000 - 0111 1111 1111 1111 | 7FF0 - 7FFF | I/O #7
 
+!address START_OF_ROM = $8000
+
 !address IO_0 = $7F80
 !address IO_1 = $7F90
 !address IO_2 = $7FA0
@@ -35,21 +37,62 @@
 !address IO_6 = $7FE0
 !address IO_7 = $7FF0
 
-*=$8000
+*=START_OF_ROM
 main:
   ; initialize stack pointer to 01FF
   ldx #$ff
   txs
 
   ; put CPU in native mode
+  ; this is diagnostic number 1: If the Emulation LED turns off,
+  ; it means the board able to read the reset vector, and execute the first few instructions.
   clc
   xce
+
+  ; Diagnostic number 2
+  ; checksum ourselves
+
+  ; set registers to 16 bits (Set bits m and x to 0 in CPU status register)
+  rep # %00110000
+  !rl
+  !al
+
+  ldx # $7FFE
+  lda # 0
+
+- clc
+  adc START_OF_ROM, x
+  dex
+  dex
+  bpl -
+
+  cmp # 0
 
   ; set registers to 8 bits (Set bits m and x to 1 in CPU status register)
   sep # %00110000
   !rs
   !as
 
+  beq checksum_ok
+
+  ; alternate E on with E off to signify ROM checksum error
+  ; 200ms period : 800 000 clock cycles. DEX, BNE both take 2 cycles. So we want 200k loops
+  ; that's around 3 times 2^16 iterations
+  ; because Emulation is being toggled, we are forced to use 8 bits registers
+  sec ; carry is set, emulation is off before this loop, so we can just repeat XCE to get toggling
+---- lda # 3
+--- ldy # $ff
+-- ldx # $ff
+- dex
+  bne -
+  dey
+  bne --
+  dec
+  bne ---
+  xce
+  jmp ----
+
+checksum_ok:
   ; initialize devices
   jsr via_init
   jsr lcd_init
@@ -98,6 +141,11 @@ main:
 !source "lib/via.a"
 !source "lib/lcd.a"
 !source "lib/acia.a"
+
+; zero sum word is the last word before vectors
+; this is updated during the build process to make the checksum of the ROM equal to 0
+*=$ffde
+  !word $0000
 
 *=$fffc
   !word main
