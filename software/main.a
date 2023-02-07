@@ -40,7 +40,7 @@
 
 !source "lib/macros.a"
 
-main:
+reset:
   ; initialize stack pointer to 01FF
   ldx #$ff
   txs
@@ -69,13 +69,81 @@ main:
   bpl -
 
   cmp # 0
+  bne checksum_fail
+
+  ; ### Diagnostic 3: Test bank0 RAM
+
+  ; load into X the address of the end of RAM
+  ldx #$7f7f
+  dex ; align to 16 bits
+
+  ; store 16 bits of data at X and X+1 and verify we read the same thing
+- txa
+  sta address($0),X ; direct page indexed
+  cmp address($0),X
+  bne memtest_fail
+
+  ; decrement address
+  dex
+  dex
+
+  ; continue until X=0
+  bne -
+
+  ; ### Diagnostic 4: Test extended RAM
+
+  ldy # $f0 ; store bank number F0 into Y
+
+  ; set indexes to 8 bits
+-- sep #%00010000
+	!rs
+
+  phy
+  plb ; pull value into Data Bank Register, effectively changing bank for all data accesses
+
+  ; set indexes to 16 bits
+  rep #%00010000
+	!rl
+
+  ldx #$ffff
+  dex ; align to 16 bits
+
+   ; store 16 bits of data at X and X+1 and verify we read the same thing
+- txa
+  sta address($0000),X ; absolute indexed
+  cmp address($0000),X
+  bne highmemtest_fail
+
+  ; decrement address
+  dex
+  dex
+
+  ; continue until X=0
+  bne -
+
+  ; increment Y
+  iny
+  cpy #$F8
+  bne --
 
   ; set registers to 8 bits (Set bits m and x to 1 in CPU status register)
   sep # %00110000
   !rs
   !as
 
-  beq checksum_ok
+  ; reset data bank register
+  ldy #0
+  phy
+  plb
+
+  jmp main
+
+checksum_fail:
+
+  ; set registers to 8 bits (Set bits m and x to 1 in CPU status register)
+  sep # %00110000
+  !rs
+  !as
 
   ; alternate E on with E off to signify ROM checksum error (200ms period)
   sec ; carry is set, emulation is off before this loop, so we can just repeat XCE to get toggling
@@ -83,7 +151,49 @@ main:
   xce
   jmp -
 
-checksum_ok:
+memtest_fail:
+
+  ; set registers to 8 bits (Set bits m and x to 1 in CPU status register)
+  sep # %00110000
+  !rs
+  !as
+
+  ; alternate E on with E off to signify low RAM error (one short 200ms, one long 400ms)
+  sec ; carry is set, emulation is off before this loop, so we can just repeat XCE to get toggling
+- +delay_large_ms 400
+  xce
+  +delay_large_ms 200
+  xce
+  +delay_large_ms 200
+  xce
+  +delay_large_ms 400
+  xce
+  jmp -
+
+highmemtest_fail:
+
+  ; set registers to 8 bits (Set bits m and x to 1 in CPU status register)
+  sep # %00110000
+  !rs
+  !as
+
+  ; alternate E on with E off to signify extended RAM error (two short 200ms, one long 400ms)
+  sec ; carry is set, emulation is off before this loop, so we can just repeat XCE to get toggling
+- +delay_large_ms 400
+  xce
+  +delay_large_ms 200
+  xce
+  +delay_large_ms 200
+  xce
+  +delay_large_ms 200
+  xce
+  +delay_large_ms 200
+  xce
+  +delay_large_ms 400
+  xce
+  jmp -
+
+main:
   ; initialize devices
   jsr via_init
   jsr lcd_init
@@ -139,5 +249,5 @@ checksum_ok:
   !word $0000
 
 *=$fffc
-  !word main
+  !word reset
   !word $eaea
