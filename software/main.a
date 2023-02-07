@@ -199,45 +199,38 @@ main:
   jsr lcd_init
   jsr acia_init
 
-  lda # "H"
-  jsr acia_putchar
-  lda # "e"
-  jsr acia_putchar
-  lda # "l"
-  jsr acia_putchar
-  lda # "l"
-  jsr acia_putchar
-  lda # "o"
-  jsr acia_putchar
-  lda # ","
-  jsr acia_putchar
-  lda # " "
-  jsr acia_putchar
-  lda # "W"
-  jsr acia_putchar
-  lda # "o"
-  jsr acia_putchar
-  lda # "r"
-  jsr acia_putchar
-  lda # "l"
-  jsr acia_putchar
-  lda # "d"
-  jsr acia_putchar
-  lda # "!"
-  jsr acia_putchar
+  ; print Hello, World to both terminal and LCD
+  ldx # 0
+- lda hello, X
+  beq +
+  phx
+  jsr acia_and_lcd_putchar
+  plx
+  inx
+  jmp -
+  hello: !text "Hello, World!", 0
++
+
+  ; Add new lines for terminal only
   lda # "\r"
   jsr acia_putchar
   lda # "\n"
   jsr acia_putchar
 
+  ; in a loop, print all chars received from the terminal, back to the terminal and to the LCD
 - jsr acia_getchar
+  jsr acia_and_lcd_putchar
+  jmp -
+
+  ; shouldn't be reached
+  stp
+
+acia_and_lcd_putchar:
   pha
   jsr print_char
   pla
   jsr acia_putchar
-  jmp -
-
-  stp
+  rts
 
 !source "lib/via.a"
 !source "lib/lcd.a"
