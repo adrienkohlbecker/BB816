@@ -31,16 +31,17 @@ def read_status():
       sys.exit(1)
 
 if __name__ == '__main__':
-  p1 = Process(target=program_eeprom, args=())
-  p2 = Process(target=read_status, args=())
-  p1.start()
-  p2.start()
-  p1.join(timeout=10)
-  p2.join(timeout=1)
-  if p1.exitcode == None:
-    p1.terminate()
-  if p2.exitcode == None:
-    p2.terminate()
+  # p1 = Process(target=program_eeprom, args=())
+  # p2 = Process(target=read_status, args=())
+  # p1.start()
+  # p2.start()
+  # p1.join(timeout=10)
+  # p2.join(timeout=1)
+  # if p1.exitcode == None:
+  #   p1.terminate()
+  # if p2.exitcode == None:
+  #   p2.terminate()
 
-  if p1.exitcode != 0 or p2.exitcode != 0:
-    sys.exit(1)
+  # if p1.exitcode != 0 or p2.exitcode != 0:
+  #   sys.exit(1)
+  program_eeprom()

@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 #define DDR_BANK DDRB
 #define PIN_BANK PINB
 #define PORT_BANK PORTB
@@ -214,20 +216,6 @@ void programByteAtAddress(word addr, byte data) {
   __asm__("nop\n\t");
 }
 
-void checkToggleBit(word addr) {
-  byte newData = readByteAtAddress(addr) & 0b01000000;
-  byte previousData = !newData;
-
-  // Wait for data to be valid
-  while(newData != previousData) {
-    previousData = newData;
-    newData = readByteAtAddress(addr) & 0b01000000;
-
-    // TODO: figure out why this is needed
-    delayMicroseconds(200);
-  }
-}
-
 void startReadFromROM() {
   // Set data to input
   DDR_DATA = 0b00000000;
@@ -266,6 +254,20 @@ byte readByteAtAddress(word addr) {
   __asm__("nop\n\t");
 
   return readData;
+}
+
+void checkToggleBit(word addr) {
+  byte newData = readByteAtAddress(addr) & 0b01000000;
+  byte previousData = !newData;
+
+  // Wait for data to be valid
+  while(newData != previousData) {
+    previousData = newData;
+    newData = readByteAtAddress(addr) & 0b01000000;
+
+    // TODO: figure out why this is needed
+    delayMicroseconds(200);
+  }
 }
 
 void enableWriteProtection() {
