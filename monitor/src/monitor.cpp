@@ -42,7 +42,7 @@ void setup() {
   pinMode(ROM_WE, INPUT);
   pinMode(RD, INPUT);
 
-  Serial.begin(57600);
+  Serial.begin(115200);
 }
 
 void printByteAsBinary(byte x) {
@@ -56,6 +56,7 @@ bool tracingEnabled = false;
 
 void startTracing() {
   tracingEnabled = true;
+  Serial.println("Tracing...");
 
   digitalWrite(CLOCK_EN, 1); // enable teensy clock
   pinMode(CLOCK_EN, OUTPUT);
@@ -66,6 +67,7 @@ void startTracing() {
 
 void stopTracing() {
   tracingEnabled = false;
+  Serial.println("Stopped tracing!");
 
   digitalWrite(CLOCK_SRC, 0);
   pinMode(CLOCK_SRC, INPUT);  // tri-state the Teensy clock pin
@@ -145,6 +147,7 @@ void printWordAsHex(word w) {
 }
 
 void resetComputer() {
+  Serial.println("Reset");
   digitalWrite(MR, 0);
   pinMode(MR, OUTPUT);
   __asm__("nop\n\t");
@@ -403,7 +406,27 @@ void handleProgramming() {
   }
 }
 
+bool welcome = false;
+
 void loop() {
+  // Serial will be true if Serial Monitor is opened on the computer
+  // This only works on Teensy and Arduino boards with native USB (Leonardo, Micro...), and indicates whether or not the USB CDC serial connection is open
+  // On boards with separate USB interface, this always return true (eg. Uno, Nano, Mini, Mega)
+  if (!Serial) {
+    if (welcome) { welcome = false; }
+    if (tracingEnabled) { stopTracing(); }
+    return;
+  }
+
+  if (!welcome) {
+    // Print welcome message
+    welcome = true;
+    delay(200);
+    Serial.println("Teensy monitor for 65C816 computer");
+    Serial.println("Help: `t` to trace. `q` to stop trace. `r` to reset the computer.");
+    Serial.println("");
+  }
+
   if (Serial.available() > 0) {
     byte incomingByte = Serial.read();
     switch (incomingByte) {
@@ -438,13 +461,6 @@ void loop() {
   }
 
   if (tracingEnabled) {
-    // Serial will be true if Serial Monitor is opened on the computer
-    // This only works on Teensy and Arduino boards with native USB (Leonardo, Micro...), and indicates whether or not the USB CDC serial connection is open
-    // On boards with separate USB interface, this always return true (eg. Uno, Nano, Mini, Mega)
-    if (Serial) {
-      trace();
-    } else {
-      stopTracing();
-    }
+    trace();
   }
 }
