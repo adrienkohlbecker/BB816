@@ -26,6 +26,9 @@
 #define ROM_WE 7
 #define RD 3
 
+// Whether to output the address bus and data bus in binary as well as hexadecimals
+bool BINARY_TRACE = false;
+
 // List of instruction mnemonics, index is the opcode
 const char *mnemonics[] = {
   "BRK",
@@ -312,9 +315,25 @@ void printByteAsBinary(byte x) {
   }
 }
 
+// printByteAsHex prints to Serial the hexadecimal representation of a byte, with leading zero
+void printByteAsHex(byte b) {
+  if (b < 16) {
+    Serial.print('0');
+  }
+  Serial.print(b, HEX);
+}
+
+// printWordAsHex prints to Serial the hexadecimal representation of a byte, with leading zero
+void printWordAsHex(word w) {
+  printByteAsHex(highByte(w));
+  printByteAsHex(lowByte(w));
+}
+
 bool tracingEnabled = false;
 
 void startTracing() {
+  if (tracingEnabled) { return; }
+
   tracingEnabled = true;
   Serial.println("Tracing...");
 
@@ -326,6 +345,8 @@ void startTracing() {
 }
 
 void stopTracing() {
+  if (!tracingEnabled) { return; }
+
   tracingEnabled = false;
   Serial.println("Stopped tracing!");
 
@@ -336,7 +357,7 @@ void stopTracing() {
   pinMode(CLOCK_EN, INPUT);
 }
 
-void trace() {
+inline void trace() {
   digitalWrite(CLOCK_SRC, 1);
 
   // wait 125ns for the ROM to output its data, each nop has a 62.5ns delay
@@ -354,24 +375,34 @@ void trace() {
   bool rw   = (ctrl & (1 << 0)) > 0;
 
   if (va) {
-    printByteAsBinary(bank);
-    Serial.print(" ");
-    printByteAsBinary(address_h);
-    printByteAsBinary(address_l);
-    Serial.print(" ");
-    printByteAsBinary(data);
-    Serial.print("   ");
+    if (BINARY_TRACE) {
+      printByteAsBinary(bank);
+      Serial.print(" ");
+      printByteAsBinary(address_h);
+      printByteAsBinary(address_l);
+      Serial.print(" ");
+      printByteAsBinary(data);
+      Serial.print("   ");
+    }
 
-    char output[14];
-    sprintf(output, "%02x %02x%02x  %c %02x", bank, address_h, address_l, rw ? 'r' : 'W', data);
-    Serial.print(output);
+    printByteAsHex(bank);
+    Serial.print(" ");
+    printByteAsHex(address_h);
+    printByteAsHex(address_l);
+    Serial.print(rw ? " r " : " W ");
+    printByteAsHex(data);
+
     if (sync) {
       Serial.print("  ");
       Serial.print(mnemonics[data]);
     }
-      Serial.println("");
+
+    Serial.println("");
   } else {
-    Serial.println("-------- ---------------- --------   -- ----  - --");
+    if (BINARY_TRACE) {
+       Serial.print("-------- ---------------- --------   ");
+    }
+    Serial.println("-- ---- - --");
   }
 
   digitalWrite(CLOCK_SRC, 0);
@@ -395,20 +426,6 @@ byte readHexAsByte() {
   byte ln = hexDigitToNumber(blockingSerialRead());
 
   return hn << 4 | ln;
-}
-
-// printByteAsHex prints to Serial the hexadecimal representation of a byte, with leading zero
-void printByteAsHex(byte b) {
-  if (b < 16) {
-    Serial.print('0');
-  }
-  Serial.print(b, HEX);
-}
-
-// printWordAsHex prints to Serial the hexadecimal representation of a byte, with leading zero
-void printWordAsHex(word w) {
-  printByteAsHex(highByte(w));
-  printByteAsHex(lowByte(w));
 }
 
 void resetComputer() {
@@ -671,6 +688,10 @@ void handleProgramming() {
   }
 }
 
+void toggleBinaryTrace() {
+  BINARY_TRACE = !BINARY_TRACE;
+}
+
 bool welcome = false;
 
 void loop() {
@@ -689,6 +710,7 @@ void loop() {
     delay(200);
     Serial.println("Teensy monitor for 65C816 computer");
     Serial.println("Help: `t` to trace. `q` to stop trace. `r` to reset the computer.");
+    Serial.println("      `i` to toggle binary trace.");
     Serial.println("");
   }
 
@@ -710,6 +732,10 @@ void loop() {
       case 'q':
         // stop trace mode
         stopTracing();
+        break;
+      case 'i':
+        // toggle binary trace
+        toggleBinaryTrace();
         break;
       case ' ':
       case '\t':
