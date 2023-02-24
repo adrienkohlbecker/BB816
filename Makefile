@@ -1,8 +1,5 @@
 default:
-	( cd software; ./build.sh main.a )
-
-memtest:
-	( cd software; ./build.sh examples/memtest.a )
+	( cd software; ./build.sh main.asm )
 
 minipro:
 	minipro --presence_check

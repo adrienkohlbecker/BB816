@@ -38,7 +38,7 @@
 
 *=START_OF_ROM
 
-!source "lib/macros.a"
+!source "lib/macros.asm"
 
 reset:
   ; initialize stack pointer to 01FF
@@ -232,9 +232,9 @@ acia_and_lcd_putchar:
   jsr acia_putchar
   rts
 
-!source "lib/via.a"
-!source "lib/lcd.a"
-!source "lib/acia.a"
+!source "lib/via.asm"
+!source "lib/lcd.asm"
+!source "lib/acia.asm"
 
 ; zero sum word is the last word before vectors
 ; this is updated during the build process to make the checksum of the ROM equal to 0
