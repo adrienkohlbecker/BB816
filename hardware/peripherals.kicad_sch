@@ -6,8 +6,8 @@
 
   (title_block
     (title "Peripherals module")
-    (date "2022-09-26")
-    (rev "A.30")
+    (date "2023-02-24")
+    (rev "A.31")
     (comment 2 "https://github.com/adrienkohlbecker/65C816")
     (comment 3 "Licensed under CERN-OHL-W v2")
     (comment 4 "Copyright © 2022 Adrien Kohlbecker")
@@ -181,7 +181,7 @@
       (property "Datasheet" "" (id 3) (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_keywords" "power-flag" (id 4) (at 0 0 0)
+      (property "ki_keywords" "global power" (id 4) (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (property "ki_description" "Power symbol creates a global label with name \"GND\" , ground" (id 5) (at 0 0 0)
@@ -221,7 +221,7 @@
       (property "Datasheet" "" (id 3) (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_keywords" "power-flag" (id 4) (at 0 0 0)
+      (property "ki_keywords" "global power" (id 4) (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (property "ki_description" "Power symbol creates a global label with name \"VCC\"" (id 5) (at 0 0 0)
