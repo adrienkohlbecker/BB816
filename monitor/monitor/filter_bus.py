@@ -2,7 +2,7 @@ from platformio.public import DeviceMonitorFilterBase
 import unittest
 
 class Bus(DeviceMonitorFilterBase):
-#class Bus():
+# class Bus():
   NAME = "bus"
 
   # Whether to output the address bus and data bus in binary as well as hexadecimals
@@ -17,85 +17,50 @@ class Bus(DeviceMonitorFilterBase):
     super().__init__(*args, **kwargs)
 
   # This filter processes all the incoming bytes through the monitor's serial link.
-  # Most of the bytes are passed through, except lines starting with 0x11 (ASCII's DC1 character)
-  # These lines are special "trace" lines, that contain bytes for the values of the address bus, data bus, and control lines of the computer
+  # Most of the bytes are passed through, except packets starting with 0x11 (ASCII's DC1 character)
+  # These packetsare special "trace" packets, that contain bytes for the values of the address bus, data bus, and control lines of the computer
   # They are processed independently, and the result is forwarded to the terminal instead of them.
   #
-  # Calls to rx() can happen in the middle of lines, with incomplete data. If we detect that we're currently receiving a trace line,
-  # and it is split over multiple rx() calls, we buffer the incoming bytes until the line is complete.
+  # Calls to rx() can happen in the middle of packets, with incomplete data. If we detect that we're currently receiving a trace packet,
+  # and it is split over multiple rx() calls, we buffer the incoming bytes until the packet is complete.
   def rx(self, text):
-    first = 0
-    last = 0
+    if len(self.buffer) > 0:
+      text = self.buffer + text
+      self.buffer = ""
 
+    last = 0
     while True:
-      # did we reach the end of the text
+      # did we reach the end of the text, if so return it
       if last == len(text):
         return text
 
-      idx = text.find("\n", last)
-      # if the remainder of the text contains no new line
+      # see if we have the start of a packet. If not, return the text
+      idx = text.find("\x11", last)
       if idx == -1:
-        # if the buffer starts with 0x11, we're building a trace line, add text to buffer and return the text up to here
-        if self.buffer.startswith(chr(0x11)) and len(self.buffer) < 4096:
-          self.buffer += text[last:]
-          return text[:last]
-        # if the remainder starts with 0x11, we're starting a trace line
-        elif text[last] == chr(0x11):
-          self.buffer += text[last:]
-          return text[:last]
-        # else, we're reading a non trace line, we can just return the rest of the string
-        else:
-          return text
-      # if we did find a new line
-      else:
-        line = text[last:idx]
-        # if we were buffering a trace line, empty buffer
-        if len(self.buffer) > 0:
-          line = self.buffer + line
-          self.buffer = ""
+        return text
 
-        first = last
-        last = idx + 1
+      # if the text does not contain a full packet, buffer the start of the packet and return the text up to here
+      if idx + 6 > len(text):
+        self.buffer = text[idx:]
+        return text[:idx]
 
-        # if it is not a trace line, we don't touch it
-        if not line.startswith(chr(0x11)):
-          continue
+      # a packet is 6 bytes including the start byte
+      packet = text[idx : idx+6]
 
-        # incomplete line, it probably had a \n as data byte
-        if len(line) < 6:
-          # print('===')
-          # print(f'{[c for c in text]}')
-          # print(f'{[c for c in line]}')
-          self.buffer = line + "\n"
-          text = text[: first] + text[last :]
-          # print(f'{[c for c in text]}')
-          # print(first)
-          # print(last)
-          last -= last - first
-          # print(last)
-          continue
-
-        # replace the trace line with the processed text
-        trace = self.process_line(line)
-        if len(trace) != 0:
-          text = text[: first] + trace + text[last-1 :]
-          last += len(trace)-len(line)
-
-    return text
+      # process the packet
+      trace = self.process_packet(packet)
+      text = text[: idx] + trace + text[idx+6 :]
+      last = idx + len(trace)
 
   def tx(self, text):
     return text
 
-  def process_line(self, line):
-    if len(line) != 6:
-      print(f'{[c for c in line]}')
-      raise Exception("trace line should be 6 bytes")
-
-    bank =   ord(line[1])
-    addr_h = ord(line[2])
-    addr_l = ord(line[3])
-    data =   ord(line[4])
-    ctrl =   ord(line[5])
+  def process_packet(self, packet):
+    bank =   ord(packet[1])
+    addr_h = ord(packet[2])
+    addr_l = ord(packet[3])
+    data =   ord(packet[4])
+    ctrl =   ord(packet[5])
 
     va   = (ctrl & (1 << 7)) > 0
     sync = (ctrl & (1 << 1)) > 0
@@ -106,11 +71,11 @@ class Bus(DeviceMonitorFilterBase):
     if va:
       if self.BINARY_TRACE:
         result += "{:08b} {:08b}{:08b} {:08b}   ".format(bank, addr_h, addr_l, data)
-      result += "{:02x} {:02x}{:02x} {} {:02x}  {}".format(bank, addr_h, addr_l, "r" if rw else "W", data, mnemonics[data] if sync else "")
+      result += "{:02x} {:02x}{:02x} {} {:02x}  {}\n".format(bank, addr_h, addr_l, "r" if rw else "W", data, mnemonics[data] if sync else "")
     else:
       if self.BINARY_TRACE:
         result += "-------- ---------------- --------   "
-      result += "-- ---- - --"
+      result += "-- ---- - --\n"
 
     return result
 
@@ -141,7 +106,7 @@ class TestBus(unittest.TestCase):
     self.assertEqual(self.b.buffer, "")
 
   def test_trace(self):
-    t = self.b.rx("\x11trace\n")
+    t = self.b.rx("\x11trace")
     self.assertEqual(t, "-- ---- - --\n")
     self.assertEqual(self.b.buffer, "")
 
@@ -149,32 +114,21 @@ class TestBus(unittest.TestCase):
     t = self.b.rx("\x11tr")
     self.assertEqual(t, "")
     self.assertEqual(self.b.buffer, "\x11tr")
-    t = self.b.rx("ace")
+    t = self.b.rx("ac")
     self.assertEqual(t, "")
-    self.assertEqual(self.b.buffer, "\x11trace")
-    t = self.b.rx("\n")
+    self.assertEqual(self.b.buffer, "\x11trac")
+    t = self.b.rx("e")
     self.assertEqual(t, "-- ---- - --\n")
     self.assertEqual(self.b.buffer, "")
 
-  def test_trace_with_Ox0A_byte(self):
-    t = self.b.rx("foo\n\x11tr\nce\nbar\n")
+  def test_trace_with_Ox11_byte(self):
+    t = self.b.rx("foo\n\x11tr\x11cebar\n")
     self.assertEqual(t, "foo\n-- ---- - --\nbar\n")
     self.assertEqual(self.b.buffer, "")
-    t = self.b.rx("\x11tr\n")
+    t = self.b.rx("\x11tr\x11")
     self.assertEqual(t, "")
-    self.assertEqual(self.b.buffer, "\x11tr\n")
+    self.assertEqual(self.b.buffer, "\x11tr\x11")
     t = self.b.rx("ce")
-    self.assertEqual(t, "")
-    self.assertEqual(self.b.buffer, "\x11tr\nce")
-    t = self.b.rx("\n")
-    self.assertEqual(t, "-- ---- - --\n")
-    self.assertEqual(self.b.buffer, "")
-
-  def test_another_0x0A_byte(self):
-    t = self.b.rx("\x11")
-    self.assertEqual(t, "")
-    self.assertEqual(self.b.buffer, "\x11")
-    t = self.b.rx("\x00\x80\x13\nA\n")
     self.assertEqual(t, "-- ---- - --\n")
     self.assertEqual(self.b.buffer, "")
 

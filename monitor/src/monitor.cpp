@@ -81,6 +81,8 @@ void stopTracing() {
   pinMode(CLOCK_EN, INPUT);
 }
 
+byte traceBuf[6];
+
 inline void trace() {
   digitalWrite(CLOCK_SRC, 0);
   digitalWrite(CLOCK_SRC, 1);
@@ -89,15 +91,17 @@ inline void trace() {
   __asm__("nop\n\t");
   __asm__("nop\n\t");
 
-  Serial.write(0x11); // Send ASCII DC1 to start trace packet
-  Serial.write(PIN_BANK);
-  Serial.write(PIN_ADDR_H);
-  Serial.write(PIN_ADDR_L);
-  Serial.write(PIN_DATA);
-  Serial.write(PIN_CTRL);
-  Serial.write(0x0A); // Send new line to end packet
+  // traceBuf[0] is filled up by setup()
+  traceBuf[1] = PIN_BANK;
+  traceBuf[2] = PIN_ADDR_H;
+  traceBuf[3] = PIN_ADDR_L;
+  traceBuf[4] = PIN_DATA;
+  traceBuf[5] = PIN_CTRL;
+  Serial.write(traceBuf, 6);
 
-  if (sync && hasBreakpoint && bank == breakpoint[0] && address_h == breakpoint[1] && address_l == breakpoint[2]) {
+  bool sync = traceBuf[5] & 0b00000010;
+
+  if (sync && hasBreakpoint && traceBuf[1] == breakpoint[0] && traceBuf[2] == breakpoint[1] && traceBuf[3] == breakpoint[2]) {
     Serial.println("break!");
     breaking = true;
   }
@@ -446,6 +450,8 @@ void setup() {
   pinMode(RD, INPUT);
 
   Serial.begin(115200);
+
+  traceBuf[0] = 0x11; // Send ASCII DC1 to start trace packet
 }
 
 void loop() {
