@@ -26,288 +26,6 @@
 #define ROM_WE 7
 #define RD 3
 
-// Whether to output the address bus and data bus in binary as well as hexadecimals
-bool BINARY_TRACE = false;
-
-// List of instruction mnemonics, index is the opcode
-const char *mnemonics[] = {
-  "BRK",
-  "ORA (dp,X)",
-  "COP #const",
-  "ORA sr,S",
-  "TSB dp",
-  "ORA dp",
-  "ASL dp",
-  "ORA [dp]",
-  "PHP",
-  "ORA #const",
-  "ASL A",
-  "PHD",
-  "TSB addr",
-  "ORA addr",
-  "ASL addr",
-  "ORA long",
-  "BPL nearlabel",
-  "ORA (dp),Y",
-  "ORA (dp)",
-  "ORA (sr,S),Y",
-  "TRB dp",
-  "ORA dp,X",
-  "ASL dp,X",
-  "ORA [dp],Y",
-  "CLC",
-  "ORA addr,Y",
-  "INC A",
-  "TCS",
-  "TRB addr",
-  "ORA addr,X",
-  "ASL addr,X",
-  "ORA long,X",
-  "JSR addr",
-  "AND (dp,X)",
-  "JSR long",
-  "AND sr,S",
-  "BIT dp",
-  "AND dp",
-  "ROL dp",
-  "AND [dp]",
-  "PLP",
-  "AND #const",
-  "ROL A",
-  "PLD",
-  "BIT addr",
-  "AND addr",
-  "ROL addr",
-  "AND long",
-  "BMI nearlabel",
-  "AND (dp),Y",
-  "AND (dp)",
-  "AND (sr,S),Y",
-  "BIT dp,X",
-  "AND dp,X",
-  "ROL dp,X",
-  "AND [dp],Y",
-  "SEC",
-  "AND addr,Y",
-  "DEC A",
-  "TSC",
-  "BIT addr,X",
-  "AND addr,X",
-  "ROL addr,X",
-  "AND long,X",
-  "RTI",
-  "EOR (dp,X)",
-  "WDM",
-  "EOR sr,S",
-  "MVP srcbk,destbk",
-  "EOR dp",
-  "LSR dp",
-  "EOR [dp]",
-  "PHA",
-  "EOR #const",
-  "LSR A",
-  "PHK",
-  "JMP addr",
-  "EOR addr",
-  "LSR addr",
-  "EOR long",
-  "BVC nearlabel",
-  "EOR (dp),Y",
-  "EOR (dp)",
-  "EOR (sr,S),Y",
-  "MVN srcbk,destbk",
-  "EOR dp,X",
-  "LSR dp,X",
-  "EOR [dp],Y",
-  "CLI",
-  "EOR addr,Y",
-  "PHY",
-  "TCD",
-  "JMP long",
-  "EOR addr,X",
-  "LSR addr,X",
-  "EOR long,X",
-  "RTS",
-  "ADC (dp,X)",
-  "PER label",
-  "ADC sr,S",
-  "STZ dp",
-  "ADC dp",
-  "ROR dp",
-  "ADC [dp]",
-  "PLA",
-  "ADC #const",
-  "ROR A",
-  "RTL",
-  "JMP (addr)",
-  "ADC addr",
-  "ROR addr",
-  "ADC long",
-  "BVS nearlabel",
-  "ADC ( dp),Y",
-  "ADC (dp)",
-  "ADC (sr,S),Y",
-  "STZ dp,X",
-  "ADC dp,X",
-  "ROR dp,X",
-  "ADC [dp],Y",
-  "SEI",
-  "ADC addr,Y",
-  "PLY",
-  "TDC",
-  "JMP (addr,X)",
-  "ADC addr,X",
-  "ROR addr,X",
-  "ADC long,X",
-  "BRA nearlabel",
-  "STA (dp,X)",
-  "BRL label",
-  "STA sr,S",
-  "STY dp",
-  "STA dp",
-  "STX dp",
-  "STA [dp]",
-  "DEY",
-  "BIT #const",
-  "TXA",
-  "PHB",
-  "STY addr",
-  "STA addr",
-  "STX addr",
-  "STA long",
-  "BCC nearlabel",
-  "STA (dp),Y",
-  "STA (dp)",
-  "STA (sr,S),Y",
-  "STY dp,X",
-  "STA dp,X",
-  "STX dp,Y",
-  "STA [dp],Y",
-  "TYA",
-  "STA addr,Y",
-  "TXS",
-  "TXY",
-  "STZ addr",
-  "STA addr,X",
-  "STZ addr,X",
-  "STA long,X",
-  "LDY #const",
-  "LDA (dp,X)",
-  "LDX #const",
-  "LDA sr,S",
-  "LDY dp",
-  "LDA dp",
-  "LDX dp",
-  "LDA [dp]",
-  "TAY",
-  "LDA #const",
-  "TAX",
-  "PLB",
-  "LDY addr",
-  "LDA addr",
-  "LDX addr",
-  "LDA long",
-  "BCS nearlabel",
-  "LDA (dp),Y",
-  "LDA (dp)",
-  "LDA (sr,S),Y",
-  "LDY dp,X",
-  "LDA dp,X",
-  "LDX dp,Y",
-  "LDA [dp],Y",
-  "CLV",
-  "LDA addr,Y",
-  "TSX",
-  "TYX",
-  "LDY addr,X",
-  "LDA addr,X",
-  "LDX addr,Y",
-  "LDA long,X",
-  "CPY #const",
-  "CMP (dp,X)",
-  "REP #const",
-  "CMP sr,S",
-  "CPY dp",
-  "CMP dp",
-  "DEC dp",
-  "CMP [dp]",
-  "INY",
-  "CMP #const",
-  "DEX",
-  "WAI",
-  "CPY addr",
-  "CMP addr",
-  "DEC addr",
-  "CMP long",
-  "BNE nearlabel",
-  "CMP (dp),Y",
-  "CMP (dp)",
-  "CMP (sr,S),Y",
-  "PEI (dp)",
-  "CMP dp,X",
-  "DEC dp,X",
-  "CMP [dp],Y",
-  "CLD",
-  "CMP addr,Y",
-  "PHX",
-  "STP",
-  "JMP [addr]",
-  "CMP addr,X",
-  "DEC addr,X",
-  "CMP long,X",
-  "CPX #const",
-  "SBC (dp,X)",
-  "SEP #const",
-  "SBC sr,S",
-  "CPX dp",
-  "SBC dp",
-  "INC dp",
-  "SBC [dp]",
-  "INX",
-  "SBC #const",
-  "NOP",
-  "XBA",
-  "CPX addr",
-  "SBC addr",
-  "INC addr",
-  "SBC long",
-  "BEQ nearlabel",
-  "SBC (dp),Y",
-  "SBC (dp)",
-  "SBC (sr,S),Y",
-  "PEA addr",
-  "SBC dp,X",
-  "INC dp,X",
-  "SBC [dp],Y",
-  "SED",
-  "SBC addr,Y",
-  "PLX",
-  "XCE",
-  "JSR (addr,X))",
-  "SBC addr,X",
-  "INC addr,X",
-  "SBC long,X"
-};
-
-void setup() {
-  DDR_BANK = 0b00000000;
-  DDR_ADDR_H = 0b00000000;
-  DDR_ADDR_L = 0b00000000;
-  DDR_DATA = 0b00000000;
-
-  pinMode(CLOCK_SRC, INPUT);
-  pinMode(CLOCK_EN, INPUT);
-  pinMode(READ_WRITE, INPUT);
-  pinMode(SYNC, INPUT);
-  pinMode(VA, INPUT);
-  pinMode(MR, INPUT);
-  pinMode(BE, INPUT);
-  pinMode(ROM_WE, INPUT);
-  pinMode(RD, INPUT);
-
-  Serial.begin(115200);
-}
-
 void printByteAsBinary(byte x) {
   for (int i = 0; i < 8; i++) {
     Serial.print(x & 10000000 ? "1" : "0");
@@ -371,46 +89,13 @@ inline void trace() {
   __asm__("nop\n\t");
   __asm__("nop\n\t");
 
-  byte bank      = PIN_BANK;
-  byte address_h = PIN_ADDR_H;
-  byte address_l = PIN_ADDR_L;
-  byte data      = PIN_DATA;
-  byte ctrl      = PIN_CTRL;
-
-  bool va   = (ctrl & (1 << 7)) > 0;
-  bool sync = (ctrl & (1 << 1)) > 0;
-  bool rw   = (ctrl & (1 << 0)) > 0;
-
-  if (va) {
-    if (BINARY_TRACE) {
-      printByteAsBinary(bank);
-      Serial.print(" ");
-      printByteAsBinary(address_h);
-      printByteAsBinary(address_l);
-      Serial.print(" ");
-      printByteAsBinary(data);
-      Serial.print("   ");
-    }
-
-    printByteAsHex(bank);
-    Serial.print(" ");
-    printByteAsHex(address_h);
-    printByteAsHex(address_l);
-    Serial.print(rw ? " r " : " W ");
-    printByteAsHex(data);
-
-    if (sync) {
-      Serial.print("  ");
-      Serial.print(mnemonics[data]);
-    }
-
-    Serial.println("");
-  } else {
-    if (BINARY_TRACE) {
-       Serial.print("-------- ---------------- --------   ");
-    }
-    Serial.println("-- ---- - --");
-  }
+  Serial.write(0x11); // Send ASCII DC1 to start trace packet
+  Serial.write(PIN_BANK);
+  Serial.write(PIN_ADDR_H);
+  Serial.write(PIN_ADDR_L);
+  Serial.write(PIN_DATA);
+  Serial.write(PIN_CTRL);
+  Serial.write(0x0A); // Send new line to end packet
 
   if (sync && hasBreakpoint && bank == breakpoint[0] && address_h == breakpoint[1] && address_l == breakpoint[2]) {
     Serial.println("break!");
@@ -742,11 +427,26 @@ void removeBreakpoint() {
   breaking = false;
 }
 
-void toggleBinaryTrace() {
-  BINARY_TRACE = !BINARY_TRACE;
-}
-
 bool welcome = false;
+
+void setup() {
+  DDR_BANK = 0b00000000;
+  DDR_ADDR_H = 0b00000000;
+  DDR_ADDR_L = 0b00000000;
+  DDR_DATA = 0b00000000;
+
+  pinMode(CLOCK_SRC, INPUT);
+  pinMode(CLOCK_EN, INPUT);
+  pinMode(READ_WRITE, INPUT);
+  pinMode(SYNC, INPUT);
+  pinMode(VA, INPUT);
+  pinMode(MR, INPUT);
+  pinMode(BE, INPUT);
+  pinMode(ROM_WE, INPUT);
+  pinMode(RD, INPUT);
+
+  Serial.begin(115200);
+}
 
 void loop() {
   // Serial will be true if Serial Monitor is opened on the computer
@@ -764,7 +464,6 @@ void loop() {
     delay(200);
     Serial.println("Teensy monitor for BB816 computer");
     Serial.println("Help: `t` to trace. `q` to stop trace. `r` to reset the computer.");
-    Serial.println("      `i` to toggle binary trace.");
     Serial.println("      `b` to set a breakpoint. `d` to delete the breakpoint.");
     Serial.println("      when breaking, `s` to step one clock cycle. `c` to resume the clock.");
     Serial.println("");
@@ -788,10 +487,6 @@ void loop() {
       case 'q':
         // stop trace mode
         stopTracing();
-        break;
-      case 'i':
-        // toggle binary trace
-        toggleBinaryTrace();
         break;
       case 'b':
         // set breakpoint
