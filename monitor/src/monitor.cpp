@@ -331,10 +331,15 @@ void printWordAsHex(word w) {
 
 bool tracingEnabled = false;
 
+byte breakpoint[3];
+bool hasBreakpoint = false;
+bool breaking = false;
+
 void startTracing() {
   if (tracingEnabled) { return; }
 
   tracingEnabled = true;
+  breaking = false;
   Serial.println("Tracing...");
 
   digitalWrite(CLOCK_EN, 1); // enable teensy clock
@@ -348,6 +353,7 @@ void stopTracing() {
   if (!tracingEnabled) { return; }
 
   tracingEnabled = false;
+  breaking = false;
   Serial.println("Stopped tracing!");
 
   digitalWrite(CLOCK_SRC, 0);
@@ -358,6 +364,7 @@ void stopTracing() {
 }
 
 inline void trace() {
+  digitalWrite(CLOCK_SRC, 0);
   digitalWrite(CLOCK_SRC, 1);
 
   // wait 125ns for the ROM to output its data, each nop has a 62.5ns delay
@@ -405,7 +412,22 @@ inline void trace() {
     Serial.println("-- ---- - --");
   }
 
-  digitalWrite(CLOCK_SRC, 0);
+  if (sync && hasBreakpoint && bank == breakpoint[0] && address_h == breakpoint[1] && address_l == breakpoint[2]) {
+    Serial.println("break!");
+    breaking = true;
+  }
+}
+
+void step() {
+  if (!breaking) { return; }
+
+  trace();
+}
+
+void resumeTrace() {
+  if (!breaking) { return; }
+
+  breaking = false;
 }
 
 // blockingSerialRead blocks until data is available on the Serial port
@@ -427,6 +449,19 @@ byte readHexAsByte() {
 
   return hn << 4 | ln;
 }
+
+byte readHexAsByteWithEcho() {
+  byte digit;
+  digit = blockingSerialRead();
+  Serial.write(digit);
+  byte hn = hexDigitToNumber(digit);
+  digit = blockingSerialRead();
+  Serial.write(digit);
+  byte ln = hexDigitToNumber(digit);
+
+  return hn << 4 | ln;
+}
+
 
 void resetComputer() {
   Serial.println("Reset");
@@ -688,6 +723,23 @@ void handleProgramming() {
   }
 }
 
+void setBreakpoint() {
+  Serial.print("Breakpoint: ");
+  hasBreakpoint = true;
+  breakpoint[0] = readHexAsByteWithEcho();
+  Serial.print(" ");
+  breakpoint[1] = readHexAsByteWithEcho();
+  Serial.print(" ");
+  breakpoint[2] = readHexAsByteWithEcho();
+  Serial.println("");
+}
+
+void removeBreakpoint() {
+  Serial.println("Cleared breakpoint");
+  hasBreakpoint = false;
+  breaking = false;
+}
+
 void toggleBinaryTrace() {
   BINARY_TRACE = !BINARY_TRACE;
 }
@@ -711,6 +763,8 @@ void loop() {
     Serial.println("Teensy monitor for BB816 computer");
     Serial.println("Help: `t` to trace. `q` to stop trace. `r` to reset the computer.");
     Serial.println("      `i` to toggle binary trace.");
+    Serial.println("      `b` to set a breakpoint. `d` to delete the breakpoint.");
+    Serial.println("      when breaking, `s` to step one clock cycle. `c` to resume the clock.");
     Serial.println("");
   }
 
@@ -737,6 +791,22 @@ void loop() {
         // toggle binary trace
         toggleBinaryTrace();
         break;
+      case 'b':
+        // set breakpoint
+        setBreakpoint();
+        break;
+      case 'd':
+        // set breakpoint
+        removeBreakpoint();
+        break;
+      case 's':
+        // step clock
+        step();
+        break;
+      case 'c':
+        // continue clock
+        resumeTrace();
+        break;
       case ' ':
       case '\t':
       case '\r':
@@ -751,7 +821,7 @@ void loop() {
     }
   }
 
-  if (tracingEnabled) {
+  if (tracingEnabled && !breaking) {
     trace();
   }
 }
