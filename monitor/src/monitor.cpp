@@ -53,32 +53,40 @@ byte breakpoint[3];
 bool hasBreakpoint = false;
 bool breaking = false;
 
-void startTracing() {
-  if (tracingEnabled) { return; }
+void toggleTracing() {
+  if (tracingEnabled) {
+    tracingEnabled = false;
+    breaking = false;
+    Serial.println("Stopped tracing!");
 
-  tracingEnabled = true;
-  breaking = false;
-  Serial.println("Tracing...");
+    digitalWrite(CLOCK_SRC, 0);
+    pinMode(CLOCK_SRC, INPUT);  // tri-state the Teensy clock pin
+    __asm__("nop\n\t");        // Wait 62.5ns for pin to be tri-stated
+    digitalWrite(CLOCK_EN, 0); // enable main clock
+    pinMode(CLOCK_EN, INPUT);
+  } else {
+    tracingEnabled = true;
+    breaking = false;
+    Serial.println("Tracing...");
 
-  digitalWrite(CLOCK_EN, 1); // enable teensy clock
-  pinMode(CLOCK_EN, OUTPUT);
-  __asm__("nop\n\t");        // Wait 62.5ns for main clock to be tri-stated
-  digitalWrite(CLOCK_SRC, 0); // make sure it starts with 0
-  pinMode(CLOCK_SRC, OUTPUT);
+    digitalWrite(CLOCK_EN, 1); // enable teensy clock
+    pinMode(CLOCK_EN, OUTPUT);
+    __asm__("nop\n\t");        // Wait 62.5ns for main clock to be tri-stated
+    digitalWrite(CLOCK_SRC, 0); // make sure it starts with 0
+    pinMode(CLOCK_SRC, OUTPUT);
+  }
 }
 
-void stopTracing() {
-  if (!tracingEnabled) { return; }
+bool loggingEnabled = false;
 
-  tracingEnabled = false;
-  breaking = false;
-  Serial.println("Stopped tracing!");
-
-  digitalWrite(CLOCK_SRC, 0);
-  pinMode(CLOCK_SRC, INPUT);  // tri-state the Teensy clock pin
-  __asm__("nop\n\t");        // Wait 62.5ns for pin to be tri-stated
-  digitalWrite(CLOCK_EN, 0); // enable main clock
-  pinMode(CLOCK_EN, INPUT);
+void toggleLogging() {
+  if (loggingEnabled) {
+    loggingEnabled = false;
+    Serial.println("Stopped logging!");
+  } else {
+    loggingEnabled = true;
+    Serial.println("Started logging!");
+  }
 }
 
 byte traceBuf[6];
@@ -97,17 +105,22 @@ inline void trace() {
   traceBuf[3] = PIN_ADDR_L;
   traceBuf[4] = PIN_DATA;
   traceBuf[5] = PIN_CTRL;
-  Serial.write(traceBuf, 6);
 
   bool sync = traceBuf[5] & 0b00000010;
-
   if (sync && hasBreakpoint && traceBuf[1] == breakpoint[0] && traceBuf[2] == breakpoint[1] && traceBuf[3] == breakpoint[2]) {
-    Serial.println("break!");
+    Serial.println("Break!");
     breaking = true;
+    loggingEnabled = true;
   }
+
+  if (loggingEnabled) {
+    Serial.write(traceBuf, 6);
+  }
+
 }
 
 void step() {
+  if (!loggingEnabled) { return; }
   if (!breaking) {
     breaking = true;
   } else {
@@ -460,7 +473,7 @@ void loop() {
   // On boards with separate USB interface, this always return true (eg. Uno, Nano, Mini, Mega)
   if (!Serial) {
     if (welcome) { welcome = false; }
-    if (tracingEnabled) { stopTracing(); }
+    if (tracingEnabled) { toggleTracing(); }
     return;
   }
 
@@ -469,7 +482,7 @@ void loop() {
     welcome = true;
     delay(200);
     Serial.println("Teensy monitor for BB816 computer");
-    Serial.println("Help: `t` to trace. `q` to stop trace. `r` to reset the computer.");
+    Serial.println("Help: `t` to toggle tracing. `l` to toggle logging. `r` to reset the computer.");
     Serial.println("      `b` to set a breakpoint. `d` to delete the breakpoint.");
     Serial.println("      when breaking, `s` to step one clock cycle. `c` to resume the clock.");
     Serial.println("");
@@ -487,12 +500,12 @@ void loop() {
         resetComputer();
         break;
       case 't':
-        // enter trace mode
-        startTracing();
+        // toggle trace mode
+        toggleTracing();
         break;
-      case 'q':
-        // stop trace mode
-        stopTracing();
+      case 'l':
+        // toggle logging mode
+        toggleLogging();
         break;
       case 'b':
         // set breakpoint
