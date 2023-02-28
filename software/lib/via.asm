@@ -82,14 +82,21 @@ VIA_PORT_B5        = 1 << 5
 VIA_PORT_B6        = 1 << 6
 VIA_PORT_B7        = 1 << 7
 
-VIA_DDRA_DEFAULT = $00 ; all inputs
-VIA_DDRB_DEFAULT = (VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
+VIA_PORTA_DEFAULT = $00 ; all zero
+VIA_PORTB_DEFAULT = $00 ; all zero
+VIA_DDRA_DEFAULT = $ff ; all outputs
+VIA_DDRB_DEFAULT = $ff ; all outputs
 
 via_init:
   ; initialize port A and port B
-  stz IO_0_VIA_PORTA
-  stz IO_0_VIA_PORTB
+  lda # VIA_PORTA_DEFAULT
+  sta IO_0_VIA_PORTA
+  lda # VIA_PORTB_DEFAULT
+  sta IO_0_VIA_PORTB
   lda # VIA_DDRA_DEFAULT
   sta IO_0_VIA_DDRA
   lda # VIA_DDRB_DEFAULT
   sta IO_0_VIA_DDRB
+  ; initialize PCR: CA1, CB1 default, CA2, CB2 low output
+  lda # ( VIA_PCR_CA1_NEGATIVE_EDGE | VIA_PCR_CA2_LOW_OUTPUT | VIA_PCR_CB1_NEGATIVE_EDGE | VIA_PCR_CB2_LOW_OUTPUT )
+  sta IO_0_VIA_PCR

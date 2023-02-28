@@ -65,7 +65,7 @@ lcd_instruction:
     ; PORT A is output
     ldx # $ff
     stx IO_0_VIA_DDRA
- 
+
     ; Set the Enable bit to send the instruction
     ora # VIA_PORT_B0_LCD_E
     sta IO_0_VIA_PORTB
@@ -75,8 +75,10 @@ lcd_instruction:
     sta IO_0_VIA_PORTB
 
     ; Clears external bus
-    stz IO_0_VIA_DDRA
-    stz IO_0_VIA_PORTA
+    lda # VIA_PORTA_DEFAULT
+    sta IO_0_VIA_PORTA
+    lda # VIA_DDRA_DEFAULT
+    sta IO_0_VIA_DDRA
 
     rts
 
@@ -113,8 +115,10 @@ print_char:
     sta IO_0_VIA_PORTB
 
     ; Clears external bus
-    stz IO_0_VIA_DDRA
-    stz IO_0_VIA_PORTA
+    lda # VIA_PORTA_DEFAULT
+    sta IO_0_VIA_PORTA
+    lda # VIA_DDRA_DEFAULT
+    sta IO_0_VIA_DDRA
 
     rts
 
@@ -124,6 +128,9 @@ print_char:
 lcd_read_address:
     ; Get current control signals
     lda IO_0_VIA_PORTB
+
+    ; PORT A is input
+    stz IO_0_VIA_DDRA
 
     ; Clear RS/E bits; Set RW
     and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B0_LCD_E)
@@ -145,6 +152,10 @@ lcd_read_address:
     txa
     and # LCD_READ_ADDR_COUNTER_MASK
 
+    ; Restore DDRA
+    ldx # VIA_DDRA_DEFAULT
+    stx IO_0_VIA_DDRA
+
     rts
 
 ; lcd_wait: Wait for the LCD busy flag to clear
@@ -155,6 +166,9 @@ lcd_wait:
 
 .lcd_wait_loop:
     txa
+
+    ; PORT A is input
+    stz IO_0_VIA_DDRA
 
     ; Clear RS/E bits; Set RW
     and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B0_LCD_E)
@@ -175,5 +189,9 @@ lcd_wait:
     ; Clear RS/RW/E bits
     and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
     sta IO_0_VIA_PORTB
+
+    ; Restore DDRA
+    lda # VIA_DDRA_DEFAULT
+    sta IO_0_VIA_DDRA
 
     rts
