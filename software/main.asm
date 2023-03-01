@@ -208,7 +208,7 @@ main:
   plx
   inx
   jmp -
-  hello: !text "Hello, World!", 0
+hello: !text "Hello, World!", 0
 +
 
   ; Add new lines for terminal only
