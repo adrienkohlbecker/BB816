@@ -201,15 +201,15 @@ main:
 
   ; print Hello, World to both terminal and LCD
   ldx # 0
-- lda hello, X
-  beq +
+- lda +, X
+  beq ++
   phx
   jsr acia_and_lcd_putchar
   plx
   inx
   jmp -
-hello: !text "Hello, World!", 0
-+
++ !text "Hello, World!", 0
+++
 
   ; Add new lines for terminal only
   lda # "\r"
