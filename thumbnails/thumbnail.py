@@ -37,7 +37,8 @@ episodes = [
     'CPU breakout\nPart 4',
     'EEPROM\nProgrammer',
     'CPU breakout\nPart 5',
-    '6551 UART\nwith USB adapter'
+    '6551 UART\nwith USB adapter',
+    'ROM programmer\nMem Diagnostics'
 ]
 
 path = './thumbnails/'
@@ -45,7 +46,7 @@ pathfmt = path + '{:d}.{}'
 
 for num, episode in enumerate(episodes, start=0):
 
-    if num < 30:
+    if num < 31:
         continue
 
     with Image.open(pathfmt.format(num, 'png')) as im:
@@ -57,7 +58,7 @@ for num, episode in enumerate(episodes, start=0):
         canvas.text((image_width-50,0+50), '{:d}'.format(num), font=font, fill='#FFFFFF', stroke_fill='#000000', stroke_width=5, anchor="rt")
 
         font = ImageFont.truetype('Arial Black.ttf', size=120)
-        canvas.text((image_width/2,image_height-30), "65C816 Computer", font=font, fill='#FFFFFF', stroke_fill='#000000', stroke_width=5, anchor="mb")
+        canvas.text((image_width/2,image_height-30), "BB816 Computer", font=font, fill='#FFFFFF', stroke_fill='#000000', stroke_width=5, anchor="mb")
 
         font = ImageFont.truetype('Arial Black.ttf', size=80)
         canvas.multiline_text((0+30,0), episode, font=font, fill='#FFFFFF', stroke_fill='#000000', stroke_width=3)
@@ -71,7 +72,7 @@ with Image.open(pathfmt.format(len(episodes)-1, 'png')) as im:
 
     canvas = ImageDraw.Draw(img)
     font = ImageFont.truetype('Arial Black.ttf', size=60)
-    canvas.text((playlist_width/2,playlist_height-15), "65C816 Computer", font=font, fill='#FFFFFF', stroke_fill='#000000', stroke_width=2, anchor="mb")
+    canvas.text((playlist_width/2,playlist_height-15), "BB816 Computer", font=font, fill='#FFFFFF', stroke_fill='#000000', stroke_width=2, anchor="mb")
 
     font = ImageFont.truetype('Arial Black.ttf', size=40)
     canvas.multiline_text((0+15,0), 'Playlist', font=font, fill='#FFFFFF', stroke_fill='#000000', stroke_width=1)
