@@ -70,6 +70,21 @@ ACIA_CONTROL_PARITY_EVEN                 = 1 << 6 ; Parity should never be enabl
 ACIA_CONTROL_PARITY_MARK_CHECK_DISABLED  = 2 << 6 ; Parity should never be enabled
 ACIA_CONTROL_PARITY_SPACE_CHECK_DISABLED = 3 << 6 ; Parity should never be enabled
 
+!ifdef FLAG_ACIA_IRQ {
+  !set .command_irq_bits = ACIA_COMMAND_RECEIVER_IRQ_ENABLED
+} else {
+  !set .command_irq_bits = ACIA_COMMAND_RECEIVER_IRQ_DISABLED
+}
+
+; -----------------------------------------------------------------
+;   Workspace
+; -----------------------------------------------------------------
+
+!address rx_buffer_rptr = $0200 ; 1 byte
+!address rx_buffer_wptr = $0201 ; 1 byte
+!address rx_buffer      = $0202 ; 16 bytes
+rx_buffer_size = 16
+
 ; -----------------------------------------------------------------
 ;   acia_init(): Programatically resets and initializes the ACIA as well as the internal workspace.
 ; -----------------------------------------------------------------
@@ -77,6 +92,14 @@ ACIA_CONTROL_PARITY_SPACE_CHECK_DISABLED = 3 << 6 ; Parity should never be enabl
 acia_init         stz IO_1_ACIA_STATUS_REGISTER   ; programmatically reset the chip by writing the status register
                                                   ; weirdly enough, that does not reset ALL the internal registers,
                                                   ; see the datasheet.
+
+                  stz rx_buffer_rptr              ; reset internal state
+                  stz rx_buffer_wptr
+
+                  ldx # rx_buffer_size - 1        ; zero out the internal buffer
+-                 stz rx_buffer,X
+                  dex
+                  bpl -
 
                   ; set up the ACIA with
                   ; - baud rate 300 (smallest supported by MCP2221A)
@@ -88,23 +111,23 @@ acia_init         stz IO_1_ACIA_STATUS_REGISTER   ; programmatically reset the c
 
                   ; further set up the ACIA with
                   ; - /DTR = Low
-                  ; - Receiver IRQ on
+                  ; - IRQ bits from FLAG_ACIA_IRQ
                   ; - /RTS = Low, Transmitter enabled, transmitter IRQ off
                   ; - Echo mode disabled
                   ; - Parity disabled
-                  lda # ACIA_COMMAND_DATA_TERMINAL_READY_ASSERT | ACIA_COMMAND_RECEIVER_IRQ_ENABLED | ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_ASSERT_INTERRUPT_DISABLED | ACIA_COMMAND_RECEIVER_ECHO_DISABLED | ACIA_COMMAND_RECEIVER_PARITY_DISABLED
+                  lda # ACIA_COMMAND_DATA_TERMINAL_READY_ASSERT | .command_irq_bits | ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_ASSERT_INTERRUPT_DISABLED | ACIA_COMMAND_RECEIVER_ECHO_DISABLED | ACIA_COMMAND_RECEIVER_PARITY_DISABLED
                   sta IO_1_ACIA_COMMAND_REGISTER
 
                   rts
 
 ; -----------------------------------------------------------------
-;   acia_putchar(): Sends a byte over serial. Blocking loop until transmit is available.
+;   acia_sync_putc(): Sends a byte over serial. Blocking loop until transmit is available.
 ;
 ;   Parameters:
 ;       A = byte to send
 ; -----------------------------------------------------------------
 
-acia_putchar      tax                             ; move byte to X register
+acia_sync_putc    tax                             ; move byte to X register
 
                   !ifndef FLAG_ACIA_XMIT_BUG {    ; if we're using an ACIA without the Xmit bug (eg. R6551)
                     lda # ACIA_STATUS_TRANSMITTER_DATA_REGISTER_EMPTY
@@ -123,17 +146,98 @@ acia_putchar      tax                             ; move byte to X register
                   rts
 
 ; -----------------------------------------------------------------
-;   acia_getchar(): Receives a byte over serial. Blocking loop until something is received.
+;   acia_sync_getc(): Receives a byte over serial. Blocking loop until something is received.
 ;
 ;   Returns:
 ;       A: byte received
 ;       P: n,z set from A
 ; -----------------------------------------------------------------
-
-acia_getchar      lda # ACIA_STATUS_RECEIVER_DATA_REGISTER_FULL
+; TODO: Check for error conditions (parity, overrun, framing)
+acia_sync_getc    lda # ACIA_STATUS_RECEIVER_DATA_REGISTER_FULL
 -                 bit IO_1_ACIA_STATUS_REGISTER   ; wait until a byte is available
                   beq -
 
                   lda IO_1_ACIA_DATA_REGISTER     ; get received byte
 
                   rts
+
+; -----------------------------------------------------------------
+;   acia_async_getc(): If a byte has been received over serial, return it in the A register and set the carry.
+;                      If not, clear the carry.
+;
+;   Returns:
+;       A: byte received
+;       P: n,z set from A
+;          c=1 if byte received, c=0 if no byte received
+; -----------------------------------------------------------------
+
+acia_async_getc   ldx rx_buffer_rptr              ; compare r/w pointers
+                  cpx rx_buffer_wptr
+                  bne +                           ; if the two pointers are equal, no byte has been received
+                  clc                             ; clear carry and return
+                  rts
+
++                 lda rx_buffer,X                 ; else, load the received byte
+
+                  cpx # rx_buffer_size - 1        ; check if read pointer = rx_buffer_size - 1 and reset if yes, if not increment
+                  bne +                           ; if not, just increment
+                  ldx # $ff                       ; if yes, reset it to $ff and increment (effectively set it to 0)
++                 inx
+
+                  stx rx_buffer_rptr              ; save new pointer
+
+                  and # $ff                       ; ensure flags are set by the value of A
+                  sec                             ; set carry to signify a byte is present
+                  rts
+
+; -----------------------------------------------------------------
+;   acia_int_handler(): Check if the ACIA has raised an interrupt, and if yes process it using the procedure
+;                            outline in Rockwell's R6551 datasheet "Status Register Operation"
+; -----------------------------------------------------------------
+
+acia_int_handler  lda IO_1_ACIA_STATUS_REGISTER
+                  bmi +                           ; n flag is set to ACIA_STATUS_INTERRUPT_OCCURRED by lda.
+                  rts                             ; If it is 1, an ACIA interrupt occurred, else we return
++
+                  bit # ACIA_STATUS_RECEIVER_DATA_REGISTER_FULL
+                  beq +
+                  jsr .acia_int_rx
++
+                  rts
+
+; -----------------------------------------------------------------
+;   .acia_int_rx(): Handle a receiver interrupt.
+;
+;   Parameters:
+;       A = ACIA status register at time of interrupt
+; -----------------------------------------------------------------
+
+.acia_int_rx      ldx IO_1_ACIA_DATA_REGISTER     ; load data register, this will clear the interrupt
+                                                  ; as well as the status register bits
+
+                  bit # ACIA_STATUS_OVERRUN_HAS_OCCURRED
+                  bne .acia_handle_overrun
+
+                  bit # ACIA_STATUS_FRAMING_ERROR_DETECTED
+                  bne .acia_handle_framing_error
+
+                  bit # ACIA_STATUS_PARITY_ERROR_DETECTED
+                  bne .acia_handle_parity_error
+
+                  txa                             ; add data byte to rx buffer
+                  ldx rx_buffer_wptr
+                  sta rx_buffer,X
+
+                  cpx # rx_buffer_size - 1        ; check if write pointer = rx_buffer_size - 1
+                  bne +                           ; if yes, set it to FF so it wraps to 0 with the increment
+                  ldx # $ff
++
+                  inx                             ; increment and save new pointer
+                  stx rx_buffer_wptr
+
+                  rts
+
+.acia_handle_overrun
+.acia_handle_framing_error
+.acia_handle_parity_error
+                  rts                             ; don't handle these errors for now

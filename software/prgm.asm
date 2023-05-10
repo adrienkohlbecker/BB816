@@ -17,39 +17,39 @@ main              +m_16_bits                      ; Save existing IRQ handler, a
 -                 lda +, X                        ; ... to both the lcd and console
                   beq ++
                   phx
-                  jsr acia_and_lcd_putchar
+                  jsr acia_lcd_putc
                   plx
                   inx
                   jmp -
 +                 !text "Hello, World!", 0
 ++
                   lda # "\r"                      ; add new line in console only
-                  jsr acia_putchar
+                  jsr acia_sync_putc
                   lda # "\n"
-                  jsr acia_putchar
+                  jsr acia_sync_putc
 
--                 wai                             ; wait for interrupts for ever
-                  jmp -
+-                 jsr acia_async_getc             ; check if we received a character
+                  bcc -                           ; if carry is clear, we did not, loop
+                  jsr acia_lcd_putc               ; print the character
+                  jmp -                           ; loop indefinitely
 
 ; -----------------------------------------------------------------
-;   acia_and_lcd_putchar(): prints a character to both the LCD and the console
+;   acia_lcd_putc(): prints a character to both the LCD and the console
 ;
 ;   Parameters:
 ;       A = character to send, in ASCII
 ; -----------------------------------------------------------------
 
-acia_and_lcd_putchar
-                  pha
+acia_lcd_putc     pha
                   jsr print_char
                   pla
-                  jsr acia_putchar
+                  jsr acia_sync_putc
                   rts
 
 ; -----------------------------------------------------------------
 ;   prgm_irq(): IRQ hook for user program
 ; -----------------------------------------------------------------
 
-prgm_irq:         jsr acia_getchar
-                  jsr acia_and_lcd_putchar
+prgm_irq:         ; do nothing for now
 
                   jmp (prgm_old_irq_location)
