@@ -1,67 +1,90 @@
-; bin2hex: convert 8 bit number to hexadecimal
-; argument: A=byte to convert
-; return: A=higher nibble in hex, B=lower nibble in hex
-bin2hex:
-    tay
-    and # %00001111 ; lower nibble
-    tax
-    lda .hexlookup,x
-    xba ; save lower HEX in B
-    tya ; restore byte
-    lsr ; higher nibble
-    lsr
-    lsr
-    lsr
-    tax
-    lda .hexlookup,x
-    rts
+.hexlookup        !text "0123456789ABCDEF"
 
-; bin2hex16: convert 16 bit number to hexadecimal
-; argument: B,A=word to convert
-; return: A=fourth nibble in hex, B=third nibble in hex, X=second nibble in hex, Y=first nibble in hex
-bin2hex16:
-  xba ; save B
-  pha
-  xba
+; -----------------------------------------------------------------
+;   bin2hex(): convert 8 bit number to hexadecimal
+;
+;   Parameters:
+;       A = byte to convert
+;   Returns:
+;       A: higher nibble in ASCII hex representation
+;       B: lower nibble in ASCII hex representation
+; -----------------------------------------------------------------
 
-  jsr bin2hex
+bin2hex           tay
+                  and # %00001111                 ; get lower nibble
+                  tax
+                  lda .hexlookup,x
+                  xba                             ; save lower HEX in B
+                  tya                             ; restore byte
+                  lsr                             ; higher nibble, shift four times
+                  lsr
+                  lsr
+                  lsr
+                  tax
+                  lda .hexlookup,x
+                  rts
 
-  tax ; save second nibble to X
-  xba
-  tay ; save first nibble to Y
+; -----------------------------------------------------------------
+;   bin2hex16(): convert 8 bit number to hexadecimal
+;
+;   Parameters:
+;       A = low byte of word to convert
+;       B = high byte word to convert
+;   Returns:
+;       A: fourth nibble in ASCII hex representation
+;       B: third nibble in ASCII hex representation
+;       X: second nibble in ASCII hex representation
+;       Y: first nibble in ASCII hex representation
+; -----------------------------------------------------------------
 
-  pla ; restore B into A
-  phy ; save registers
-  phx
+bin2hex16         xba                             ; save B
+                  pha
+                  xba
 
-  jsr bin2hex
+                  jsr bin2hex
 
-  plx
-  ply
+                  tax                             ; save second nibble to X
+                  xba
+                  tay                             ; save first nibble to Y
 
-  rts
+                  pla                             ; restore B into A
+                  phy                             ; save registers
+                  phx
 
-.hexlookup:
-    !text "0123456789ABCDEF"
+                  jsr bin2hex
 
-; print_hex: prints 8 bit hex number in ascii to LCD
-; argument: A=byte to print
-print_hex:
-  jsr bin2hex
-  xba
-  pha
-  xba
-  jsr print_char
-  pla
-  jsr print_char
-  rts
+                  plx
+                  ply
 
-; print_hex16: prints 16 bit hex number in ascii to LCD
-; argument: B,A=word to print
-print_hex16:
-  pha
-  xba
-  jsr print_hex
-  pla
-  jsr print_hex
-  rts
+                  rts
+
+; -----------------------------------------------------------------
+;   print_hex():  prints 8 bit hex number in ascii to LCD
+;
+;   Parameters:
+;       A = byte to print
+; -----------------------------------------------------------------
+
+print_hex         jsr bin2hex
+                  xba
+                  pha
+                  xba
+                  jsr print_char
+                  pla
+                  jsr print_char
+                  rts
+
+; -----------------------------------------------------------------
+;   print_hex16():  prints 16 bit hex number in ascii to LCD
+;
+;   Parameters:
+;       A = low byte of word to convert
+;       B = high byte word to convert
+; -----------------------------------------------------------------
+
+print_hex16       pha
+                  xba
+                  jsr print_hex
+                  pla
+                  jsr print_hex
+                  rts

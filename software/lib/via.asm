@@ -1,3 +1,7 @@
+; -----------------------------------------------------------------
+;   Register addresses
+; -----------------------------------------------------------------
+
 !address IO_0_VIA_PORTB       = IO_0 + $0   ; Output/Intput Register Port B
 !address IO_0_VIA_PORTA       = IO_0 + $1   ; Output/Intput Register Port A
 !address IO_0_VIA_DDRB        = IO_0 + $2   ; Data Direction Register Port B
@@ -14,6 +18,10 @@
 !address IO_0_VIA_IFR         = IO_0 + $D   ; Interrupt Flag Register
 !address IO_0_VIA_IER         = IO_0 + $E   ; Interrupe Enable Register
 !address IO_0_VIA_PORTA_NHDSK = IO_0 + $F   ; Output/Intput Register Port A but with no handshake
+
+; -----------------------------------------------------------------
+;   PCR register settings
+; -----------------------------------------------------------------
 
 VIA_PCR_CA1_NEGATIVE_EDGE             = 0 << 0
 VIA_PCR_CA1_POSITIVE_EDGE             = 1 << 0
@@ -36,6 +44,10 @@ VIA_PCR_CB2_PULSE_OUTPUT              = 5 << 5
 VIA_PCR_CB2_LOW_OUTPUT                = 6 << 5
 VIA_PCR_CB2_HIGH_OUTPUT               = 7 << 5
 
+; -----------------------------------------------------------------
+;   ACR register settings
+; -----------------------------------------------------------------
+
 VIA_ACR_PA_LATCH_DISABLE           = 0 << 0
 VIA_ACR_PA_LATCH_ENABLE            = 1 << 0
 VIA_ACR_PB_LATCH_DISABLE           = 0 << 1
@@ -55,6 +67,10 @@ VIA_ACR_T1_CONTINUOUS_PB7_DISABLED = 1 << 6
 VIA_ACR_T1_ONE_SHOT_PB7_ENABLED    = 2 << 6
 VIA_ACR_T1_CONTINUOUS_PB7_ENABLED  = 3 << 6
 
+; -----------------------------------------------------------------
+;   IR register settings
+; -----------------------------------------------------------------
+
 VIA_IR_CA2_ACTIVE_EDGE   = 1 << 0
 VIA_IR_CA1_ACTIVE_EDGE   = 1 << 1
 VIA_IR_COMPLETE_8_SHIFTS = 1 << 2
@@ -63,6 +79,10 @@ VIA_IR_CB1_ACTIVE_EDGE   = 1 << 4
 VIA_IR_T2_TIMEOUT        = 1 << 5
 VIA_IR_T1_TIMEOUT        = 1 << 6
 VIA_IR_ANY_INTERRUPT     = 1 << 7
+
+; -----------------------------------------------------------------
+;   I/O Ports bits
+; -----------------------------------------------------------------
 
 VIA_PORT_A0_EXT0 = 1 << 0
 VIA_PORT_A1_EXT1 = 1 << 1
@@ -82,21 +102,27 @@ VIA_PORT_B5        = 1 << 5
 VIA_PORT_B6        = 1 << 6
 VIA_PORT_B7        = 1 << 7
 
+; -----------------------------------------------------------------
+;   Default port settings
+; -----------------------------------------------------------------
+
 VIA_PORTA_DEFAULT = $00 ; all zero
 VIA_PORTB_DEFAULT = $00 ; all zero
 VIA_DDRA_DEFAULT = $ff ; all outputs
 VIA_DDRB_DEFAULT = $ff ; all outputs
 
-via_init:
-  ; initialize port A and port B
-  lda # VIA_PORTA_DEFAULT
-  sta IO_0_VIA_PORTA
-  lda # VIA_PORTB_DEFAULT
-  sta IO_0_VIA_PORTB
-  lda # VIA_DDRA_DEFAULT
-  sta IO_0_VIA_DDRA
-  lda # VIA_DDRB_DEFAULT
-  sta IO_0_VIA_DDRB
-  ; initialize PCR: CA1, CB1 default, CA2, CB2 low output
-  lda # ( VIA_PCR_CA1_NEGATIVE_EDGE | VIA_PCR_CA2_LOW_OUTPUT | VIA_PCR_CB1_NEGATIVE_EDGE | VIA_PCR_CB2_LOW_OUTPUT )
-  sta IO_0_VIA_PCR
+; -----------------------------------------------------------------
+;   via_init(): initializes the VIA
+; -----------------------------------------------------------------
+
+via_init          lda # VIA_PORTA_DEFAULT         ; initialize port A and port B
+                  sta IO_0_VIA_PORTA
+                  lda # VIA_PORTB_DEFAULT
+                  sta IO_0_VIA_PORTB
+                  lda # VIA_DDRA_DEFAULT
+                  sta IO_0_VIA_DDRA
+                  lda # VIA_DDRB_DEFAULT
+                  sta IO_0_VIA_DDRB
+                                                  ; initialize PCR: CA1, CB1 default, CA2, CB2 low output
+                  lda # ( VIA_PCR_CA1_NEGATIVE_EDGE | VIA_PCR_CA2_LOW_OUTPUT | VIA_PCR_CB1_NEGATIVE_EDGE | VIA_PCR_CB2_LOW_OUTPUT )
+                  sta IO_0_VIA_PCR

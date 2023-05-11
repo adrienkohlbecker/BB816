@@ -1,5 +1,8 @@
-CPU_SPEED_MHZ = 4.0
 CPU_PERIOD_NS = 1000.0 / CPU_SPEED_MHZ
+
+; -----------------------------------------------------------------
+;   delay loop macros
+; -----------------------------------------------------------------
 
 ; delay_small_us can represent delays from 6 cycles (1.5us @ 4MHz) to 1276 cycles (319us @ 4MHz), in steps of 5 cycles (1.25us @ 4MHz)
 !macro delay_small_us .delay_us {
@@ -97,55 +100,73 @@ CPU_PERIOD_NS = 1000.0 / CPU_SPEED_MHZ
 }
 
 !macro delay_medium_ms .delay_ms {
-  +delay_medium_us .delay_ms * 1000
+                  +delay_medium_us .delay_ms * 1000
 }
 
+; -----------------------------------------------------------------
+;   cpu_emu / cpu_native: manage the CPU emulation mode setting
+; -----------------------------------------------------------------
+
 !macro cpu_native {
-  clc
-  xce
+                  clc
+                  xce
 }
 
 !macro cpu_emu {
-  sec
-  xce
+                  sec
+                  xce
 }
 
-// brk is a two byte instruction, we have to add
-// a signature byte for the program to resume
-// correctly after rti occurs.
+; -----------------------------------------------------------------
+;   +brk:         brk is a two byte instruction, we have to add a signature byte for the program
+;                 to resume correctly after rti occurs.
+; -----------------------------------------------------------------
+
 !macro brk {
-  brk
-  !byte $00
+                  brk
+                  !byte $00
 }
+
+; -----------------------------------------------------------------
+;   mx_16_bits / mx_8_bits: manage the accumulator and index register sizes
+; -----------------------------------------------------------------
 
 !macro mx_16_bits {
-  rep # %00110000
-  !rl
-  !al
+                  rep # %00110000
+                  !rl
+                  !al
 }
 
 !macro mx_8_bits {
-  sep # %00110000
-  !rs
-  !as
+                  sep # %00110000
+                  !rs
+                  !as
 }
 
+; -----------------------------------------------------------------
+;   m_16_bits / m_8_bits: manage the accumulator register size
+; -----------------------------------------------------------------
+
 !macro m_16_bits {
-  rep #%00100000
-  !al
+                  rep #%00100000
+                  !al
 }
 
 !macro m_8_bits {
-  sep #%00100000
-  !as
+                  sep #%00100000
+                  !as
 }
 
+; -----------------------------------------------------------------
+;   x_16_bits / x_8_bits: manage the index register size
+; -----------------------------------------------------------------
+
 !macro x_16_bits {
-  rep #%00010000
-  !rl
+                  rep #%00010000
+                  !rl
 }
 
 !macro x_8_bits {
-  sep #%00010000
-  !rs
+                  sep #%00010000
+                  !rs
 }

@@ -1,3 +1,7 @@
+; -----------------------------------------------------------------
+;   Command bits
+; -----------------------------------------------------------------
+
 LCD_CMD_CLEAR_DISPLAY                 = 1 << 0
 LCD_CMD_RETURN_HOME                   = 1 << 1
 LCD_CMD_ENTRY_MODE_SET_DISPLAY_STATIC = 1 << 2 | 0 << 0
@@ -23,175 +27,168 @@ LCD_CMD_FUNCTION_SET_8BIT_MODE        = 1 << 5 | 1 << 4
 LCD_CMD_SET_CGRAM_ADDR                = 1 << 6
 LCD_CMD_SET_DDRAM_ADDR                = 1 << 7
 
+; -----------------------------------------------------------------
+;   Masks
+; -----------------------------------------------------------------
+
 LCD_READ_BUSY_FLAG         = 1 << 7
 LCD_READ_ADDR_COUNTER_MASK = $ff & !LCD_READ_BUSY_FLAG
 
-; lcd_init
-; resets the LCD to its default state
-lcd_init:
-  lda # LCD_CMD_CLEAR_DISPLAY
-  jsr lcd_instruction
+; -----------------------------------------------------------------
+;   lcd_init(): resets the LCD to its default state
+; -----------------------------------------------------------------
 
-  lda # LCD_CMD_FUNCTION_SET_5x8_DOTS | LCD_CMD_FUNCTION_SET_TWO_LINES | LCD_CMD_FUNCTION_SET_8BIT_MODE
-  jsr lcd_instruction
+lcd_init          lda # LCD_CMD_CLEAR_DISPLAY
+                  jsr lcd_instruction
 
-  lda # LCD_CMD_DISPLAY_CONTROL_BLINKING_ON | LCD_CMD_DISPLAY_CONTROL_CURSOR_ON | LCD_CMD_DISPLAY_CONTROL_DISPLAY_ON
-  jsr lcd_instruction
+                  lda # LCD_CMD_FUNCTION_SET_5x8_DOTS | LCD_CMD_FUNCTION_SET_TWO_LINES | LCD_CMD_FUNCTION_SET_8BIT_MODE
+                  jsr lcd_instruction
 
-  lda # LCD_CMD_ENTRY_MODE_SET_DISPLAY_STATIC | LCD_CMD_ENTRY_MODE_SET_LTR
-  jsr lcd_instruction
+                  lda # LCD_CMD_DISPLAY_CONTROL_BLINKING_ON | LCD_CMD_DISPLAY_CONTROL_CURSOR_ON | LCD_CMD_DISPLAY_CONTROL_DISPLAY_ON
+                  jsr lcd_instruction
 
-  rts
+                  lda # LCD_CMD_ENTRY_MODE_SET_DISPLAY_STATIC | LCD_CMD_ENTRY_MODE_SET_LTR
+                  jsr lcd_instruction
 
-; lcd_instruction:
-; send a command to the LCD
+                  rts
+
+; -----------------------------------------------------------------
+;   lcd_instruction(): send a command to the LCD
 ;
-; arguments: A = command to send
-lcd_instruction:
-    pha ; save command
-    jsr lcd_wait
-    plx ; restore command into X
+;   Parameters:
+;       A = command to send
+; -----------------------------------------------------------------
 
-    ; Get current control signals
-    lda IO_0_VIA_PORTB
+lcd_instruction   pha                             ; save command
+                  jsr lcd_wait
+                  plx                             ; restore command into X
 
-    ; Clear RS/RW/E bits
-    and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
-    sta IO_0_VIA_PORTB
+                  lda IO_0_VIA_PORTB              ; Get current control signals
 
-    ; Output command to external bus
-    stx IO_0_VIA_PORTA
+                                                  ; Clear RS/RW/E bits
+                  and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
+                  sta IO_0_VIA_PORTB
 
-    ; PORT A is output
-    ldx # $ff
-    stx IO_0_VIA_DDRA
+                  stx IO_0_VIA_PORTA              ; Output command to external bus
 
-    ; Set the Enable bit to send the instruction
-    ora # VIA_PORT_B0_LCD_E
-    sta IO_0_VIA_PORTB
+                  ldx # $ff                       ; PORT A is output
+                  stx IO_0_VIA_DDRA
 
-    ; Clear RS/RW/E bits
-    and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
-    sta IO_0_VIA_PORTB
+                  ora # VIA_PORT_B0_LCD_E         ; Set the Enable bit to send the instruction
+                  sta IO_0_VIA_PORTB
 
-    ; Clears external bus
-    lda # VIA_PORTA_DEFAULT
-    sta IO_0_VIA_PORTA
-    lda # VIA_DDRA_DEFAULT
-    sta IO_0_VIA_DDRA
+                                                  ; Clear RS/RW/E bits
+                  and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
+                  sta IO_0_VIA_PORTB
 
-    rts
+                  lda # VIA_PORTA_DEFAULT         ; Clears external bus
+                  sta IO_0_VIA_PORTA
+                  lda # VIA_DDRA_DEFAULT
+                  sta IO_0_VIA_DDRA
 
-; print_char:
-; prints a single character to the LCD
+                  rts
+
+; -----------------------------------------------------------------
+;   print_char(): prints a single character to the LCD
+;   Parameters:
+;       A = char to print
+; -----------------------------------------------------------------
+
+print_char        pha                             ; save char
+                  jsr lcd_wait
+                  plx                             ; restore char into X
+
+                  lda IO_0_VIA_PORTB              ; Get current control signals
+
+                                                  ; Clear RW/E bits, set RS
+                  and # $ff & !(VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
+                  ora # VIA_PORT_B2_LCD_RS
+                  sta IO_0_VIA_PORTB
+
+                  stx IO_0_VIA_PORTA              ; Output char to external bus
+
+                  ldx # $ff                       ; PORT A is output
+                  stx IO_0_VIA_DDRA
+
+                                                  ; Set the Enable bit + RS to send the instruction
+                  ora # VIA_PORT_B0_LCD_E | VIA_PORT_B2_LCD_RS
+                  sta IO_0_VIA_PORTB
+
+                                                  ; Clear RS/RW/E bits
+                  and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
+                  sta IO_0_VIA_PORTB
+
+                  lda # VIA_PORTA_DEFAULT         ; Clears external bus
+                  sta IO_0_VIA_PORTA
+                  lda # VIA_DDRA_DEFAULT
+                  sta IO_0_VIA_DDRA
+
+                  rts
+
+; -----------------------------------------------------------------
+;   lcd_read_address(): Reads address counter
 ;
-; Arguments: A=character
-print_char:
-    pha ; save char
-    jsr lcd_wait
-    plx ; restore char into X
+;   Returns:
+;       A: address counter
+; -----------------------------------------------------------------
 
-    ; Get current control signals
-    lda IO_0_VIA_PORTB
+lcd_read_address  lda IO_0_VIA_PORTB              ; Get current control signals
 
-    ; Clear RW/E bits, set RS
-    and # $ff & !(VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
-    ora # VIA_PORT_B2_LCD_RS
-    sta IO_0_VIA_PORTB
+                  stz IO_0_VIA_DDRA               ; PORT A is input
 
-    ; Output char to external bus
-    stx IO_0_VIA_PORTA
+                                                  ; Clear RS/E bits; Set RW
+                  and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B0_LCD_E)
+                  ora # VIA_PORT_B1_LCD_RW
+                  sta IO_0_VIA_PORTB
 
-    ; PORT A is output
-    ldx # $ff
-    stx IO_0_VIA_DDRA
+                                                  ; Set the Enable bit + RW to read the data
+                  ora # VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E
+                  sta IO_0_VIA_PORTB
 
-    ; Set the Enable bit + RS to send the instruction
-    ora # VIA_PORT_B0_LCD_E | VIA_PORT_B2_LCD_RS
-    sta IO_0_VIA_PORTB
+                  ldx IO_0_VIA_PORTA              ; Get value of busy flag
 
-    ; Clear RS/RW/E bits
-    and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
-    sta IO_0_VIA_PORTB
+                                                  ; Clear RS/RW/E bits
+                  and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
+                  sta IO_0_VIA_PORTB
 
-    ; Clears external bus
-    lda # VIA_PORTA_DEFAULT
-    sta IO_0_VIA_PORTA
-    lda # VIA_DDRA_DEFAULT
-    sta IO_0_VIA_DDRA
+                  txa                             ; strip busy bit
+                  and # LCD_READ_ADDR_COUNTER_MASK
 
-    rts
+                  ldx # VIA_DDRA_DEFAULT           ; Restore DDRA
+                  stx IO_0_VIA_DDRA
 
-; lcd_read_address: Reads address counter
-; No arguments
-; Returns value in A
-lcd_read_address:
-    ; Get current control signals
-    lda IO_0_VIA_PORTB
+                  rts
 
-    ; PORT A is input
-    stz IO_0_VIA_DDRA
+; -----------------------------------------------------------------
+;   lcd_wait(): Wait for the LCD busy flag to clear
+; -----------------------------------------------------------------
 
-    ; Clear RS/E bits; Set RW
-    and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B0_LCD_E)
-    ora # VIA_PORT_B1_LCD_RW
-    sta IO_0_VIA_PORTB
+lcd_wait          ldx IO_0_VIA_PORTB              ; Get current control signals
 
-    ; Set the Enable bit + RW to read the data
-    ora # VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E
-    sta IO_0_VIA_PORTB
+.lcd_wait_loop    txa
 
-    ; Get value of busy flag
-    ldx IO_0_VIA_PORTA
+                  stz IO_0_VIA_DDRA               ; PORT A is input
 
-    ; Clear RS/RW/E bits
-    and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
-    sta IO_0_VIA_PORTB
+                                                  ; Clear RS/E bits; Set RW
+                  and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B0_LCD_E)
+                  ora # VIA_PORT_B1_LCD_RW
+                  sta IO_0_VIA_PORTB
 
-    ; strip busy bit
-    txa
-    and # LCD_READ_ADDR_COUNTER_MASK
+                                                  ; Set the Enable bit + RW to read the data
+                  ora # VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E
+                  sta IO_0_VIA_PORTB
 
-    ; Restore DDRA
-    ldx # VIA_DDRA_DEFAULT
-    stx IO_0_VIA_DDRA
+                  tax                             ; Get value of busy flag
+                  lda IO_0_VIA_PORTA
+                  bit # LCD_READ_BUSY_FLAG
+                  bne .lcd_wait_loop
+                  txa
 
-    rts
+                                                  ; Clear RS/RW/E bits
+                  and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
+                  sta IO_0_VIA_PORTB
 
-; lcd_wait: Wait for the LCD busy flag to clear
-; No arguments
-lcd_wait:
-    ; Get current control signals
-    ldx IO_0_VIA_PORTB
+                  lda # VIA_DDRA_DEFAULT          ; Restore DDRA
+                  sta IO_0_VIA_DDRA
 
-.lcd_wait_loop:
-    txa
-
-    ; PORT A is input
-    stz IO_0_VIA_DDRA
-
-    ; Clear RS/E bits; Set RW
-    and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B0_LCD_E)
-    ora # VIA_PORT_B1_LCD_RW
-    sta IO_0_VIA_PORTB
-
-    ; Set the Enable bit + RW to read the data
-    ora # VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E
-    sta IO_0_VIA_PORTB
-
-    ; Get value of busy flag
-    tax
-    lda IO_0_VIA_PORTA
-    bit # LCD_READ_BUSY_FLAG
-    bne .lcd_wait_loop
-    txa
-
-    ; Clear RS/RW/E bits
-    and # $ff & !(VIA_PORT_B2_LCD_RS | VIA_PORT_B1_LCD_RW | VIA_PORT_B0_LCD_E)
-    sta IO_0_VIA_PORTB
-
-    ; Restore DDRA
-    lda # VIA_DDRA_DEFAULT
-    sta IO_0_VIA_DDRA
-
-    rts
+                  rts
