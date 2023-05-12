@@ -88,3 +88,19 @@ print_hex16       pha
                   pla
                   jsr print_hex
                   rts
+
+; -----------------------------------------------------------------
+;   print_hex():  prints 8 bit hex number in ascii to ACIA
+;
+;   Parameters:
+;       A = byte to print
+; -----------------------------------------------------------------
+
+acia_print_hex    jsr binhex
+                  xba
+                  pha
+                  xba
+                  jsr acia_sync_putc
+                  pla
+                  jsr acia_sync_putc
+                  rts
