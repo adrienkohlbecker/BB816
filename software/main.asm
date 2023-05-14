@@ -54,7 +54,7 @@ HIGH_RAM_BANK_END   = $f7
 CPU_SPEED_MHZ = 4.0
 
 ; Enable Power-On Self Test routines
-FLAG_ENABLE_POST
+; FLAG_ENABLE_POST
 
 ; Enable ACIA transmit bug workaround
 FLAG_ACIA_XMIT_BUG
