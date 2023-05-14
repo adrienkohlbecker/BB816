@@ -13,7 +13,7 @@ I'm not going for ludicrous speed and features for revision A, here are the goal
 - Runs at 4Mhz
 - Prototyped on a breadboard, through-hole ICs only, no programmable logic
 - 32KB RAM, 32KB ROM, 512KB extended RAM
-- 65C22 and 65C21 for peripheral I/O
+- 65C22 for peripheral I/O
 - 65C51 for UART
 
 The goals of the YouTube series are to provide a good description of all the design decisions, including going in-depth on timing, to be a more advanced complement to something like Ben Eater's 6502 series, as well as show more love to this cool CPU in the homebrew community.
@@ -116,7 +116,7 @@ The goals of the YouTube series are to provide a good description of all the des
 
 ### Rest of the computer
 
-**Component Count:** 144
+**Component Count:** 167
 
 | Refs | Qty | Component | Description |
 | ----- | --- | ---- | ----------- |
@@ -124,8 +124,9 @@ The goals of the YouTube series are to provide a good description of all the des
 | BAR2, BAR3, BAR4 | 3 | Yellow | BAR GRAPH 8 segment |
 | BAR5 | 1 | Green | BAR GRAPH 8 segment |
 | BAR6, BAR7, BAR8 | 3 | Red | BAR GRAPH 8 segment |
+| BAR9, BAR10 | 2 | LED-Array-8-GYR | BAR GRAPH 10 segment |
 | C1, C6, C10, C27 | 4 | 10u | Polarized capacitor, small symbol |
-| C2, C3, C4, C5, C7, C8, C9, C12, C16, C17, C18, C19, C20, C21, C22, C23, C24, C28, C29, C30, C31, C32, C33, C34, C35, C36, C37, C38, C39 | 29 | 100n | Unpolarized capacitor, small symbol |
+| C2, C3, C4, C5, C7, C8, C9, C12, C16, C17, C18, C19, C20, C21, C22, C23, C24, C28, C29, C30, C31, C32, C33, C34, C35, C36, C37, C38, C39, C41, C42, C43, C44 | 33 | 100n | Unpolarized capacitor, small symbol |
 | C11 | 1 | 22u | Polarized capacitor, small symbol |
 | C13, C14, C15 | 3 | 2.2u | Polarized capacitor, small symbol |
 | C25 | 1 | 1u | Polarized capacitor, small symbol |
@@ -133,10 +134,9 @@ The goals of the YouTube series are to provide a good description of all the des
 | C40 | 1 | 470n | Unpolarized capacitor, small symbol |
 | D1 | 1 | Clock | Light emitting diode, small symbol |
 | D2, D7 | 2 | 1N5819 | 40V 1A Schottky Barrier Rectifier Diode, DO-41 |
-| D3 | 1 | Rx | Light emitting diode, small symbol |
-| D4 | 1 | Tx | Light emitting diode, small symbol |
-| D5 | 1 | USBCFG | Light emitting diode, small symbol |
-| D6 | 1 | I2C | Light emitting diode, small symbol |
+| D8 | 1 | Slow | Light emitting diode, small symbol |
+| D9 | 1 | Fast | Light emitting diode, small symbol |
+| D10 | 1 | Pulse | Light emitting diode, small symbol |
 | DS1 | 1 | HD44780 | LCD 16x2 Alphanumeric , 8 bit parallel bus, 5V VDD |
 | J1 | 1 | Tester | Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | J2 | 1 | USB_B | USB Type B connector |
@@ -145,10 +145,10 @@ The goals of the YouTube series are to provide a good description of all the des
 | R1, R9, R10, R11, R12, R13, R14, R15, R19, R20, R34, R35, R36 | 13 | 3.3k | Resistor, small symbol |
 | R2, R4, R6, R8 | 4 | 10k | Resistor, small symbol |
 | R3, R5, R7 | 3 | 2.2k | Resistor, small symbol |
-| R16, R18, R25, R26, R27, R30, R31, R32, R33 | 9 | 1k | Resistor, small symbol |
+| R16, R18, R25, R26, R27, R31, R32, R37, R38, R39, R41, R42 | 12 | 1k | Resistor, small symbol |
 | R17 | 1 | 220 | Resistor, small symbol |
-| R21, R22, R23, R24 | 4 | 6.8k | Resistor, small symbol |
-| R28, R29 | 2 | 1.5k | Resistor, small symbol |
+| R21, R22, R23, R24, R33, R43, R44, R45, R46, R47, R48, R49, R50, R51 | 14 | 6.8k | Resistor, small symbol |
+| R28, R29, R30, R40 | 4 | 1.5k | Resistor, small symbol |
 | RN1, RN2, RN3 | 3 | 1k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN4, RN7 | 2 | 3.3k | 8 resistor network, star topology, bussed resistors, small symbol |
 | RN5, RN6, RN8 | 3 | 1.5k | 8 resistor network, star topology, bussed resistors, small symbol |
@@ -169,21 +169,21 @@ The goals of the YouTube series are to provide a good description of all the des
 | U7 | 1 | LY62256PL-55LL | 32Kx8 bit Low Power CMOS Static RAM, 55/70ns, DIP-28 |
 | U8 | 1 | AS6C4008-55PCN | 512K x 8 Low Power CMOS RAM, DIP-32 |
 | U9 | 1 | 74HC14 | Hex inverter schmitt trigger |
-| U10, U14 | 2 | 74HC74 | Dual D Flip-flop, Set & Reset |
-| U11 | 1 | 74HC283 | 4-bit full Adder |
-| U12, U15 | 2 | 74AC112 | dual JK Flip-Flop, Set & Reset |
-| U13 | 1 | 74HC193 | Synchronous 4-bit Up/Down (2 clk) counter |
+| U10, U12, U14 | 3 | 74HC74 | Dual D Flip-flop, Set & Reset |
+| U11 | 1 | 74HC32 | Quad 2-input OR |
+| U13 | 1 | 74HCT193 | Synchronous 4-bit Up/Down (2 clk) counter |
+| U15, U31 | 2 | 74AHC74 | Dual D Flip-flop, Set & Reset |
 | U16 | 1 | LMC555xN | CMOS Timer, 555 compatible, PDIP-8 |
 | U17 | 1 | 74HC251 | Multiplexer 8 to 1, 3-state Outputs |
-| U18 | 1 | 74AC151 | Multiplexer 8 to 1 |
+| U18 | 1 | 74HC153 | Dual Multiplexer 4 to 1 |
 | U19 | 1 | 74HC04 | Hex Inverter |
 | U20 | 1 | 74HC540 | 8-bit Buffer/Line driver Inverter, 3-state outputs |
-| U21, U22, U23, U24, U27, U28 | 6 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
+| U21, U22, U23, U24, U27, U28, U32, U33 | 8 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
 | U25 | 1 | Teensy++2.0 |  |
 | U26 | 1 | W65C22SxP | W65C22S CMOS Versatile Interface Adapter (VIA), 20-pin I/O, 2 Timer/Counters, DIP-40 |
-| U29 | 1 | W65C51NxP | W65C51N CMOS Asynchronous Communication Interface Adapter (ACIA), Serial UART, DIP-28 |
+| U29 | 1 | W65C51NxP | W65C21N CMOS Peripheral Interface Adapter (PIA), 20-pin I/O, NMOS-Compatible, DIP-40 |
 | U30 | 1 | MCP2221AxP | USB to I2C/UART Protocol Converter with GPIO, DIP-14 |
-| X1 | 1 | 20MHz | Crystal Clock Oscillator, DIP14-style metal package |
+| X1 | 1 | 8MHz | Crystal Clock Oscillator, DIP14-style metal package |
 | X2 | 1 | 1.8432MHz | Crystal Clock Oscillator, DIP8-style metal package |
 
 ### Used in previous videos
