@@ -54,6 +54,9 @@ HIGH_RAM_BANK_END   = $f7
 ; Speed of the main CPU clock
 CPU_SPEED_MHZ = 4.0
 
+; Baud rate of the ACIA (valid values include 300, 19200, 115200)
+ACIA_BAUD = 115200
+
 ; Enable Power-On Self Test routines
 ; FLAG_ENABLE_POST
 

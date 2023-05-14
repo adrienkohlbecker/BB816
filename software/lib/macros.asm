@@ -28,9 +28,6 @@ CPU_PERIOD_NS = 1000.0 / CPU_SPEED_MHZ
 ; delay_medium_us can represent delays from 12 cycles (3us @ 4MHz) to 326656 cycles (81664us ~= 81.6ms @ 4MHz)
 ; the step size increases with the size of the delay
 !macro delay_medium_us .delay_us {
-  !if .delay_us <= 1281 * CPU_PERIOD_NS / 1000.0 {
-    !warn "+delay_medium_us used where +delay_small_us could be used"
-  }
   !if .delay_us > 326656 * CPU_PERIOD_NS / 1000.0 {
     !error "+delay_medium_us can only wait maximum 326656 cycles, use +delay_large_ms"
   }
@@ -62,9 +59,6 @@ CPU_PERIOD_NS = 1000.0 / CPU_SPEED_MHZ
 ; delay_large_ms can represent delays from 18 cycles (4.5us @ 4MHz) to 83298556 cycles (~= 20.82s @ 4MHz)
 ; the step size increases with the size of the delay
 !macro delay_large_ms .delay_ms {
-  !if .delay_ms <= 329217 * CPU_PERIOD_NS / 1000000.0 {
-    !warn "+delay_large_ms used where +delay_medium_ms could be used"
-  }
   !if .delay_ms > 83298556 * CPU_PERIOD_NS / 1000000.0 {
     !error "+delay_large_ms can only wait maximum 83298556 cycles, use multiple calls"
   }

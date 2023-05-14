@@ -77,6 +77,36 @@ ACIA_CONTROL_PARITY_SPACE_CHECK_DISABLED = 3 << 6 ; Parity should never be enabl
 }
 
 ; -----------------------------------------------------------------
+;   Baud rate setting
+; -----------------------------------------------------------------
+
+!if ACIA_BAUD = 300 { ; note: 300 is the smallest supported by the MCP2221A
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_300
+} else if ACIA_BAUD = 600 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_600
+} else if ACIA_BAUD = 1200 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_1200
+} else if ACIA_BAUD = 1800 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_1800
+} else if ACIA_BAUD = 2400 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_2400
+} else if ACIA_BAUD = 3600 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_3600
+} else if ACIA_BAUD = 4800 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_4800
+} else if ACIA_BAUD = 7200 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_7200
+} else if ACIA_BAUD = 9600 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_9600
+} else if ACIA_BAUD = 19200 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_19200
+} else if ACIA_BAUD = 115200 {
+  .baud_bits = ACIA_CONTROL_BAUD_RATE_115200
+} else {
+  !serious "Invalid baud rate selected"
+}
+
+; -----------------------------------------------------------------
 ;   Workspace
 ; -----------------------------------------------------------------
 
@@ -102,11 +132,11 @@ acia_init         stz IO_1_ACIA_STATUS_REGISTER   ; programmatically reset the c
                   bpl -
 
                   ; set up the ACIA with
-                  ; - baud rate 300 (smallest supported by MCP2221A)
+                  ; - baud rate
                   ; - no external receiver clock, RxC pin outputs the baud rate
                   ; - 8 bit word length
                   ; - 1 stop bit
-                  lda # ACIA_CONTROL_BAUD_RATE_115200 | ACIA_CONTROL_RECEIVER_CLOCK_BAUD_RATE | ACIA_CONTROL_WORD_LENGTH_8 | ACIA_CONTROL_STOPBIT_1
+                  lda # .baud_bits | ACIA_CONTROL_RECEIVER_CLOCK_BAUD_RATE | ACIA_CONTROL_WORD_LENGTH_8 | ACIA_CONTROL_STOPBIT_1
                   sta IO_1_ACIA_CONTROL_REGISTER
 
                   ; further set up the ACIA with
@@ -138,9 +168,10 @@ acia_sync_putc    tax                             ; move byte to X register
                   stx IO_1_ACIA_DATA_REGISTER     ; transmit byte
 
                   !ifdef FLAG_ACIA_XMIT_BUG {     ; if we're using an ACIA with the Xmit bug (eg. W65C51N)
-                    +delay_medium_ms 1000.0/30    ; wait for the byte to be transmitted
+                                                  ; wait for the byte to be transmitted
+                    +delay_medium_ms 1000*10.0/ACIA_BAUD
                                                   ; With a 8N1 configuration, 10 bits need to go out per byte
-                                                  ; At 300 baud, that's 1/30s per byte
+                                                  ; Example: At 300 baud, that's 1/30s per byte
                   }
 
                   rts
