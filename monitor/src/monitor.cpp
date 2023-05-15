@@ -419,9 +419,11 @@ inline void trace() {
 }
 
 void step() {
-  if (!breaking) { return; }
-
-  trace();
+  if (!breaking) {
+    breaking = true;
+  } else {
+    trace();
+  }
 }
 
 void resumeTrace() {
