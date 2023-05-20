@@ -10,9 +10,11 @@
 ;
 ; Bank0:
 ;
-; 0000 0000 0000 0000 - 0000 0000 1111 1111 | 0000 - 00FF | Direct page
+; 0000 0000 0000 0000 - 0000 0000 1011 1111 | 0000 - 00BF | Direct page
+; 0000 0000 1100 0000 - 0000 0000 1111 1111 | 00C0 - 00FF | Supermon816 Direct Page
 ; 0000 0001 0000 0000 - 0000 0001 1111 1111 | 0100 - 01FF | Stack
-; 0000 0010 0000 0000 - 0111 1110 1111 1111 | 0200 - 7EFF | General Purpose RAM
+; 0000 0010 0000 0000 - 0111 1110 1001 1001 | 0200 - 7E99 | General Purpose RAM
+; 0111 1110 1001 1010 - 0111 1110 1111 1111 | 7E9A - 7EFF | Supermon816 Buffer
 ; 0111 1111 0000 0000 - 0111 1111 0111 1111 | 7F00 - 7F7F | [Reserved for more I/O in future hardware revisions]
 ; 0111 1111 1000 0000 - 0111 1111 1111 1111 | 7F80 - 7FFF | I/O
 ; 1000 0000 0000 0000 - 1111 1111 1111 1111 | 8000 - FFFF | ROM
@@ -130,6 +132,8 @@ kernel_init       jsr via_init                    ; initialize device drivers
                   sta vec_emu_brk
                   sta vec_emu_cop
                   +m_8_bits
+
+                  !source "prgm/supermon.asm"
 
                   +cpu_emu                        ; put CPU in emulation mode before running programs
 
