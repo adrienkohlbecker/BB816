@@ -131,6 +131,8 @@ kernel_init       jsr via_init                    ; initialize device drivers
                   sta vec_emu_cop
                   +m_8_bits
 
+                  +cpu_emu                        ; put CPU in emulation mode before running programs
+
                   !source "prgm/hello.asm"
 
                   stp                             ; shouldn't be reached

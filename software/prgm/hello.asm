@@ -4,7 +4,9 @@
 ;   main(): main user program start
 ; -----------------------------------------------------------------
 
-main              +m_16_bits                      ; Save existing IRQ handler, and add our own
+main              +cpu_native
+
+                  +m_16_bits                      ; Save existing IRQ handler, and add our own
                   lda vec_native_irq
                   sta prgm_old_irq_location
                   lda # int(prgm_irq)

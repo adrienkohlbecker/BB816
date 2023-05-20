@@ -6,3 +6,7 @@
 - PC, S, D, DBR, PBR registers and D, I, M, X, E flags are callee-saved. A subroutine can use them freely, but before it returns it has to put them back exactly the way it found them, and the subroutine's callers can rely on this behavior.
 - A subroutine can only change bits in PORTB directly related to the hardware it is addressing (for example, a LCD subroutine can change the LCD bits but must not change the state of the other bits)
 - PORTA must be returned to input, if it was set to output, and the port should be reset to zero if it was used to output data
+
+## User program entrypoint
+
+- User programs are called with the CPU in emulation mode, with interrupts disabled. The stack and all kernel device drivers have been initialized to default values.
