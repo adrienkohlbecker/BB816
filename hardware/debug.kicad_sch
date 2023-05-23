@@ -6,15 +6,15 @@
 
   (title_block
     (title "Debug Module")
-    (date "2023-05-14")
+    (date "2023-05-23")
     (rev "A.32")
-    (comment 2 "https://github.com/adrienkohlbecker/65C816")
+    (comment 2 "https://github.com/adrienkohlbecker/BB816")
     (comment 3 "Licensed under CERN-OHL-W v2")
-    (comment 4 "Copyright © 2022 Adrien Kohlbecker")
+    (comment 4 "Copyright © 2022-2023 Adrien Kohlbecker")
   )
 
   (lib_symbols
-    (symbol "65C816:LED-Array-10-BGYR" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
+    (symbol "BB816:LED-Array-10-BGYR" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "BAR" (id 0) (at 0 11.938 0)
         (effects (font (size 1.27 1.27)))
       )
@@ -417,7 +417,7 @@
         )
       )
     )
-    (symbol "65C816:LED-Array-8" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
+    (symbol "BB816:LED-Array-8" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "BAR" (id 0) (at 0 11.938 0)
         (effects (font (size 1.27 1.27)))
       )
@@ -720,7 +720,7 @@
         )
       )
     )
-    (symbol "65C816:LED-Array-8-GYR" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
+    (symbol "BB816:LED-Array-8-GYR" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "BAR" (id 0) (at 0 11.938 0)
         (effects (font (size 1.27 1.27)))
       )
@@ -4247,7 +4247,7 @@
     (pin "2" (uuid 327d1628-95ba-4c45-95fe-4365620c8652))
   )
 
-  (symbol (lib_id "65C816:LED-Array-8") (at 165.1 39.37 0) (unit 1)
+  (symbol (lib_id "BB816:LED-Array-8") (at 165.1 39.37 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000061c8e8ff)
     (property "Reference" "BAR2" (id 0) (at 165.1 24.511 0))
@@ -4362,7 +4362,7 @@
     (pin "1" (uuid a958fdba-4e47-4c07-b8e5-b166be56c2d3))
   )
 
-  (symbol (lib_id "65C816:LED-Array-8") (at 165.1 92.71 0) (unit 1)
+  (symbol (lib_id "BB816:LED-Array-8") (at 165.1 92.71 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000061cb2084)
     (property "Reference" "BAR3" (id 0) (at 165.1 77.851 0))
@@ -4477,7 +4477,7 @@
     (pin "1" (uuid 92094627-39dc-4532-b207-dec5d7a7eeff))
   )
 
-  (symbol (lib_id "65C816:LED-Array-8") (at 165.1 144.78 0) (unit 1)
+  (symbol (lib_id "BB816:LED-Array-8") (at 165.1 144.78 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000061cb88ce)
     (property "Reference" "BAR4" (id 0) (at 165.1 129.921 0))
@@ -4678,7 +4678,7 @@
     (pin "9" (uuid db105ea5-5179-4200-8e64-dd494617b83c))
   )
 
-  (symbol (lib_id "65C816:LED-Array-8") (at 250.19 40.64 0) (unit 1)
+  (symbol (lib_id "BB816:LED-Array-8") (at 250.19 40.64 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000061cf545c)
     (property "Reference" "BAR5" (id 0) (at 250.19 25.781 0))
@@ -5024,7 +5024,7 @@
     (pin "9" (uuid 7653426a-acc6-4874-bbf0-439b2aa47cf5))
   )
 
-  (symbol (lib_id "65C816:LED-Array-8-GYR") (at 85.09 170.18 180) (unit 1)
+  (symbol (lib_id "BB816:LED-Array-8-GYR") (at 85.09 170.18 180) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 0f275832-b4e5-4b77-b477-61cdcd59f8f5)
     (property "Reference" "BAR9" (id 0) (at 84.455 151.13 0))
@@ -5406,7 +5406,7 @@
     (pin "2" (uuid 39b074db-2061-4ddd-ad3a-deabd8d52901))
   )
 
-  (symbol (lib_id "65C816:LED-Array-10-BGYR") (at 85.09 113.03 0) (unit 1)
+  (symbol (lib_id "BB816:LED-Array-10-BGYR") (at 85.09 113.03 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid a7e376c9-fb69-4975-b411-b7a56874b31b)
     (property "Reference" "BAR1" (id 0) (at 85.725 96.52 0))

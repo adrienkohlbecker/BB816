@@ -5,12 +5,12 @@
   (paper "A4")
 
   (title_block
-    (title "65C816 Homebrew Computer")
-    (date "2023-05-14")
+    (title "BB816 Homebrew Computer")
+    (date "2023-05-23")
     (rev "A.32")
-    (comment 2 "https://github.com/adrienkohlbecker/65C816")
+    (comment 2 "https://github.com/adrienkohlbecker/BB816")
     (comment 3 "Licensed under CERN-OHL-W v2")
-    (comment 4 "Copyright © 2022 Adrien Kohlbecker")
+    (comment 4 "Copyright © 2022-2023 Adrien Kohlbecker")
   )
 
   (lib_symbols
@@ -24,10 +24,10 @@
       (property "Footprint" "" (id 2) (at -12.7 46.99 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "Datasheet" "https://github.com/adrienkohlbecker/65C816/tree/main/hardware/breakout" (id 3) (at -12.7 46.99 0)
+      (property "Datasheet" "https://github.com/adrienkohlbecker/BB816/tree/main/hardware/breakout" (id 3) (at -12.7 46.99 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_description" "See https://github.com/adrienkohlbecker/65C816/tree/main/hardware/breakout" (id 4) (at 0 0 0)
+      (property "ki_description" "See https://github.com/adrienkohlbecker/BB816/tree/main/hardware/breakout" (id 4) (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (symbol "65C816-Breakout_0_1"
@@ -1783,7 +1783,7 @@
     (property "Footprint" "" (id 2) (at 41.91 33.02 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "https://github.com/adrienkohlbecker/65C816/tree/main/hardware/breakout" (id 3) (at 41.91 33.02 0)
+    (property "Datasheet" "https://github.com/adrienkohlbecker/BB816/tree/main/hardware/breakout" (id 3) (at 41.91 33.02 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "" (uuid 8122a672-8d7e-4f11-b503-223a75695119))

@@ -6,11 +6,11 @@
 
   (title_block
     (title "Address Decoding Module")
-    (date "2023-05-14")
+    (date "2023-05-23")
     (rev "A.32")
-    (comment 2 "https://github.com/adrienkohlbecker/65C816")
+    (comment 2 "https://github.com/adrienkohlbecker/BB816")
     (comment 3 "Licensed under CERN-OHL-W v2")
-    (comment 4 "Copyright © 2022 Adrien Kohlbecker")
+    (comment 4 "Copyright © 2022-2023 Adrien Kohlbecker")
   )
 
   (lib_symbols

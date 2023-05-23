@@ -708,7 +708,7 @@ void loop() {
     // Print welcome message
     welcome = true;
     delay(200);
-    Serial.println("Teensy monitor for 65C816 computer");
+    Serial.println("Teensy monitor for BB816 computer");
     Serial.println("Help: `t` to trace. `q` to stop trace. `r` to reset the computer.");
     Serial.println("      `i` to toggle binary trace.");
     Serial.println("");

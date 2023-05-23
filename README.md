@@ -1,4 +1,4 @@
-# 65C816
+# BB816
 
 A homebrew computer based on the 65C816 processor. Watch the series on YouTube:
 
@@ -160,7 +160,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | SW4 | 1 | SW_DIP_SPDT_x02 | 2x DIP Switch, Single Pole Double Throw (SPDT) switch, small symbol |
 | SW5 | 1 | SW_DIP_x03 | 3x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
 | SW6 | 1 | SW_DIP_x08 | 8x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol |
-| U1 | 1 | 65C816-Breakout | See https://github.com/adrienkohlbecker/65C816/tree/main/hardware/breakout |
+| U1 | 1 | 65C816-Breakout | See https://github.com/adrienkohlbecker/BB816/tree/main/hardware/breakout |
 | U2 | 1 | 74HC30 | 8-input NAND |
 | U3 | 1 | 74AHC00 | quad 2-input NAND gate |
 | U4 | 1 | 74AHC32 | Quad 2-input OR |

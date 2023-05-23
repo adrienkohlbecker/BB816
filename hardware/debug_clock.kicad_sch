@@ -6,15 +6,15 @@
 
   (title_block
     (title "Clock Module")
-    (date "2023-05-14")
+    (date "2023-05-23")
     (rev "A.32")
-    (comment 2 "https://github.com/adrienkohlbecker/65C816")
+    (comment 2 "https://github.com/adrienkohlbecker/BB816")
     (comment 3 "Licensed under CERN-OHL-W v2")
-    (comment 4 "Copyright © 2022 Adrien Kohlbecker")
+    (comment 4 "Copyright © 2022-2023 Adrien Kohlbecker")
   )
 
   (lib_symbols
-    (symbol "65C816:LMC555xN" (in_bom yes) (on_board yes)
+    (symbol "BB816:LMC555xN" (in_bom yes) (on_board yes)
       (property "Reference" "U12" (id 0) (at -6.35 8.89 0)
         (effects (font (size 1.27 1.27)))
       )
@@ -80,7 +80,7 @@
         )
       )
     )
-    (symbol "65C816:SW_DIP_SPDT_x02" (pin_names (offset 0) hide) (in_bom yes) (on_board yes)
+    (symbol "BB816:SW_DIP_SPDT_x02" (pin_names (offset 0) hide) (in_bom yes) (on_board yes)
       (property "Reference" "SW" (id 0) (at 0 8.89 0)
         (effects (font (size 1.27 1.27)))
       )
@@ -4380,7 +4380,7 @@
     (pin "1" (uuid f77233ca-f03f-4486-be06-7ba055ac29c5))
   )
 
-  (symbol (lib_id "65C816:LMC555xN") (at 224.79 52.07 0) (unit 1)
+  (symbol (lib_id "BB816:LMC555xN") (at 224.79 52.07 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-00006196ecf1)
     (property "Reference" "U16" (id 0) (at 218.44 43.18 0))
@@ -5453,7 +5453,7 @@
     (pin "1" (uuid cba373f1-fd49-4f0b-a5b4-c372090cc82d))
   )
 
-  (symbol (lib_id "65C816:SW_DIP_SPDT_x02") (at 67.31 193.04 0) (unit 1)
+  (symbol (lib_id "BB816:SW_DIP_SPDT_x02") (at 67.31 193.04 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000061df5bc7)
     (property "Reference" "SW4" (id 0) (at 67.31 181.1782 0))

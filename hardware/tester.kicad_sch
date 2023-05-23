@@ -6,15 +6,15 @@
 
   (title_block
     (title "Tester Module")
-    (date "2023-05-14")
+    (date "2023-05-23")
     (rev "A.32")
-    (comment 2 "https://github.com/adrienkohlbecker/65C816")
+    (comment 2 "https://github.com/adrienkohlbecker/BB816")
     (comment 3 "Licensed under CERN-OHL-W v2")
-    (comment 4 "Copyright © 2022 Adrien Kohlbecker")
+    (comment 4 "Copyright © 2022-2023 Adrien Kohlbecker")
   )
 
   (lib_symbols
-    (symbol "65C816:LED-Array-8" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
+    (symbol "BB816:LED-Array-8" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "BAR" (id 0) (at 0 11.938 0)
         (effects (font (size 1.27 1.27)))
       )
@@ -1329,7 +1329,7 @@
     (uuid fe82f293-6896-48fd-a842-aa6d92511220)
   )
 
-  (symbol (lib_id "65C816:LED-Array-8") (at 130.81 59.69 0) (unit 1)
+  (symbol (lib_id "BB816:LED-Array-8") (at 130.81 59.69 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000061ebb5b6)
     (property "Reference" "BAR8" (id 0) (at 130.81 44.831 0))
