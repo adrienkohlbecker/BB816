@@ -181,7 +181,7 @@ The goals of the YouTube series are to provide a good description of all the des
 | U21, U22, U23, U24, U27, U28, U32, U33 | 8 | 74HC541 | 8-bit Buffer/Line Driver 3-state outputs |
 | U25 | 1 | Teensy++2.0 |  |
 | U26 | 1 | W65C22SxP | W65C22S CMOS Versatile Interface Adapter (VIA), 20-pin I/O, 2 Timer/Counters, DIP-40 |
-| U29 | 1 | W65C51NxP | W65C21N CMOS Peripheral Interface Adapter (PIA), 20-pin I/O, NMOS-Compatible, DIP-40 |
+| U29 | 1 | W65C51NxP | W65C51N CMOS Asynchronous Communication Interface Adapter (ACIA), Serial UART, DIP-28 |
 | U30 | 1 | MCP2221AxP | USB to I2C/UART Protocol Converter with GPIO, DIP-14 |
 | X1 | 1 | 8MHz | Crystal Clock Oscillator, DIP14-style metal package |
 | X2 | 1 | 1.8432MHz | Crystal Clock Oscillator, DIP8-style metal package |

@@ -30,7 +30,7 @@
       (property "ki_keywords" "6502 6551 ACIA UART" (id 4) (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_description" "W65C21N CMOS Peripheral Interface Adapter (PIA), 20-pin I/O, NMOS-Compatible, DIP-40" (id 5) (at 0 0 0)
+      (property "ki_description" "W65C51N CMOS Asynchronous Communication Interface Adapter (ACIA), Serial UART, DIP-28" (id 5) (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (property "ki_fp_filters" "DIP-28_W15.24mm* PLCC28" (id 6) (at 0 0 0)
