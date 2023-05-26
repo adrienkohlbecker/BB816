@@ -438,9 +438,9 @@ byte blockingSerialRead() {
   return Serial.read();
 }
 
-// hexDigitToNumber converts a ASCII digit in 0..9, A..F to the corresponding number
+// hexDigitToNumber converts a ASCII digit in 0..9, A..F and a..f to the corresponding number
 byte hexDigitToNumber(byte hexDigit) {
-  return (hexDigit >= 'A') ? hexDigit - 'A' + 10 : hexDigit - '0';
+  return (hexDigit >= 'A') ? (hexDigit & 0b11011111) - 'A' + 10 : hexDigit - '0';
 }
 
 // readHexAsByte does two blocking reads from the Serial port,
