@@ -36,6 +36,30 @@
 !address IO_6 = $7FE0
 !address IO_7 = $7FF0
 
+// Constants
+
+CPU_FLAG_CARRY       = 1 << 0
+CPU_FLAG_ZERO        = 1 << 1
+CPU_FLAG_IRQ_DISABLE = 1 << 2
+CPU_FLAG_DECIMAL     = 1 << 3
+CPU_FLAG_BREAK       = 1 << 4 ; Emulation mode
+CPU_FLAG_INDEX_8BIT  = 1 << 4 ; Native mode
+CPU_FLAG_MEMORY_8BIT = 1 << 5 ; Native mode
+CPU_FLAG_OVERFLOW    = 1 << 6
+CPU_FLAG_NEGATIVE    = 1 << 7
+
+// IRQ handlers
+!address vec_native_irq   = $00 // 2 bytes
+!address vec_native_nmi   = $02 // 2 bytes
+!address vec_native_abort = $04 // 2 bytes
+!address vec_native_brk   = $06 // 2 bytes
+!address vec_native_cop   = $08 // 2 bytes
+!address vec_emu_irq      = $0A // 2 bytes
+!address vec_emu_nmi      = $0C // 2 bytes
+!address vec_emu_abort    = $0E // 2 bytes
+!address vec_emu_brk      = $10 // 2 bytes
+!address vec_emu_cop      = $12 // 2 bytes
+
 *=START_OF_ROM
 
 !source "lib/macros.asm"
@@ -48,8 +72,7 @@ reset:
   ; put CPU in native mode
   ; this is diagnostic number 1: If the Emulation LED turns off,
   ; it means the board able to read the reset vector, and execute the first few instructions.
-  clc
-  xce
+  +cpu_native
 
   ; Diagnostic number 2
   ; checksum ourselves
@@ -136,7 +159,7 @@ reset:
   phy
   plb
 
-  jmp main
+  jmp kernel_init
 
 checksum_fail:
 
@@ -193,54 +216,144 @@ highmemtest_fail:
   xce
   jmp -
 
-main:
+kernel_init:
   ; initialize devices
   jsr via_init
   jsr lcd_init
   jsr acia_init
 
-  ; print Hello, World to both terminal and LCD
-  ldx # 0
-- lda +, X
-  beq ++
-  phx
-  jsr acia_and_lcd_putchar
-  plx
-  inx
-  jmp -
-+ !text "Hello, World!", 0
-++
+  ; initialize interrupt vectors
+  +m_16_bits
+  lda # int(int_native_exit)
+  sta vec_native_irq
+  sta vec_native_nmi
+  sta vec_native_abort
+  sta vec_native_brk
+  sta vec_native_cop
+  lda # int(int_emu_exit)
+  sta vec_emu_irq
+  sta vec_emu_nmi
+  sta vec_emu_abort
+  sta vec_emu_brk
+  sta vec_emu_cop
+  +m_8_bits
 
-  ; Add new lines for terminal only
-  lda # "\r"
-  jsr acia_putchar
-  lda # "\n"
-  jsr acia_putchar
-
-  ; in a loop, print all chars received from the terminal, back to the terminal and to the LCD
-- jsr acia_getchar
-  jsr acia_and_lcd_putchar
-  jmp -
+  !source "prgm.asm"
 
   ; shouldn't be reached
   stp
 
-acia_and_lcd_putchar:
-  pha
-  jsr print_char
-  pla
-  jsr acia_putchar
-  rts
-
 !source "lib/via.asm"
 !source "lib/lcd.asm"
 !source "lib/acia.asm"
+
+; Native mode interrupts
+
+!address int_native_stack_offset_pbr = 12
+!address int_native_stack_offset_pc  = 10
+!address int_native_stack_offset_p   = 9
+!address int_native_stack_offset_a   = 5
+!address int_native_stack_offset_x   = 3
+!address int_native_stack_offset_y   = 1
+!address int_native_stack_offset_d   = 7
+!address int_native_stack_offset_dbr = 8
+
+!macro int_native_entry {
+  +mx_16_bits
+  phb
+  phd
+  pha
+  phx
+  phy
+  +mx_8_bits
+}
+
+int_native_exit   +mx_16_bits
+                  ply
+                  plx
+                  pla
+                  pld
+                  plb
+                  +mx_8_bits
+
+                  rti
+
+int_native_irq    +int_native_entry
+                  jmp (vec_native_irq)
+
+int_native_nmi    +int_native_entry
+                  jmp (vec_native_nmi)
+
+int_native_brk    +int_native_entry
+                  jmp (vec_native_brk)
+
+int_native_cop    +int_native_entry
+                  jmp (vec_native_cop)
+
+int_native_abort  +int_native_entry
+                  jmp (vec_native_abort)
+
+; Emulation mode interrupts
+
+!address int_emu_stack_offset_pc = 5
+!address int_emu_stack_offset_p  = 4
+!address int_emu_stack_offset_a  = 3
+!address int_emu_stack_offset_x  = 2
+!address int_emu_stack_offset_y  = 1
+
+!macro int_emu_entry {
+  pha
+  phx
+  phy
+}
+
+int_emu_exit      ply
+                  plx
+                  pla
+
+                  rti
+
+int_emu_irqbrk    +int_emu_entry
+                  lda int_emu_stack_offset_p,s    // in emulation mode, we have to check the break flag on the
+                  and # CPU_FLAG_BREAK            // CPU status register pushed to the stack by the interrupt
+                  bne int_emu_brk                 // to determine if we're handling an hardware IRQ or software BRK
+int_emu_irq       jmp (vec_emu_irq)
+int_emu_brk       jmp (vec_emu_brk)
+
+int_emu_nmi       +int_emu_entry
+                  jmp (vec_emu_nmi)
+
+int_emu_cop       +int_emu_entry
+                  jmp (vec_emu_cop)
+
+int_emu_abort     +int_emu_entry
+                  jmp (vec_emu_abort)
+
+int_rti           rti
 
 ; zero sum word is the last word before vectors
 ; this is updated during the build process to make the checksum of the ROM equal to 0
 *=$ffde
   !word $0000
 
-*=$fffc
-  !word reset
-  !word $eaea
+// native mode vector locations
+*=$ffe0
+!word int_rti          // 00FFE0,1 (Reserved)
+!word int_rti          // 00FFE2,3 (Reserved)
+!word int_native_cop   // 00FFE4,5 (COP)
+!word int_native_brk   // 00FFE6,7 (BRK)
+!word int_native_abort // 00FFE8,9 (ABORT)
+!word int_native_nmi   // 00FFEA,B (NMI)
+!word int_rti          // 00FFEC,D (Reserved)
+!word int_native_irq   // 00FFEE,F (IRQ)
+
+// emulation mode vector locations
+*=$fff0
+!word int_rti          // 00FFF0,1 (Reserved)
+!word int_rti          // 00FFF2,3 (Reserved)
+!word int_emu_cop      // 00FFF4,5 (COP)
+!word int_rti          // 00FFF6,7 (Reserved)
+!word int_emu_abort    // 00FFF8,9 (ABORT)
+!word int_emu_nmi      // 00FFFA,B (NMI)
+!word reset            // 00FFFC,D (Reset)
+!word int_emu_irqbrk   // 00FFFE,F (IRQ/BRK)

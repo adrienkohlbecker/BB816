@@ -99,3 +99,53 @@ CPU_PERIOD_NS = 1000.0 / CPU_SPEED_MHZ
 !macro delay_medium_ms .delay_ms {
   +delay_medium_us .delay_ms * 1000
 }
+
+!macro cpu_native {
+  clc
+  xce
+}
+
+!macro cpu_emu {
+  sec
+  xce
+}
+
+// brk is a two byte instruction, we have to add
+// a signature byte for the program to resume
+// correctly after rti occurs.
+!macro brk {
+  brk
+  !byte $00
+}
+
+!macro mx_16_bits {
+  rep # %00110000
+  !rl
+  !al
+}
+
+!macro mx_8_bits {
+  sep # %00110000
+  !rs
+  !as
+}
+
+!macro m_16_bits {
+  rep #%00100000
+  !al
+}
+
+!macro m_8_bits {
+  sep #%00100000
+  !as
+}
+
+!macro x_16_bits {
+  rep #%00010000
+  !rl
+}
+
+!macro x_8_bits {
+  sep #%00010000
+  !rs
+}
