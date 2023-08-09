@@ -25,13 +25,13 @@ main              +m_16_bits                      ; Save existing IRQ handler, a
 ++
                   lda # "\r"                      ; add new line in console only
 -                 jsr acia_async_putc
-                  bcc -
+                  bcs -
                   lda # "\n"
 -                 jsr acia_async_putc
-                  bcc -
+                  bcs -
 
 -                 jsr acia_async_getc             ; check if we received a character
-                  bcc -                           ; if carry is clear, we did not, loop
+                  bcs -                           ; if carry is set, we did not, loop
                   jsr acia_lcd_putc               ; print the character
                   jmp -                           ; loop indefinitely
 
@@ -46,7 +46,7 @@ acia_lcd_putc     pha
                   jsr print_char
                   pla
 -                 jsr acia_async_putc
-                  bcc -
+                  bcs -
                   rts
 
 ; -----------------------------------------------------------------

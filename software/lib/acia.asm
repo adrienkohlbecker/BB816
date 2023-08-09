@@ -202,7 +202,7 @@ acia_sync_putc    tax                             ; move byte to X register
 ;       A: byte to enqueue
 ;
 ;   Returns:
-;       P:c=1 if byte enqueued, c=0 no space in buffer
+;       P:c=0 if byte enqueued, c=1 no space in buffer
 ; -----------------------------------------------------------------
 
 acia_async_putc   ldx tx_buffer_wptr              ; get write pointer
@@ -211,7 +211,7 @@ acia_async_putc   ldx tx_buffer_wptr              ; get write pointer
                   iny                             ; if wptr + 1 == rptr, then writing this byte will make the two
                   cpy tx_buffer_rptr              ; pointers equal, which is the "no data" case, so this constitutes
                   bne +                           ; an overflow.
-                  clc                             ; in that case, clear carry and return
+                  sec                             ; in that case, clear carry and return
                   rts
 
 +                 sta tx_buffer,X                 ; else add data byte to tx buffer
@@ -228,7 +228,7 @@ acia_async_putc   ldx tx_buffer_wptr              ; get write pointer
                   tsb IO_1_ACIA_COMMAND_REGISTER  ; enable transmitter if it is not already enabled
                   xba                             ; restore byte
 
-                  sec                             ; set carry and return
+                  clc                             ; set carry and return
                   rts
 
 ; -----------------------------------------------------------------
@@ -254,13 +254,13 @@ acia_sync_getc    lda # ACIA_STATUS_RECEIVER_DATA_REGISTER_FULL
 ;   Returns:
 ;       A: byte received
 ;       P: n,z set from A
-;          c=1 if byte received, c=0 if no byte received
+;          c=0 if byte received, c=1 if no byte received
 ; -----------------------------------------------------------------
 
 acia_async_getc   ldx rx_buffer_rptr              ; compare r/w pointers
                   cpx rx_buffer_wptr
                   bne +                           ; if the two pointers are equal, no byte has been received
-                  clc                             ; clear carry and return
+                  sec                             ; clear carry and return
                   rts
 
 +                 lda rx_buffer,X                 ; else, load the received byte
@@ -273,7 +273,7 @@ acia_async_getc   ldx rx_buffer_rptr              ; compare r/w pointers
                   stx rx_buffer_rptr              ; save new pointer
 
                   and # $ff                       ; ensure flags are set by the value of A
-                  sec                             ; set carry to signify a byte is present
+                  clc                             ; set carry to signify a byte is present
                   rts
 
 ; -----------------------------------------------------------------
