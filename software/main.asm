@@ -131,7 +131,7 @@ kernel_init       jsr via_init                    ; initialize device drivers
                   sta vec_emu_cop
                   +m_8_bits
 
-                  !source "prgm.asm"
+                  !source "prgm/hello.asm"
 
                   stp                             ; shouldn't be reached
 
