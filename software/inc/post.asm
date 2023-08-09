@@ -31,7 +31,7 @@
 ; -----------------------------------------------------------------
 
 .checksum_fail    sec                             ; set carry, we know emulation is off, so we have our 1 and our 0
--                 +delay_large_ms 200
+-                 +delay_ms 200
                   xce
                   bra -                           ; loop indefinitely
 
@@ -54,13 +54,13 @@
 ; -----------------------------------------------------------------
 
 .memtest_fail     sec                             ; set carry, we know emulation is off, so we have our 1 and our 0
--                 +delay_large_ms 400
+-                 +delay_ms 400
                   xce
-                  +delay_large_ms 200
+                  +delay_ms 200
                   xce
-                  +delay_large_ms 200
+                  +delay_ms 200
                   xce
-                  +delay_large_ms 400
+                  +delay_ms 400
                   xce
                   bra -                           ; loop indefinitely
 
@@ -94,7 +94,7 @@
                   phy
                   plb
 
-                  bra .end_post                   ; jump to end of POST routine
+                  jmp .end_post                   ; jump to end of POST routine
 
 ; -----------------------------------------------------------------
 ;   The high memtest failed handler will blink the emulation LED with alternating
@@ -104,19 +104,19 @@
 ; -----------------------------------------------------------------
 
 .highmemtest_fail sec                             ; set carry, we know emulation is off, so we have our 1 and our 0
--                 +delay_large_ms 400
+-                 +delay_ms 400
                   xce
-                  +delay_large_ms 200
+                  +delay_ms 200
                   xce
-                  +delay_large_ms 200
+                  +delay_ms 200
                   xce
-                  +delay_large_ms 200
+                  +delay_ms 200
                   xce
-                  +delay_large_ms 200
+                  +delay_ms 200
                   xce
-                  +delay_large_ms 400
+                  +delay_ms 400
                   xce
-                  bra -                           ; loop indefinitely
+                  jmp -                           ; loop indefinitely
 
 ; -----------------------------------------------------------------
 ;   End of the POST routines

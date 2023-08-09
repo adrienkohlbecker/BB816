@@ -197,7 +197,7 @@ acia_sync_putc    !ifdef FLAG_ACIA_IRQ {
                                                   ; wait for the byte to be transmitted
                                                   ; With a 8N1 configuration, 10 bits need to go out per byte
                                                   ; Example: At 300 baud, that's 1/30s per byte
-                      +delay_medium_ms 1000*10.0/ACIA_BAUD
+                      +delay_ms 1000*10.0/ACIA_BAUD
                     }
 
                   }
