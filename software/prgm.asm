@@ -24,9 +24,11 @@ main              +m_16_bits                      ; Save existing IRQ handler, a
 +                 !text "Hello, World!", 0
 ++
                   lda # "\r"                      ; add new line in console only
-                  jsr acia_sync_putc
+-                 jsr acia_async_putc
+                  bcc -
                   lda # "\n"
-                  jsr acia_sync_putc
+-                 jsr acia_async_putc
+                  bcc -
 
 -                 jsr acia_async_getc             ; check if we received a character
                   bcc -                           ; if carry is clear, we did not, loop
@@ -43,7 +45,8 @@ main              +m_16_bits                      ; Save existing IRQ handler, a
 acia_lcd_putc     pha
                   jsr print_char
                   pla
-                  jsr acia_sync_putc
+-                 jsr acia_async_putc
+                  bcc -
                   rts
 
 ; -----------------------------------------------------------------

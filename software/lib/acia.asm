@@ -71,9 +71,16 @@ ACIA_CONTROL_PARITY_MARK_CHECK_DISABLED  = 2 << 6 ; Parity should never be enabl
 ACIA_CONTROL_PARITY_SPACE_CHECK_DISABLED = 3 << 6 ; Parity should never be enabled
 
 !ifdef FLAG_ACIA_IRQ {
-  !set .command_irq_bits = ACIA_COMMAND_RECEIVER_IRQ_ENABLED
+  !ifdef FLAG_ACIA_XMIT_BUG {
+    ; enable receiver IRQ,  enable transmitter but not its IRQs
+    !set .command_irq_bits = ACIA_COMMAND_RECEIVER_IRQ_ENABLED | ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_ASSERT_INTERRUPT_DISABLED
+  } else {
+    ; enable receiver IRQ, disable transmitter until something to transmit is available
+    !set .command_irq_bits = ACIA_COMMAND_RECEIVER_IRQ_ENABLED | ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_DEASSERT_TRANSMITTER_DISABLED
+  }
 } else {
-  !set .command_irq_bits = ACIA_COMMAND_RECEIVER_IRQ_DISABLED
+  ; disable receiver IRQ, enable transmitter but not its IRQs
+  !set .command_irq_bits = ACIA_COMMAND_RECEIVER_IRQ_DISABLED | ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_ASSERT_INTERRUPT_DISABLED
 }
 
 ; -----------------------------------------------------------------
@@ -115,6 +122,11 @@ ACIA_CONTROL_PARITY_SPACE_CHECK_DISABLED = 3 << 6 ; Parity should never be enabl
 !address rx_buffer      = $0202 ; 16 bytes
 rx_buffer_size = 16
 
+!address tx_buffer_rptr = $0212 ; 1 byte
+!address tx_buffer_wptr = $0213 ; 1 byte
+!address tx_buffer      = $0214 ; 16 bytes
+tx_buffer_size = 16
+
 ; -----------------------------------------------------------------
 ;   acia_init(): Programatically resets and initializes the ACIA as well as the internal workspace.
 ; -----------------------------------------------------------------
@@ -125,9 +137,16 @@ acia_init         stz IO_1_ACIA_STATUS_REGISTER   ; programmatically reset the c
 
                   stz rx_buffer_rptr              ; reset internal state
                   stz rx_buffer_wptr
+                  stz tx_buffer_rptr
+                  stz tx_buffer_wptr
 
-                  ldx # rx_buffer_size - 1        ; zero out the internal buffer
+                  ldx # rx_buffer_size - 1        ; zero out the rx buffer
 -                 stz rx_buffer,X
+                  dex
+                  bpl -
+
+                  ldx # tx_buffer_size - 1        ; zero out the tx buffer
+-                 stz tx_buffer,X
                   dex
                   bpl -
 
@@ -142,10 +161,9 @@ acia_init         stz IO_1_ACIA_STATUS_REGISTER   ; programmatically reset the c
                   ; further set up the ACIA with
                   ; - /DTR = Low
                   ; - IRQ bits from FLAG_ACIA_IRQ
-                  ; - /RTS = Low, Transmitter enabled, transmitter IRQ off
                   ; - Echo mode disabled
                   ; - Parity disabled
-                  lda # ACIA_COMMAND_DATA_TERMINAL_READY_ASSERT | .command_irq_bits | ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_ASSERT_INTERRUPT_DISABLED | ACIA_COMMAND_RECEIVER_ECHO_DISABLED | ACIA_COMMAND_RECEIVER_PARITY_DISABLED
+                  lda # ACIA_COMMAND_DATA_TERMINAL_READY_ASSERT | .command_irq_bits | ACIA_COMMAND_RECEIVER_ECHO_DISABLED | ACIA_COMMAND_RECEIVER_PARITY_DISABLED
                   sta IO_1_ACIA_COMMAND_REGISTER
 
                   rts
@@ -174,6 +192,43 @@ acia_sync_putc    tax                             ; move byte to X register
                                                   ; Example: At 300 baud, that's 1/30s per byte
                   }
 
+                  rts
+
+; -----------------------------------------------------------------
+;   acia_async_putc(): Enqueue the A register in the Tx buffer if there is space, and set the carry.
+;                      If there is no space, clear the carry.
+;
+;   Parameters:
+;       A: byte to enqueue
+;
+;   Returns:
+;       P:c=1 if byte enqueued, c=0 no space in buffer
+; -----------------------------------------------------------------
+
+acia_async_putc   ldx tx_buffer_wptr              ; get write pointer
+
+                  txy                             ; check if our buffer is full
+                  iny                             ; if wptr + 1 == rptr, then writing this byte will make the two
+                  cpy tx_buffer_rptr              ; pointers equal, which is the "no data" case, so this constitutes
+                  bne +                           ; an overflow.
+                  clc                             ; in that case, clear carry and return
+                  rts
+
++                 sta tx_buffer,X                 ; else add data byte to tx buffer
+
+                  cpx # tx_buffer_size - 1        ; check if write pointer = tx_buffer_size - 1
+                  bne +                           ; if yes, set it to FF so it wraps to 0 with the increment
+                  ldx # $ff
++
+                  inx                             ; increment and save new pointer
+                  stx tx_buffer_wptr
+
+                  xba                             ; save byte for return
+                  lda # ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_ASSERT_INTERRUPT_ENABLED
+                  tsb IO_1_ACIA_COMMAND_REGISTER  ; enable transmitter if it is not already enabled
+                  xba                             ; restore byte
+
+                  sec                             ; set carry and return
                   rts
 
 ; -----------------------------------------------------------------
@@ -234,6 +289,12 @@ acia_int_handler  lda IO_1_ACIA_STATUS_REGISTER
                   beq +
                   jsr .acia_int_rx
 +
+                  !ifndef FLAG_ACIA_XMIT_BUG {    ; if we're using an ACIA without the Xmit bug (eg. R6551)
+                    bit # ACIA_STATUS_TRANSMITTER_DATA_REGISTER_EMPTY
+                    beq +
+                    jsr .acia_int_tx
+                  }
++
                   rts
 
 ; -----------------------------------------------------------------
@@ -243,7 +304,7 @@ acia_int_handler  lda IO_1_ACIA_STATUS_REGISTER
 ;       A = ACIA status register at time of interrupt
 ; -----------------------------------------------------------------
 
-.acia_int_rx      ldx IO_1_ACIA_DATA_REGISTER     ; load data register, this will clear the interrupt
+.acia_int_rx      ldy IO_1_ACIA_DATA_REGISTER     ; load data register, this will clear the interrupt
                                                   ; as well as the status register bits
 
                   bit # ACIA_STATUS_OVERRUN_HAS_OCCURRED
@@ -255,8 +316,14 @@ acia_int_handler  lda IO_1_ACIA_STATUS_REGISTER
                   bit # ACIA_STATUS_PARITY_ERROR_DETECTED
                   bne .acia_handle_parity_error
 
-                  txa                             ; add data byte to rx buffer
-                  ldx rx_buffer_wptr
+                  ldx rx_buffer_wptr              ; get write pointer
+
+                  txa                             ; check if our buffer is full
+                  inc                             ; if wptr + 1 == rptr, then writing this byte will make the two
+                  cmp rx_buffer_rptr              ; pointers equal, which is the "no data" case, so this constitutes
+                  beq .acia_handle_rx_buffer_overflow ; an overflow.
+
+                  tya                             ; add data byte to rx buffer
                   sta rx_buffer,X
 
                   cpx # rx_buffer_size - 1        ; check if write pointer = rx_buffer_size - 1
@@ -271,4 +338,29 @@ acia_int_handler  lda IO_1_ACIA_STATUS_REGISTER
 .acia_handle_overrun
 .acia_handle_framing_error
 .acia_handle_parity_error
+.acia_handle_rx_buffer_overflow
                   rts                             ; don't handle these errors for now
+
+; -----------------------------------------------------------------
+;   .acia_int_tx(): Handle a transmitter interrupt.
+; -----------------------------------------------------------------
+.acia_int_tx      ; do we have data to transmit
+                  ldx tx_buffer_rptr              ; compare r/w pointers
+                  cpx tx_buffer_wptr
+                  bne +                           ; if they're not equal, we have data to send
+                                                  ; else we're done with the queue
+                  lda # ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_ASSERT_INTERRUPT_ENABLED
+                  trb IO_1_ACIA_COMMAND_REGISTER  ; disable transmitter
+                  rts
++
+                  lda tx_buffer,x
+                  sta IO_1_ACIA_DATA_REGISTER
+
+                  cpx # tx_buffer_size - 1        ; check if read pointer = tx_buffer_size - 1
+                  bne +                           ; if yes, set it to FF so it wraps to 0 with the increment
+                  ldx # $ff
++
+                  inx                             ; increment and save new pointer
+                  stx tx_buffer_rptr
+
+                  rts
