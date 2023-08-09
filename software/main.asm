@@ -211,7 +211,11 @@ int_emu_exit      ply
 ; -----------------------------------------------------------------
 
 int_native_irq    +int_native_entry
-                  jsr acia_int_handler
+
+                  !ifdef FLAG_ACIA_IRQ {
+                    jsr acia_int_handler
+                  }
+
                   jmp (vec_native_irq)
 
 int_native_nmi    +int_native_entry
@@ -231,9 +235,12 @@ int_emu_irqbrk    +int_emu_entry
                   and # CPU_FLAG_BREAK            ; CPU status register pushed to the stack by the interrupt
                   bne int_emu_brk                 ; to determine if we're handling an hardware IRQ or software BRK
 
-int_emu_irq       +cpu_native                     ; kernel interrupt routines are called in native mode
-                  jsr acia_int_handler
-                  +cpu_emu
+int_emu_irq       !ifdef FLAG_ACIA_IRQ {
+                    +cpu_native                    ; kernel interrupt routines are called in native mode
+                    jsr acia_int_handler
+                    +cpu_emu
+                  }
+
                   jmp (vec_emu_irq)
 
 int_emu_brk       jmp (vec_emu_brk)

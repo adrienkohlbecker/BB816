@@ -26,14 +26,11 @@ main              +cpu_native
 +                 !text "Hello, World!", 0
 ++
                   lda # "\r"                      ; add new line in console only
--                 jsr acia_async_putc
-                  bcs -
+                  jsr acia_sync_putc
                   lda # "\n"
--                 jsr acia_async_putc
-                  bcs -
+                  jsr acia_sync_putc
 
--                 jsr acia_async_getc             ; check if we received a character
-                  bcs -                           ; if carry is set, we did not, loop
+-                 jsr acia_sync_getc              ; get a character (blocking loop)
                   jsr acia_lcd_putc               ; print the character
                   jmp -                           ; loop indefinitely
 
@@ -47,8 +44,7 @@ main              +cpu_native
 acia_lcd_putc     pha
                   jsr print_char
                   pla
--                 jsr acia_async_putc
-                  bcs -
+                  jsr acia_sync_putc
                   rts
 
 ; -----------------------------------------------------------------

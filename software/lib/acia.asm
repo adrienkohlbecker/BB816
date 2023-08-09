@@ -150,19 +150,19 @@ acia_init         stz IO_1_ACIA_STATUS_REGISTER   ; programmatically reset the c
                   dex
                   bpl -
 
-                  ; set up the ACIA with
-                  ; - baud rate
-                  ; - no external receiver clock, RxC pin outputs the baud rate
-                  ; - 8 bit word length
-                  ; - 1 stop bit
+                                                  ; set up the ACIA with
+                                                  ; - baud rate
+                                                  ; - no external receiver clock, RxC pin outputs the baud rate
+                                                  ; - 8 bit word length
+                                                  ; - 1 stop bit
                   lda # .baud_bits | ACIA_CONTROL_RECEIVER_CLOCK_BAUD_RATE | ACIA_CONTROL_WORD_LENGTH_8 | ACIA_CONTROL_STOPBIT_1
                   sta IO_1_ACIA_CONTROL_REGISTER
 
-                  ; further set up the ACIA with
-                  ; - /DTR = Low
-                  ; - IRQ bits from FLAG_ACIA_IRQ
-                  ; - Echo mode disabled
-                  ; - Parity disabled
+                                                  ; further set up the ACIA with
+                                                  ; - /DTR = Low
+                                                  ; - IRQ bits from FLAG_ACIA_IRQ
+                                                  ; - Echo mode disabled
+                                                  ; - Parity disabled
                   lda # ACIA_COMMAND_DATA_TERMINAL_READY_ASSERT | .command_irq_bits | ACIA_COMMAND_RECEIVER_ECHO_DISABLED | ACIA_COMMAND_RECEIVER_PARITY_DISABLED
                   sta IO_1_ACIA_COMMAND_REGISTER
 
@@ -175,21 +175,31 @@ acia_init         stz IO_1_ACIA_STATUS_REGISTER   ; programmatically reset the c
 ;       A = byte to send
 ; -----------------------------------------------------------------
 
-acia_sync_putc    tax                             ; move byte to X register
+acia_sync_putc    !ifdef FLAG_ACIA_IRQ {
 
-                  !ifndef FLAG_ACIA_XMIT_BUG {    ; if we're using an ACIA without the Xmit bug (eg. R6551)
-                    lda # ACIA_STATUS_TRANSMITTER_DATA_REGISTER_EMPTY
--                   bit IO_1_ACIA_STATUS_REGISTER ; wait until we can transmit
-                    beq -
-                  }
+-                   jsr acia_async_putc
+                    bcs -
 
-                  stx IO_1_ACIA_DATA_REGISTER     ; transmit byte
+                  } else {
 
-                  !ifdef FLAG_ACIA_XMIT_BUG {     ; if we're using an ACIA with the Xmit bug (eg. W65C51N)
+                    tax                           ; move byte to X register
+
+                    !ifndef FLAG_ACIA_XMIT_BUG {  ; if we're using an ACIA without the Xmit bug (eg. R6551)
+                                                  ; wait until we can transmit
+                      lda # ACIA_STATUS_TRANSMITTER_DATA_REGISTER_EMPTY
+-                     bit IO_1_ACIA_STATUS_REGISTER
+                      beq -
+                    }
+
+                    stx IO_1_ACIA_DATA_REGISTER   ; transmit byte
+
+                    !ifdef FLAG_ACIA_XMIT_BUG {   ; if we're using an ACIA with the Xmit bug (eg. W65C51N)
                                                   ; wait for the byte to be transmitted
-                    +delay_medium_ms 1000*10.0/ACIA_BAUD
                                                   ; With a 8N1 configuration, 10 bits need to go out per byte
                                                   ; Example: At 300 baud, that's 1/30s per byte
+                      +delay_medium_ms 1000*10.0/ACIA_BAUD
+                    }
+
                   }
 
                   rts
@@ -205,30 +215,52 @@ acia_sync_putc    tax                             ; move byte to X register
 ;       P:c=0 if byte enqueued, c=1 no space in buffer
 ; -----------------------------------------------------------------
 
-acia_async_putc   ldx tx_buffer_wptr              ; get write pointer
+acia_async_putc   !ifdef FLAG_ACIA_IRQ {
 
-                  txy                             ; check if our buffer is full
-                  iny                             ; if wptr + 1 == rptr, then writing this byte will make the two
-                  cpy tx_buffer_rptr              ; pointers equal, which is the "no data" case, so this constitutes
-                  bne +                           ; an overflow.
-                  sec                             ; in that case, clear carry and return
-                  rts
+                    !ifdef FLAG_ACIA_XMIT_BUG {
 
-+                 sta tx_buffer,X                 ; else add data byte to tx buffer
+                                                  ; if we're using an ACIA with the Xmit bug (eg. W65C51N)
+                                                  ; wait for the byte to be transmitted
+                                                  ; With a 8N1 configuration, 10 bits need to go out per byte
+                                                  ; Example: At 300 baud, that's 1/30s per byte
+                      sta IO_1_ACIA_DATA_REGISTER
+                      +delay_ms 1000*10.0/ACIA_BAUD
 
-                  cpx # tx_buffer_size - 1        ; check if write pointer = tx_buffer_size - 1
-                  bne +                           ; if yes, set it to FF so it wraps to 0 with the increment
-                  ldx # $ff
+                    } else {
+
+                      ldx tx_buffer_wptr          ; get write pointer
+
+                      txy                         ; check if our buffer is full
+                      iny                         ; if wptr + 1 == rptr, then writing this byte will make the two
+                      cpy tx_buffer_rptr          ; pointers equal, which is the "no data" case, so this constitutes
+                      bne +                       ; an overflow.
+                      sec                         ; in that case, clear carry and return
+                      rts
+
++                     sta tx_buffer,X             ; else add data byte to tx buffer
+
+                      cpx # tx_buffer_size - 1    ; check if write pointer = tx_buffer_size - 1
+                      bne +                       ; if yes, set it to FF so it wraps to 0 with the increment
+                      ldx # $ff
 +
-                  inx                             ; increment and save new pointer
-                  stx tx_buffer_wptr
+                      inx                         ; increment and save new pointer
+                      stx tx_buffer_wptr
 
-                  xba                             ; save byte for return
-                  lda # ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_ASSERT_INTERRUPT_ENABLED
-                  tsb IO_1_ACIA_COMMAND_REGISTER  ; enable transmitter if it is not already enabled
-                  xba                             ; restore byte
+                      xba                         ; save byte for return
+                                                  ; enable transmitter if it is not already enabled
+                      lda # ACIA_COMMAND_TRANSMITTER_CONTROL_REQUEST_TO_SEND_ASSERT_INTERRUPT_ENABLED
+                      tsb IO_1_ACIA_COMMAND_REGISTER
+                      xba                         ; restore byte
 
-                  clc                             ; set carry and return
+                    }
+
+                  } else {
+
+                    jsr acia_sync_putc
+
+                  }
+
+                  clc                             ; clear carry and return
                   rts
 
 ; -----------------------------------------------------------------
@@ -238,12 +270,21 @@ acia_async_putc   ldx tx_buffer_wptr              ; get write pointer
 ;       A: byte received
 ;       P: n,z set from A
 ; -----------------------------------------------------------------
-; TODO: Check for error conditions (parity, overrun, framing)
-acia_sync_getc    lda # ACIA_STATUS_RECEIVER_DATA_REGISTER_FULL
--                 bit IO_1_ACIA_STATUS_REGISTER   ; wait until a byte is available
-                  beq -
+acia_sync_getc    !ifdef FLAG_ACIA_IRQ {
 
-                  lda IO_1_ACIA_DATA_REGISTER     ; get received byte
+-                   jsr acia_async_getc
+                    bcs -
+
+                  } else {
+
+                    ; TODO: Check for error conditions (parity, overrun, framing)
+                    lda # ACIA_STATUS_RECEIVER_DATA_REGISTER_FULL
+-                   bit IO_1_ACIA_STATUS_REGISTER ; wait until a byte is available
+                    beq -
+
+                    lda IO_1_ACIA_DATA_REGISTER   ; get received byte
+
+                  }
 
                   rts
 
@@ -257,24 +298,36 @@ acia_sync_getc    lda # ACIA_STATUS_RECEIVER_DATA_REGISTER_FULL
 ;          c=0 if byte received, c=1 if no byte received
 ; -----------------------------------------------------------------
 
-acia_async_getc   ldx rx_buffer_rptr              ; compare r/w pointers
-                  cpx rx_buffer_wptr
-                  bne +                           ; if the two pointers are equal, no byte has been received
-                  sec                             ; clear carry and return
-                  rts
+acia_async_getc   !ifdef FLAG_ACIA_IRQ {
 
-+                 lda rx_buffer,X                 ; else, load the received byte
+                    ldx rx_buffer_rptr            ; compare r/w pointers
+                    cpx rx_buffer_wptr
+                    bne +                         ; if the two pointers are equal, no byte has been received
+                    sec                           ; clear carry and return
+                    rts
 
-                  cpx # rx_buffer_size - 1        ; check if read pointer = rx_buffer_size - 1 and reset if yes, if not increment
-                  bne +                           ; if not, just increment
-                  ldx # $ff                       ; if yes, reset it to $ff and increment (effectively set it to 0)
-+                 inx
++                   lda rx_buffer,X               ; else, load the received byte
 
-                  stx rx_buffer_rptr              ; save new pointer
+                    cpx # rx_buffer_size - 1      ; check if read pointer = rx_buffer_size - 1 and reset if yes, if not increment
+                    bne +                         ; if not, just increment
+                    ldx # $ff                     ; if yes, reset it to $ff and increment (effectively set it to 0)
++                   inx
 
-                  and # $ff                       ; ensure flags are set by the value of A
+                    stx rx_buffer_rptr            ; save new pointer
+
+                    and # $ff                     ; ensure flags are set by the value of A
+
+                  } else {
+
+                    jsr acia_sync_getc
+
+                  }
+
                   clc                             ; set carry to signify a byte is present
                   rts
+
+
+!ifdef FLAG_ACIA_IRQ {
 
 ; -----------------------------------------------------------------
 ;   acia_int_handler(): Check if the ACIA has raised an interrupt, and if yes process it using the procedure
@@ -344,7 +397,8 @@ acia_int_handler  lda IO_1_ACIA_STATUS_REGISTER
 ; -----------------------------------------------------------------
 ;   .acia_int_tx(): Handle a transmitter interrupt.
 ; -----------------------------------------------------------------
-.acia_int_tx      ; do we have data to transmit
+
+.acia_int_tx                                      ; do we have data to transmit
                   ldx tx_buffer_rptr              ; compare r/w pointers
                   cpx tx_buffer_wptr
                   bne +                           ; if they're not equal, we have data to send
@@ -364,3 +418,5 @@ acia_int_handler  lda IO_1_ACIA_STATUS_REGISTER
                   stx tx_buffer_rptr
 
                   rts
+
+}

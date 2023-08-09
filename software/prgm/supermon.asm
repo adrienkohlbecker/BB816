@@ -39,8 +39,7 @@ putcha            php
                   phx
                   phy
                   +x_8_bits
--                 jsr acia_async_putc
-                  bcs -
+                  jsr acia_sync_putc
                   +x_16_bits
                   ply
                   plx
