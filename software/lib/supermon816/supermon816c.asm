@@ -149,7 +149,7 @@
          !byte "."
          !byte "1"             ;minor
          !byte "."
-         !byte "2"             ;revision
+         !byte "3"             ;revision
 }
 ;
 ;REVISION TABLE
@@ -168,6 +168,9 @@
 ;                    was out of range for a forward branch or reference, the
 ;                    function was not correctly computing the offset needed &
 ;                    was instead indicating an out-of-range error.
+;
+;     2023/08/14  A) Corrected an inadvertent coding error in the GETBYTE sub-
+;                    routine.
 ;———
 ;1.0  2013/11/01  A) Original derived from the POC V1.1 single-board computer
 ;                    firmware.
@@ -3763,7 +3766,7 @@ nxtaddra sep #m_seta
 ;
 ;getbyte: GET A BYTE FROM MEMORY
 ;
-getbyte  lda [addra],y         ;get a byte
+getbyte  lda [addra]           ;get a byte
 ;
 ;===============================================================================
 ;
